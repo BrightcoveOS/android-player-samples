@@ -13,13 +13,13 @@ This version of the sample apps supports the Brightcove SDK and plugins versione
 
 * [Basic FreeWheel Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicFreeWheelSampleApp"): This app shows how to configure an app to use the Brightcove native Android player FreeWheel Plugin to play a video.
 
-Note that in order to enable this sample app, you must independently obtain and install the non-free file **AdManager.jar** into the top-level directory **libs/**  The *Basic FreeWheel Sample App* was tested with version 5.7.2.  Contact [FreeWheel](http://www.freewheel.tv/about/contact "FreeWheel") directly for more information on how to obtain their products.
+Note that in order to enable this sample app, you must independently obtain and install the non-free file **AdManager.jar** into the top-level directory **libs/**.  The *Basic FreeWheel Sample App* was tested with version 5.7.2.  Contact [FreeWheel](http://www.freewheel.tv/about/contact "FreeWheel") directly for more information on how to obtain their products.
 
 * [Basic Google IMA Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicIMASampleApp"): This app shows how to setup to use the Google IMA Plugin to play ads before, during and after a video. This version has been tested and works with v3 of the IMA SDK.
 
 * [Basic Omniture Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicOmnitureSampleApp"): This app shows how to configure an app to use the Brightcove native Android player Omniture Plugin to play a video.
 
-Note that in order to enable this sample app, you must independently obtain and install the file **adobe-adms.jar** into the top-level directory **libs/**  Version 3.2.2 of the Adobe provided, non-free, jar file was used to test this sample app.
+Note that in order to enable this sample app, you must independently obtain and install the file **adobe-adms.jar** into the top-level directory **libs/**.  Version 3.2.2 of the Adobe provided, non-free, jar file was used to test this sample app.
 
 * [Basic Widevine Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicWidevineSampleApp"): This app shows how to configure an app to use the Brightcove native Android player Widevine Plugin to play a video.
 
