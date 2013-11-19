@@ -23,7 +23,9 @@ Note that in order to enable this sample app, you must independently obtain and 
 
 * [Basic Widevine Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicWidevineSampleApp"): This app shows how to configure an app to use the Brightcove native Android player Widevine Plugin to play a video.
 
-The sample apps will use the Brightcove Android Native Player version indicated by the value of the property named *anpVersion* and found in the top level file **gradle.properties**.  To override this version, create a file named **.gradle/gradle.properties** in your home directory and set the value of the property *anpVerion* to the desired version.  An invalid version will cause no sample app projects to be configured.
+* [Basic Bundled Video Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicWidevineSampleApp"): This app shows how to play a video that is stored on the device for offline viewing.
+
+The sample apps will use the Brightcove Android Native Player version indicated by the value of the property named *anpVersion* found in the top level file **gradle.properties**.  To override this version, create a file named **.gradle/gradle.properties** in your home directory and set the value of the property *anpVersion* to the desired version.  An invalid version will cause no sample app projects to be configured.
 
 All sample apps which have satisfied dependencies will run by default.  If you would like to explicitly disable a sample app, copy the associated boolean property from the **gradle.properties** top level file to **~/.gradle/gradle.properties** with a value of *FALSE*.
 
