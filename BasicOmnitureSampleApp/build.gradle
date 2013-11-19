@@ -1,0 +1,4 @@
+dependencies {
+    compile "com.brightcove.omniture:android-omniture-plugin:${anpVersion}"
+    compile files("${rootProject.projectDir}/libs/adobe-adms.jar")
+}

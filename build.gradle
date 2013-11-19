@@ -1,0 +1,45 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'com.android.tools.build:gradle:0.6.+'
+    classpath 'de.undercouch:gradle-download-task:0.2'
+  }
+}
+
+println "Using Android Native Player version: $anpVersion"
+
+subprojects {
+  apply plugin: 'android'
+
+  repositories {
+    mavenCentral()
+
+    // This repo is a temporary convenience repo for Brightcove
+    // development.  It will be replaced with a public Brightcove
+    // repository soon.
+    maven {
+        url "${rootProject.rootDir}/.repo"
+    }
+  }
+
+  android {
+    compileSdkVersion 19
+    buildToolsVersion "17.0.0"
+    
+    defaultConfig {
+      minSdkVersion 10
+      targetSdkVersion 17
+    }
+  }
+  
+  dependencies {
+    compile 'com.android.support:appcompat-v7:+'
+    compile "com.brightcove.player:android-sdk:$anpVersion"
+  }
+
+  println "Processing ${project.name}"
+}

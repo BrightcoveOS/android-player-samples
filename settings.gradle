@@ -1,0 +1,21 @@
+
+if ("$runBasicFreewheelSampleApp" && freewheelDependenciesAreSatisfied())
+  include ':BasicFreeWheelSampleApp'
+if ("$runBasicIMASampleApp")
+  include ':BasicIMASampleApp'
+if ("$runBasicOmnitureSampleApp" && omnitureDependenciesAreSatisfied())
+  include ':BasicOmnitureSampleApp'
+if ("$runBasicWidevineSampleApp")
+  include ':BasicWidevineSampleApp'
+if ("$runBasicBundledVideoSampleApp")
+    include ':BasicBundledVideoSampleApp'
+
+boolean freewheelDependenciesAreSatisfied() {
+    File dep = file("${rootProject.projectDir}/libs/AdManager.jar")
+    return dep.exists()
+}
+
+boolean omnitureDependenciesAreSatisfied() {
+    File dep = file("${rootProject.projectDir}/libs/adobe-adms.jar")
+    return dep.exists()
+}

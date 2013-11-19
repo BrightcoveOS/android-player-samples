@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BasicWidevineSampleApp</string>
+    <string name="full_screen">Full Screen</string>
+    <string name="normal_screen">Normal Screen</string>
+    <string name="seek_to_live">Seek To Live</string>
+    <string name="ad_click">Ad Click</string>
+    <string name="ad_skip">Ad Skip</string>
+    <string name="ads_skip">Ads Skip</string>
+
+</resources>
