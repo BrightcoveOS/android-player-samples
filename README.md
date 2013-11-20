@@ -39,7 +39,7 @@ From Android Studio using VCS installation:
 
 1. Select the *Checkout From Version Control* option in the new project dialog,
 1. Pick the GITHUB menu entry
-1. Use **git@github.com:BrightcoveOS/android-player-sdk-samples.git** for the URL
+1. Use **git@github.com:BrightcoveOS/android-player-samples.git** for the URL
 1. Click on SUBMIT and use default values on subsequent screens.
 
 From Android Studio using Import
