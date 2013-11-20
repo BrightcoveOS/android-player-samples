@@ -1,0 +1,33 @@
+apply plugin: 'download-task'
+
+def libs = "${rootProject.projectDir}/libs"
+def libsdk = libs + '/sdk.jar'
+def imadir = libs + 'ima-sdk'
+
+dependencies {
+    compile "com.brightcove.ima:android-ima-plugin:${anpVersion}"
+    compile "com.brightcove.drm:android-widevine-plugin:${anpVersion}"
+    compile files(libsdk)
+}
+
+// Conditionally download and extract the Google IMA SDK during
+// configuration.  This step is done once.  The 'clean' task will not
+// remove libraries from /libs/.
+File dep = file(libsdk)
+if (!dep.exists()) {
+    println "Downloading the Google IMA SDK..."
+    download {
+        src 'http://dl.google.com/in-stream/google_sdk/android/v3/ima-android-v3-beta3.zip'
+        dest file(libs)
+    }
+    println "Extracting Google's IMA SDK..."
+    copy {
+        from zipTree(libs + '/ima-android-v3-beta3.zip')
+        into imadir
+    }
+    copy {
+        from new File(imadir + '/lib/sdk.jar')
+        into libs
+    }
+    delete(imadir)
+}

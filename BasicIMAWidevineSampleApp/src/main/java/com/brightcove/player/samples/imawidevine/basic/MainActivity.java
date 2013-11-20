@@ -1,4 +1,4 @@
-package com.brightcove.player.samples.ima.basic;
+package com.brightcove.player.samples.imawidevine.basic;
 
 import android.annotation.TargetApi;
 import android.app.ActionBar;
@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
+import com.brightcove.drm.widevine.WidevinePlugin;
 import com.brightcove.ima.GoogleIMAComponent;
 import com.brightcove.ima.GoogleIMAEventType;
 import com.brightcove.player.event.Event;
@@ -20,8 +21,10 @@ import com.brightcove.player.event.EventLogger;
 import com.brightcove.player.event.EventType;
 import com.brightcove.player.media.Catalog;
 import com.brightcove.player.media.PlaylistListener;
+import com.brightcove.player.media.VideoListener;
 import com.brightcove.player.model.CuePoint;
 import com.brightcove.player.model.Playlist;
+import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
 import com.google.ads.interactivemedia.v3.api.Ad;
@@ -37,10 +40,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This app illustrates how to use the Google IMA SDK via the Brightcove Android Native Player IMA Plugin.
+ * This app illustrates how to use the ASDASDF
  *
- * @author Paul Matthew Reilly (original code)
- * @author Paul Michael Reilly (added explanatory comments)
+ * @author Billy Hnath
  */
 public class MainActivity extends BrightcovePlayer {
 
@@ -58,7 +60,7 @@ public class MainActivity extends BrightcovePlayer {
         // entering the superclass. This allows for some stock video player lifecycle
         // management.  Establish the video object and use it's event emitter to get important
         // notifications and to control logging.
-        setContentView(R.layout.ima_activity_main);
+        setContentView(R.layout.ima_widevine_activity_main);
         brightcoveVideoView = (BrightcoveVideoView) findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
         eventEmitter = brightcoveVideoView.getEventEmitter();
@@ -66,61 +68,33 @@ public class MainActivity extends BrightcovePlayer {
         // Use a procedural abstraction to setup the Google IMA SDK via the plugin and establish
         // a playlist listener object for our sample video: the Potter Puppet show.
         setupGoogleIMA();
-        Catalog catalog = new Catalog("ErQk9zUeDVLIp8Dc7aiHKq8hDMgkv5BFU7WGshTc-hpziB3BuYh28A..");
-        catalog.findPlaylistByReferenceID("stitch", new PlaylistListener() {
-                public void onPlaylist(Playlist playlist) {
-                    brightcoveVideoView.addAll(playlist.getVideos());
-                }
 
-                public void onError(String error) {
-                    Log.e(TAG, error);
-                }
-            });
+        // Initialize the widevine plugin.
+        setupWidevine();
 
-        // Log whether or not instance state in non-null.
-        if (savedInstanceState != null) {
-            Log.v(TAG, "Restoring saved position");
-        } else {
-            Log.v(TAG, "No saved state");
-        }
-    }
+        // Create the catalog object which will start and play the video.
+        Catalog catalog = new Catalog("FqicLlYykdimMML7pj65Gi8IHl8EVReWMJh6rLDcTjTMqdb5ay_xFA..");
+        catalog.findVideoByID("2142125168001", new VideoListener() {
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+            @Override
+            public void onError(String error) {
+                Log.e(TAG, error);
+            }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        switch (item.getItemId()) {
-            case R.id.full_screen:
-                ActionBar actionBar = getActionBar();
-                if (actionBar != null) {
-                    actionBar.hide();
-                }
-
-                WindowManager.LayoutParams attrs = getWindow().getAttributes();
-                attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
-                getWindow().setAttributes(attrs);
-                brightcoveVideoView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-                                                                            RelativeLayout.LayoutParams.MATCH_PARENT));
-                break;
-        }
-        return true;
+            @Override
+            public void onVideo(Video video) {
+                brightcoveVideoView.add(video);
+                brightcoveVideoView.start();
+            }
+        });
     }
 
     /**
      * Provide a sample illustrative ad.
      */
     private String[] googleAds = {
-        // Honda Pilot
-        "http://pubads.g.doubleclick.net/gampad/ads?sz=400x300&iu=%2F6062%2Fhanna_MA_group%2Fvideo_comp_app&ciu_szs=&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&m_ast=vast&url=[referrer_url]&correlator=[timestamp]"
+            // Honda Pilot
+            "http://pubads.g.doubleclick.net/gampad/ads?sz=400x300&iu=%2F6062%2Fhanna_MA_group%2Fvideo_comp_app&ciu_szs=&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&m_ast=vast&url=[referrer_url]&correlator=[timestamp]"
     };
 
     /**
@@ -242,5 +216,15 @@ public class MainActivity extends BrightcovePlayer {
         // Create the Brightcove IMA Plugin and register the event emitter so that the plugin
         // can deal with video events.
         googleIMAComponent = new GoogleIMAComponent(brightcoveVideoView, eventEmitter);
+    }
+
+    private void setupWidevine() {
+        // Set up the DRM licensing server to be handled by Brightcove with arbitrary device and
+        // portal identifiers to fulfill the Widevine API contract.  These arguments will
+        // suffice to create a Widevine plugin instance.
+        String drmServerUri = "https://wvlic.brightcove.com/widevine/cypherpc/cgi-bin/GetEMMs.cgi";
+        String deviceId = "device1234";
+        String portalId = "brightcove";
+        new WidevinePlugin(this, brightcoveVideoView, drmServerUri, deviceId, portalId);
     }
 }
