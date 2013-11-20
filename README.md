@@ -25,9 +25,9 @@ Note that in order to enable this sample app, you must independently obtain and 
 
 * [Basic Bundled Video Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicWidevineSampleApp"): This app shows how to play a video that is stored on the device for offline viewing.
 
-The sample apps will use the Brightcove Android Native Player version indicated by the value of the property named *anpVersion* found in the top level file **gradle.properties**.  To override this version, create a file named **.gradle/gradle.properties** in your home directory and set the value of the property *anpVersion* to the desired version.  An invalid version will cause no sample app projects to be configured.
+By default, the sample apps will build with the most recent Brightcove Android Native Player version at build time.  To override this behavior with a specific version, create a file named **.gradle/gradle.properties** in your home directory and set the value of the property *anpVersion* to the desired version.  An invalid version will cause no sample app projects to be configured.
 
-All sample apps which have satisfied dependencies will run by default.  If you would like to explicitly disable a sample app, copy the associated boolean property from the **gradle.properties** top level file to **~/.gradle/gradle.properties** with a value of *FALSE*.
+All sample apps which have satisfied dependencies will run by default.  If you would like to explicitly disable a sample app, copy the associated boolean property from the **gradle.properties** top level file to **~/.gradle/gradle.properties** with a value of *false* instead of *true*.
 
 To install the sample apps into Android Studio follow these steps:
 
@@ -40,14 +40,14 @@ From Android Studio using VCS installation:
 1. Select the *Checkout From Version Control* option in the new project dialog,
 1. Pick the GITHUB menu entry
 1. Use **git@github.com:BrightcoveOS/android-player-sdk-samples.git** for the URL
-1. Click on SUBMIT
+1. Click on SUBMIT and use default values on subsequent screens.
 
 From Android Studio using Import
 
 1. Clone this repo to your file system.
 1. Select the *Import Project...* option in the new project dialog,
 1. Using the file selector dialog, select the top level **build.gradle** file from the cloned repo on your system,
-1. Click on OK.
+1. Click on OK and use default values on subsequent sceens.
 
 Android Studio will now download/import and build the sample app.  At this point the samples will be in your instance of Android Studio where you can observe the snippets in action on a physical or virtual device, walk through the code using the Android Studio debugger, search on keywords or just browse Android source code.
 
