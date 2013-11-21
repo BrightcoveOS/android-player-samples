@@ -3,6 +3,8 @@ if ("$runBasicFreewheelSampleApp" && freewheelDependenciesAreSatisfied())
   include ':BasicFreeWheelSampleApp'
 if ("$runBasicIMASampleApp")
   include ':BasicIMASampleApp'
+if ("$runBasicIMAWidevineSampleApp")
+  include ':BasicIMAWidevineSampleApp'
 if ("$runBasicOmnitureSampleApp" && omnitureDependenciesAreSatisfied())
   include ':BasicOmnitureSampleApp'
 if ("$runBasicWidevineSampleApp")
