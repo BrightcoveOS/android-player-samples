@@ -15,7 +15,8 @@ import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
 
 /**
- * This app illustrates how to use the Brightcove Android Native Player Widevine Plugin.
+ * This app illustrates how to use the Widevine Plugin with the
+ * Brightcove Player for Android.
  *
  * @author Paul Matthew Reilly (original code)
  * @author Paul Michael Reilly (added explanatory comments)
@@ -42,7 +43,7 @@ public class MainActivity extends BrightcovePlayer {
         String portalId = "brightcove";
         new WidevinePlugin(this, brightcoveVideoView, drmServerUri, deviceId, portalId);
 
-        // Create the catalog object which will start and play the video. 
+        // Create the catalog object which will start and play the video.
         Catalog catalog = new Catalog("FqicLlYykdimMML7pj65Gi8IHl8EVReWMJh6rLDcTjTMqdb5ay_xFA..");
         catalog.findVideoByID("2142125168001", new VideoListener() {
 

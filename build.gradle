@@ -12,6 +12,39 @@ buildscript {
 
 println "Using Android Native Player version: $anpVersion"
 
+// Automatically download the Google IMA third party zip file and
+// extract the jar to satisfy the dependency.
+def downloadIMA() {
+  def libs = "${rootProject.projectDir}/libs"
+  def libsdk = libs + '/sdk.jar'
+  def imadir = libs + 'ima-sdk'
+
+  // Conditionally download and extract the Google IMA SDK during
+  // configuration.  This step is done once.  The 'clean' task will not
+  // remove libraries from /libs/.
+  File dep = file(libsdk)
+  if (!dep.exists()) {
+    apply plugin: 'download-task'
+
+    println "Downloading the Google IMA SDK..."
+
+    download {
+      src 'http://dl.google.com/in-stream/google_sdk/android/v3/ima-android-v3-beta3.zip'
+      dest file(libs)
+    }
+    println "Extracting Google's IMA SDK..."
+    copy {
+      from zipTree(libs + '/ima-android-v3-beta3.zip')
+      into imadir
+    }
+    copy {
+      from new File(imadir + '/lib/sdk.jar')
+      into libs
+    }
+    delete(imadir)
+  }
+}
+
 subprojects {
   apply plugin: 'android'
 
@@ -29,16 +62,31 @@ subprojects {
   android {
     compileSdkVersion 19
     buildToolsVersion "17.0.0"
-    
+
     defaultConfig {
       minSdkVersion 10
       targetSdkVersion 17
     }
   }
-  
+
   dependencies {
     compile 'com.android.support:appcompat-v7:+'
     compile "com.brightcove.player:android-sdk:$anpVersion"
+  }
+
+  if (project.name.contains('IMA')) {
+    downloadIMA()
+    dependencies {
+      compile "com.brightcove.player:android-sdk:$anpVersion"
+      compile "com.brightcove.ima:android-ima-plugin:${anpVersion}"
+      compile files("${rootProject.projectDir}/libs/sdk.jar")
+    }
+  }
+
+  if (project.name.contains('Widevine')) {
+    dependencies {
+      compile "com.brightcove.drm:android-widevine-plugin:${anpVersion}"
+    }
   }
 
   println "Processing ${project.name}"

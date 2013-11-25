@@ -1,7 +1,7 @@
 android-player-samples
 ======================
 
-Still under development and is experimental  - please use at your own risk. 
+Still under development and is experimental  - please use at your own risk.
 
 ======================
 
@@ -24,6 +24,9 @@ Note that in order to enable this sample app, you must independently obtain and 
 * [Basic Widevine Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicWidevineSampleApp"): This app shows how to configure an app to use the Brightcove native Android player Widevine Plugin to play a video.
 
 * [Basic Bundled Video Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicWidevineSampleApp"): This app shows how to play a video that is stored on the device for offline viewing.
+
+* [Ad Rules Google IMA Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "AdRulesIMASampleApp"): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules. This version has been tested and works with v3 of the IMA SDK.
+
 
 By default, the sample apps will build with the most recent Brightcove Android Native Player version at build time.  To override this behavior with a specific version, create a file named **.gradle/gradle.properties** in your home directory and set the value of the property *anpVersion* to the desired version.  An invalid version will cause no sample app projects to be configured.
 
@@ -57,4 +60,3 @@ Android Studio will now download/import and build the sample app.  At this point
 Enjoy!
 
 The Brightcove Player Android Team
-
