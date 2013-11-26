@@ -1,40 +1,28 @@
 package com.brightcove.player.samples.imawidevine.basic;
 
-import android.annotation.TargetApi;
-import android.app.ActionBar;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.RelativeLayout;
-
 import com.brightcove.drm.widevine.WidevinePlugin;
 import com.brightcove.ima.GoogleIMAComponent;
 import com.brightcove.ima.GoogleIMAEventType;
 import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
-import com.brightcove.player.event.EventLogger;
 import com.brightcove.player.event.EventType;
 import com.brightcove.player.media.Catalog;
-import com.brightcove.player.media.PlaylistListener;
+import com.brightcove.player.media.DeliveryType;
 import com.brightcove.player.media.VideoListener;
 import com.brightcove.player.model.CuePoint;
-import com.brightcove.player.model.Playlist;
+import com.brightcove.player.model.Source;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
-import com.google.ads.interactivemedia.v3.api.Ad;
 import com.google.ads.interactivemedia.v3.api.AdDisplayContainer;
-import com.google.ads.interactivemedia.v3.api.AdEvent;
 import com.google.ads.interactivemedia.v3.api.AdsRequest;
 import com.google.ads.interactivemedia.v3.api.CompanionAdSlot;
 import com.google.ads.interactivemedia.v3.api.ImaSdkFactory;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,12 +35,9 @@ import java.util.Map;
 public class MainActivity extends BrightcovePlayer {
 
     private final String TAG = this.getClass().getSimpleName();
-    private static final String POSITION = "position";
 
-    private EventLogger logger;
     private EventEmitter eventEmitter;
     private GoogleIMAComponent googleIMAComponent;
-    private String clickThroughUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +86,7 @@ public class MainActivity extends BrightcovePlayer {
      * Specify where the ad should interrupt the main video.  This code provides a procedural
      * abastraction for the Google IMA Plugin setup code.
      */
-    private void setupCuePoints() {
+    private void setupCuePoints(Source source) {
         String cuePointType = "ad";
         Map<String, Object> properties = new HashMap<String, Object>();
         Map<String, Object> details = new HashMap<String, Object>();
@@ -112,12 +97,13 @@ public class MainActivity extends BrightcovePlayer {
         eventEmitter.emit(EventType.SET_CUE_POINT, details);
 
         // midroll
-        /*
-          // Due to HLS bugs in the Android MediaPlayer, the following code must be disabled for now.
-          cuePoint = new CuePoint(10, cuePointType, properties);
-          details.put(Event.CUE_POINT, cuePoint);
-          eventEmitter.emit(EventType.SET_CUE_POINT, details);
-        */
+        // Due HLS bugs in the Android MediaPlayer, midrolls are not supported.
+        if (!source.getDeliveryType().equals(DeliveryType.HLS)) {
+            cuePoint = new CuePoint(CuePoint.PositionType.BEFORE, cuePointType, properties);
+            details.put(Event.CUE_POINT, cuePoint);
+            eventEmitter.emit(EventType.SET_CUE_POINT, details);
+        }
+
 
         // postroll
         cuePoint = new CuePoint(CuePoint.PositionType.AFTER, cuePointType, properties);
@@ -135,7 +121,7 @@ public class MainActivity extends BrightcovePlayer {
         eventEmitter.on(EventType.DID_SET_SOURCE, new EventListener() {
             @Override
             public void processEvent(Event event) {
-                setupCuePoints();
+                setupCuePoints((Source) event.properties.get(Event.SOURCE));
             }
         });
 
@@ -147,17 +133,6 @@ public class MainActivity extends BrightcovePlayer {
             @Override
             public void processEvent(Event event) {
                 Log.v(TAG, event.getType());
-
-                AdEvent adEvent = (AdEvent) event.properties.get(GoogleIMAComponent.AD_EVENT);
-
-                try {
-                    Ad ad = adEvent.getAd();
-                    Method method = ad.getClass().getDeclaredMethod("getClickThruUrl");
-                    clickThroughUrl = (String) method.invoke(ad);
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
-                //clickThroughUrl = ((com.google.ads.interactivemedia.v3.b.a.a) ad).getClickThruUrl();
             }
         });
 
@@ -200,9 +175,9 @@ public class MainActivity extends BrightcovePlayer {
                 // Build the list of ad request objects, one per ad, and point each to the ad
                 // display container created above.
                 ArrayList<AdsRequest> adsRequests = new ArrayList<AdsRequest>(googleAds.length);
-                for (int i = 0; i < googleAds.length; i++) {
+                for (String adURL : googleAds) {
                     AdsRequest adsRequest = sdkFactory.createAdsRequest();
-                    adsRequest.setAdTagUrl(googleAds[i]);
+                    adsRequest.setAdTagUrl(adURL);
                     adsRequest.setAdDisplayContainer(container);
                     adsRequests.add(adsRequest);
                 }

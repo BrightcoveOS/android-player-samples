@@ -10,7 +10,9 @@ if ("$runBasicOmnitureSampleApp" && omnitureDependenciesAreSatisfied())
 if ("$runBasicWidevineSampleApp")
   include ':BasicWidevineSampleApp'
 if ("$runBasicBundledVideoSampleApp")
-    include ':BasicBundledVideoSampleApp'
+  include ':BasicBundledVideoSampleApp'
+if ("$runAdRulesIMASampleApp")
+  include ':AdRulesIMASampleApp'
 
 boolean freewheelDependenciesAreSatisfied() {
     File dep = file("${rootProject.projectDir}/libs/AdManager.jar")

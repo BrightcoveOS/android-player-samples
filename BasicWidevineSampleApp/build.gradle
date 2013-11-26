@@ -1,3 +1,0 @@
-dependencies {
-    compile "com.brightcove.drm:android-widevine-plugin:${anpVersion}"
-}

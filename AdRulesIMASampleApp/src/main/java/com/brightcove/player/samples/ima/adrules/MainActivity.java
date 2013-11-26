@@ -1,33 +1,24 @@
-package com.brightcove.player.samples.ima.basic;
+package com.brightcove.player.samples.ima.adrules;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ViewGroup;
 import com.brightcove.ima.GoogleIMAComponent;
 import com.brightcove.ima.GoogleIMAEventType;
 import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventType;
-import com.brightcove.player.media.Catalog;
-import com.brightcove.player.media.DeliveryType;
-import com.brightcove.player.media.PlaylistListener;
-import com.brightcove.player.model.CuePoint;
-import com.brightcove.player.model.Playlist;
-import com.brightcove.player.model.Source;
+import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
 import com.google.ads.interactivemedia.v3.api.AdDisplayContainer;
 import com.google.ads.interactivemedia.v3.api.AdsRequest;
-import com.google.ads.interactivemedia.v3.api.CompanionAdSlot;
 import com.google.ads.interactivemedia.v3.api.ImaSdkFactory;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
- * This app illustrates how to use the Google IMA plugin with the
- * Brightcove Player for Android.
+ * This app illustrates how to use "Ad Rules" the Google IMA plugin
+ * and the Brightcove Player for Android.
  *
  * @author Paul Matthew Reilly (original code)
  * @author Paul Michael Reilly (added explanatory comments)
@@ -38,6 +29,7 @@ public class MainActivity extends BrightcovePlayer {
 
     private EventEmitter eventEmitter;
     private GoogleIMAComponent googleIMAComponent;
+    private String adRulesURL = "http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=%2F15018773%2Feverything2&ciu_szs=300x250%2C468x60%2C728x90&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=dummy&correlator=[timestamp]&cmsid=133&vid=10XWSh7W4so&ad_rule=1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,19 +42,11 @@ public class MainActivity extends BrightcovePlayer {
         super.onCreate(savedInstanceState);
         eventEmitter = brightcoveVideoView.getEventEmitter();
 
-        // Use a procedural abstraction to setup the Google IMA SDK via the plugin and establish
-        // a playlist listener object for our sample video: the Potter Puppet show.
+        // Use a procedural abstraction to setup the Google IMA SDK via the plugin.
         setupGoogleIMA();
-        Catalog catalog = new Catalog("ErQk9zUeDVLIp8Dc7aiHKq8hDMgkv5BFU7WGshTc-hpziB3BuYh28A..");
-        catalog.findPlaylistByReferenceID("stitch", new PlaylistListener() {
-                public void onPlaylist(Playlist playlist) {
-                    brightcoveVideoView.addAll(playlist.getVideos());
-                }
 
-                public void onError(String error) {
-                    Log.e(TAG, error);
-                }
-            });
+        // add a content video.
+        brightcoveVideoView.add(Video.createVideo("http://rmcdn.2mdn.net/MotifFiles/html/1248596/android_1330378998288.mp4"));
 
         // Log whether or not instance state in non-null.
         if (savedInstanceState != null) {
@@ -73,52 +57,16 @@ public class MainActivity extends BrightcovePlayer {
     }
 
     /**
-     * Provide a sample illustrative ad.
-     */
-    private String[] googleAds = {
-        // Honda Pilot
-        "http://pubads.g.doubleclick.net/gampad/ads?sz=400x300&iu=%2F6062%2Fhanna_MA_group%2Fvideo_comp_app&ciu_szs=&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&m_ast=vast&url=[referrer_url]&correlator=[timestamp]"
-    };
-
-    /**
-     * Specify where the ad should interrupt the main video.  This code provides a procedural
-     * abastraction for the Google IMA Plugin setup code.
-     */
-    private void setupCuePoints(Source source) {
-        String cuePointType = "ad";
-        Map<String, Object> properties = new HashMap<String, Object>();
-        Map<String, Object> details = new HashMap<String, Object>();
-
-        // preroll
-        CuePoint cuePoint = new CuePoint(CuePoint.PositionType.BEFORE, cuePointType, properties);
-        details.put(Event.CUE_POINT, cuePoint);
-        eventEmitter.emit(EventType.SET_CUE_POINT, details);
-
-        // midroll
-        // Due HLS bugs in the Android MediaPlayer, midrolls are not supported.
-        if (!source.getDeliveryType().equals(DeliveryType.HLS)) {
-            cuePoint = new CuePoint(10, cuePointType, properties);
-            details.put(Event.CUE_POINT, cuePoint);
-            eventEmitter.emit(EventType.SET_CUE_POINT, details);
-        }
-
-        // postroll
-        cuePoint = new CuePoint(CuePoint.PositionType.AFTER, cuePointType, properties);
-        details.put(Event.CUE_POINT, cuePoint);
-        eventEmitter.emit(EventType.SET_CUE_POINT, details);
-    }
-
-    /**
      * Setup the Brightcove IMA Plugin: add some cue points; establish a factory object to
      * obtain the Google IMA SDK instance.
      */
     private void setupGoogleIMA() {
 
         // Defer adding cue points until the set video event is triggered.
-        eventEmitter.on(EventType.DID_SET_SOURCE, new EventListener() {
+        eventEmitter.on(EventType.DID_SET_VIDEO, new EventListener() {
             @Override
             public void processEvent(Event event) {
-                setupCuePoints((Source) event.properties.get(Event.SOURCE));
+                googleIMAComponent.initializeAdsRequests();
             }
         });
 
@@ -160,25 +108,14 @@ public class MainActivity extends BrightcovePlayer {
                 container.setPlayer(googleIMAComponent.getVideoAdPlayer());
                 container.setAdContainer(brightcoveVideoView);
 
-                // Populate the container with the companion ad slots.
-                ArrayList<CompanionAdSlot> companionAdSlots = new ArrayList<CompanionAdSlot>();
-                CompanionAdSlot companionAdSlot = sdkFactory.createCompanionAdSlot();
-                ViewGroup adFrame = (ViewGroup) findViewById(R.id.ad_frame);
-                companionAdSlot.setContainer(adFrame);
-                companionAdSlot.setSize(adFrame.getWidth(), adFrame.getHeight());
-                companionAdSlots.add(companionAdSlot);
-                container.setCompanionSlots(companionAdSlots);
+                // Build an ads request object and point it to the ad
+                // display container created above.
+                AdsRequest adsRequest = sdkFactory.createAdsRequest();
+                adsRequest.setAdTagUrl(adRulesURL);
+                adsRequest.setAdDisplayContainer(container);
 
-                // Build the list of ads request objects, one per ad
-                // URL, and point each to the ad display container
-                // created above.
-                ArrayList<AdsRequest> adsRequests = new ArrayList<AdsRequest>(googleAds.length);
-                for (String adURL : googleAds) {
-                    AdsRequest adsRequest = sdkFactory.createAdsRequest();
-                    adsRequest.setAdTagUrl(adURL);
-                    adsRequest.setAdDisplayContainer(container);
-                    adsRequests.add(adsRequest);
-                }
+                ArrayList<AdsRequest> adsRequests = new ArrayList<AdsRequest>(1);
+                adsRequests.add(adsRequest);
 
                 // Respond to the event with the new ad requests.
                 event.properties.put(GoogleIMAComponent.ADS_REQUESTS, adsRequests);
@@ -188,6 +125,6 @@ public class MainActivity extends BrightcovePlayer {
 
         // Create the Brightcove IMA Plugin and register the event emitter so that the plugin
         // can deal with video events.
-        googleIMAComponent = new GoogleIMAComponent(brightcoveVideoView, eventEmitter);
+        googleIMAComponent = new GoogleIMAComponent(brightcoveVideoView, eventEmitter, true);
     }
 }
