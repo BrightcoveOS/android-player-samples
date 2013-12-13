@@ -99,7 +99,7 @@ public class MainActivity extends BrightcovePlayer {
         // midroll
         // Due HLS bugs in the Android MediaPlayer, midrolls are not supported.
         if (!source.getDeliveryType().equals(DeliveryType.HLS)) {
-            cuePoint = new CuePoint(CuePoint.PositionType.BEFORE, cuePointType, properties);
+            cuePoint = new CuePoint(10000, cuePointType, properties);
             details.put(Event.CUE_POINT, cuePoint);
             eventEmitter.emit(EventType.SET_CUE_POINT, details);
         }

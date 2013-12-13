@@ -12,9 +12,11 @@ import com.brightcove.player.event.EventType;
 import com.brightcove.player.media.Catalog;
 import com.brightcove.player.media.DeliveryType;
 import com.brightcove.player.media.PlaylistListener;
+import com.brightcove.player.media.VideoFields;
 import com.brightcove.player.model.CuePoint;
 import com.brightcove.player.model.Playlist;
 import com.brightcove.player.model.Source;
+import com.brightcove.player.util.StringUtil;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
 import com.google.ads.interactivemedia.v3.api.AdDisplayContainer;
@@ -22,7 +24,9 @@ import com.google.ads.interactivemedia.v3.api.AdsRequest;
 import com.google.ads.interactivemedia.v3.api.CompanionAdSlot;
 import com.google.ads.interactivemedia.v3.api.ImaSdkFactory;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -53,8 +57,14 @@ public class MainActivity extends BrightcovePlayer {
         // Use a procedural abstraction to setup the Google IMA SDK via the plugin and establish
         // a playlist listener object for our sample video: the Potter Puppet show.
         setupGoogleIMA();
+
+        Map<String, String> options = new HashMap<String, String>();
+        List<String> values = new ArrayList<String>(Arrays.asList(VideoFields.DEFAULT_FIELDS));
+        values.remove(VideoFields.HLS_URL);
+        options.put("video_fields", StringUtil.join(values, ","));
+
         Catalog catalog = new Catalog("ErQk9zUeDVLIp8Dc7aiHKq8hDMgkv5BFU7WGshTc-hpziB3BuYh28A..");
-        catalog.findPlaylistByReferenceID("stitch", new PlaylistListener() {
+        catalog.findPlaylistByReferenceID("stitch", options, new PlaylistListener() {
                 public void onPlaylist(Playlist playlist) {
                     brightcoveVideoView.addAll(playlist.getVideos());
                 }
@@ -97,7 +107,7 @@ public class MainActivity extends BrightcovePlayer {
         // midroll
         // Due HLS bugs in the Android MediaPlayer, midrolls are not supported.
         if (!source.getDeliveryType().equals(DeliveryType.HLS)) {
-            cuePoint = new CuePoint(10, cuePointType, properties);
+            cuePoint = new CuePoint(10000, cuePointType, properties);
             details.put(Event.CUE_POINT, cuePoint);
             eventEmitter.emit(EventType.SET_CUE_POINT, details);
         }
