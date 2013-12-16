@@ -1,6 +1,7 @@
 package com.brightcove.player.samples.imawidevine.basic;
 
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.ViewGroup;
 import com.brightcove.drm.widevine.WidevinePlugin;
@@ -99,7 +100,7 @@ public class MainActivity extends BrightcovePlayer {
         // midroll
         // Due HLS bugs in the Android MediaPlayer, midrolls are not supported.
         if (!source.getDeliveryType().equals(DeliveryType.HLS)) {
-            cuePoint = new CuePoint(10000, cuePointType, properties);
+            cuePoint = new CuePoint(10 * (int) DateUtils.SECOND_IN_MILLIS, cuePointType, properties);
             details.put(Event.CUE_POINT, cuePoint);
             eventEmitter.emit(EventType.SET_CUE_POINT, details);
         }
