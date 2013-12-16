@@ -1,6 +1,7 @@
 package com.brightcove.player.samples.ima.basic;
 
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.ViewGroup;
 import com.brightcove.ima.GoogleIMAComponent;
@@ -58,6 +59,9 @@ public class MainActivity extends BrightcovePlayer {
         // a playlist listener object for our sample video: the Potter Puppet show.
         setupGoogleIMA();
 
+        // Remove the HLS_URL field from the catalog request to allow
+        // midrolls to work.  Midrolls don't work with HLS due to
+        // seeking bugs in the Android OS.
         Map<String, String> options = new HashMap<String, String>();
         List<String> values = new ArrayList<String>(Arrays.asList(VideoFields.DEFAULT_FIELDS));
         values.remove(VideoFields.HLS_URL);
@@ -104,10 +108,10 @@ public class MainActivity extends BrightcovePlayer {
         details.put(Event.CUE_POINT, cuePoint);
         eventEmitter.emit(EventType.SET_CUE_POINT, details);
 
-        // midroll
+        // midroll at 10 seconds.
         // Due HLS bugs in the Android MediaPlayer, midrolls are not supported.
         if (!source.getDeliveryType().equals(DeliveryType.HLS)) {
-            cuePoint = new CuePoint(10000, cuePointType, properties);
+            cuePoint = new CuePoint(10 * (int) DateUtils.SECOND_IN_MILLIS, cuePointType, properties);
             details.put(Event.CUE_POINT, cuePoint);
             eventEmitter.emit(EventType.SET_CUE_POINT, details);
         }
