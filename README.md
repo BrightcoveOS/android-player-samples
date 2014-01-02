@@ -27,6 +27,8 @@ Note that in order to enable this sample app, you must independently obtain and 
 
 * [Ad Rules Google IMA Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "AdRulesIMASampleApp"): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules. This version has been tested and works with v3 of the IMA SDK.
 
+* [HLS Player Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "HLSPlayerSampleApp"): This app shows how to setup the HLS player to play.
+
 
 By default, the sample apps will build with the most recent Brightcove Android Native Player version at build time.  To override this behavior with a specific version, create a file named **.gradle/gradle.properties** in your home directory and set the value of the property *anpVersion* to the desired version.  An invalid version will cause no sample app projects to be configured.
 

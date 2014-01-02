@@ -13,6 +13,8 @@ if ("$runBasicBundledVideoSampleApp")
   include ':BasicBundledVideoSampleApp'
 if ("$runAdRulesIMASampleApp")
   include ':AdRulesIMASampleApp'
+if ("$runHLSPlayerSampleApp")
+  include ':HLSPlayerSampleApp'
 
 boolean freewheelDependenciesAreSatisfied() {
     File dep = file("${rootProject.projectDir}/libs/AdManager.jar")
