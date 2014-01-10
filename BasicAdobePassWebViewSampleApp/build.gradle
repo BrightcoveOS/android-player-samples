@@ -1,0 +1,3 @@
+dependencies {
+    compile files("${rootProject.projectDir}/libs/android_accessenabler-1.7.2.jar")
+}
