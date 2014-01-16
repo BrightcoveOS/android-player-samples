@@ -20,6 +20,8 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <service android:name="com.adobe.adobepass.accessenabler.api.AccessEnablerService"
+            android:label="AccessEnabler service"/>
         <activity
             android:name="com.brightcove.player.samples.adobepass.webview.basic.MainActivity"
             android:screenOrientation="unspecified"
@@ -30,6 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.brightcove.player.samples.adobepass.webview.basic.WebViewActivity" />
     </application>
 
 </manifest>
