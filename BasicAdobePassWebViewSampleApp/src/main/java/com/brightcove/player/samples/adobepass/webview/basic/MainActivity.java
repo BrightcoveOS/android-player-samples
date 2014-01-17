@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Base64;
 import android.util.Log;
 import android.webkit.SslErrorHandler;
@@ -171,7 +172,7 @@ public class MainActivity extends BrightcovePlayer implements IAccessEnablerDele
     public void setAuthenticationStatus(int i, String s) {
         Log.v(TAG, "setAuthenticationStatus: " + i + " , " + s);
         if (i == AccessEnabler.ACCESS_ENABLER_STATUS_SUCCESS) {
-            accessEnabler.getAuthorization("resource1(^)resource2");
+            accessEnabler.getAuthorization("2149332630001");
         } else if (i == AccessEnabler.ACCESS_ENABLER_STATUS_ERROR) {
             Log.v(TAG, "AUTH FAILED");
         }
@@ -180,8 +181,11 @@ public class MainActivity extends BrightcovePlayer implements IAccessEnablerDele
     @Override
     public void setToken(String s, String s2) {
         Log.v(TAG, "setToken: " + s + " ," + s2);
-        Catalog catalog = new Catalog("FqicLlYykdimMML7pj65Gi8IHl8EVReWMJh6rLDcTjTMqdb5ay_xFA..");
+        Looper.prepare();
+        Catalog catalog = new Catalog(s);
+        Log.v(TAG, "ran findVideoByID");
         catalog.findVideoByID(s2, new VideoListener() {
+
 
             @Override
             public void onError(String error) {
@@ -190,6 +194,7 @@ public class MainActivity extends BrightcovePlayer implements IAccessEnablerDele
 
             @Override
             public void onVideo(Video video) {
+                Log.v(TAG, "playing video");
                 brightcoveVideoView.add(video);
                 brightcoveVideoView.start();
             }
