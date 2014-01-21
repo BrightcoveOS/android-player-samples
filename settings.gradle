@@ -1,19 +1,19 @@
 
-if ("$runBasicFreewheelSampleApp" && freewheelDependenciesAreSatisfied())
+if (Boolean.valueOf("$runBasicFreewheelSampleApp") && freewheelDependenciesAreSatisfied())
   include ':BasicFreeWheelSampleApp'
-if ("$runBasicIMASampleApp")
+if (Boolean.valueOf("$runBasicIMASampleApp"))
   include ':BasicIMASampleApp'
-if ("$runBasicIMAWidevineSampleApp")
+if (Boolean.valueOf("$runBasicIMAWidevineSampleApp"))
   include ':BasicIMAWidevineSampleApp'
-if ("$runBasicOmnitureSampleApp" && omnitureDependenciesAreSatisfied())
+if (Boolean.valueOf("$runBasicOmnitureSampleApp") && omnitureDependenciesAreSatisfied())
   include ':BasicOmnitureSampleApp'
-if ("$runBasicWidevineSampleApp")
+if (Boolean.valueOf("$runBasicWidevineSampleApp"))
   include ':BasicWidevineSampleApp'
-if ("$runBasicBundledVideoSampleApp")
+if (Boolean.valueOf("$runBasicBundledVideoSampleApp"))
   include ':BasicBundledVideoSampleApp'
-if ("$runAdRulesIMASampleApp")
+if (Boolean.valueOf("$runAdRulesIMASampleApp"))
   include ':AdRulesIMASampleApp'
-if ("$runHLSPlayerSampleApp")
+if (Boolean.valueOf("$runHLSPlayerSampleApp"))
   include ':HLSPlayerSampleApp'
 
 boolean freewheelDependenciesAreSatisfied() {

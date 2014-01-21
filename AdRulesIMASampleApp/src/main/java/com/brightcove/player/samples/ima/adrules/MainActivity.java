@@ -57,12 +57,10 @@ public class MainActivity extends BrightcovePlayer {
     }
 
     /**
-     * Setup the Brightcove IMA Plugin: add some cue points; establish a factory object to
-     * obtain the Google IMA SDK instance.
+     * Setup the Brightcove IMA Plugin.
      */
     private void setupGoogleIMA() {
 
-        // Defer adding cue points until the set video event is triggered.
         eventEmitter.on(EventType.DID_SET_VIDEO, new EventListener() {
             @Override
             public void processEvent(Event event) {
@@ -97,9 +95,9 @@ public class MainActivity extends BrightcovePlayer {
             }
         });
 
-        // Set up a listener for initializing AdsRequests. The Google IMA plugin emits an ad
-        // request event in response to each cue point event.  The event processor (handler)
-        // illustrates how to play ads back to back.
+        // Set up a listener for initializing AdsRequests. The Google
+        // IMA plugin emits an ad request event in response to the ad
+        // rules.
         eventEmitter.on(GoogleIMAEventType.ADS_REQUEST_FOR_VIDEO, new EventListener() {
             @Override
             public void processEvent(Event event) {
