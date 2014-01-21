@@ -17,7 +17,6 @@ import android.widget.MediaController;
 import android.widget.RelativeLayout;
 
 import com.brightcove.freewheel.controller.FreeWheelController;
-import com.brightcove.freewheel.cuepoint.AdCuePointComponent;
 import com.brightcove.freewheel.event.FreeWheelEventType;
 import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;

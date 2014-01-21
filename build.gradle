@@ -57,11 +57,11 @@ subprojects {
 
   android {
     compileSdkVersion 19
-    buildToolsVersion "17.0.0"
+    buildToolsVersion "19.0.0"
 
     defaultConfig {
       minSdkVersion 10
-      targetSdkVersion 17
+      targetSdkVersion 18
     }
   }
 
@@ -73,20 +73,26 @@ subprojects {
   if (project.name.contains('IMA')) {
     downloadIMA()
     dependencies {
-      compile "com.brightcove.player:android-ima-plugin:${anpVersion}"
+      compile "com.brightcove.ima:android-ima-plugin:${anpVersion}"
       compile files("${rootProject.projectDir}/libs/sdk.jar")
     }
   }
 
   if (project.name.contains('Widevine')) {
     dependencies {
-      compile "com.brightcove.player:android-widevine-plugin:${anpVersion}"
+      compile "com.brightcove.widevine:android-widevine-plugin:${anpVersion}"
+    }
+
+    android {
+      defaultConfig {
+        minSdkVersion 11
+      }
     }
   }
 
   if (project.name.contains('HLS')) {
     dependencies {
-      compile "com.brightcove.player:android-hls-player:${anpVersion}"
+      compile "com.brightcove.hls:android-hls-trial:${anpVersion}"
     }
   }
 
