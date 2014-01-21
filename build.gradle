@@ -50,12 +50,8 @@ subprojects {
 
   repositories {
     mavenCentral()
-
-    // This repo is a temporary convenience repo for Brightcove
-    // development.  It will be replaced with a public Brightcove
-    // repository soon.
     maven {
-        url 'http://docs.brightcove.com/en/video-cloud/maven/repo'
+      url 'http://docs.brightcove.com/en/video-cloud/maven/repo'
     }
   }
 
@@ -77,15 +73,20 @@ subprojects {
   if (project.name.contains('IMA')) {
     downloadIMA()
     dependencies {
-      compile "com.brightcove.player:android-sdk:$anpVersion"
-      compile "com.brightcove.ima:android-ima-plugin:${anpVersion}"
+      compile "com.brightcove.player:android-ima-plugin:${anpVersion}"
       compile files("${rootProject.projectDir}/libs/sdk.jar")
     }
   }
 
   if (project.name.contains('Widevine')) {
     dependencies {
-      compile "com.brightcove.drm:android-widevine-plugin:${anpVersion}"
+      compile "com.brightcove.player:android-widevine-plugin:${anpVersion}"
+    }
+  }
+
+  if (project.name.contains('HLS')) {
+    dependencies {
+      compile "com.brightcove.player:android-hls-player:${anpVersion}"
     }
   }
 

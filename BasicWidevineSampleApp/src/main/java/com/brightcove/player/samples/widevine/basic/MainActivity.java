@@ -6,8 +6,6 @@ import android.util.Log;
 import android.widget.MediaController;
 
 import com.brightcove.drm.widevine.WidevinePlugin;
-import com.brightcove.player.event.EventEmitter;
-import com.brightcove.player.event.EventLogger;
 import com.brightcove.player.media.Catalog;
 import com.brightcove.player.media.VideoListener;
 import com.brightcove.player.model.Video;
@@ -32,8 +30,6 @@ public class MainActivity extends BrightcovePlayer {
         setContentView(R.layout.basic_widevine);
         brightcoveVideoView = (BrightcoveVideoView) findViewById(R.id.bc_video_view);
         super.onCreate(savedInstanceState);
-        EventEmitter eventEmitter = brightcoveVideoView.getEventEmitter();
-        new EventLogger(eventEmitter, true, getClass().getSimpleName());
 
         // Set up the DRM licensing server to be handled by Brightcove with arbitrary device and
         // portal identifiers to fulfill the Widevine API contract.  These arguments will
