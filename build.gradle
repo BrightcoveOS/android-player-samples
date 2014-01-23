@@ -46,7 +46,6 @@ subprojects {
     maven {
       url 'http://docs.brightcove.com/en/video-cloud/maven/repo'
     }
-    mavenLocal()
   }
 
   android {
