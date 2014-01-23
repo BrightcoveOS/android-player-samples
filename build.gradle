@@ -85,7 +85,7 @@ subprojects {
 
   if (project.name.contains('HLS')) {
     dependencies {
-      compile "com.brightcove.hls:android-hls-player:${anpVersion}"
+      compile "com.brightcove.player:android-hls-player:${anpVersion}"
     }
   }
 
