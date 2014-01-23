@@ -18,7 +18,8 @@ import java.util.ArrayList;
 
 /**
  * This app illustrates how to use "Ad Rules" the Google IMA plugin
- * and the Brightcove Player for Android.
+ * and the Brightcove Player for Android.  Note: cue points are not
+ * used with Ad Rules.
  *
  * @author Paul Matthew Reilly (original code)
  * @author Paul Michael Reilly (added explanatory comments)
@@ -35,8 +36,7 @@ public class MainActivity extends BrightcovePlayer {
     protected void onCreate(Bundle savedInstanceState) {
         // When extending the BrightcovePlayer, we must assign the BrightcoveVideoView before
         // entering the superclass. This allows for some stock video player lifecycle
-        // management.  Establish the video object and use it's event emitter to get important
-        // notifications and to control logging.
+        // management.
         setContentView(R.layout.ima_activity_main);
         brightcoveVideoView = (BrightcoveVideoView) findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
@@ -45,7 +45,7 @@ public class MainActivity extends BrightcovePlayer {
         // Use a procedural abstraction to setup the Google IMA SDK via the plugin.
         setupGoogleIMA();
 
-        // add a content video.
+        // Establish the video object.
         brightcoveVideoView.add(Video.createVideo("http://rmcdn.2mdn.net/MotifFiles/html/1248596/android_1330378998288.mp4"));
 
         // Log whether or not instance state in non-null.
@@ -60,7 +60,7 @@ public class MainActivity extends BrightcovePlayer {
      * Setup the Brightcove IMA Plugin.
      */
     private void setupGoogleIMA() {
-
+        // After the video has been prepared, setup Ad Rules.
         eventEmitter.on(EventType.DID_SET_VIDEO, new EventListener() {
             @Override
             public void processEvent(Event event) {
@@ -71,7 +71,7 @@ public class MainActivity extends BrightcovePlayer {
         // Establish the Google IMA SDK factory instance.
         final ImaSdkFactory sdkFactory = ImaSdkFactory.getInstance();
 
-        // Defer ad processing until the time is appropriate: when one is supposed to start.
+        // Enable logging up ad start.
         eventEmitter.on(GoogleIMAEventType.DID_START_AD, new EventListener() {
             @Override
             public void processEvent(Event event) {
@@ -96,8 +96,8 @@ public class MainActivity extends BrightcovePlayer {
         });
 
         // Set up a listener for initializing AdsRequests. The Google
-        // IMA plugin emits an ad request event in response to the ad
-        // rules.
+        // IMA plugin emits an ad request event as a result of
+        // initializeAdsRequests() being called.
         eventEmitter.on(GoogleIMAEventType.ADS_REQUEST_FOR_VIDEO, new EventListener() {
             @Override
             public void processEvent(Event event) {
@@ -121,8 +121,8 @@ public class MainActivity extends BrightcovePlayer {
             }
         });
 
-        // Create the Brightcove IMA Plugin and register the event emitter so that the plugin
-        // can deal with video events.
+        // Create the Brightcove IMA Plugin and pass in the event
+        // emitter so that the plugin can integrate with the SDK.
         googleIMAComponent = new GoogleIMAComponent(brightcoveVideoView, eventEmitter, true);
     }
 }
