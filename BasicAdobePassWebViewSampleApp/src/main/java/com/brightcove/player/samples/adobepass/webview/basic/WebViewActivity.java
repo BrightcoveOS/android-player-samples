@@ -15,7 +15,9 @@ import com.adobe.adobepass.accessenabler.api.AccessEnabler;
 import java.net.URLDecoder;
 
 /**
- * Created by bhnath on 1/15/14.
+ * A webview activity to access the adobepass login pages for credential entry.
+ *
+ * @author Billy Hnath (bhnath)
  */
 public class WebViewActivity extends Activity {
 
