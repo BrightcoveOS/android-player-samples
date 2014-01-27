@@ -139,7 +139,7 @@ public class MainActivity extends BrightcovePlayer {
         // Establish the Google IMA SDK factory instance.
         final ImaSdkFactory sdkFactory = ImaSdkFactory.getInstance();
 
-        // Defer ad processing until the time is appropriate: when one is supposed to start.
+        // Enable logging of ad starts
         eventEmitter.on(GoogleIMAEventType.DID_START_AD, new EventListener() {
             @Override
             public void processEvent(Event event) {
@@ -147,7 +147,7 @@ public class MainActivity extends BrightcovePlayer {
             }
         });
 
-        // Enable logging any failed attempts to play an ad.
+        // Enable logging of any failed attempts to play an ad.
         eventEmitter.on(GoogleIMAEventType.DID_FAIL_TO_PLAY_AD, new EventListener() {
             @Override
             public void processEvent(Event event) {
@@ -155,7 +155,7 @@ public class MainActivity extends BrightcovePlayer {
             }
         });
 
-        // Enable Logging upon ad completion.
+        // Enable logging of ad completions.
         eventEmitter.on(GoogleIMAEventType.DID_COMPLETE_AD, new EventListener() {
             @Override
             public void processEvent(Event event) {
