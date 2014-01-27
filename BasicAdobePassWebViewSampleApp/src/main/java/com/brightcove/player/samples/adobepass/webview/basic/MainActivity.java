@@ -1,10 +1,16 @@
 package com.brightcove.player.samples.adobepass.webview.basic;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Base64;
 import android.util.Log;
+import android.webkit.SslErrorHandler;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.adobe.adobepass.accessenabler.api.AccessEnabler;
 import com.adobe.adobepass.accessenabler.api.AccessEnablerException;
@@ -24,6 +30,7 @@ import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
 
 import java.io.InputStream;
+import java.net.URLDecoder;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.Signature;
@@ -43,7 +50,8 @@ public class MainActivity extends BrightcovePlayer implements IAccessEnablerDele
 
     private final String TAG = this.getClass().getSimpleName();
 
-    public static final String STAGING_URL = "sp.auth-staging.adobe.com/adobe-services";
+    private static final String STAGING_URL = "sp.auth-staging.adobe.com/adobe-services";
+    private static final int WEBVIEW_ACTIVITY = 1;
 
     private EventEmitter eventEmitter;
     private AccessEnabler accessEnabler;
@@ -93,6 +101,16 @@ public class MainActivity extends BrightcovePlayer implements IAccessEnablerDele
         // Set the requestor ID.
         accessEnabler.setRequestor(requestorId, signedRequestorId, spUrls);
 
+        // TODO (once we media API changes are made):
+        // Media API call will return result withy nulled out URL fields if the media
+        // is protected. We need to make the adobepass calls to get the token for the media,
+        // then make another Media API call with the adobepass token included (in the header or
+        // a cookie) which will return a result with non-nulled URL fields.
+
+        // 1. Ignore URL fields on the first call.
+        // 2. Make the AdobePass calls
+        // 3. Add token to next Media API call.
+
         // Add a test video to the BrightcoveVideoView.
         Map<String, String> options = new HashMap<String, String>();
         List<String> values = new ArrayList<String>(Arrays.asList(VideoFields.DEFAULT_FIELDS));
@@ -119,8 +137,13 @@ public class MainActivity extends BrightcovePlayer implements IAccessEnablerDele
         }
     }
 
+    // Make sure we log out once the application is killed.
     @Override
-    protected void onBack
+    public void onBackPressed() {
+        Log.v(TAG, "onBackPressed");
+        accessEnabler.logout();
+        super.onBackPressed();
+    }
 
     private String generateSignature(PrivateKey privateKey, String data) throws AccessEnablerException {
         try {
@@ -165,50 +188,31 @@ public class MainActivity extends BrightcovePlayer implements IAccessEnablerDele
     }
 
     @Override
-    public void setRequestorComplete(int i) {
-        Log.v(TAG, "setRequestorComplete: " + i);
-        if (i == AccessEnabler.ACCESS_ENABLER_STATUS_SUCCESS) {
+    public void setRequestorComplete(int status) {
+        Log.v(TAG, "setRequestorComplete: " + status);
+        if (status == AccessEnabler.ACCESS_ENABLER_STATUS_SUCCESS) {
             accessEnabler.getAuthentication();
         }
     }
 
     @Override
-    public void setAuthenticationStatus(int i, String s) {
-        Log.v(TAG, "setAuthenticationStatus: " + i + " , " + s);
-        if (i == AccessEnabler.ACCESS_ENABLER_STATUS_SUCCESS) {
+    public void setAuthenticationStatus(int status, String errorCode) {
+        Log.v(TAG, "setAuthenticationStatus: " + status + " , " + errorCode);
+        if (status == AccessEnabler.ACCESS_ENABLER_STATUS_SUCCESS) {
             accessEnabler.getAuthorization("2149332630001");
-        } else if (i == AccessEnabler.ACCESS_ENABLER_STATUS_ERROR) {
-            Log.v(TAG, "AUTH FAILED");
+        } else if (status == AccessEnabler.ACCESS_ENABLER_STATUS_ERROR) {
+            Log.v(TAG, "setAuthenticationStatus: authentication failed.");
         }
     }
 
     @Override
-    public void setToken(String s, String s2) {
-        Log.v(TAG, "setToken: " + s + " ," + s2);
-
-//        Looper.prepare();
-//        Catalog catalog = new Catalog(s);
-//        Log.v(TAG, "ran findVideoByID");
-//        catalog.findVideoByID(s2, new VideoListener() {
-//
-//
-//            @Override
-//            public void onError(String error) {
-//                Log.e(TAG, error);
-//            }
-//
-//            @Override
-//            public void onVideo(Video video) {
-//                Log.v(TAG, "playing video");
-//                brightcoveVideoView.add(video);
-//                brightcoveVideoView.start();
-//            }
-//        });
+    public void setToken(String token, String resourceId) {
+        Log.v(TAG, "setToken: " + token + " ," + resourceId);
     }
 
     @Override
-    public void tokenRequestFailed(String s, String s2, String s3) {
-        Log.v(TAG, "tokenRequestFailed: " + s + ", " + s2 + ", " + s3);
+    public void tokenRequestFailed(String resourceId, String errorCode, String errorDescription) {
+        Log.v(TAG, "tokenRequestFailed: " + resourceId + ", " + errorCode + ", " + errorDescription);
     }
 
     @Override
@@ -222,19 +226,19 @@ public class MainActivity extends BrightcovePlayer implements IAccessEnablerDele
         accessEnabler.setSelectedProvider(mvpds.get(0).getId());
     }
 
+    // Open the webview activity here to do the URL redirection for both
+    // logging in and logging out.
     @Override
-    public void navigateToUrl(String s) {
-        Log.v(TAG, "navigateToUrl: " + s);
-        if(s.indexOf(AccessEnabler.SP_URL_PATH_GET_AUTHENTICATION) > 0) {
-            Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
-            intent.putExtra("url", s);
-            startActivityForResult(intent, 1);
-        }
+    public void navigateToUrl(String url) {
+        Log.v(TAG, "navigateToUrl: " + url);
+        Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
+        intent.putExtra("url", url);
+        startActivityForResult(intent, WEBVIEW_ACTIVITY);
     }
 
     @Override
-    public void sendTrackingData(Event event, ArrayList<String> strings) {
-        Log.v(TAG, "sendTrackingData: " + event + ", " + strings);
+    public void sendTrackingData(Event event, ArrayList<String> data) {
+        Log.v(TAG, "sendTrackingData: " + event + ", " + data);
     }
 
     @Override
@@ -243,7 +247,7 @@ public class MainActivity extends BrightcovePlayer implements IAccessEnablerDele
     }
 
     @Override
-    public void preauthorizedResources(ArrayList<String> strings) {
-        Log.v(TAG, "preauthorizedResources:" + strings);
+    public void preauthorizedResources(ArrayList<String> resources) {
+        Log.v(TAG, "preauthorizedResources:" + resources);
     }
 }
