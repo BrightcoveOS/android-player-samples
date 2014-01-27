@@ -102,7 +102,7 @@ public class MainActivity extends BrightcovePlayer implements IAccessEnablerDele
         accessEnabler.setRequestor(requestorId, signedRequestorId, spUrls);
 
         // TODO (once we media API changes are made):
-        // Media API call will return result withy nulled out URL fields if the media
+        // Media API call will return result with nulled out URL fields if the media
         // is protected. We need to make the adobepass calls to get the token for the media,
         // then make another Media API call with the adobepass token included (in the header or
         // a cookie) which will return a result with non-nulled URL fields.
