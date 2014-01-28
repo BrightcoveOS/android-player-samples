@@ -8,5 +8,10 @@
         android:id="@+id/sampleWebView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
+    <com.brightcove.player.view.BrightcoveVideoView
+        android:id="@+id/brightcove_video_view"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:layout_gravity="center_horizontal|top"/>
 
 </FrameLayout>
