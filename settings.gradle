@@ -13,6 +13,8 @@ if (Boolean.valueOf("$runBasicBundledVideoSampleApp"))
   include ':BasicBundledVideoSampleApp'
 if (Boolean.valueOf("$runAdRulesIMASampleApp"))
   include ':AdRulesIMASampleApp'
+if ("$runBasicAdobePassWebViewSampleApp")
+  include ':BasicAdobePassWebViewSampleApp'
 if (Boolean.valueOf("$runHLSPlayerSampleApp"))
   include ':HLSPlayerSampleApp'
 
