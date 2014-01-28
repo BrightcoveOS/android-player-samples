@@ -67,6 +67,7 @@ public class MainActivity extends BrightcovePlayer implements IAccessEnablerDele
         super.onCreate(savedInstanceState);
 
         // configure the AdobePass AccessEnabler library
+
         try {
             accessEnabler = AccessEnabler.Factory.getInstance(this);
             if (accessEnabler != null) {
