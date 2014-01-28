@@ -13,7 +13,7 @@ if (Boolean.valueOf("$runBasicBundledVideoSampleApp"))
   include ':BasicBundledVideoSampleApp'
 if (Boolean.valueOf("$runAdRulesIMASampleApp"))
   include ':AdRulesIMASampleApp'
-if ("$runBasicAdobePassWebViewSampleApp")
+if (Boolean.valueOf("$runBasicAdobePassWebViewSampleApp") && adobepassDependenciesAreSatisfied())
   include ':BasicAdobePassWebViewSampleApp'
 if (Boolean.valueOf("$runHLSPlayerSampleApp"))
   include ':HLSPlayerSampleApp'
@@ -25,5 +25,10 @@ boolean freewheelDependenciesAreSatisfied() {
 
 boolean omnitureDependenciesAreSatisfied() {
     File dep = file("${rootProject.projectDir}/libs/adobe-adms.jar")
+    return dep.exists()
+}
+
+boolean adobepassDependenciesAreSatisfied() {
+    File dep = file("${rootProject.projectDir}/libs/android_accessenabler-1.7.2.jar")
     return dep.exists()
 }
