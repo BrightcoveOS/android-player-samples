@@ -20,6 +20,7 @@ public class WebViewActivity extends Activity {
     private final String TAG = this.getClass().getSimpleName();
 
     private WebView webView;
+    private boolean isLoaded = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,9 +41,12 @@ public class WebViewActivity extends Activity {
     }
 
     private final WebViewClient webViewClient = new WebViewClient() {
+
+        @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url){
             Log.d(TAG, "Loading URL: " + url);
-            return false;
+            view.loadUrl(url);
+            return true;
         }
 
         @Override
@@ -67,7 +71,47 @@ public class WebViewActivity extends Activity {
         @Override
         public void onPageFinished(WebView view, String url) {
             Log.d(TAG, "Page loaded: " + url);
-            super.onPageFinished(view, url);
+            if (url.contains("SAMLResponse") || url.contains("assertionConsumer")) {
+                if (!isLoaded) {
+                Intent result = new Intent(WebViewActivity.this, MainActivity.class);
+                setResult(RESULT_OK, result);
+                finish();
+                isLoaded = true;
+                }
+            }
         }
     };
+
+//    private class CaptureJSONResponseTask extends AsyncTask<String, String, String> {
+//
+//        @Override
+//        protected String doInBackground(String... params) {
+//            Log.v(TAG, "doInBackground:");
+//            String result = "";
+//            try {
+//                URL theURL = new URL(params[0]);
+//                URLConnection connection = theURL.openConnection();
+//                connection.connect();
+//                InputStream inputStream = connection.getInputStream();
+//
+//                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+//                String line = "";
+//
+//                while ((line = bufferedReader.readLine()) != null) {
+//                    result += line;
+//                }
+//                inputStream.close();
+//                Log.v(TAG, "result: " + result);
+//            } catch (Exception e) {
+//                Log.e(TAG, e.getMessage());
+//                e.printStackTrace();
+//            }
+//            return result;
+//        }
+//
+//        protected void onPostExecute(String jsonResponse) {
+//            Log.v(TAG, "onPostExecute:");
+//
+//        }
+//    }
 }

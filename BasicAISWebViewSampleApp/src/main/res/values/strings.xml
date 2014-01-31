@@ -2,5 +2,8 @@
 <resources>
 
     <string name="app_name">Basic AIS WebView Sample App</string>
+    <string name="title_activity_choose_idp">ChooseIDPActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>
