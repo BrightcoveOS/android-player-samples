@@ -1,12 +1,33 @@
 package com.brightcove.player.samples.ais.webview.basic;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.CookieSyncManager;
 
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
+import com.google.gson.Gson;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.CookieStore;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.protocol.ClientContext;
+import org.apache.http.impl.client.BasicCookieStore;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.cookie.BasicClientCookie;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.util.EntityUtils;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * This app illustrates how to integrate Akamai Identity Services within a webview.
@@ -21,9 +42,15 @@ public class MainActivity extends BrightcovePlayer {
 
     private EventEmitter eventEmitter;
 
-    private String platform_id = "urn:brightcove:com:test:1";
-    private String idp_id = "urn:akamai:com:ais:idp:mvpdx:1";
-    private String content_id = "12345";
+    private String baseUrl;
+    private String platformId;
+    private String authorizationCookie = "";
+
+    // Basic REST API Calls (minimum required)
+    private String initUrl;
+    private String chooseIdpUrl;
+    private String authorizationResourceUrl;
+    private String singleLogoutUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +62,19 @@ public class MainActivity extends BrightcovePlayer {
         eventEmitter = brightcoveVideoView.getEventEmitter();
         super.onCreate(savedInstanceState);
 
-        String url = "http://idp.securetve.com/rest/1.0/" + platform_id + "/init/" + idp_id;
+        platformId = getResources().getString(R.string.platform_id);
+        baseUrl = getResources().getString(R.string.base_url);
 
-        Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
-        intent.putExtra("url", url);
-        startActivityForResult(intent, WEBVIEW_ACTIVITY);
+        initUrl =  baseUrl + platformId + "/init/";
+        chooseIdpUrl = baseUrl + platformId + "/chooser";
+        authorizationResourceUrl = baseUrl + platformId + "/identity/resourceAccess/";
+        singleLogoutUrl = baseUrl + platformId + "/slo/";
+
+        // Initialize our cookie syncing mechanism for the webview and start the
+        // authorization workflow.
+        CookieSyncManager.createInstance(this);
+        new GetIdentityProvidersAsyncTask().execute(chooseIdpUrl);
+
         // Add a test video to the BrightcoveVideoView.
 //        Map<String, String> options = new HashMap<String, String>();
 //        List<String> values = new ArrayList<String>(Arrays.asList(VideoFields.DEFAULT_FIELDS));
@@ -59,12 +94,103 @@ public class MainActivity extends BrightcovePlayer {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.v(TAG, "onActivityResult: " + requestCode + ", " + resultCode + ", " + data);
         super.onActivityResult(requestCode, resultCode, data);
+
+        String AIS_WEBVIEW_COOKIE = getResources().getString(R.string.ais_webview_cookie);
+
+        if (resultCode == RESULT_OK) {
+            // try to access a resource with a resource id
+            // if AuthZ then get the token
+            // if no AuthZ then say were not authorized
+            authorizationCookie = data.getExtras().getString(AIS_WEBVIEW_COOKIE);
+            new ResourceAccessAsyncTask().execute(authorizationResourceUrl+"12345");
+        }
     }
 
     // Make sure we log out once the application is killed.
     @Override
     public void onBackPressed() {
-        Log.v(TAG, "onBackPressed");
+        Log.v(TAG, "onBackPressed:");
         super.onBackPressed();
+        String AIS_TARGET_URL = getResources().getString(R.string.ais_target_url);
+        Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
+        intent.putExtra(AIS_TARGET_URL, singleLogoutUrl);
+        startActivityForResult(intent, WEBVIEW_ACTIVITY);
+    }
+
+    public String httpGet(String url) {
+
+        String domain = getResources().getString(R.string.ais_domain);
+        String result = "";
+        InputStream inputStream = null;
+
+        CookieStore cookieStore = new BasicCookieStore();
+        BasicHttpContext localContext = new BasicHttpContext();
+        localContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
+
+        try {
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpGet httpGet = new HttpGet(url);
+            if(!authorizationCookie.equals("")) {
+                String[] cookies = authorizationCookie.split(";");
+                for (int i = 0; i < cookies.length; i++) {
+                    String[] nvp = cookies[i].split("=");
+                    BasicClientCookie c = new BasicClientCookie(nvp[0], nvp[1]);
+                    c.setDomain(domain);
+                    cookieStore.addCookie(c);
+                }
+            }
+            HttpResponse httpResponse = httpClient.execute(httpGet, localContext);
+            result = EntityUtils.toString(httpResponse.getEntity());
+        } catch (Exception e) {
+            Log.e(TAG, e.getLocalizedMessage());
+        }
+
+        return result;
+    }
+
+    private class GetIdentityProvidersAsyncTask extends AsyncTask<String, Void, String> {
+
+        private String AIS_TARGET_URL = getResources().getString(R.string.ais_target_url);
+
+        @Override
+        protected String doInBackground(String... params) {
+            return httpGet(params[0]);
+        }
+
+        protected void onPostExecute(String jsonResponse) {
+            Log.v(TAG, "onPostExecute:");
+
+            String idp = "";
+            Gson gson = new Gson();
+            ChooserResponse response = gson.fromJson(jsonResponse, ChooserResponse.class);
+
+            Iterator it = response.getPossibleIdps().entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry pairs = (Map.Entry)it.next();
+                idp = pairs.getKey().toString();
+                it.remove();
+            }
+
+            Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
+            intent.putExtra(AIS_TARGET_URL, initUrl + idp);
+            startActivityForResult(intent, WEBVIEW_ACTIVITY);
+        }
+    }
+
+    private class ResourceAccessAsyncTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            return httpGet(params[0]);
+        }
+
+        protected void onPostExecute(String jsonResponse) {
+            Log.v(TAG, "onPostExecute:");
+
+            Gson gson = new Gson();
+            ResourceAccessResponse response = gson.fromJson(jsonResponse, ResourceAccessResponse.class);
+
+            Log.v(TAG, "message: " + response.getMessage());
+        }
     }
 }
