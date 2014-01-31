@@ -76,14 +76,12 @@ public class MainActivity extends BrightcovePlayer {
         Log.v(TAG, "onActivityResult: " + requestCode + ", " + resultCode + ", " + data);
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_CANCELED) {
-
-        } else if (resultCode == RESULT_OK) {
-
+        if (resultCode == RESULT_OK) {
+            // try to access a resource with a resource id
+            // if AuthZ then get the token
+            // if no AuthZ then say were not authorized
+            new ResourceAccessAsyncTask().execute(authorization_resource_url);
         }
-        Intent intent = getIntent();
-        String jsonResponse = intent.getStringExtra("loggedInSuccess");
-        Log.v(TAG, "jsonResponse: " + jsonResponse);
     }
 
     // Make sure we log out once the application is killed.
@@ -144,6 +142,23 @@ public class MainActivity extends BrightcovePlayer {
             Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
             intent.putExtra("url", init_url + idp);
             startActivityForResult(intent, WEBVIEW_ACTIVITY);
+        }
+    }
+
+    private class ResourceAccessAsyncTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            return GET(params[0]);
+        }
+
+        protected void onPostExecute(String jsonResponse) {
+            Log.v(TAG, "onPostExecute:");
+
+            Gson gson = new Gson();
+            ResourceAccessResponse response = gson.fromJson(jsonResponse, ResourceAccessResponse.class);
+
+            Log.v(TAG, "message: " + response.getMessage());
         }
     }
 }

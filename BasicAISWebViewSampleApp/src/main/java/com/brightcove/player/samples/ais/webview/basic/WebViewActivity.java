@@ -36,7 +36,7 @@ public class WebViewActivity extends Activity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
 
-        Log.v(TAG, "Loading: " + url);
+        //Log.v(TAG, "Loading: " + url);
         webView.loadUrl(url);
     }
 
