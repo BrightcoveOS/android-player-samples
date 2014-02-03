@@ -3,9 +3,12 @@ package com.brightcove.player.samples.ais.webview.basic;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -20,7 +23,6 @@ public class WebViewActivity extends Activity {
     private final String TAG = this.getClass().getSimpleName();
 
     private WebView webView;
-    private boolean isLoaded = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,14 +31,19 @@ public class WebViewActivity extends Activity {
         Intent intent = getIntent();
         String url = intent.getStringExtra("url");
 
-        setContentView(R.layout.ais_webview_activity_main);
-        webView = (WebView) findViewById(R.id.sampleWebView);
+//        setContentView(R.layout.ais_webview_activity_main);
+//        webView = (WebView) findViewById(R.id.sampleWebView);
+        webView = new WebView(this);
+        setContentView(webView);
         webView.setWebViewClient(webViewClient);
 
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
 
-        //Log.v(TAG, "Loading: " + url);
+        Uri.Builder builder = Uri.parse(url).buildUpon();
+        builder.appendQueryParameter("responsemethod", "redirect");
+        url = builder.build().toString();
+
         webView.loadUrl(url);
     }
 
@@ -45,8 +52,17 @@ public class WebViewActivity extends Activity {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url){
             Log.d(TAG, "Loading URL: " + url);
-            view.loadUrl(url);
-            return true;
+            if(url.contains("foo://")) {
+                String cookie = CookieManager.getInstance().getCookie("idp.securetve.com");
+                Log.v(TAG, "cookie: " + cookie);
+                Intent result = new Intent(WebViewActivity.this, MainActivity.class);
+                result.putExtra("cookie", cookie);
+                CookieSyncManager.getInstance().sync();
+                setResult(RESULT_OK, result);
+                finish();
+                return true;
+            }
+            return false;
         }
 
         @Override
@@ -71,47 +87,7 @@ public class WebViewActivity extends Activity {
         @Override
         public void onPageFinished(WebView view, String url) {
             Log.d(TAG, "Page loaded: " + url);
-            if (url.contains("SAMLResponse") || url.contains("assertionConsumer")) {
-                if (!isLoaded) {
-                Intent result = new Intent(WebViewActivity.this, MainActivity.class);
-                setResult(RESULT_OK, result);
-                finish();
-                isLoaded = true;
-                }
-            }
+            super.onPageFinished(view, url);
         }
     };
-
-//    private class CaptureJSONResponseTask extends AsyncTask<String, String, String> {
-//
-//        @Override
-//        protected String doInBackground(String... params) {
-//            Log.v(TAG, "doInBackground:");
-//            String result = "";
-//            try {
-//                URL theURL = new URL(params[0]);
-//                URLConnection connection = theURL.openConnection();
-//                connection.connect();
-//                InputStream inputStream = connection.getInputStream();
-//
-//                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-//                String line = "";
-//
-//                while ((line = bufferedReader.readLine()) != null) {
-//                    result += line;
-//                }
-//                inputStream.close();
-//                Log.v(TAG, "result: " + result);
-//            } catch (Exception e) {
-//                Log.e(TAG, e.getMessage());
-//                e.printStackTrace();
-//            }
-//            return result;
-//        }
-//
-//        protected void onPostExecute(String jsonResponse) {
-//            Log.v(TAG, "onPostExecute:");
-//
-//        }
-//    }
 }
