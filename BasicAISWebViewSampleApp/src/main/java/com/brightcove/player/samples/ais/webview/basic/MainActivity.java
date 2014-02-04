@@ -150,6 +150,8 @@ public class MainActivity extends BrightcovePlayer {
 
     private class GetIdentityProvidersAsyncTask extends AsyncTask<String, Void, String> {
 
+        private String AIS_TARGET_URL = getResources().getString(R.string.ais_target_url);
+
         @Override
         protected String doInBackground(String... params) {
             return httpGet(params[0]);
@@ -170,7 +172,7 @@ public class MainActivity extends BrightcovePlayer {
             }
 
             Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
-            intent.putExtra("url", initUrl + idp);
+            intent.putExtra(AIS_TARGET_URL, initUrl + idp);
             startActivityForResult(intent, WEBVIEW_ACTIVITY);
         }
     }
