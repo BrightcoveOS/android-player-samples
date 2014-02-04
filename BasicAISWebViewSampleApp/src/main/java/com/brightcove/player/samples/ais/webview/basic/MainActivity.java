@@ -22,8 +22,9 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.util.EntityUtils;
 
-import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -118,7 +119,6 @@ public class MainActivity extends BrightcovePlayer {
 
         String domain = getResources().getString(R.string.ais_domain);
         String result = "";
-        InputStream inputStream = null;
 
         CookieStore cookieStore = new BasicCookieStore();
         BasicHttpContext localContext = new BasicHttpContext();
@@ -157,19 +157,19 @@ public class MainActivity extends BrightcovePlayer {
         protected void onPostExecute(String jsonResponse) {
             Log.v(TAG, "onPostExecute:");
 
-            String idp = "";
+            List<String> idps = new ArrayList<String>();
             Gson gson = new Gson();
             ChooserResponse response = gson.fromJson(jsonResponse, ChooserResponse.class);
 
             Iterator it = response.getPossibleIdps().entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry pairs = (Map.Entry)it.next();
-                idp = pairs.getKey().toString();
+                idps.add(pairs.getKey().toString());
                 it.remove();
             }
 
             Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
-            intent.putExtra(AIS_TARGET_URL, initUrl + idp);
+            intent.putExtra(AIS_TARGET_URL, initUrl + idps.get(0));
             startActivityForResult(intent, WEBVIEW_ACTIVITY);
         }
     }
