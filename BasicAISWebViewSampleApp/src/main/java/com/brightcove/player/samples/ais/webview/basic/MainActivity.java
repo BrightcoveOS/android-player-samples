@@ -38,17 +38,18 @@ public class MainActivity extends BrightcovePlayer {
     private final String TAG = this.getClass().getSimpleName();
 
     private static final int WEBVIEW_ACTIVITY = 1;
-    private static final String BASE_URL = "http://idp.securetve.com/rest/1.0/";
 
     private EventEmitter eventEmitter;
-    private String platform_id = "urn:brightcove:com:test:1"; //getResources().getString(R.string.platform_id);
-    private String _cookie = "";
+
+    private String baseUrl;
+    private String platformId;
+    private String authorizationCookie = "";
 
     // Basic REST API Calls (minimum required)
-    private String init_url = BASE_URL + platform_id + "/init/";
-    private String choose_idp_url = BASE_URL + platform_id + "/chooser/";
-    private String authorization_resource_url = BASE_URL + platform_id + "/identity/resourceAccess/";
-    private String single_logout_url = BASE_URL + platform_id + "/slo/";
+    private String initUrl;
+    private String chooseIdpUrl;
+    private String authorizationResourceUrl;
+    private String singleLogoutUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +61,16 @@ public class MainActivity extends BrightcovePlayer {
         eventEmitter = brightcoveVideoView.getEventEmitter();
         super.onCreate(savedInstanceState);
 
+        platformId = getResources().getString(R.string.platform_id);
+        baseUrl = getResources().getString(R.string.base_url);
+
+        initUrl =  baseUrl + platformId + "/init/";
+        chooseIdpUrl = baseUrl + platformId + "/chooser";
+        authorizationResourceUrl = baseUrl + platformId + "/identity/resourceAccess/";
+        singleLogoutUrl = baseUrl + platformId + "/slo/";
+
         CookieSyncManager.createInstance(this);
-        new GetIDPSAsyncTask().execute(choose_idp_url);
+        new GetIdentityProvidersAsyncTask().execute(chooseIdpUrl);
 
         // Add a test video to the BrightcoveVideoView.
 //        Map<String, String> options = new HashMap<String, String>();
@@ -87,26 +96,24 @@ public class MainActivity extends BrightcovePlayer {
             // try to access a resource with a resource id
             // if AuthZ then get the token
             // if no AuthZ then say were not authorized
-            Bundle bundle = data.getExtras();
-            String cookie = bundle.getString("cookie");
-            Log.v(TAG, "cookie outside: " + cookie);
-            _cookie = cookie;
-            new ResourceAccessAsyncTask().execute(authorization_resource_url+"12345");
+            authorizationCookie = data.getExtras().getString("cookie");
+            new ResourceAccessAsyncTask().execute(authorizationResourceUrl+"12345");
         }
     }
 
     // Make sure we log out once the application is killed.
     @Override
     public void onBackPressed() {
-        Log.v(TAG, "onBackPressed");
+        Log.v(TAG, "onBackPressed:");
         super.onBackPressed();
-        Log.v(TAG, "Logging out");
         Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
-        intent.putExtra("url", single_logout_url);
+        intent.putExtra("url", singleLogoutUrl);
         startActivityForResult(intent, WEBVIEW_ACTIVITY);
     }
 
     public String GET(String url) {
+
+        String domain = getResources().getString(R.string.ais_domain);
         String result = "";
         InputStream inputStream = null;
 
@@ -117,12 +124,12 @@ public class MainActivity extends BrightcovePlayer {
         try {
             HttpClient httpClient = new DefaultHttpClient();
             HttpGet httpGet = new HttpGet(url);
-            if(!_cookie.equals("")) {
-                String[] cookies = _cookie.split(";");
+            if(!authorizationCookie.equals("")) {
+                String[] cookies = authorizationCookie.split(";");
                 for (int i = 0; i < cookies.length; i++) {
                     String[] nvp = cookies[i].split("=");
                     BasicClientCookie c = new BasicClientCookie(nvp[0], nvp[1]);
-                    c.setDomain("idp.securetve.com");
+                    c.setDomain(domain);
                     cookieStore.addCookie(c);
                 }
             }
@@ -147,7 +154,7 @@ public class MainActivity extends BrightcovePlayer {
         return result;
     }
 
-    private class GetIDPSAsyncTask extends AsyncTask<String, Void, String> {
+    private class GetIdentityProvidersAsyncTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... params) {
@@ -167,10 +174,9 @@ public class MainActivity extends BrightcovePlayer {
                 idp = pairs.getKey().toString();
                 it.remove();
             }
-            Log.v(TAG, "idp: " + idp);
 
             Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
-            intent.putExtra("url", init_url + idp);
+            intent.putExtra("url", initUrl + idp);
             startActivityForResult(intent, WEBVIEW_ACTIVITY);
         }
     }

@@ -14,7 +14,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 /**
- * A webview activity to access the ais login pages for credential entry.
+ * A webview activity to access ais login pages for credential entry.
  *
  * @author Billy Hnath (bhnath)
  */
@@ -31,15 +31,15 @@ public class WebViewActivity extends Activity {
         Intent intent = getIntent();
         String url = intent.getStringExtra("url");
 
-//        setContentView(R.layout.ais_webview_activity_main);
-//        webView = (WebView) findViewById(R.id.sampleWebView);
-        webView = new WebView(this);
-        setContentView(webView);
+        setContentView(R.layout.ais_webview_activity_main);
+        webView = (WebView) findViewById(R.id.sampleWebView);
         webView.setWebViewClient(webViewClient);
 
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
 
+        // Append '?responsemethod=redirect' to the AIS call, otherwise we
+        // will not get the proper redirects to complete authentication.
         Uri.Builder builder = Uri.parse(url).buildUpon();
         builder.appendQueryParameter("responsemethod", "redirect");
         url = builder.build().toString();
@@ -49,12 +49,18 @@ public class WebViewActivity extends Activity {
 
     private final WebViewClient webViewClient = new WebViewClient() {
 
+
+
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url){
             Log.d(TAG, "Loading URL: " + url);
-            if(url.contains("foo://")) {
-                String cookie = CookieManager.getInstance().getCookie("idp.securetve.com");
-                Log.v(TAG, "cookie: " + cookie);
+            String AIS_REDIRECT_URL = getResources().getString(R.string.ais_redirect_url);
+            String AIS_DOMAIN = getResources().getString(R.string.ais_domain);
+            // Once we've hit the final redirect URL to complete authentication,
+            // harvest the cookie from this webview and pass it back to the main
+            // activity.
+            if(url.equals(AIS_REDIRECT_URL)) {
+                String cookie = CookieManager.getInstance().getCookie(AIS_DOMAIN);
                 Intent result = new Intent(WebViewActivity.this, MainActivity.class);
                 result.putExtra("cookie", cookie);
                 CookieSyncManager.getInstance().sync();
