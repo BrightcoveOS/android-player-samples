@@ -20,6 +20,7 @@ import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.util.EntityUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -69,6 +70,8 @@ public class MainActivity extends BrightcovePlayer {
         authorizationResourceUrl = baseUrl + platformId + "/identity/resourceAccess/";
         singleLogoutUrl = baseUrl + platformId + "/slo/";
 
+        // Initialize our cookie syncing mechanism for the webview and start the
+        // authorization workflow.
         CookieSyncManager.createInstance(this);
         new GetIdentityProvidersAsyncTask().execute(chooseIdpUrl);
 
@@ -92,11 +95,13 @@ public class MainActivity extends BrightcovePlayer {
         Log.v(TAG, "onActivityResult: " + requestCode + ", " + resultCode + ", " + data);
         super.onActivityResult(requestCode, resultCode, data);
 
+        String AIS_WEBVIEW_COOKIE = getResources().getString(R.string.ais_webview_cookie);
+
         if (resultCode == RESULT_OK) {
             // try to access a resource with a resource id
             // if AuthZ then get the token
             // if no AuthZ then say were not authorized
-            authorizationCookie = data.getExtras().getString("cookie");
+            authorizationCookie = data.getExtras().getString(AIS_WEBVIEW_COOKIE);
             new ResourceAccessAsyncTask().execute(authorizationResourceUrl+"12345");
         }
     }
@@ -106,12 +111,13 @@ public class MainActivity extends BrightcovePlayer {
     public void onBackPressed() {
         Log.v(TAG, "onBackPressed:");
         super.onBackPressed();
+        String AIS_TARGET_URL = getResources().getString(R.string.ais_target_url);
         Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
-        intent.putExtra("url", singleLogoutUrl);
+        intent.putExtra(AIS_TARGET_URL, singleLogoutUrl);
         startActivityForResult(intent, WEBVIEW_ACTIVITY);
     }
 
-    public String GET(String url) {
+    public String httpGet(String url) {
 
         String domain = getResources().getString(R.string.ais_domain);
         String result = "";
@@ -134,21 +140,9 @@ public class MainActivity extends BrightcovePlayer {
                 }
             }
             HttpResponse httpResponse = httpClient.execute(httpGet, localContext);
-            inputStream = httpResponse.getEntity().getContent();
+            result = EntityUtils.toString(httpResponse.getEntity());
         } catch (Exception e) {
             Log.e(TAG, e.getLocalizedMessage());
-        }
-
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        String line = "";
-        try {
-            while ((line = bufferedReader.readLine()) != null) {
-                result += line;
-            }
-            inputStream.close();
-            Log.v(TAG, "result: " + result);
-        } catch (IOException e) {
-            Log.e(TAG, e.getMessage());
         }
 
         return result;
@@ -158,7 +152,7 @@ public class MainActivity extends BrightcovePlayer {
 
         @Override
         protected String doInBackground(String... params) {
-            return GET(params[0]);
+            return httpGet(params[0]);
         }
 
         protected void onPostExecute(String jsonResponse) {
@@ -185,7 +179,7 @@ public class MainActivity extends BrightcovePlayer {
 
         @Override
         protected String doInBackground(String... params) {
-            return GET(params[0]);
+            return httpGet(params[0]);
         }
 
         protected void onPostExecute(String jsonResponse) {

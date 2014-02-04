@@ -28,8 +28,10 @@ public class WebViewActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        String AIS_TARGET_URL = getResources().getString(R.string.ais_target_url);
+
         Intent intent = getIntent();
-        String url = intent.getStringExtra("url");
+        String url = intent.getStringExtra(AIS_TARGET_URL);
 
         setContentView(R.layout.ais_webview_activity_main);
         webView = (WebView) findViewById(R.id.sampleWebView);
@@ -56,13 +58,14 @@ public class WebViewActivity extends Activity {
             Log.d(TAG, "Loading URL: " + url);
             String AIS_REDIRECT_URL = getResources().getString(R.string.ais_redirect_url);
             String AIS_DOMAIN = getResources().getString(R.string.ais_domain);
+            String AIS_WEBVIEW_COOKIE = getResources().getString(R.string.ais_webview_cookie);
             // Once we've hit the final redirect URL to complete authentication,
             // harvest the cookie from this webview and pass it back to the main
             // activity.
             if(url.equals(AIS_REDIRECT_URL)) {
                 String cookie = CookieManager.getInstance().getCookie(AIS_DOMAIN);
                 Intent result = new Intent(WebViewActivity.this, MainActivity.class);
-                result.putExtra("cookie", cookie);
+                result.putExtra(AIS_WEBVIEW_COOKIE, cookie);
                 CookieSyncManager.getInstance().sync();
                 setResult(RESULT_OK, result);
                 finish();

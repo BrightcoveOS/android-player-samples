@@ -8,5 +8,7 @@
     <string name="ais_redirect_url">foo://?st=bar</string>
     <string name="ais_domain">idp.securetve.com</string>
     <string name="base_url">http://idp.securetve.com/rest/1.0/</string>
+    <string name="ais_webview_cookie">aisWebviewCookie</string>
+    <string name="ais_target_url">aisTargetUrl</string>
 
 </resources>

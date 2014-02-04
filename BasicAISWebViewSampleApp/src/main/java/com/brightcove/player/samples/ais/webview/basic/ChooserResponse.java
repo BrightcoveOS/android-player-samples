@@ -9,7 +9,7 @@ public class ChooserResponse {
     private Map<String, String> grouped_idps;
     private String _type;
     private boolean authenticated;
-    private Map<String, IDPS> possible_idps;
+    private Map<String, IdentityProvider> possible_idps;
     private Map<String, String> footprints;
     private String platform_id;
     private Map<String, String> preferred_idps;
@@ -21,11 +21,11 @@ public class ChooserResponse {
         return authenticated;
     }
 
-    public Map<String, IDPS> getPossibleIdps() {
+    public Map<String, IdentityProvider> getPossibleIdps() {
         return possible_idps;
     }
 
-    public class IDPS {
+    public class IdentityProvider {
         private String url;
         private Map<String, String> logos;
         private String display_name;
