@@ -41,9 +41,7 @@ public class MainActivity extends BrightcovePlayer {
     private static final String BASE_URL = "http://idp.securetve.com/rest/1.0/";
 
     private EventEmitter eventEmitter;
-    private String platform_id = "urn:brightcove:com:test:1";
-    private String content_id = "12345";
-
+    private String platform_id = "urn:brightcove:com:test:1"; //getResources().getString(R.string.platform_id);
     private String _cookie = "";
 
     // Basic REST API Calls (minimum required)
@@ -93,7 +91,7 @@ public class MainActivity extends BrightcovePlayer {
             String cookie = bundle.getString("cookie");
             Log.v(TAG, "cookie outside: " + cookie);
             _cookie = cookie;
-            new ResourceAccessAsyncTask().execute(authorization_resource_url+content_id);
+            new ResourceAccessAsyncTask().execute(authorization_resource_url+"12345");
         }
     }
 
