@@ -1,42 +1,68 @@
 package com.brightcove.player.samples.ais.webview.basic;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Map;
 
 /**
  * Created by bhnath on 1/29/14.
  */
 public class ChooserResponse {
-    private Map<String, String> grouped_idps;
-    private String _type;
+
+    @SerializedName("grouped_idps")
+    private Map<String, String> groupedIdps;
+
+    @SerializedName("_type")
+    private String type;
+
+    @SerializedName("authenticated")
     private boolean authenticated;
-    private Map<String, IdentityProvider> possible_idps;
+
+    @SerializedName("possible_idps")
+    private Map<String, IdentityProvider> possibleIdps;
+
+    @SerializedName("footprints")
     private Map<String, String> footprints;
-    private String platform_id;
-    private Map<String, String> preferred_idps;
+
+    @SerializedName("platform_id")
+    private String platformId;
+
+    @SerializedName("preferred_idps")
+    private Map<String, String> preferredIdps;
 
     public String getType() {
-        return _type;
+        return type;
     }
     public boolean getAuthenticated() {
         return authenticated;
     }
 
     public Map<String, IdentityProvider> getPossibleIdps() {
-        return possible_idps;
+        return possibleIdps;
     }
 
     public class IdentityProvider {
+
+        @SerializedName("url")
         private String url;
+
+        @SerializedName("logos")
         private Map<String, String> logos;
-        private String display_name;
+
+        @SerializedName("display_name")
+        private String displayName;
+
+        @SerializedName("name")
         private String name;
 
         public String getUrl() {
             return url;
         }
-
+        public Map<String, String> getLogos() {
+            return logos;
+        }
         public String getDisplayName() {
-            return display_name;
+            return displayName;
         }
         public String getName() {
             return name;

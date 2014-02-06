@@ -1,21 +1,38 @@
 package com.brightcove.player.samples.ais.webview.basic;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by bhnath on 1/31/14.
  */
 public class ResourceAccessResponse {
 
-    private String _type;
+    @SerializedName("_type")
+    private String type;
+
+    @SerializedName("resource")
     private String resource;
-    private String security_token;
+
+    @SerializedName("security_token")
+    private String securityToken;
+
+    @SerializedName("expires")
     private int expires;
-    private int servertime;
-    private String platform_id;
+
+    @SerializedName("servertime")
+    private int serverTime;
+
+    @SerializedName("platform_id")
+    private String platformId;
+
+    @SerializedName("message")
     private String message;
+
+    @SerializedName("authorization")
     private boolean authorization;
 
     public String getType() {
-        return _type;
+        return type;
     }
 
     public String getResource() {
@@ -23,7 +40,7 @@ public class ResourceAccessResponse {
     }
 
     public String getSecurityToken() {
-        return security_token;
+        return securityToken;
     }
 
     public int getExpires() {
@@ -31,11 +48,11 @@ public class ResourceAccessResponse {
     }
 
     public int getServerTime() {
-        return servertime;
+        return serverTime;
     }
 
     public String getPlatformId() {
-        return platform_id;
+        return platformId;
     }
 
     public String getMessage() {
