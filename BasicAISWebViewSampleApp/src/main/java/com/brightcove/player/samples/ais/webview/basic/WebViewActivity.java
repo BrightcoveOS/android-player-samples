@@ -51,18 +51,16 @@ public class WebViewActivity extends Activity {
 
     private final WebViewClient webViewClient = new WebViewClient() {
 
-
-
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url){
             Log.d(TAG, "Loading URL: " + url);
-            String AIS_REDIRECT_URL = getResources().getString(R.string.ais_redirect_url);
+            String AIS_REDIRECT_TOKEN = getResources().getString(R.string.ais_redirect_token);
             String AIS_DOMAIN = getResources().getString(R.string.ais_domain);
             String AIS_WEBVIEW_COOKIE = getResources().getString(R.string.ais_webview_cookie);
             // Once we've hit the final redirect URL to complete authentication,
             // harvest the cookie from this webview and pass it back to the main
             // activity.
-            if(url.equals(AIS_REDIRECT_URL)) {
+            if(url.contains(AIS_REDIRECT_TOKEN) && url.contains("aisresponse")) {
                 String cookie = CookieManager.getInstance().getCookie(AIS_DOMAIN);
                 Intent result = new Intent(WebViewActivity.this, MainActivity.class);
                 result.putExtra(AIS_WEBVIEW_COOKIE, cookie);

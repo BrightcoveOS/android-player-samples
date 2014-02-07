@@ -1,12 +1,15 @@
 package com.brightcove.player.samples.ais.webview.basic;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.CookieSyncManager;
+import android.widget.Toast;
 
 import com.brightcove.player.event.EventEmitter;
+import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
 import com.google.gson.Gson;
@@ -43,8 +46,6 @@ public class MainActivity extends BrightcovePlayer {
     private String baseUrl;
     private String platformId;
     private String authorizationCookie = "";
-
-    // Basic REST API Calls (minimum required)
     private String initUrl;
     private String chooseIdpUrl;
     private String authorizationResourceUrl;
@@ -63,6 +64,7 @@ public class MainActivity extends BrightcovePlayer {
         platformId = getResources().getString(R.string.platform_id);
         baseUrl = getResources().getString(R.string.base_url);
 
+        // Basic REST API Calls (minimum required)
         initUrl =  baseUrl + platformId + "/init/";
         chooseIdpUrl = baseUrl + platformId + "/chooser";
         authorizationResourceUrl = baseUrl + platformId + "/identity/resourceAccess/";
@@ -73,19 +75,6 @@ public class MainActivity extends BrightcovePlayer {
         CookieSyncManager.createInstance(this);
         new GetIdentityProvidersAsyncTask().execute(chooseIdpUrl);
 
-        // Add a test video to the BrightcoveVideoView.
-//        Map<String, String> options = new HashMap<String, String>();
-//        List<String> values = new ArrayList<String>(Arrays.asList(VideoFields.DEFAULT_FIELDS));
-//        Catalog catalog = new Catalog("ErQk9zUeDVLIp8Dc7aiHKq8hDMgkv5BFU7WGshTc-hpziB3BuYh28A..");
-//        catalog.findPlaylistByReferenceID("stitch", options, new PlaylistListener() {
-//            public void onPlaylist(Playlist playlist) {
-//                brightcoveVideoView.addAll(playlist.getVideos());
-//            }
-//
-//            public void onError(String error) {
-//                Log.e(TAG, error);
-//            }
-//        });
     }
 
     @Override
@@ -94,13 +83,15 @@ public class MainActivity extends BrightcovePlayer {
         super.onActivityResult(requestCode, resultCode, data);
 
         String AIS_WEBVIEW_COOKIE = getResources().getString(R.string.ais_webview_cookie);
+        String resourceId = getResources().getString(R.string.resource_id);
 
+        // If the result back from the webview was OK, then try to access the asset via the
+        // resource id. Otherwise alert the user that authorization was not successful.
         if (resultCode == RESULT_OK) {
-            // try to access a resource with a resource id
-            // if AuthZ then get the token
-            // if no AuthZ then say were not authorized
             authorizationCookie = data.getExtras().getString(AIS_WEBVIEW_COOKIE);
-            new ResourceAccessAsyncTask().execute(authorizationResourceUrl+"12345");
+            new ResourceAccessAsyncTask().execute(authorizationResourceUrl+resourceId);
+        } else {
+            Toast.makeText(this, "Authorization was not successful.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -124,14 +115,18 @@ public class MainActivity extends BrightcovePlayer {
         BasicHttpContext localContext = new BasicHttpContext();
         localContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
 
+        // If we have a cookie stored, parse and use it. Otherwise, use a default http client.
         try {
             HttpClient httpClient = new DefaultHttpClient();
             HttpGet httpGet = new HttpGet(url);
             if(!authorizationCookie.equals("")) {
                 String[] cookies = authorizationCookie.split(";");
                 for (int i = 0; i < cookies.length; i++) {
-                    String[] nvp = cookies[i].split("=");
-                    BasicClientCookie c = new BasicClientCookie(nvp[0], nvp[1]);
+                    String[] kvp = cookies[i].split("=");
+                    if(kvp.length != 2) {
+                        throw new Exception("Illegal cookie: missing key/value pair.");
+                    }
+                    BasicClientCookie c = new BasicClientCookie(kvp[0], kvp[1]);
                     c.setDomain(domain);
                     cookieStore.addCookie(c);
                 }
@@ -157,6 +152,8 @@ public class MainActivity extends BrightcovePlayer {
         protected void onPostExecute(String jsonResponse) {
             Log.v(TAG, "onPostExecute:");
 
+            // Parse the JSON response, get the first IDP and pass it to the webview activity
+            // to load the login page.
             List<String> idps = new ArrayList<String>();
             Gson gson = new Gson();
             ChooserResponse response = gson.fromJson(jsonResponse, ChooserResponse.class);
@@ -184,10 +181,17 @@ public class MainActivity extends BrightcovePlayer {
         protected void onPostExecute(String jsonResponse) {
             Log.v(TAG, "onPostExecute:");
 
+            // Parse the JSON response, get the token and append it to the protected media url.
+            // Then play add the video to the view and play it.
             Gson gson = new Gson();
             ResourceAccessResponse response = gson.fromJson(jsonResponse, ResourceAccessResponse.class);
 
-            Log.v(TAG, "message: " + response.getMessage());
+            String url = getResources().getString(R.string.protected_media_url);
+            Uri.Builder builder = Uri.parse(url).buildUpon();
+            builder.appendQueryParameter("hdnea", response.getSecurityToken());
+            url = builder.build().toString();
+            brightcoveVideoView.add(Video.createVideo(url));
+            brightcoveVideoView.start();
         }
     }
 }

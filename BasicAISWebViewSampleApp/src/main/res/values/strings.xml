@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Application name used in the title bar. -->
     <string name="app_name">Basic AIS WebView Sample App</string>
-    <string name="title_activity_choose_idp">ChooseIDPActivity</string>
-    <string name="action_settings">Settings</string>
-    <string name="platform_id">urn:brightcove:com:test:1</string>
-    <string name="ais_redirect_url">foo://?st=bar</string>
+
+    <!-- The platform ID (UID for referencing a specific configuration in AIS). -->
+    <string name="platform_id">urn:bellmedia:com:sp:astral:fr:test:4</string>
+
+    <!-- The resource identifier for a protected media asset.  -->
+    <string name="resource_id">canald</string>
+
+    <!-- A string token that will be present in the final redirect URL after successful login. -->
+    <string name="ais_redirect_token">bellmedia://</string>
+
+    <!-- The domain for using the REST API. -->
     <string name="ais_domain">idp.securetve.com</string>
+
+    <!-- The base URL to access the REST API. -->
     <string name="base_url">http://idp.securetve.com/rest/1.0/</string>
+
+    <!-- Constant for webview cookie storage. -->
     <string name="ais_webview_cookie">aisWebviewCookie</string>
+
+    <!-- Constant for URLs passed to the webview. -->
     <string name="ais_target_url">aisTargetUrl</string>
+
+    <!-- A media URL to test playback of AIS-protected content. -->
+    <string name="protected_media_url">http://c.brightcove.com/services/mobile/streaming/index/master.m3u8?videoId=2889947590001&amp;playerId=2848932405001&amp;lineupId=&amp;affiliateId=&amp;pubId=2221711259001</string>
 
 </resources>
