@@ -3,7 +3,11 @@ package com.brightcove.player.samples.ais.webview.basic;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by bhnath on 1/31/14.
+ * JSON response class for the /identity/resourceAccess/ REST API call.
+ * Note: this is not a completed class. It has been implemented
+ * enough for the purposes of this sample app.
+ *
+ * @author bhnath (Billy Hnath)
  */
 public class ResourceAccessResponse {
 

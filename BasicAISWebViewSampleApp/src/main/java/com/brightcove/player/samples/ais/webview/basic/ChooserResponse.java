@@ -5,7 +5,11 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Map;
 
 /**
- * Created by bhnath on 1/29/14.
+ * JSON response class for the /chooser/ REST API call.
+ * Note: this is not a completed class. It has been implemented
+ * enough for the purposes of this sample app.
+ *
+ * @author bhnath (Billy Hnath)
  */
 public class ChooserResponse {
 
