@@ -19,6 +19,8 @@ if (Boolean.valueOf("$runBasicAISWebViewSampleApp"))
   include ':BasicAISWebViewSampleApp'
 if (Boolean.valueOf("$runHLSPlayerSampleApp"))
   include ':HLSPlayerSampleApp'
+if (Boolean.valueOf("$runWebVTTSampleApp"))
+  include ':WebVTTSampleApp'
 
 boolean freewheelDependenciesAreSatisfied() {
     File dep = file("${rootProject.projectDir}/libs/AdManager.jar")

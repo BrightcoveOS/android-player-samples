@@ -43,8 +43,9 @@ subprojects {
 
   repositories {
     mavenCentral()
+    mavenLocal()
     maven {
-      url 'http://docs.brightcove.com/en/video-cloud/maven/repo'
+      url 'http://solutions.brightcove.com/bcls/maven/repo'
     }
   }
 
@@ -54,26 +55,26 @@ subprojects {
 
     defaultConfig {
       minSdkVersion 10
-      targetSdkVersion 18
+      targetSdkVersion 19
     }
   }
 
   dependencies {
     compile 'com.android.support:appcompat-v7:+'
-    compile "com.brightcove.player:android-sdk:$anpVersion"
+    compile "com.brightcove.player:android-sdk:$anpVersion@aar"
   }
 
   if (project.name.contains('IMA')) {
     downloadIMA()
     dependencies {
-      compile "com.brightcove.ima:android-ima-plugin:${anpVersion}"
+      compile "com.brightcove.ima:android-ima-plugin:${anpVersion}@aar"
       compile files("${rootProject.projectDir}/libs/" + imaAndroidSdkJarFileName)
     }
   }
 
   if (project.name.contains('Widevine')) {
     dependencies {
-      compile "com.brightcove.widevine:android-widevine-plugin:${anpVersion}"
+      compile "com.brightcove.widevine:android-widevine-plugin:${anpVersion}@aar"
     }
 
     android {
@@ -85,7 +86,24 @@ subprojects {
 
   if (project.name.contains('HLS')) {
     dependencies {
-      compile "com.brightcove.player:android-hls-player:${anpVersion}"
+      compile "com.brightcove.player:android-hls-player:${anpVersion}@aar"
+    }
+  }
+
+  if (project.name.contains('WebVTT')) {
+    android {
+      defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 19
+      }
+    }
+  }
+
+  if (project.name.contains('WebView')) {
+    android {
+      lintOptions {
+        disable 'SetJavaScriptEnabled'
+      }
     }
   }
 
