@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Basic Cast Sample App</string>
+
+    <string name="application_id">C2F1843F</string>
+
+    <string name="media_route_menu_title">Play on&#8230;</string>
+
+    <string name="media_url">https://ia600408.us.archive.org/26/items/BigBuckBunny_328/BigBuckBunny_512kb.mp4</string>
+    <string name="media_image">http://upload.wikimedia.org/wikipedia/commons/c/c5/Big_buck_bunny_poster_big.jpg</string>
+
+</resources>
