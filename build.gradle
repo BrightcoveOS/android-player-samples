@@ -47,6 +47,10 @@ subprojects {
     maven {
       url 'http://solutions.brightcove.com/bcls/maven/repo'
     }
+
+    flatDir {
+        dirs 'libs'
+    }
   }
 
   android {
@@ -105,6 +109,13 @@ subprojects {
         disable 'SetJavaScriptEnabled'
       }
     }
+  }
+
+  if (project.name.contains('Cast')) {
+      compile 'com.android.support:appcompat-v7:+'
+      compile 'com.google.android.gms:play-services:+'
+      compile 'com.android.support:mediarouter-v7:+'
+      compile 'com.google.cast:castcompanionlibrary:1.1@aar'
   }
 
   println "Processing ${project.name}"
