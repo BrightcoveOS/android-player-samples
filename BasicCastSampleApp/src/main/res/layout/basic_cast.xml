@@ -5,19 +5,10 @@
     android:orientation="vertical"
     tools:context=".MainActivity" >
 
-    <com.brightcove.player.view.BrightcoveVideoView
-        android:id="@+id/bc_video_view"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="280dp"
-        android:layout_gravity="center_horizontal|top"/>
-
-    <com.google.sample.castcompanionlibrary.widgets.MiniController
-        android:id="@+id/miniController1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/shadow7"
-        android:visibility="gone" />
-
+        android:layout_height="match_parent"
+        android:id="@+id/brightcove_video_view_fragment">
+    </FrameLayout>
 
 </FrameLayout>
