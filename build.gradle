@@ -66,7 +66,7 @@ subprojects {
 
   dependencies {
     compile 'com.android.support:appcompat-v7:+'
-    compile "com.brightcove.player:android-sdk:$anpVersion@aar"
+    compile "com.brightcove.player:android-sdk:4.1.3@aar" //$anpVersion@aar"
   }
 
   if (project.name.contains('IMA')) {
@@ -114,7 +114,7 @@ subprojects {
 
   if (project.name.contains('Cast')) {
       dependencies {
-          compile "com.brightcove.cast:android-cast-plugin:${anpVersion}@aar"
+          compile "com.brightcove.cast:android-cast-plugin:4.1.3@aar" //${anpVersion}@aar"
           compile 'com.google.cast:CastCompanionLibrary:1.1@aar'
           compile 'com.android.support:appcompat-v7:+'
           compile 'com.google.android.gms:play-services:+'

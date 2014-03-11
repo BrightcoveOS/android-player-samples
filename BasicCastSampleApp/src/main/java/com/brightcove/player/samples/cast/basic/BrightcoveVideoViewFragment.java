@@ -6,13 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brightcove.cast.GoogleCastComponent;
-import com.brightcove.cast.GoogleCastComponentConstants;
 import com.brightcove.cast.GoogleCastEventType;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.view.BrightcovePlayerFragment;
 import com.brightcove.player.view.BrightcoveVideoView;
 import com.google.sample.castcompanionlibrary.widgets.MiniController;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,19 +27,31 @@ public class BrightcoveVideoViewFragment extends BrightcovePlayerFragment {
     private BrightcoveVideoView brightcoveVideoView;
     private MiniController miniController;
 
+    public static BrightcoveVideoViewFragment newInstance(BrightcoveVideoView videoView, EventEmitter emitter) {
+        BrightcoveVideoViewFragment brightcoveVideoViewFragment = new BrightcoveVideoViewFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("videoView", (Serializable) videoView);
+        bundle.putSerializable("eventEmitter", (Serializable) emitter);
+        brightcoveVideoViewFragment.setArguments(bundle);
+        return brightcoveVideoViewFragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.basic_cast_fragment, container, false);
+        //View view = inflater.inflate(R.layout.basic_cast_fragment, container, false);
 
-        brightcoveVideoView = (BrightcoveVideoView) view.findViewById(R.id.bc_video_view);
-        eventEmitter = brightcoveVideoView.getEventEmitter();
+
+        brightcoveVideoView = (BrightcoveVideoView) getArguments().getSerializable("videoView");
+        eventEmitter = (EventEmitter) getArguments().getSerializable("eventEmitter");
+
+        View view = super.onCreateView(inflater, container, savedInstanceState);
 
         String applicationId = getResources().getString(R.string.application_id);
         googleCastComponent = new GoogleCastComponent(eventEmitter, applicationId, getActivity());
 
         miniController = (MiniController) view.findViewById(R.id.miniController1);
         Map<String, Object> properties = new HashMap<String, Object>();
-        properties.put(GoogleCastComponentConstants.CAST_MINICONTROLLER, miniController);
+        properties.put(GoogleCastComponent.CAST_MINICONTROLLER, miniController);
         eventEmitter.emit(GoogleCastEventType.SET_MINI_CONTROLLER, properties);
 
         String url = getResources().getString(R.string.media_url);
@@ -48,18 +60,19 @@ public class BrightcoveVideoViewFragment extends BrightcovePlayerFragment {
                 buildMetadataProperties("subTitle", "title", "studio", bbimg, bbimg, url));
 
         brightcoveVideoView.setVideoPath(url);
+        brightcoveVideoView.start();
 
         return view;
     }
 
     private Map<String, Object> buildMetadataProperties(String subTitle, String title, String studio, String imageUrl, String bigImageUrl, String url) {
         Map<String, Object> properties = new HashMap<String, Object>();
-        properties.put(GoogleCastComponentConstants.CAST_MEDIA_METADATA_SUBTITLE, subTitle);
-        properties.put(GoogleCastComponentConstants.CAST_MEDIA_METADATA_TITLE, title);
-        properties.put(GoogleCastComponentConstants.CAST_MEDIA_METADATA_STUDIO, studio);
-        properties.put(GoogleCastComponentConstants.CAST_MEDIA_METADATA_IMAGE_URL, imageUrl);
-        properties.put(GoogleCastComponentConstants.CAST_MEDIA_METADATA_BIG_IMAGE_URL, bigImageUrl);
-        properties.put(GoogleCastComponentConstants.CAST_MEDIA_METADATA_URL, url);
+        properties.put(GoogleCastComponent.CAST_MEDIA_METADATA_SUBTITLE, subTitle);
+        properties.put(GoogleCastComponent.CAST_MEDIA_METADATA_TITLE, title);
+        properties.put(GoogleCastComponent.CAST_MEDIA_METADATA_STUDIO, studio);
+        properties.put(GoogleCastComponent.CAST_MEDIA_METADATA_IMAGE_URL, imageUrl);
+        properties.put(GoogleCastComponent.CAST_MEDIA_METADATA_BIG_IMAGE_URL, bigImageUrl);
+        properties.put(GoogleCastComponent.CAST_MEDIA_METADATA_URL, url);
         return properties;
     }
 
