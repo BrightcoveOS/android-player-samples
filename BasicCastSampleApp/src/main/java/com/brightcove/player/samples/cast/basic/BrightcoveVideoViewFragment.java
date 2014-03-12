@@ -12,7 +12,6 @@ import com.brightcove.player.view.BrightcovePlayerFragment;
 import com.brightcove.player.view.BrightcoveVideoView;
 import com.google.sample.castcompanionlibrary.widgets.MiniController;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,29 +21,23 @@ import java.util.Map;
 public class BrightcoveVideoViewFragment extends BrightcovePlayerFragment {
     public static final String TAG = BrightcoveVideoViewFragment.class.getSimpleName();
 
-    private EventEmitter eventEmitter;
+    private static EventEmitter eventEmitter;
     private GoogleCastComponent googleCastComponent;
-    private BrightcoveVideoView brightcoveVideoView;
     private MiniController miniController;
 
-    public static BrightcoveVideoViewFragment newInstance(BrightcoveVideoView videoView, EventEmitter emitter) {
+    public static BrightcoveVideoViewFragment newInstance(EventEmitter emitter) {
         BrightcoveVideoViewFragment brightcoveVideoViewFragment = new BrightcoveVideoViewFragment();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("videoView", (Serializable) videoView);
-        bundle.putSerializable("eventEmitter", (Serializable) emitter);
-        brightcoveVideoViewFragment.setArguments(bundle);
+        eventEmitter = emitter;
         return brightcoveVideoViewFragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //View view = inflater.inflate(R.layout.basic_cast_fragment, container, false);
+        View view = inflater.inflate(R.layout.basic_cast_fragment, container, false);
 
-
-        brightcoveVideoView = (BrightcoveVideoView) getArguments().getSerializable("videoView");
-        eventEmitter = (EventEmitter) getArguments().getSerializable("eventEmitter");
-
-        View view = super.onCreateView(inflater, container, savedInstanceState);
+        brightcoveVideoView = (BrightcoveVideoView) view.findViewById(R.id.brightcove_video_view);
+        brightcoveVideoView.setEventEmitter(eventEmitter);
+        super.onCreateView(inflater, container, savedInstanceState);
 
         String applicationId = getResources().getString(R.string.application_id);
         googleCastComponent = new GoogleCastComponent(eventEmitter, applicationId, getActivity());

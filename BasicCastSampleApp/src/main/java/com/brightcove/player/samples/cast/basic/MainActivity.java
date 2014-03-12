@@ -7,7 +7,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 
 import com.brightcove.cast.GoogleCastComponent;
+import com.brightcove.cast.GoogleCastEventType;
 import com.brightcove.player.event.EventEmitter;
+import com.brightcove.player.event.EventEmitterImpl;
 import com.brightcove.player.view.BrightcoveVideoView;
 
 import java.util.HashMap;
@@ -20,28 +22,19 @@ import java.util.Map;
  * @author Billy Hnath (bhnath@brightcove.com)
  */
 public class MainActivity extends ActionBarActivity {
-    //Need to extend BrightcovePlayer and ActionBarActivity
-    //Interface to BrightcovePlayer?
-    //Might be a good way to demo not extending off of BrightcovePlayer
-    //for customers that need to extend off something else instead.
-
-    // use a fragment!
 
     public static final String TAG = MainActivity.class.getSimpleName();
 
     private EventEmitter eventEmitter;
-    private BrightcoveVideoView brightcoveVideoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basic_cast);
 
-        brightcoveVideoView = (BrightcoveVideoView) findViewById(R.id.brightcove_video_view);
-        eventEmitter = brightcoveVideoView.getEventEmitter();
+        eventEmitter = new EventEmitterImpl();
 
-        BrightcoveVideoViewFragment brightcoveVideoViewFragment = BrightcoveVideoViewFragment.newInstance(brightcoveVideoView, eventEmitter);
-
+        BrightcoveVideoViewFragment brightcoveVideoViewFragment = BrightcoveVideoViewFragment.newInstance(eventEmitter);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.brightcove_video_view_fragment, brightcoveVideoViewFragment);
@@ -56,7 +49,7 @@ public class MainActivity extends ActionBarActivity {
             Map<String, Object> properties = new HashMap<String, Object>();
             properties.put(GoogleCastComponent.CAST_MENU, menu);
             properties.put(GoogleCastComponent.CAST_MENU_RESOURCE_ID, R.id.media_router_menu_item);
-            //eventEmitter.emit(GoogleCastEventType.SET_CAST_BUTTON, properties);
+            eventEmitter.emit(GoogleCastEventType.SET_CAST_BUTTON, properties);
             return true;
     }
 
