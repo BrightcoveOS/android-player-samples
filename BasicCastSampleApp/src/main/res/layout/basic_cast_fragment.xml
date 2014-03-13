@@ -5,12 +5,14 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical" >
 
+    <!-- The standard BrightcoveVideoView for media playback. -->
     <com.brightcove.player.view.BrightcoveVideoView
         android:id="@+id/brightcove_video_view"
         android:layout_width="match_parent"
         android:layout_height="280dp"
         android:layout_gravity="center_horizontal|top"/>
 
+    <!-- The minicontroller widget used to control playback on a cast device. d-->
     <com.google.sample.castcompanionlibrary.widgets.MiniController
         android:id="@+id/miniController1"
         android:layout_width="fill_parent"

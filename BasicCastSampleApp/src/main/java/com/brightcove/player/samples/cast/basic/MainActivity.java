@@ -4,13 +4,13 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 
 import com.brightcove.cast.GoogleCastComponent;
 import com.brightcove.cast.GoogleCastEventType;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventEmitterImpl;
-import com.brightcove.player.view.BrightcoveVideoView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,17 +32,32 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basic_cast);
 
+        // We need a top level EventEmitter to handle communication to the ActionBar as well as
+        // the underlying android-cast-plugin, so create a new one and pass it into the fragment.
         eventEmitter = new EventEmitterImpl();
+        launchBrightcoveVideoViewFragment();
+    }
 
-        BrightcoveVideoViewFragment brightcoveVideoViewFragment = BrightcoveVideoViewFragment.newInstance(eventEmitter);
+    /**
+     * Create an instance of the BrightcoveVideoViewFragment with an EventEmitter and a Context
+     * pointing back to the main activity, then launch it.
+     */
+    private void launchBrightcoveVideoViewFragment() {
+        Log.v(TAG, "launchBrightcoveVideoViewFragment:");
+        BrightcoveVideoViewFragment brightcoveVideoViewFragment = BrightcoveVideoViewFragment.newInstance(eventEmitter, this);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.brightcove_video_view_fragment, brightcoveVideoViewFragment);
         fragmentTransaction.commit();
     }
 
+    /**
+     * When the actionbar menu is created, send an event off to the android_cast_plugin
+     * to set up the Cast button.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+            Log.v(TAG, "onCreateOptionsMenu:");
             super.onCreateOptionsMenu(menu);
             getMenuInflater().inflate(R.menu.main, menu);
 
@@ -52,16 +67,4 @@ public class MainActivity extends ActionBarActivity {
             eventEmitter.emit(GoogleCastEventType.SET_CAST_BUTTON, properties);
             return true;
     }
-
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        eventEmitter.emit(GoogleCastEventType.SET_NOTIFICATIONS);
-//    }
-//
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        eventEmitter.emit(GoogleCastEventType.UNSET_NOTIFICATIONS);
-//    }
 }
