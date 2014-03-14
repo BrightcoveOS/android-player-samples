@@ -61,9 +61,9 @@ public class BrightcoveVideoViewFragment extends BrightcovePlayerFragment {
 
         // Send the location of the media (url) and its metadata information for remote playback.
         String url = getResources().getString(R.string.media_url);
-        String bbimg = getResources().getString(R.string.media_image);
+        String imageUrl = getResources().getString(R.string.media_image);
         eventEmitter.emit(GoogleCastEventType.SET_MEDIA_METADATA,
-                buildMetadataProperties("subTitle", "title", "studio", bbimg, bbimg, url));
+                buildMetadataProperties("subTitle", "title", "studio", imageUrl, imageUrl, url));
 
         brightcoveVideoView.setVideoPath(url);
         brightcoveVideoView.start();
@@ -86,17 +86,21 @@ public class BrightcoveVideoViewFragment extends BrightcovePlayerFragment {
         return properties;
     }
 
+    /**
+     * Handle resuming Chromecast notifications on a resume lifecycle event.
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        eventEmitter.emit(GoogleCastEventType.SET_NOTIFICATIONS);
+    }
+
+    /**
+     * Handle pausing Chromecast nofications on a pause lifecycle event.
+     */
+    @Override
+    public void onPause() {
+        super.onPause();
+        eventEmitter.emit(GoogleCastEventType.UNSET_NOTIFICATIONS);
+    }
 }
-
-
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        eventEmitter.emit(GoogleCastEventType.SET_NOTIFICATIONS);
-//    }
-//
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        eventEmitter.emit(GoogleCastEventType.UNSET_NOTIFICATIONS);
-//    }
