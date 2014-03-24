@@ -4,14 +4,15 @@
     <string name="app_name">Basic Cast Sample App</string>
 
     <!-- The application ID for the receiver applicaton. -->
-    <string name="application_id">C2F1843F</string>
+    <string name="application_id">YOUR_APP_ID</string>
 
     <!-- The text to display on the Chromecast menu title. -->
     <string name="media_route_menu_title">Play on&#8230;</string>
 
+    <!-- A URL pointing to the playback media for remote play. -->
+    <string name="media_url">A_MEDIA_URL</string>
 
-    <string name="media_url">https://ia600408.us.archive.org/26/items/BigBuckBunny_328/BigBuckBunny_512kb.mp4</string>
-    <!--<string name="media_url">http://cdn5.unicornmedia.com/now/stitched/mp4/95ea75e1-dd2a-4aea-851a-28f46f8e8195/00000000-0000-0000-0000-000000000000/3a41c6e4-93a3-4108-8995-64ffca7b9106/9b118b95-38df-4b99-bb50-8f53d62f6ef8/0/0/105/1438852996/content.mp4</string>-->
-    <string name="media_image">http://upload.wikimedia.org/wikipedia/commons/c/c5/Big_buck_bunny_poster_big.jpg</string>
+    <!-- A background/thumbnail image for the media being played back. -->
+    <string name="media_image">A_MEDIA_IMAGE</string>
 
 </resources>
