@@ -41,7 +41,6 @@ public class BrightcoveVideoViewFragment extends BrightcovePlayerFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         // Perform the internal wiring to be able to make use of the BrightcovePlayerFragment.
         View view = inflater.inflate(R.layout.basic_cast_fragment, container, false);
         brightcoveVideoView = (BrightcoveVideoView) view.findViewById(R.id.brightcove_video_view);
@@ -66,7 +65,6 @@ public class BrightcoveVideoViewFragment extends BrightcovePlayerFragment {
                 buildMetadataProperties("subTitle", "title", "studio", imageUrl, imageUrl, url));
 
         brightcoveVideoView.setVideoPath(url);
-        brightcoveVideoView.start();
 
         return view;
     }

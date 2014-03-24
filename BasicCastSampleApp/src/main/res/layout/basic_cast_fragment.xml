@@ -12,12 +12,13 @@ android:orientation="vertical" >
         android:layout_height="280dp"
         android:layout_gravity="center_horizontal|top"/>
 
-    <!-- The minicontroller widget used to control playback on a cast device. d-->
+    <!-- The minicontroller widget used to control playback on a cast device. -->
     <com.google.sample.castcompanionlibrary.widgets.MiniController
         android:id="@+id/miniController1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal|bottom"
         android:background="@drawable/shadow7"
         android:visibility="gone" />
 
