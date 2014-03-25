@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import com.brightcove.drm.widevine.WidevinePlugin;
 import com.brightcove.ima.GoogleIMAComponent;
 import com.brightcove.ima.GoogleIMAEventType;
+import com.brightcove.ima.GoogleIMAVideoAdPlayer;
 import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
@@ -36,9 +37,12 @@ import java.util.Map;
 public class MainActivity extends BrightcovePlayer {
 
     private final String TAG = this.getClass().getSimpleName();
+    private static final String AD_POSITION = "adPosition";
 
     private EventEmitter eventEmitter;
     private GoogleIMAComponent googleIMAComponent;
+    private int adPosition;
+    private boolean adWasPlaying;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,5 +205,58 @@ public class MainActivity extends BrightcovePlayer {
         String deviceId = "device1234";
         String portalId = "brightcove";
         new WidevinePlugin(this, brightcoveVideoView, drmServerUri, deviceId, portalId);
+    }
+
+    @Override
+    protected void onStart() {
+        Log.v(TAG, "onStart: adPosition = " + adPosition);
+        super.onStart();
+
+        if ((googleIMAComponent != null) && (adPosition != -1)) {
+            GoogleIMAVideoAdPlayer googleIMAVideoAdPlayer = googleIMAComponent.getVideoAdPlayer();
+            googleIMAVideoAdPlayer.seekTo(adPosition);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        Log.v(TAG, "onPause");
+        super.onPause();
+
+        GoogleIMAVideoAdPlayer googleIMAVideoAdPlayer = googleIMAComponent.getVideoAdPlayer();
+
+        if (googleIMAVideoAdPlayer.isPlaying()) {
+            googleIMAVideoAdPlayer.pauseAd();
+            adPosition = googleIMAVideoAdPlayer.getCurrentPosition();
+            adWasPlaying = true;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        Log.v(TAG, "onResume");
+        super.onResume();
+
+        if (adWasPlaying) {
+            GoogleIMAVideoAdPlayer googleIMAVideoAdPlayer = googleIMAComponent.getVideoAdPlayer();
+            googleIMAVideoAdPlayer.start();
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle bundle) {
+        Log.v(TAG, "onSaveInstanceState: adPosition = " + adPosition);
+        bundle.putInt(AD_POSITION, adPosition);
+        super.onSaveInstanceState(bundle);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.v(TAG, "onStop");
+
+        GoogleIMAVideoAdPlayer googleIMAVideoAdPlayer = googleIMAComponent.getVideoAdPlayer();
+        googleIMAVideoAdPlayer.stopPlayback();
+        adWasPlaying = false;
     }
 }
