@@ -29,6 +29,8 @@ Note that in order to enable this sample app, you must independently obtain and 
 
 * [HLS Player Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "HLSPlayerSampleApp"): This app shows how to setup the HLS player to play.
 
+* [WebVTT Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "WebVTTSampleApp"): This app shows how to implement closed captioning using WebVTT files with Android 4.4.
+
 
 By default, the sample apps will build with the most recent Brightcove Android Native Player version at build time.  To override this behavior with a specific version, create a file named **.gradle/gradle.properties** in your home directory and set the value of the property *anpVersion* to the desired version.  An invalid version will cause no sample app projects to be configured.
 
