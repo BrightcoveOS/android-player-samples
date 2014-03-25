@@ -4,17 +4,26 @@ import android.os.Bundle;
 import android.util.Log;
 import com.brightcove.ima.GoogleIMAComponent;
 import com.brightcove.ima.GoogleIMAEventType;
+import com.brightcove.ima.GoogleIMAVideoAdPlayer;
 import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventType;
+import com.brightcove.player.media.Catalog;
+import com.brightcove.player.media.VideoFields;
+import com.brightcove.player.media.VideoListener;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
+import com.brightcove.player.util.StringUtil;
 import com.google.ads.interactivemedia.v3.api.AdDisplayContainer;
 import com.google.ads.interactivemedia.v3.api.AdsRequest;
 import com.google.ads.interactivemedia.v3.api.ImaSdkFactory;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * This app illustrates how to use "Ad Rules" the Google IMA plugin
@@ -27,10 +36,13 @@ import java.util.ArrayList;
 public class MainActivity extends BrightcovePlayer {
 
     private final String TAG = this.getClass().getSimpleName();
+    private static final String AD_POSITION = "adPosition";
 
     private EventEmitter eventEmitter;
     private GoogleIMAComponent googleIMAComponent;
     private String adRulesURL = "http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=%2F15018773%2Feverything2&ciu_szs=300x250%2C468x60%2C728x90&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=dummy&correlator=[timestamp]&cmsid=133&vid=10XWSh7W4so&ad_rule=1";
+    private int adPosition;
+    private boolean adWasPlaying;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +57,26 @@ public class MainActivity extends BrightcovePlayer {
         // Use a procedural abstraction to setup the Google IMA SDK via the plugin.
         setupGoogleIMA();
 
-        // Establish the video object.
-        brightcoveVideoView.add(Video.createVideo("http://rmcdn.2mdn.net/MotifFiles/html/1248596/android_1330378998288.mp4"));
+        Map<String, String> options = new HashMap<String, String>();
+        List<String> values = new ArrayList<String>(Arrays.asList(VideoFields.DEFAULT_FIELDS));
+        values.remove(VideoFields.HLS_URL);
+        options.put("video_fields", StringUtil.join(values, ","));
+
+        Catalog catalog = new Catalog("ErQk9zUeDVLIp8Dc7aiHKq8hDMgkv5BFU7WGshTc-hpziB3BuYh28A..");
+        catalog.findVideoByReferenceID("shark", new VideoListener() {
+            public void onVideo(Video video) {
+                brightcoveVideoView.add(video);
+            }
+
+            public void onError(String error) {
+                Log.e(TAG, error);
+            }
+        });
 
         // Log whether or not instance state in non-null.
         if (savedInstanceState != null) {
-            Log.v(TAG, "Restoring saved position");
+            Log.v(TAG, "Restoring saved ad position");
+            adPosition = savedInstanceState.getInt(AD_POSITION);
         } else {
             Log.v(TAG, "No saved state");
         }
@@ -60,14 +86,6 @@ public class MainActivity extends BrightcovePlayer {
      * Setup the Brightcove IMA Plugin.
      */
     private void setupGoogleIMA() {
-        // After the video has been prepared, setup Ad Rules.
-        eventEmitter.on(EventType.DID_SET_VIDEO, new EventListener() {
-            @Override
-            public void processEvent(Event event) {
-                googleIMAComponent.initializeAdsRequests();
-            }
-        });
-
         // Establish the Google IMA SDK factory instance.
         final ImaSdkFactory sdkFactory = ImaSdkFactory.getInstance();
 
@@ -124,5 +142,73 @@ public class MainActivity extends BrightcovePlayer {
         // Create the Brightcove IMA Plugin and pass in the event
         // emitter so that the plugin can integrate with the SDK.
         googleIMAComponent = new GoogleIMAComponent(brightcoveVideoView, eventEmitter, true);
+
+        // After the video has been prepared, setup Ad Rules.
+        eventEmitter.on(EventType.DID_SET_VIDEO, new EventListener() {
+            @Override
+            public void processEvent(Event event) {
+                googleIMAComponent.initializeAdsRequests();
+            }
+        });
+
+        eventEmitter.on(GoogleIMAEventType.ADS_MANAGER_LOADED, new EventListener() {
+            @Override
+            public void processEvent(Event event) {
+                brightcoveVideoView.start();
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        Log.v(TAG, "onStart: adPosition = " + adPosition);
+        super.onStart();
+
+        if ((googleIMAComponent != null) && (adPosition != -1)) {
+            GoogleIMAVideoAdPlayer googleIMAVideoAdPlayer = googleIMAComponent.getVideoAdPlayer();
+            googleIMAVideoAdPlayer.seekTo(adPosition);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        Log.v(TAG, "onPause");
+        super.onPause();
+
+        GoogleIMAVideoAdPlayer googleIMAVideoAdPlayer = googleIMAComponent.getVideoAdPlayer();
+
+        if (googleIMAVideoAdPlayer.isPlaying()) {
+            googleIMAVideoAdPlayer.pauseAd();
+            adPosition = googleIMAVideoAdPlayer.getCurrentPosition();
+            adWasPlaying = true;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        Log.v(TAG, "onResume");
+        super.onResume();
+
+        if (adWasPlaying) {
+            GoogleIMAVideoAdPlayer googleIMAVideoAdPlayer = googleIMAComponent.getVideoAdPlayer();
+            googleIMAVideoAdPlayer.start();
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle bundle) {
+        Log.v(TAG, "onSaveInstanceState: adPosition = " + adPosition);
+        bundle.putInt(AD_POSITION, adPosition);
+        super.onSaveInstanceState(bundle);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.v(TAG, "onStop");
+
+        GoogleIMAVideoAdPlayer googleIMAVideoAdPlayer = googleIMAComponent.getVideoAdPlayer();
+        googleIMAVideoAdPlayer.stopPlayback();
+        adWasPlaying = false;
     }
 }
