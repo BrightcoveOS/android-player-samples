@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Basic Cast Sample App</string>
+
+    <!-- The application ID for the receiver applicaton. -->
+    <string name="application_id">YOUR_APP_ID</string>
+
+    <!-- The text to display on the Chromecast menu title. -->
+    <string name="media_route_menu_title">Play on&#8230;</string>
+
+    <!-- A URL pointing to the playback media for remote play. -->
+    <string name="media_url">A_MEDIA_URL</string>
+
+    <!-- A background/thumbnail image for the media being played back. -->
+    <string name="media_image">A_MEDIA_IMAGE</string>
+
+</resources>

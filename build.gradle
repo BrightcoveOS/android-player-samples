@@ -43,9 +43,12 @@ subprojects {
 
   repositories {
     mavenCentral()
-    mavenLocal()
     maven {
       url 'http://solutions.brightcove.com/bcls/maven/repo'
+    }
+
+    flatDir {
+        dirs '../libs'
     }
   }
 
@@ -54,7 +57,7 @@ subprojects {
     buildToolsVersion "19.0.0"
 
     defaultConfig {
-      minSdkVersion 10
+      minSdkVersion 11
       targetSdkVersion 19
     }
   }
@@ -105,6 +108,16 @@ subprojects {
         disable 'SetJavaScriptEnabled'
       }
     }
+  }
+
+  if (project.name.contains('Cast')) {
+      dependencies {
+          compile "com.brightcove.cast:android-cast-plugin:${anpVersion}@aar"
+          compile 'com.google.cast:CastCompanionLibrary:1.1@aar'
+          compile 'com.android.support:appcompat-v7:+'
+          compile 'com.google.android.gms:play-services:+'
+          compile 'com.android.support:mediarouter-v7:+'
+      }
   }
 
   println "Processing ${project.name}"
