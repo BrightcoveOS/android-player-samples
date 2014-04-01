@@ -20,8 +20,8 @@ import java.util.Map;
 /**
  * Created by bhnath on 3/10/14.
  */
-public class BrightcoveVideoViewFragment extends BrightcovePlayerFragment {
-    public static final String TAG = BrightcoveVideoViewFragment.class.getSimpleName();
+public class GoogleCastSampleFragment extends BrightcovePlayerFragment {
+    public static final String TAG = GoogleCastSampleFragment.class.getSimpleName();
 
     private static EventEmitter eventEmitter;
     private static Context context;
@@ -32,11 +32,11 @@ public class BrightcoveVideoViewFragment extends BrightcovePlayerFragment {
      * Static initializer method for the fragment to get easy access to the EventEmitter
      * and Context from the top level Activity.
      */
-    public static BrightcoveVideoViewFragment newInstance(EventEmitter emitter, Context theContext) {
-        BrightcoveVideoViewFragment brightcoveVideoViewFragment = new BrightcoveVideoViewFragment();
+    public static GoogleCastSampleFragment newInstance(EventEmitter emitter, Context theContext) {
+        GoogleCastSampleFragment googleCastSampleFragment = new GoogleCastSampleFragment();
         eventEmitter = emitter;
         context = theContext;
-        return brightcoveVideoViewFragment;
+        return googleCastSampleFragment;
     }
 
     @Override

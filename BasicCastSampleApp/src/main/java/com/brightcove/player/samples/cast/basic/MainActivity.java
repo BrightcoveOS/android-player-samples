@@ -39,15 +39,15 @@ public class MainActivity extends ActionBarActivity {
     }
 
     /**
-     * Create an instance of the BrightcoveVideoViewFragment with an EventEmitter and a Context
+     * Create an instance of the GoogleCastSampleFragment with an EventEmitter and a Context
      * pointing back to the main activity, then launch it.
      */
     private void launchBrightcoveVideoViewFragment() {
         Log.v(TAG, "launchBrightcoveVideoViewFragment:");
-        BrightcoveVideoViewFragment brightcoveVideoViewFragment = BrightcoveVideoViewFragment.newInstance(eventEmitter, this);
+        GoogleCastSampleFragment googleCastSampleFragment = GoogleCastSampleFragment.newInstance(eventEmitter, this);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.brightcove_video_view_fragment, brightcoveVideoViewFragment);
+        fragmentTransaction.add(R.id.brightcove_video_view_fragment, googleCastSampleFragment);
         fragmentTransaction.commit();
     }
 
