@@ -44,7 +44,7 @@ subprojects {
   repositories {
     mavenCentral()
     maven {
-      url 'http://solutions.brightcove.com/bcls/maven/repo'
+      url 'http://repo.brightcove.com.s3.amazonaws.com/releases'
     }
 
     flatDir {
@@ -70,14 +70,14 @@ subprojects {
   if (project.name.contains('IMA')) {
     downloadIMA()
     dependencies {
-      compile "com.brightcove.ima:android-ima-plugin:${anpVersion}@aar"
+      compile "com.brightcove.player:android-ima-plugin:${anpVersion}@aar"
       compile files("${rootProject.projectDir}/libs/" + imaAndroidSdkJarFileName)
     }
   }
 
   if (project.name.contains('Widevine')) {
     dependencies {
-      compile "com.brightcove.widevine:android-widevine-plugin:${anpVersion}@aar"
+      compile "com.brightcove.player:android-widevine-plugin:${anpVersion}@aar"
     }
 
     android {
