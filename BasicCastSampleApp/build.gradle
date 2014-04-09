@@ -1,3 +1,16 @@
-dependencies {
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.0.0"
 
+    defaultConfig {
+        minSdkVersion 11
+        targetSdkVersion 19
+        testPackageName "com.brightcove.player.samples.cast.basic.test"
+        testInstrumentationRunner "com.brightcove.player.samples.cast.basic.test.Runner"
+    }
+}
+
+dependencies {
+    compile 'com.jayway.android.robotium:robotium-solo:5.1'
+    compile 'com.squareup.spoon:spoon-client:1.1.1'
 }

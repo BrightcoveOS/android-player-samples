@@ -39,9 +39,6 @@
             android:parentActivityName="com.google.sample.cast.refplayer.VideoBrowserActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.google.sample.cast.refplayer.VideoBrowserActivity" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
