@@ -40,6 +40,6 @@ boolean adobepassDependenciesAreSatisfied() {
 }
 
 boolean googlecastDependenciesAreSatisfied() {
-    File dep = file("${rootProject.projectDir}/libs/CastCompanionLibrary-1.1.aar")
+    File dep = file("${rootProject.projectDir}/libs/CastCompanionLibrary-1.2.aar")
     return dep.exists()
 }
