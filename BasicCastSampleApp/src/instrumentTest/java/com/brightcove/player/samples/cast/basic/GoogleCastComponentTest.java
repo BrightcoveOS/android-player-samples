@@ -34,7 +34,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Integration tests for the expected behavior of the Android Cast Plugin for the Brightcove
+ * Integration tests for the expected behavior of the Cast Plugin for the Brightcove
  * Native Player SDK for Android.
  * @author Billy Hnath (bhnath@brightcove.com)
  */
@@ -51,6 +51,11 @@ public class GoogleCastComponentTest extends ActivityInstrumentationTestCase2<Ma
         super(MainActivity.class);
     }
 
+    /**
+     * Initialize Robotium, the BrightcoveVideoView and the EventEmitter.
+     * Start media playback.
+     * @throws Exception
+     */
     @Override
     protected void setUp() throws Exception {
         super.setUp();
@@ -78,7 +83,7 @@ public class GoogleCastComponentTest extends ActivityInstrumentationTestCase2<Ma
             }
         });
 
-        assertTrue("Timeout occured.", countDownLatch.await(1, TimeUnit.MINUTES));
+        assertTrue("Timeout occurred.", countDownLatch.await(1, TimeUnit.MINUTES));
     }
 
     /**
@@ -129,21 +134,30 @@ public class GoogleCastComponentTest extends ActivityInstrumentationTestCase2<Ma
      */
     public void testCastMediaToRemoteDeviceAndBackFromPaused() throws InterruptedException {
         Log.v(TAG, "testCastMediaToRemoteDeviceAndBackFromPaused");
-        final CountDownLatch countDownLatch = new CountDownLatch(1);
+        final CountDownLatch countDownLatch = new CountDownLatch(2);
 
-        brightcoveVideoView.stopPlayback();
+        brightcoveVideoView.pause();
         solo.sleep(3000);
+
+        eventEmitter.once(EventType.DID_STOP, new EventListener() {
+            @Override
+            public void processEvent(Event event) {
+                assertFalse("BrightVideoVideo is not playing.", brightcoveVideoView.isPlaying());
+                countDownLatch.countDown();
+            }
+        });
 
         solo.clickOnActionBarItem(R.id.media_router_menu_item);
         solo.clickInList(0);
         solo.sleep(6000);
 
         brightcoveVideoView.start();
+        assertFalse("BrightcoveVideoView playback did not start.", brightcoveVideoView.isPlaying());
 
         solo.waitForActivity(VideoCastControllerActivity.class);
         solo.sleep(10000);
 
-        solo.assertCurrentActivity("VideoCast", VideoCastControllerActivity.class);
+        solo.assertCurrentActivity("VideoCastControllerActivity is displayed", VideoCastControllerActivity.class);
 
         List<View> views = solo.getCurrentViews();
         for (View v : views) {
@@ -161,6 +175,10 @@ public class GoogleCastComponentTest extends ActivityInstrumentationTestCase2<Ma
         assertTrue("Timeout occurred.", countDownLatch.await(3, TimeUnit.MINUTES));
     }
 
+    /**
+     * Clean up after each test.
+     * @throws Exception
+     */
     @Override
     public void tearDown() throws Exception {
         //solo.finishOpenedActivities();
