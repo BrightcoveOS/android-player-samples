@@ -21,7 +21,7 @@ if (Boolean.valueOf("$runHLSPlayerSampleApp"))
   include ':HLSPlayerSampleApp'
 if (Boolean.valueOf("$runWebVTTSampleApp"))
   include ':WebVTTSampleApp'
-if (Boolean.valueOf("$runBasicCastSampleApp") && googlecastDependenciesAreSatisfied())
+if (Boolean.valueOf("$runBasicCastSampleApp"))
   include ':BasicCastSampleApp'
 
 boolean freewheelDependenciesAreSatisfied() {
@@ -36,10 +36,5 @@ boolean omnitureDependenciesAreSatisfied() {
 
 boolean adobepassDependenciesAreSatisfied() {
     File dep = file("${rootProject.projectDir}/libs/android_accessenabler-1.7.2.jar")
-    return dep.exists()
-}
-
-boolean googlecastDependenciesAreSatisfied() {
-    File dep = file("${rootProject.projectDir}/libs/CastCompanionLibrary-1.2.aar")
     return dep.exists()
 }
