@@ -34,8 +34,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Integration tests for the expected behavior of the Cast Plugin for the Brightcove
- * Native Player SDK for Android.
+ * Integration tests for the expected behavior of the Chromecast using the Cast
+ * plugin for the Brightcove Native Player SDK for Android.
  * @author Billy Hnath (bhnath@brightcove.com)
  */
 public class GoogleCastComponentTest extends ActivityInstrumentationTestCase2<MainActivity> {
