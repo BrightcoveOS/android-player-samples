@@ -1,3 +1,15 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.stanfy.spoon:spoon-gradle-plugin:0.9.6'
+    }
+}
+
+apply plugin: 'spoon'
+
 android {
     compileSdkVersion 19
     buildToolsVersion "19.0.0"
