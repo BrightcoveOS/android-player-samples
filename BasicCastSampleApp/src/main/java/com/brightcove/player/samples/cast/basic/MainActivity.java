@@ -45,7 +45,7 @@ public class MainActivity extends ActionBarActivity {
      * pointing back to the main activity, then launch it.
      */
     private void launchGoogleCastFragment() {
-        Log.v(TAG, "launchBrightcoveVideoViewFragment:");
+        Log.v(TAG, "launchGoogleCastFragment:");
         googleCastSampleFragment = GoogleCastSampleFragment.newInstance(eventEmitter, this);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
