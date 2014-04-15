@@ -37,14 +37,14 @@ public class MainActivity extends ActionBarActivity {
         // We need a top level EventEmitter to handle communication to the ActionBar as well as
         // the underlying android-cast-plugin, so create a new one and pass it into the fragment.
         eventEmitter = new EventEmitterImpl();
-        launchBrightcoveVideoViewFragment();
+        launchGoogleCastFragment();
     }
 
     /**
      * Create an instance of the GoogleCastSampleFragment with an EventEmitter and a Context
      * pointing back to the main activity, then launch it.
      */
-    public void launchBrightcoveVideoViewFragment() {
+    private void launchGoogleCastFragment() {
         Log.v(TAG, "launchBrightcoveVideoViewFragment:");
         googleCastSampleFragment = GoogleCastSampleFragment.newInstance(eventEmitter, this);
         FragmentManager fragmentManager = getFragmentManager();
