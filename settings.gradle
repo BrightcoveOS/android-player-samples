@@ -25,6 +25,8 @@ if (Boolean.valueOf("$runBasicCastSampleApp"))
   include ':BasicCastSampleApp'
 if (Boolean.valueOf("$runBasicOnceUxSampleApp"))
   include ':BasicOnceUxSampleApp'
+if (Boolean.valueOf("$runHLSPlayerID3SampleApp"))
+  include ':HLSPlayerID3SampleApp'
 
 boolean freewheelDependenciesAreSatisfied() {
     File dep = file("${rootProject.projectDir}/libs/AdManager.jar")
