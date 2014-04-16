@@ -23,6 +23,8 @@ if (Boolean.valueOf("$runWebVTTSampleApp"))
   include ':WebVTTSampleApp'
 if (Boolean.valueOf("$runBasicCastSampleApp"))
   include ':BasicCastSampleApp'
+if (Boolean.valueOf("$runBasicOnceUxSampleApp"))
+  include ':BasicOnceUxSampleApp'
 
 boolean freewheelDependenciesAreSatisfied() {
     File dep = file("${rootProject.projectDir}/libs/AdManager.jar")
