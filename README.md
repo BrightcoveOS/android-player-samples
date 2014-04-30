@@ -9,7 +9,17 @@ Provides sample apps for the Brightcove Player SDK and Plugins for Android.
 
 The Android sample app projects in this repository can be inserted directly into Android Studio and subsequently executed or simulated.  See below for detailed installation steps.
 
-This version of the sample apps supports the Brightcove SDK and plugins versioned 4.0.0 and higher.  The following sample apps are included:
+This version of the sample apps supports the latest Brightcove SDK and plugins.  The following sample apps are included:
+
+* [Ad Rules Google IMA Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "AdRulesIMASampleApp"): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules. This version has been tested and works with v3 of the IMA SDK.
+
+* [Basic Akamai Identity Services Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicAISWebViewSampleApp"): This app shows how to configure an app to use the Brightcove native Android player with Akamai Identity Services.
+
+* [Basic AdobePass Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicAdobePassWebViewSampleApp"): This app shows how to configure an app to use the Brightcove native Android player with AdobePass.
+
+* [Basic Bundled Video Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicWidevineSampleApp"): This app shows how to play a video that is stored on the device for offline viewing.
+
+* [Basic Cast Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicCastSampleApp"): This add Google Chromecast with the Brightcove native Android player.
 
 * [Basic FreeWheel Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicFreeWheelSampleApp"): This app shows how to configure an app to use the Brightcove native Android player FreeWheel Plugin to play a video.
 
@@ -17,15 +27,15 @@ Note that in order to enable this sample app, you must independently obtain and 
 
 * [Basic Google IMA Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicIMASampleApp"): This app shows how to setup to use the Google IMA Plugin to play ads before, during and after a video. This version has been tested and works with v3 of the IMA SDK.
 
+* [Basic Google IMA Widevine Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicIMAWidevineSampleApp"): This app shows how to setup to use the Google IMA Plugin to play ads before, during and after a Widevine video. This version has been tested and works with v3 of the IMA SDK.
+
 * [Basic Omniture Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicOmnitureSampleApp"): This app shows how to configure an app to use the Brightcove native Android player Omniture Plugin to play a video.
 
 Note that in order to enable this sample app, you must independently obtain and install the file **adobe-adms.jar** into the top-level directory **libs/**.  Version 3.2.2 of the Adobe provided, non-free, jar file was used to test this sample app.
 
 * [Basic Widevine Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicWidevineSampleApp"): This app shows how to configure an app to use the Brightcove native Android player Widevine Plugin to play a video.
 
-* [Basic Bundled Video Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicWidevineSampleApp"): This app shows how to play a video that is stored on the device for offline viewing.
-
-* [Ad Rules Google IMA Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "AdRulesIMASampleApp"): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules. This version has been tested and works with v3 of the IMA SDK.
+* [HLS Player ID3 Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "HLSPlayerID3SampleApp"): This app shows how to use ID3 tags with the HLS player.
 
 * [HLS Player Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "HLSPlayerSampleApp"): This app shows how to setup the HLS player to play.
 
@@ -34,11 +44,9 @@ Note that in order to enable this sample app, you must independently obtain and 
 
 By default, the sample apps will build with the most recent Brightcove Android Native Player version at build time.  To override this behavior with a specific version, create a file named **.gradle/gradle.properties** in your home directory and set the value of the property *anpVersion* to the desired version.  An invalid version will cause no sample app projects to be configured.
 
-All sample apps which have satisfied dependencies will run by default.  If you would like to explicitly disable a sample app, copy the associated boolean property from the **gradle.properties** top level file to **~/.gradle/gradle.properties** with a value of *false* instead of *true*.
-
 To install the sample apps into Android Studio follow these steps:
 
-1. Obtain and install the current version of [Android Studio](http://developer.android.com/sdk/installing/studio.html) using the provided on-line instructions,
+1. Obtain and install the latest version of [Android Studio](http://developer.android.com/sdk/installing/studio.html) using the provided on-line instructions,
 1. Configure Android Studio for Android versions from Android 10 to Android 19 (see Android Studio help for details),
 1. Invoke the new project wizard using the File menu if it is not presented by default,
 
