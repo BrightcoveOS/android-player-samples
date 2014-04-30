@@ -5,7 +5,7 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:0.8.+'
+    classpath 'com.android.tools.build:gradle:0.9.+'
     classpath 'de.undercouch:gradle-download-task:0.+'
   }
 }
@@ -13,7 +13,7 @@ buildscript {
 println "Using Android Native Player version: $anpVersion"
 
 project.ext {
-  imaAndroidSdkJarFileName = "ima-android-sdk-beta5.jar"
+  imaAndroidSdkJarFileName = "ima-android-sdk-beta6.jar"
 }
 
 // Automatically download the Google IMA third party zip file and
@@ -61,10 +61,10 @@ subprojects {
 
   android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.0"
+    buildToolsVersion "19.0.3"
 
     defaultConfig {
-      minSdkVersion 11
+      minSdkVersion 10
       targetSdkVersion 19
     }
   }
@@ -74,11 +74,30 @@ subprojects {
     compile "com.brightcove.player:android-sdk:$anpVersion@aar"
   }
 
+  if (project.name.contains('AdobePass')) {
+    dependencies {
+      compile files("${rootProject.projectDir}/libs/android_accessenabler-1.7.2.jar")
+      compile 'com.google.code.gson:gson:2.+'
+    }
+  }
+
+  if (project.name.contains('AIS')) {
+    dependencies {
+      compile 'com.google.code.gson:gson:2.+'
+    }
+  }
+
   if (project.name.contains('IMA')) {
     downloadIMA()
     dependencies {
       compile "com.brightcove.player:android-ima-plugin:${anpVersion}@aar"
       compile files("${rootProject.projectDir}/libs/" + imaAndroidSdkJarFileName)
+    }
+  }
+
+  if (project.name.contains('OnceUx')) {
+    dependencies {
+      compile "com.brightcove.player:android-onceux-plugin:${anpVersion}@aar"
     }
   }
 
