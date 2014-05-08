@@ -1,4 +1,4 @@
 dependencies {
-    compile "com.brightcove.player:android-freewheel-plugin:${anpVersion}@aar"
+    compile "com.brightcove.player:android-freewheel-plugin:${anpVersion}"
     compile files("${rootProject.projectDir}/libs/AdManager.jar")
 }

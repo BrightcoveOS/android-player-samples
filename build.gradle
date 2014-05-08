@@ -13,14 +13,13 @@ buildscript {
 println "Using Android Native Player version: $anpVersion"
 
 project.ext {
-  imaAndroidSdkJarFileName = "ima-android-sdk-beta6.jar"
+  imaAndroidSdkJarFileName = "ima-android-sdk-beta5.jar"
 }
 
 // Automatically download the Google IMA third party zip file and
 // extract the jar to satisfy the dependency.
 def downloadIMA() {
-  def libs = "${rootProject.projectDir}/libs"
-  def libsdk = libs + '/' + imaAndroidSdkJarFileName
+  def libsdk = 'libs/' + imaAndroidSdkJarFileName
 
   // Conditionally download the Google IMA SDK during
   // configuration.  This step is done once.  The 'clean' task will not
@@ -33,7 +32,7 @@ def downloadIMA() {
 
     download {
       src 'https://dl.google.com/in-stream/google_sdk/android/v3/' + imaAndroidSdkJarFileName
-      dest file(libs)
+      dest file("${rootProject.projectDir}/libs/ima-android-sdk.jar")
     }
   }
 }
@@ -54,8 +53,11 @@ subprojects {
     }
     mavenLocal()
 
+    // This top level file repository will provide/contain third party
+    // dependencies which are either downloaded directly (not using a
+    // Maven repo) or installed manually for something like VisualOn.
     flatDir {
-      dirs '../libs'
+      dirs "${rootProject.projectDir}/libs"
     }
   }
 
@@ -71,7 +73,6 @@ subprojects {
 
   dependencies {
     compile 'com.android.support:appcompat-v7:+'
-    compile "com.brightcove.player:android-sdk:$anpVersion@aar"
   }
 
   if (project.name.contains('AdobePass')) {
@@ -90,20 +91,20 @@ subprojects {
   if (project.name.contains('IMA')) {
     downloadIMA()
     dependencies {
-      compile "com.brightcove.player:android-ima-plugin:${anpVersion}@aar"
+      compile "com.brightcove.player:android-ima-plugin:${anpVersion}"
       compile files("${rootProject.projectDir}/libs/" + imaAndroidSdkJarFileName)
     }
   }
 
   if (project.name.contains('OnceUx')) {
     dependencies {
-      compile "com.brightcove.player:android-onceux-plugin:${anpVersion}@aar"
+      compile "com.brightcove.player:android-onceux-plugin:${anpVersion}"
     }
   }
 
   if (project.name.contains('Widevine')) {
     dependencies {
-      compile "com.brightcove.player:android-widevine-plugin:${anpVersion}@aar"
+      compile "com.brightcove.player:android-widevine-plugin:${anpVersion}"
     }
 
     android {
@@ -115,7 +116,7 @@ subprojects {
 
   if (project.name.contains('HLS')) {
     dependencies {
-      compile "com.brightcove.player:android-hls-player:${anpVersion}@aar"
+      compile "com.brightcove.player:android-hls-player:${anpVersion}"
     }
   }
 
@@ -138,8 +139,8 @@ subprojects {
 
   if (project.name.contains('Cast')) {
     dependencies {
-      compile "com.brightcove.player:android-cast-plugin:${anpVersion}@aar"
-      compile 'com.google.sample.castcompanionlibrary:CastCompanionLibrary-android:+@aar'
+      compile "com.brightcove.player:android-cast-plugin:${anpVersion}"
+      compile 'com.google.sample.castcompanionlibrary:CastCompanionLibrary-android:+'
       compile 'com.google.android.gms:play-services:+'
       compile 'com.android.support:mediarouter-v7:+'
     }
