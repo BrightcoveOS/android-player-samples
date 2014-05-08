@@ -44,7 +44,7 @@ public class MainActivity extends BrightcovePlayer {
     //it's click through URL is.
 
     // The OnceUX plugin VMAP data URL.
-    private String onceUxVMAPDataUrl = "http://onceux.unicornmedia.com/now/ads/vmap/od/auto/95ea75e1-dd2a-4aea-851a-28f46f8e8195/43f54cc0-aa6b-4b2c-b4de-63d707167bf9/9b118b95-38df-4b99-bb50-8f53d62f6ef8??umtp=0";
+    private String onceUxAdDataUrl = "http://onceux.unicornmedia.com/now/ads/vmap/od/auto/95ea75e1-dd2a-4aea-851a-28f46f8e8195/43f54cc0-aa6b-4b2c-b4de-63d707167bf9/9b118b95-38df-4b99-bb50-8f53d62f6ef8??umtp=0";
     // Original from Criss: "http://onceux.unicornmedia.com/now/ads/vmap/od/auto/b11dbc9b-9d90-4edb-b4ab-769e0049209b/2455340c-8dcd-412e-a917-c6fadfe268c7/3a41c6e4-93a3-4108-8995-64ffca7b9106/bigbuckbunny?umtp=0";
 
     // The OnceUX plugin content URL.
@@ -69,7 +69,7 @@ public class MainActivity extends BrightcovePlayer {
         // On either event the plugin will continue playing the video.
         registerEventHandlers();
         OnceUxPlugin plugin = new OnceUxPlugin(this, brightcoveVideoView);
-        plugin.processServerData(onceUxVMAPDataUrl);
+        plugin.processVideo(onceUxAdDataUrl, onceUxContentUrl);
     }
 
     // Private instance methods
@@ -86,15 +86,6 @@ public class MainActivity extends BrightcovePlayer {
                 // Log the event and display a warning message (later)
                 Log.e(TAG, event.getType());
                 // TODO: throw up a stock Android warning widget.
-            }
-        });
-
-        eventEmitter.on(OnceUxEventType.AD_DATA_READY, new EventListener() {
-            @Override
-            public void processEvent(Event event) {
-                Log.i(TAG, "Ad data processing complete.  Starting video...");
-                brightcoveVideoView.setVideoPath(onceUxContentUrl);
-                brightcoveVideoView.start();
             }
         });
     }
