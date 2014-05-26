@@ -66,8 +66,7 @@ From Android Studio using Import
 Android Studio will now download/import and build the sample app.  At this point the samples will be in your instance of Android Studio where you can observe the snippets in action on a physical or virtual device, walk through the code using the Android Studio debugger, search on keywords or just browse Android source code.
 
 ## Overriding the default build behavior
-By default, the sample apps will build with the most recent Brightcove Android Native Player version at build time. To override this behavior with a specific version, create a file named **.gradle/gradle.properties** in your home directory
- and set the value of the property *anpVersion* to the desired version.  An invalid version will cause no sample app pro
+By default, the sample apps will build with the most recent Brightcove Android Native Player version at build time. To override this behavior with a specific version, create a file named **.gradle/gradle.properties** in your home directory and set the value of the property *anpVersion* to the desired version.  An invalid version will cause no sample app pro
 jects to be configured.
 
 ## Running a sample app
