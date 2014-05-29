@@ -1,4 +1,4 @@
-package com.brightcove.player.samples.freewheel.basic;
+package com.brightcove.player.samples.freewheelwidevine.basic;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -16,6 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.MediaController;
 import android.widget.RelativeLayout;
 
+import com.brightcove.drm.widevine.WidevinePlugin;
 import com.brightcove.freewheel.controller.FreeWheelController;
 import com.brightcove.freewheel.event.FreeWheelEventType;
 import com.brightcove.player.event.Event;
@@ -24,8 +25,7 @@ import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventLogger;
 import com.brightcove.player.event.EventType;
 import com.brightcove.player.media.Catalog;
-import com.brightcove.player.media.PlaylistListener;
-import com.brightcove.player.model.Playlist;
+import com.brightcove.player.media.VideoListener;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
@@ -37,7 +37,8 @@ import tv.freewheel.ad.interfaces.IConstants;
 import tv.freewheel.ad.interfaces.ISlot;
 
 /**
- * This app illustrates how to use the FreeWheel plugin with the Brightcove Player for Android.
+ * This app illustrates how to use the FreeWheel and Widevine plugins
+ * together with the Brightcove Player for Android.
  *
  * @author Billy Hnath
  */
@@ -62,14 +63,17 @@ public class MainActivity extends BrightcovePlayer {
         eventEmitter = brightcoveVideoView.getEventEmitter();
 
         setupFreeWheel();
+        setupWidevine();
 
-        // Add a test video to the BrightcoveVideoView.
-        Catalog catalog = new Catalog("ErQk9zUeDVLIp8Dc7aiHKq8hDMgkv5BFU7WGshTc-hpziB3BuYh28A..");
-        catalog.findPlaylistByReferenceID("stitch", new PlaylistListener() {
-            public void onPlaylist(Playlist playlist) {
-                brightcoveVideoView.addAll(playlist.getVideos());
+        Catalog catalog = new Catalog("FqicLlYykdimMML7pj65Gi8IHl8EVReWMJh6rLDcTjTMqdb5ay_xFA..");
+        catalog.findVideoByID("2142114984001", new VideoListener() {
+            @Override
+            public void onVideo(Video video) {
+                brightcoveVideoView.add(video);
+                brightcoveVideoView.start();
             }
 
+            @Override
             public void onError(String error) {
                 Log.e(TAG, error);
             }
@@ -156,5 +160,15 @@ public class MainActivity extends BrightcovePlayer {
             }
         });
         freeWheelController.enable();
+    }
+
+    private void setupWidevine() {
+        // Set up the DRM licensing server to be handled by Brightcove with arbitrary device and
+        // portal identifiers to fulfill the Widevine API contract.  These arguments will
+        // suffice to create a Widevine plugin instance.
+        String drmServerUri = "https://wvlic.brightcove.com/widevine/cypherpc/cgi-bin/GetEMMs.cgi";
+        String deviceId = "device1234";
+        String portalId = "brightcove";
+        new WidevinePlugin(this, brightcoveVideoView, drmServerUri, deviceId, portalId);
     }
 }

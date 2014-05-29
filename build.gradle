@@ -146,5 +146,12 @@ subprojects {
     }
   }
 
+  if (project.name.contains('FreeWheel')) {
+    dependencies {
+      compile "com.brightcove.player:android-freewheel-plugin:${anpVersion}"
+      compile files("${rootProject.projectDir}/libs/AdManager.jar")
+    }
+  }
+
   println "Processing ${project.name}"
 }
