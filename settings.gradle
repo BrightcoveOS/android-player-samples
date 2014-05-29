@@ -17,6 +17,7 @@ include ':WebVTTSampleApp'
 // FreeWheel samples require AdManager.jar to be added to the libs
 // folder.  This jar can be acquired from FreeWheel.
 //include ':BasicFreeWheelSampleApp'
+//include ':BasicFreeWheelWidevineSampleApp'
 
 // Omniture samples require adobe-adms.jar to be added to the libs
 // folder.  This jar can be acquired from Adobe.

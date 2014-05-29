@@ -30,7 +30,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This app illustrates how to use the ASDASDF
+ * This app illustrates how to use the IMA and Widevine plugins
+ * together with the Brightcove Player for Android.
  *
  * @author Billy Hnath
  */
@@ -64,7 +65,7 @@ public class MainActivity extends BrightcovePlayer {
 
         // Create the catalog object which will start and play the video.
         Catalog catalog = new Catalog("FqicLlYykdimMML7pj65Gi8IHl8EVReWMJh6rLDcTjTMqdb5ay_xFA..");
-        catalog.findVideoByID("2142125168001", new VideoListener() {
+        catalog.findVideoByID("2223563028001", new VideoListener() {
 
             @Override
             public void onError(String error) {
