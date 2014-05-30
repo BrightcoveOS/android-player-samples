@@ -1,16 +1,20 @@
-package com.brightcove.player.samples.ima.basic;
+package com.brightcove.player.samples.ima.basic.test;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
+
 import com.brightcove.ima.GoogleIMAEventType;
 import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventType;
 import com.brightcove.player.view.BrightcoveVideoView;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
+import com.brightcove.player.samples.ima.basic.MainActivity;
+import com.brightcove.player.samples.ima.basic.R;
 
 /**
  * White box style tests for the Google IMA plugin sample app.
