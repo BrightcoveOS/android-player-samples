@@ -1,0 +1,8 @@
+android { 
+
+  defaultConfig {
+    testPackageName "com.brightcove.player.samples.ima.basic.test"
+    testInstrumentationRunner "android.test.InstrumentationTestRunner"
+  }
+
+}
