@@ -5,7 +5,8 @@ import android.os.CountDownTimer;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.content.Context;
-
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventType;
@@ -46,16 +47,27 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
             }
         });
     }
+
     public void testNoAdData() throws InterruptedException {
-        mainActivity.getOnceUxPlugin().processVideo(null, "http://cdn5.unicornmedia.com/now/stitched/mp4/95ea75e1-dd2a-4aea-851a-28f46f8e8195/00000000-0000-0000-0000-000000000000/3a41c6e4-93a3-4108-8995-64ffca7b9106/9b118b95-38df-4b99-bb50-8f53d62f6ef8/0/0/105/1438852996/content.mp4");
+        final CountDownLatch latch = new CountDownLatch(1);
         Log.v(TAG, "testNoAdDataURL");
+
+        mainActivity.getOnceUxPlugin().processVideo(null, "http://cdn5.unicornmedia.com/now/stitched/mp4/95ea75e1-dd2a-4aea-851a-28f46f8e8195/00000000-0000-0000-0000-000000000000/3a41c6e4-93a3-4108-8995-64ffca7b9106/9b118b95-38df-4b99-bb50-8f53d62f6ef8/0/0/105/1438852996/content.mp4");
         eventEmitter.on(OnceUxEventType.NO_AD_DATA_URL, new EventListener() {
             @Override
             public void processEvent(Event event) {
-                assertTrue("This should have never happened; there is no Ad Data URL.", false);
-            }           
+                if (eventEmitter != null){
+                    fail("This should have never happened; there is no Ad Data URL.");
+                } else {
+                    assertTrue("Ad Data URL present.", eventEmitter == null);
+                    latch.countDown();
+                }
+            }
         });
+
         eventEmitter.emit(EventType.PLAY);
+        assertTrue("Timeout occurred.", latch.await(1, TimeUnit.MINUTES));
+        brightcoveVideoView.stopPlayback();
     }
 
     public void testWifiOff() throws InterruptedException {
