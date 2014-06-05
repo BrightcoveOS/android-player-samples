@@ -51,7 +51,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     public void testNoAdData() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
         Log.v(TAG, "testNoAdDataURL");
-        mainActivity.getOnceUxPlugin().processVideo(null, "http://cdn5.unicornmedia.com/now/stitched/mp4/95ea75e1-dd2a-4aea-851a-28f46f8e8195/00000000-0000-0000-0000-000000000000/3a41c6e4-93a3-4108-8995-64ffca7b9106/9b118b95-38df-4b99-bb50-8f53d62f6ef8/0/0/105/1438852996/content.mp4");
+        mainActivity.getOnceUxPlugin().processVideo("http://onceux.unicornmedia.com/now/ads/vmap/od/auto/95ea75e1-dd2a-4aea-851a-28f46f8e8195/43f54cc0-aa6b-4b2c-b4de-63d707167bf9/9b118b95-38df-4b99-bb50-8f53d62f6ef8??umtp=0", "http://cdn5.unicornmedia.com/now/stitched/mp4/95ea75e1-dd2a-4aea-851a-28f46f8e8195/00000000-0000-0000-0000-000000000000/3a41c6e4-93a3-4108-8995-64ffca7b9106/9b118b95-38df-4b99-bb50-8f53d62f6ef8/0/0/105/1438852996/content.mp4");
 
         eventEmitter.once(OnceUxEventType.NO_AD_DATA_URL, new EventListener() {
                 @Override
@@ -60,13 +60,15 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                     latch.countDown();
                 }
             });
-
-        eventEmitter.emit(EventType.PLAY);
-
-        latch.await(); {
-            fail("No Ad Data URL.");
+        latch.await(15, TimeUnit.SECONDS); {
+            if (latch.getCount() == 0) {
+                fail("This should not have occurred; there is No Ad Data URL.");
+            } else if (latch.getCount() == 1) {            
+                latch.countDown();
+                Log.v(TAG, "Ad Data URL found.");
+                assertTrue("Test complete.", true);
+            }
         }
-
         brightcoveVideoView.stopPlayback();
     }
 
