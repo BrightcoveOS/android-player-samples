@@ -58,18 +58,12 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         eventEmitter.once(OnceUxEventType.NO_AD_DATA_URL, new EventListener() {
                 @Override
                 public void processEvent(Event event) {
-                    Log.v(TAG, "NO_AD_DATA_URL event triggered");
+                    Log.v(TAG, "This should not have happened; an Ad Data URL was supplied.");
                     latch.countDown();
                 }
             });
-        latch.await(10, TimeUnit.SECONDS);
-            if (latch.getCount() == 0) {
-                Log.v(TAG, "This should not have happened, an Ad Data URL was supplied.");
-            } if (latch.getCount() == 1) {
-                Log.v(TAG, "Ad Data URL found.");
-            }
-            assertFalse("Timeout occurred.", latch.await(15, TimeUnit.SECONDS));
-            brightcoveVideoView.stopPlayback();
+        assertFalse("Timeout occurred.", latch.await(15, TimeUnit.SECONDS));
+        brightcoveVideoView.stopPlayback();
     }
 
     private void WifiOff() throws InterruptedException {
