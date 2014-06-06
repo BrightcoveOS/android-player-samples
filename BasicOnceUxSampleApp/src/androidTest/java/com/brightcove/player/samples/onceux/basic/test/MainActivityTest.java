@@ -48,10 +48,12 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         });
     }
 
-    public void testNoAdData() throws InterruptedException {
+    public void testNoAdDataEventDoesNotTrigger() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
         Log.v(TAG, "testNoAdDataURL");
-        mainActivity.getOnceUxPlugin().processVideo("http://onceux.unicornmedia.com/now/ads/vmap/od/auto/95ea75e1-dd2a-4aea-851a-28f46f8e8195/43f54cc0-aa6b-4b2c-b4de-63d707167bf9/9b118b95-38df-4b99-bb50-8f53d62f6ef8??umtp=0", "http://cdn5.unicornmedia.com/now/stitched/mp4/95ea75e1-dd2a-4aea-851a-28f46f8e8195/00000000-0000-0000-0000-000000000000/3a41c6e4-93a3-4108-8995-64ffca7b9106/9b118b95-38df-4b99-bb50-8f53d62f6ef8/0/0/105/1438852996/content.mp4");
+        String adUrl = "http://onceux.unicornmedia.com/now/ads/vmap/od/auto/95ea75e1-dd2a-4aea-851a-28f46f8e8195/43f54cc0-aa6b-4b2c-b4de-63d707167bf9/9b118b95-38df-4b99-bb50-8f53d62f6ef8??umtp=0";
+        String contentUrl = "http://cdn5.unicornmedia.com/now/stitched/mp4/95ea75e1-dd2a-4aea-851a-28f46f8e8195/00000000-0000-0000-0000-000000000000/3a41c6e4-93a3-4108-8995-64ffca7b9106/9b118b95-38df-4b99-bb50-8f53d62f6ef8/0/0/105/1438852996/content.mp4";
+        mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
 
         eventEmitter.once(OnceUxEventType.NO_AD_DATA_URL, new EventListener() {
                 @Override
@@ -60,19 +62,17 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                     latch.countDown();
                 }
             });
-        latch.await(15, TimeUnit.SECONDS); {
+        latch.await(10, TimeUnit.SECONDS);
             if (latch.getCount() == 0) {
-                fail("This should not have occurred; there is No Ad Data URL.");
-            } else if (latch.getCount() == 1) {            
-                latch.countDown();
+                Log.v(TAG, "This should not have happened, an Ad Data URL was supplied.");
+            } if (latch.getCount() == 1) {
                 Log.v(TAG, "Ad Data URL found.");
-                assertTrue("Test complete.", true);
             }
-        }
-        brightcoveVideoView.stopPlayback();
+            assertFalse("Timeout occurred.", latch.await(15, TimeUnit.SECONDS));
+            brightcoveVideoView.stopPlayback();
     }
 
-    public void testWifiOff() throws InterruptedException {
+    private void WifiOff() throws InterruptedException {
         WifiManager wifiManager = (WifiManager) this.getActivity().getSystemService(Context.WIFI_SERVICE);
         boolean wifiResult = wifiManager.setWifiEnabled(false);
         Log.v(TAG, "Wifi should be off for next test: " + wifiResult);
@@ -109,9 +109,9 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                 };
             });
     }
-        public void testWifiOn() throws InterruptedException {
-            WifiManager wifiManager = (WifiManager) this.getActivity().getSystemService(Context.WIFI_SERVICE);
-            boolean wifiResult = wifiManager.setWifiEnabled(true);
-            Log.v(TAG, "Turn Wifi back on: " + wifiResult);
-        }
+    private void WifiOn() throws InterruptedException {
+        WifiManager wifiManager = (WifiManager) this.getActivity().getSystemService(Context.WIFI_SERVICE);
+        boolean wifiResult = wifiManager.setWifiEnabled(true);
+        Log.v(TAG, "Turn Wifi back on: " + wifiResult);
+    }
 }
