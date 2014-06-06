@@ -69,10 +69,18 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
             public void processEvent(Event event) {
                 assertTrue("Should not have started an ad: " + state, state != State.STARTED_AD);
 
-                if (state == State.COMPLETED_CONTENT) {
-                    numPostrollsPlayed++;
-                } else {
+                switch (state) {
+                case STARTING_CONTENT:
                     numPrerollsPlayed++;
+                    break;
+                case STARTED_CONTENT:
+                    numMidrollsPlayed++;
+                    break;
+                case COMPLETED_CONTENT:
+                    numPostrollsPlayed++;
+                    break;
+                default:
+                    Log.e(TAG, "Unexpected state: " + state);
                 }
 
                 state = State.STARTED_AD;
@@ -82,13 +90,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         eventEmitter.on(GoogleIMAEventType.DID_COMPLETE_AD, new EventListener() {
             @Override
             public void processEvent(Event event) {
-                // Due to a bug, DID_START_AD events are not emitted for midrolls.
-                //assertTrue("Should have started an ad: " + state, state == State.STARTED_AD);
-
-                if (state == State.STARTED_CONTENT) {
-                    numMidrollsPlayed++;
-                }
-
+                assertTrue("Should have started an ad: " + state, state == State.STARTED_AD);
                 state = State.COMPLETED_AD;
             }
         });
@@ -173,19 +175,12 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         eventEmitter.on(GoogleIMAEventType.DID_START_AD, new EventListener() {
             @Override
             public void processEvent(Event event) {
-                // Using a new thread, so we aren't sleeping the main thread.
-                new Thread() {
-                    public void run() {
-                        MainActivityTest.this.sleep();
-                        Instrumentation instrumentation = MainActivityTest.this.getInstrumentation();
-                        instrumentation.callActivityOnPause(mainActivity);
-                        Log.v(TAG, "paused");
-                        MainActivityTest.this.sleep();
-                        instrumentation.callActivityOnResume(mainActivity);
-                        hasResumed = true;
-                        Log.v(TAG, "resumed");
-                    }
-                }.start();
+                Instrumentation instrumentation = MainActivityTest.this.getInstrumentation();
+                instrumentation.callActivityOnPause(mainActivity);
+                Log.v(TAG, "paused");
+                instrumentation.callActivityOnResume(mainActivity);
+                hasResumed = true;
+                Log.v(TAG, "resumed");
             }
         });
 

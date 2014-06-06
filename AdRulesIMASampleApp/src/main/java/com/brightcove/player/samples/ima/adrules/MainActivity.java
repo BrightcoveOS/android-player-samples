@@ -66,6 +66,10 @@ public class MainActivity extends BrightcovePlayer {
         catalog.findVideoByReferenceID("shark", new VideoListener() {
             public void onVideo(Video video) {
                 brightcoveVideoView.add(video);
+
+                // Auto play: the GoogleIMAComponent will postpone
+                // playback until the Ad Rules are loaded.
+                brightcoveVideoView.start();
             }
 
             public void onError(String error) {
@@ -143,20 +147,7 @@ public class MainActivity extends BrightcovePlayer {
         // emitter so that the plugin can integrate with the SDK.
         googleIMAComponent = new GoogleIMAComponent(brightcoveVideoView, eventEmitter, true);
 
-        // After the video has been prepared, setup Ad Rules.
-        eventEmitter.on(EventType.DID_SET_VIDEO, new EventListener() {
-            @Override
-            public void processEvent(Event event) {
-                googleIMAComponent.initializeAdsRequests();
-            }
-        });
-
-        eventEmitter.on(GoogleIMAEventType.ADS_MANAGER_LOADED, new EventListener() {
-            @Override
-            public void processEvent(Event event) {
-                brightcoveVideoView.start();
-            }
-        });
+        // Calling GoogleIMAComponent.initializeAdsRequests() is no longer necessary.
     }
 
     @Override
