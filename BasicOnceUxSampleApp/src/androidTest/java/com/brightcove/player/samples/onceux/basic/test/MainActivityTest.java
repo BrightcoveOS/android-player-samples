@@ -53,9 +53,10 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     public void setWifi(final boolean state) {
         WifiManager wifiManager = (WifiManager) this.getActivity().getSystemService(Context.WIFI_SERVICE);
         boolean wifiResult = wifiManager.setWifiEnabled(state);
-        Log.v(TAG, "Wifi is now enabled: " + wifiResult);
+        Log.v(TAG, "Wifi change successful: " + wifiResult);
+        //setWifiEnabled will return a true if the operation succeeds, not necessarily if the Wifi state is changed to enabled.
     }
-    /*
+
     public void testNoAdDataEventDoesNotTrigger() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
         Log.v(TAG, "testNoAdDataURL");
@@ -66,11 +67,11 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                     latch.countDown();
                 }
             });
-        mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
+        mainActivity.getOnceUxPlugin().processVideo(null, contentUrl);
         assertFalse("Test Failed.", latch.await(15, TimeUnit.SECONDS));
         brightcoveVideoView.stopPlayback();
     }
-    */
+
     public void testAdDataReadyEvent() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
         setWifi(false);
@@ -107,7 +108,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                 };
             });
         mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
-        setWifi(true);
         assertTrue("Test Failed", latch.await(1, TimeUnit.MINUTES));
+        setWifi(true);
     }
 }
