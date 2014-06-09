@@ -28,6 +28,8 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     private BrightcoveVideoView brightcoveVideoView;
     private EventEmitter eventEmitter;
     private MainActivity mainActivity;
+    private String adUrl = "http://onceux.unicornmedia.com/now/ads/vmap/od/auto/95ea75e1-dd2a-4aea-851a-28f46f8e8195/43f54cc0-aa6b-4b2c-b4de-63d707167bf9/9b118b95-38df-4b99-bb50-8f53d62f6ef8??umtp=0";
+    private String contentUrl = "http://cdn5.unicornmedia.com/now/stitched/mp4/95ea75e1-dd2a-4aea-851a-28f46f8e8195/00000000-0000-0000-0000-000000000000/3a41c6e4-93a3-4108-8995-64ffca7b9106/9b118b95-38df-4b99-bb50-8f53d62f6ef8/0/0/105/1438852996/content.mp4";
 
     public MainActivityTest() {
         super(MainActivity.class);
@@ -48,13 +50,15 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         });
     }
 
+    public void setWifi(final boolean state) {
+        WifiManager wifiManager = (WifiManager) this.getActivity().getSystemService(Context.WIFI_SERVICE);
+        boolean wifiResult = wifiManager.setWifiEnabled(state);
+        Log.v(TAG, "Wifi is now enabled: " + wifiResult);
+    }
+    /*
     public void testNoAdDataEventDoesNotTrigger() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
         Log.v(TAG, "testNoAdDataURL");
-        String adUrl = "http://onceux.unicornmedia.com/now/ads/vmap/od/auto/95ea75e1-dd2a-4aea-851a-28f46f8e8195/43f54cc0-aa6b-4b2c-b4de-63d707167bf9/9b118b95-38df-4b99-bb50-8f53d62f6ef8??umtp=0";
-        String contentUrl = "http://cdn5.unicornmedia.com/now/stitched/mp4/95ea75e1-dd2a-4aea-851a-28f46f8e8195/00000000-0000-0000-0000-000000000000/3a41c6e4-93a3-4108-8995-64ffca7b9106/9b118b95-38df-4b99-bb50-8f53d62f6ef8/0/0/105/1438852996/content.mp4";
-        mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
-
         eventEmitter.once(OnceUxEventType.NO_AD_DATA_URL, new EventListener() {
                 @Override
                 public void processEvent(Event event) {
@@ -62,50 +66,48 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                     latch.countDown();
                 }
             });
-        assertFalse("Timeout occurred.", latch.await(15, TimeUnit.SECONDS));
+        mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
+        assertFalse("Test Failed.", latch.await(15, TimeUnit.SECONDS));
         brightcoveVideoView.stopPlayback();
     }
+    */
+    public void testAdDataReadyEvent() throws InterruptedException {
+        final CountDownLatch latch = new CountDownLatch(1);
+        setWifi(false);
+        // Turning off Wifi to trigger an error in the AD_DATA_READY event.
+        Log.v(TAG, "Catching AD_DATA_READY Event.");
 
-    private void WifiOff() throws InterruptedException {
-        WifiManager wifiManager = (WifiManager) this.getActivity().getSystemService(Context.WIFI_SERVICE);
-        boolean wifiResult = wifiManager.setWifiEnabled(false);
-        Log.v(TAG, "Wifi should be off for next test: " + wifiResult);
-        //Turning off Wifi to trigger an Error in the next test for the AD_DATA_READY.
-    }
-
-    public void testTimer() throws InterruptedException {
-        Log.v(TAG, "Timer!");
-        final CountDownTimer timer = new CountDownTimer(1000,1000) {
-                @Override
-                public void onTick(long millisUntilFinished){}
-                @Override
-                public void onFinish() {
-                    fail("Needs Ad Data");
-                }
-            };
-        
-        // We want to have another listener that is listening for the AD_READY, and inside that listener, we're going to do something!!!
         eventEmitter.on(OnceUxEventType.AD_DATA_READY, new EventListener() {
                 @Override
                 public void processEvent(Event event) {
-                    timer.cancel();
                     String errorMessage = (String) event.properties.get(OnceUxEventType.VMAP_ERRORS);
                     String responseMessage = (String) event.properties.get(OnceUxEventType.VMAP_RESPONSE);
-                    if (errorMessage == null && responseMessage == null) {
-                        fail("Error: AD_DATA_READY is empty");
-                    } else if(errorMessage != null && responseMessage != null) {
-                        fail("Error: AD_DATA_READY is too full");
-                    } else if(errorMessage != null) {
-                        fail("Error: AD_DATA_READY has at least one error");
+                    Log.v(TAG, "AD_DATA_READY Error: " + errorMessage);
+                    Log.v(TAG, "AD_DATA_READY Response: " + responseMessage);
+                    if (responseMessage == null || responseMessage.equals("")) {
+                        if(errorMessage == null || errorMessage.equals("")) {
+                            // both are empty
+                            Log.v(TAG, "Error: AD_DATA_READY is empty");
+                            latch.countDown();
+                        } else {
+                            // response is empty, error is not
+                            Log.v(TAG, "Error: AD_DATA_READY has at least one error");
+                            latch.countDown();
+                        }
                     } else {
-                        assertTrue(true);
+                        if (responseMessage != null || !responseMessage.equals("")) {
+                            // both are not empty
+                            Log.v(TAG, "Error: AD_DATA_READY is too full");
+                            latch.countDown();
+                        } else {
+                            // response not empty, error empty
+                                Log.v(TAG, "This should not happen. AD_DATA_READY is ready.");
+                        }
                     }
                 };
             });
-    }
-    private void WifiOn() throws InterruptedException {
-        WifiManager wifiManager = (WifiManager) this.getActivity().getSystemService(Context.WIFI_SERVICE);
-        boolean wifiResult = wifiManager.setWifiEnabled(true);
-        Log.v(TAG, "Turn Wifi back on: " + wifiResult);
+        mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
+        setWifi(true);
+        assertTrue("Test Failed", latch.await(1, TimeUnit.MINUTES));
     }
 }
