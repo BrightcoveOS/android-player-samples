@@ -7,6 +7,8 @@ import android.util.Log;
 import android.content.Context;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.HashMap;
+import java.util.Map;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventType;
@@ -15,21 +17,20 @@ import com.brightcove.player.samples.onceux.basic.MainActivity;
 import com.brightcove.player.samples.onceux.basic.R;
 import com.brightcove.player.view.BrightcoveVideoView;
 import com.brightcove.plugin.onceux.event.OnceUxEventType;
+import com.brightcove.player.display.VideoDisplayComponent;
 
 public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
     private final String TAG = this.getClass().getSimpleName();
 
-    private enum State {
-        STARTED_AD, COMPLETED_AD, STARTING_CONTENT, STARTED_CONTENT, COMPLETED_CONTENT
-    }
-
-    private State state;
     private BrightcoveVideoView brightcoveVideoView;
+
     private EventEmitter eventEmitter;
     private MainActivity mainActivity;
     private String adUrl = "http://onceux.unicornmedia.com/now/ads/vmap/od/auto/95ea75e1-dd2a-4aea-851a-28f46f8e8195/43f54cc0-aa6b-4b2c-b4de-63d707167bf9/9b118b95-38df-4b99-bb50-8f53d62f6ef8??umtp=0";
     private String contentUrl = "http://cdn5.unicornmedia.com/now/stitched/mp4/95ea75e1-dd2a-4aea-851a-28f46f8e8195/00000000-0000-0000-0000-000000000000/3a41c6e4-93a3-4108-8995-64ffca7b9106/9b118b95-38df-4b99-bb50-8f53d62f6ef8/0/0/105/1438852996/content.mp4";
+    private VideoDisplayComponent videoDisplay;
+    private int playheadPosition;
 
     public MainActivityTest() {
         super(MainActivity.class);
@@ -57,6 +58,15 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         //setWifiEnabled will return a true if the operation succeeds, not necessarily if the Wifi state is changed to enabled.
     }
 
+    public void seekTo(int msec) {
+        Log.d(TAG, "Seeking to " + msec);
+        Map<String, Object> properties = new HashMap<String, Object>();
+        properties.put(Event.SEEK_POSITION, msec);
+        playheadPosition = msec;
+        eventEmitter.emit(EventType.SEEK_TO, properties);
+    }
+
+    /*
     public void testNoAdDataEventDoesNotTrigger() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
         Log.v(TAG, "testNoAdDataURL");
@@ -67,7 +77,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                     latch.countDown();
                 }
             });
-        mainActivity.getOnceUxPlugin().processVideo(null, contentUrl);
+        mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
         assertFalse("Test Failed.", latch.await(15, TimeUnit.SECONDS));
         brightcoveVideoView.stopPlayback();
     }
@@ -111,4 +121,22 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         assertTrue("Test Failed", latch.await(1, TimeUnit.MINUTES));
         setWifi(true);
     }
+    */
+    public void testSeekControls() throws InterruptedException {
+        final CountDownLatch latch = new CountDownLatch(2);
+        eventEmitter.on(OnceUxEventType.END_AD_BREAK, new EventListener() {
+                @Override
+                public void processEvent(Event event) {
+                    int playheadPosition = event.getIntegerProperty(Event.PLAYHEAD_POSITION);
+                    Log.v(TAG, "Before Seek: " + playheadPosition);
+                    seekTo(15000);
+                    //Log.v(TAG, "After Seek: " + playheadPosition);
+                    // Determine a way to delay the After Seek tag so that it only Tags AFTER the seekTo is finished.
+                    latch.countDown();
+                }
+            });
+        mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
+        assertTrue("Timeout occurred.", latch.await(1, TimeUnit.MINUTES));
+    }
+
 }
