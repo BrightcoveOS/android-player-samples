@@ -1,3 +1,4 @@
+
 package com.brightcove.player.samples.onceux.basic.test;
 
 import android.net.wifi.WifiManager;
@@ -5,6 +6,7 @@ import android.os.CountDownTimer;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.content.Context;
+import android.media.MediaPlayer;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.HashMap;
@@ -120,23 +122,69 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
         assertTrue("Test Failed", latch.await(1, TimeUnit.MINUTES));
         setWifi(true);
+        brightcoveVideoView.stopPlayback();
+    }
+
+    public void testSeekControlsPostAdBreak() throws InterruptedException {
+        final CountDownLatch latch = new CountDownLatch(2);
+        Log.v(TAG, "Post Ad Break Seek Test");
+
+        eventEmitter.on(OnceUxEventType.END_AD_BREAK, new EventListener() {
+                @Override
+                public void processEvent(Event event) {
+                    Log.v(TAG, "Post Ad. Location Before Seek: " + playheadPosition);
+                    latch.countDown();
+                    seekTo(65000);
+                    //Log.v(TAG, "After Seek: " + playheadPosition);
+                    //TODO: Determine a way to delay the After Seek tag so that it only Tags AFTER the seekTo is finished.
+                }
+            });
+        mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
+        assertTrue("Timeout occurred.", latch.await(3, TimeUnit.MINUTES));
+        brightcoveVideoView.stopPlayback();
     }
     */
-    public void testSeekControls() throws InterruptedException {
+    public void testSeekControlsReturnToAdBreak() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(2);
         eventEmitter.on(OnceUxEventType.END_AD_BREAK, new EventListener() {
                 @Override
                 public void processEvent(Event event) {
-                    int playheadPosition = event.getIntegerProperty(Event.PLAYHEAD_POSITION);
-                    Log.v(TAG, "Before Seek: " + playheadPosition);
-                    seekTo(15000);
-                    //Log.v(TAG, "After Seek: " + playheadPosition);
-                    // Determine a way to delay the After Seek tag so that it only Tags AFTER the seekTo is finished.
+                    Log.v(TAG, "During Ad. Location Before Seek: " + playheadPosition);
                     latch.countDown();
                 }
             });
+        if (latch.getCount() == 1)
+            seekTo(58000);
+        //TODO: Fix this. It's not seeking.
         mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
-        assertTrue("Timeout occurred.", latch.await(1, TimeUnit.MINUTES));
+        assertTrue("Timeout occurred.", latch.await(2, TimeUnit.MINUTES));
+        brightcoveVideoView.stopPlayback();
     }
-
+    /*
+    public void testHiddenSeekControls() throws InterruptedException {
+        final CountDownLatch latch = new CountDownLatch(3);
+        eventEmitter.on(EventType.HIDE_SEEK_CONTROLS, new EventListener(){
+                @Override
+                public void processEvent(Event event) {
+                    int position = event.getIntegerProperty(Event.PLAYHEAD_POSITION);
+                    Log.v(TAG, "Seek controls hidden at: " + position);
+                }
+            });
+        eventEmitter.on(OnceUxEventType.END_AD_BREAK, new EventListener(){
+                @Override
+                public void processEvent(Event event) {
+                    latch.countDown();
+                    if (latch.getCount() == 2) {
+                        seekTo(59500);
+                    }
+                    if (latch.getCount() == 1) {
+                        seekTo(166500);
+                    }
+                }
+            });
+        mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
+        assertTrue("Timeout occurred.", latch.await(4, TimeUnit.MINUTES));
+        brightcoveVideoView.stopPlayback();
+    }
+    */
 }
