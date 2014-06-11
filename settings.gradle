@@ -29,6 +29,6 @@ boolean freewheelDependenciesAreSatisfied() {
 }
 
 boolean omnitureDependenciesAreSatisfied() {
-    File dep = file("${rootProject.projectDir}/libs/adobe-adms.jar")
+    File dep = file("${rootProject.projectDir}/libs/adobeMobileLibrary.jar")
     return dep.exists()
 }
