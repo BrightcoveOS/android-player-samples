@@ -10,15 +10,25 @@ include ':HLSPlayerID3SampleApp'
 include ':HLSPlayerSampleApp'
 include ':WebVTTSampleApp'
 
-// AdobePass samples require android_accessenabler-1.7.2.jar to be
-// added to the libs folder.  This jar can be acquired from Adobe.
-//include ':BasicAdobePassWebViewSampleApp'
-
 // FreeWheel samples require AdManager.jar to be added to the libs
 // folder.  This jar can be acquired from FreeWheel.
-//include ':BasicFreeWheelSampleApp'
-//include ':BasicFreeWheelWidevineSampleApp'
+if (freewheelDependenciesAreSatisfied()) {
+    include ':BasicFreeWheelSampleApp'
+    include ':BasicFreeWheelWidevineSampleApp'
+}
 
 // Omniture samples require adobe-adms.jar to be added to the libs
 // folder.  This jar can be acquired from Adobe.
-//include ':BasicOmnitureSampleApp'
+if (omnitureDependenciesAreSatisfied()) {
+    include ':BasicOmnitureSampleApp'
+}
+
+boolean freewheelDependenciesAreSatisfied() {
+    File dep = file("${rootProject.projectDir}/libs/AdManager.jar")
+    return dep.exists()
+}
+
+boolean omnitureDependenciesAreSatisfied() {
+    File dep = file("${rootProject.projectDir}/libs/adobe-adms.jar")
+    return dep.exists()
+}
