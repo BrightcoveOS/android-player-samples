@@ -68,7 +68,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         eventEmitter.emit(EventType.SEEK_TO, properties);
     }
 
-    /*
     public void testNoAdDataEventDoesNotTrigger() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
         Log.v(TAG, "testNoAdDataURL");
@@ -143,25 +142,49 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         assertTrue("Timeout occurred.", latch.await(3, TimeUnit.MINUTES));
         brightcoveVideoView.stopPlayback();
     }
-    */
-    public void testSeekControlsReturnToAdBreak() throws InterruptedException {
-        final CountDownLatch latch = new CountDownLatch(2);
+
+    public void testSeekControlsPostAdBreak() throws InterruptedException {
+        final CountDownLatch latch = new CountDownLatch(1);
+        eventEmitter.on(OnceUxEventType.START_AD_BREAK, new EventListener() {
+                @Override
+                public void processEvent(Event event) {
+                    Log.v(TAG, "Skipping Ads...");
+                    seekTo(27000);
+                    //Skipping ads to make the tests timely.
+                }
+            });
         eventEmitter.on(OnceUxEventType.END_AD_BREAK, new EventListener() {
                 @Override
                 public void processEvent(Event event) {
-                    Log.v(TAG, "During Ad. Location Before Seek: " + playheadPosition);
-                    latch.countDown();
+                    Log.v(TAG, "END_AD_BREAK Emitted. Seeking...");
+                    seekTo(40000);
+                    //Actually Seeking.
                 }
             });
-        if (latch.getCount() == 1)
-            seekTo(58000);
-        //TODO: Fix this. It's not seeking.
+        eventEmitter.on(EventType.PROGRESS, new EventListener() {
+                @Override
+                public void processEvent(Event event) {
+                    int progress = event.getIntegerProperty(Event.PLAYHEAD_POSITION);
+                    if (progress > 39500) {
+                        if (progress < 41500) {
+                            //Due to the asynchronous nature of the request and how android handles HLS, the seek usually lands about 1.2 seconds late.
+                            Log.v(TAG, "Successful seek at: " + progress);
+                            latch.countDown();
+                        } else {
+                            Log.v(TAG, "Too far. At: " + progress);
+                        }
+                    } else {
+                        Log.v(TAG, "Not far enough. " + progress);
+                    }
+                }
+            });
+
         mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
-        assertTrue("Timeout occurred.", latch.await(2, TimeUnit.MINUTES));
+        assertTrue("Timeout occurred.", latch.await(1, TimeUnit.MINUTES));
         brightcoveVideoView.stopPlayback();
     }
-    /*
-    public void testHiddenSeekControls() throws InterruptedException {
+
+    public void testHideSeekControls() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(3);
         eventEmitter.on(EventType.HIDE_SEEK_CONTROLS, new EventListener(){
                 @Override
@@ -186,5 +209,5 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         assertTrue("Timeout occurred.", latch.await(4, TimeUnit.MINUTES));
         brightcoveVideoView.stopPlayback();
     }
-    */
+
 }
