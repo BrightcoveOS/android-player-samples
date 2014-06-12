@@ -125,25 +125,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     }
 
     public void testSeekControlsPostAdBreak() throws InterruptedException {
-        final CountDownLatch latch = new CountDownLatch(2);
-        Log.v(TAG, "Post Ad Break Seek Test");
-
-        eventEmitter.on(OnceUxEventType.END_AD_BREAK, new EventListener() {
-                @Override
-                public void processEvent(Event event) {
-                    Log.v(TAG, "Post Ad. Location Before Seek: " + playheadPosition);
-                    latch.countDown();
-                    seekTo(65000);
-                    //Log.v(TAG, "After Seek: " + playheadPosition);
-                    //TODO: Determine a way to delay the After Seek tag so that it only Tags AFTER the seekTo is finished.
-                }
-            });
-        mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
-        assertTrue("Timeout occurred.", latch.await(3, TimeUnit.MINUTES));
-        brightcoveVideoView.stopPlayback();
-    }
-
-    public void testSeekControlsPostAdBreak() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
         eventEmitter.on(OnceUxEventType.START_AD_BREAK, new EventListener() {
                 @Override
