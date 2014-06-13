@@ -32,7 +32,7 @@ def downloadIMA() {
 
     download {
       src 'https://dl.google.com/in-stream/google_sdk/android/v3/' + imaAndroidSdkJarFileName
-      dest file("${rootProject.projectDir}/libs/ima-android-sdk.jar")
+      dest file("${System.getProperty("user.home")}/libs/ima-android-sdk.jar")
     }
   }
 }
@@ -42,6 +42,7 @@ subprojects {
 
   repositories {
     mavenCentral()
+    // System property APS_SNAPSHOT_REPO: defined 'true' or 'false'.
     // If you have an APS_SNAPSHOT_REPO enviornment variable defined,
     // you can build agaist the snapshot libraries over the release ones.
     if(System.getenv('APS_SNAPSHOT_REPO') == "true") {
@@ -62,7 +63,6 @@ subprojects {
     // dependencies which are either downloaded directly (not using a
     // Maven repo) or installed manually for something like VisualOn.
     flatDir {
-      //dirs "${rootProject.projectDir}/libs"
       dirs "${System.getProperty("user.home")}/libs"
     }
   }
