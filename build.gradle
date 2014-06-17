@@ -32,7 +32,7 @@ def downloadIMA() {
 
     download {
       src 'https://dl.google.com/in-stream/google_sdk/android/v3/' + imaAndroidSdkJarFileName
-      dest file("${rootProject.projectDir}/libs/ima-android-sdk.jar")
+      dest file("${System.getProperty("user.home")}/libs/ima-android-sdk.jar")
     }
   }
 }
@@ -43,10 +43,10 @@ subprojects {
   repositories {
     mavenCentral()
     maven {
-      url 'http://repo.brightcove.com/releases'
+      url 'http://repo.brightcove.com/snapshots'
     }
     maven {
-      url 'http://repo.brightcove.com/snapshots'
+      url 'http://repo.brightcove.com/releases'
     }
     maven {
       url System.getenv('ANDROID_HOME') + '/extras/google/m2repository'
@@ -57,7 +57,7 @@ subprojects {
     // dependencies which are either downloaded directly (not using a
     // Maven repo) or installed manually for something like VisualOn.
     flatDir {
-      dirs "${rootProject.projectDir}/libs"
+      dirs "${System.getProperty("user.home")}/libs"
     }
   }
 
