@@ -42,17 +42,11 @@ subprojects {
 
   repositories {
     mavenCentral()
-    // System property APS_SNAPSHOT_REPO: defined 'true' or 'false'.
-    // If you have an APS_SNAPSHOT_REPO enviornment variable defined,
-    // you can build agaist the snapshot libraries over the release ones.
-    if(System.getenv('APS_SNAPSHOT_REPO') == "true") {
-      maven {
-        url 'http://repo.brightcove.com/snapshots'
-      }
-    } else {
-      maven {
-        url 'http://repo.brightcove.com/releases'
-      }
+    maven {
+      url 'http://repo.brightcove.com/snapshots'
+    }
+    maven {
+      url 'http://repo.brightcove.com/releases'
     }
     maven {
       url System.getenv('ANDROID_HOME') + '/extras/google/m2repository'
