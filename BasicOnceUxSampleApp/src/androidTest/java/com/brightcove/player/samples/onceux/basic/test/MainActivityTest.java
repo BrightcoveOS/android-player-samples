@@ -33,6 +33,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     private String contentUrl = "http://cdn5.unicornmedia.com/now/stitched/mp4/95ea75e1-dd2a-4aea-851a-28f46f8e8195/00000000-0000-0000-0000-000000000000/3a41c6e4-93a3-4108-8995-64ffca7b9106/9b118b95-38df-4b99-bb50-8f53d62f6ef8/0/0/105/1438852996/content.mp4";
     private VideoDisplayComponent videoDisplay;
     private int playheadPosition;
+    private int progress;
 
     public MainActivityTest() {
         super(MainActivity.class);
@@ -46,11 +47,19 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         eventEmitter = brightcoveVideoView.getEventEmitter();
 
         eventEmitter.once(EventType.DID_SET_VIDEO, new EventListener() {
-            @Override
-            public void processEvent(Event event) {
-                brightcoveVideoView.start();
-            }
-        });
+                @Override
+                public void processEvent(Event event) {
+                    brightcoveVideoView.start();
+                }
+            });
+        eventEmitter.on(EventType.PROGRESS, new EventListener() {
+                @Override
+                public void processEvent(Event event) {
+                    progress = event.getIntegerProperty(Event.PLAYHEAD_POSITION);
+                    Log.v(TAG, "position at: " + progress);
+                }
+            });
+
     }
 
     public void setWifi(final boolean state) {
@@ -67,10 +76,26 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         playheadPosition = msec;
         eventEmitter.emit(EventType.SEEK_TO, properties);
     }
-
+    /*
+    public void testDidPause() throws InterruptedException {
+        final CountDownLatch latch = new CountDownLatch(1);
+        Log.v(TAG, "Checking for DID_PAUSE event.");
+        eventEmitter.once(EventType.DID_PAUSE, new EventListener() {
+                @Override
+                public void processEvent(Event event) {
+                    latch.countDown();
+                    Log.v(TAG, "DID_PAUSE event triggered, should be paused.");
+                }
+            });
+        mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
+        eventEmitter.emit(EventType.PLAY);
+        assertFalse("Test Failed, DID_PAUSE triggered.", latch.await(30, TimeUnit.SECONDS));
+        brightcoveVideoView.stopPlayback();
+    }
+    */
     public void testNoAdDataEventDoesNotTrigger() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
-        Log.v(TAG, "testNoAdDataURL");
+        Log.v(TAG, "Checking for Ad Data Url");
         eventEmitter.once(OnceUxEventType.NO_AD_DATA_URL, new EventListener() {
                 @Override
                 public void processEvent(Event event) {
@@ -79,6 +104,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                 }
             });
         mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
+        eventEmitter.emit(EventType.PLAY);
         assertFalse("Test Failed.", latch.await(15, TimeUnit.SECONDS));
         brightcoveVideoView.stopPlayback();
     }
@@ -123,73 +149,68 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
             latch.countDown();
         }
         mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
+        eventEmitter.emit(EventType.PLAY);
         assertTrue("Test Failed", latch.await(1, TimeUnit.MINUTES));
         brightcoveVideoView.stopPlayback();
     }
 
     public void testSeekControlsPostAdBreak() throws InterruptedException {
-        final CountDownLatch latch = new CountDownLatch(1);
-        eventEmitter.on(OnceUxEventType.START_AD_BREAK, new EventListener() {
-                @Override
-                public void processEvent(Event event) {
-                    Log.v(TAG, "Skipping Ads...");
-                    seekTo(27000);
-                    //Skipping ads to make the tests timely.
-                }
-            });
+        final CountDownLatch latch = new CountDownLatch(2);
         eventEmitter.on(OnceUxEventType.END_AD_BREAK, new EventListener() {
                 @Override
                 public void processEvent(Event event) {
-                    Log.v(TAG, "END_AD_BREAK Emitted. Seeking...");
+                    Log.v(TAG, "END_AD_BREAK Emitted. Seeking from: " + progress);
                     seekTo(40000);
-                    //Actually Seeking.
+                    //The Seek we are testing.
+                    latch.countDown();
                 }
             });
         eventEmitter.on(EventType.PROGRESS, new EventListener() {
                 @Override
                 public void processEvent(Event event) {
-                    int progress = event.getIntegerProperty(Event.PLAYHEAD_POSITION);
                     if (progress > 39500) {
                         if (progress < 41500) {
                             //Due to the asynchronous nature of the request and how android handles HLS, the seek usually lands about 1.2 seconds late.
                             Log.v(TAG, "Successful seek at: " + progress);
                             latch.countDown();
                         } else {
-                            Log.v(TAG, "Too far. At: " + progress);
+                            Log.v(TAG, "Too far.");
                         }
                     } else {
-                        Log.v(TAG, "Not far enough. " + progress);
+                        Log.v(TAG, "Not far enough. ");
                     }
                 }
             });
 
-        mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
-        assertTrue("Timeout occurred.", latch.await(1, TimeUnit.MINUTES));
+        mainActivity.getOnceUxPlugin().processVideo(adUrl);
+        eventEmitter.emit(EventType.PLAY);
+        assertTrue("Timeout occurred.", latch.await(2, TimeUnit.MINUTES));
         brightcoveVideoView.stopPlayback();
     }
 
     public void testHideSeekControls() throws InterruptedException {
-        final CountDownLatch latch = new CountDownLatch(3);
+        final CountDownLatch latch = new CountDownLatch(6);
         eventEmitter.on(EventType.HIDE_SEEK_CONTROLS, new EventListener(){
                 @Override
                 public void processEvent(Event event) {
-                    int position = event.getIntegerProperty(Event.PLAYHEAD_POSITION);
-                    Log.v(TAG, "Seek controls hidden at: " + position);
+                    Log.v(TAG, "Seek controls hidden at: " + progress);
+                    latch.countDown();
                 }
             });
         eventEmitter.on(OnceUxEventType.END_AD_BREAK, new EventListener(){
                 @Override
                 public void processEvent(Event event) {
                     latch.countDown();
-                    if (latch.getCount() == 2) {
+                    if (latch.getCount() == 4) {
                         seekTo(59500);
                     }
-                    if (latch.getCount() == 1) {
+                    if (latch.getCount() == 2) {
                         seekTo(166500);
                     }
                 }
             });
         mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
+        eventEmitter.emit(EventType.PLAY);
         assertTrue("Timeout occurred.", latch.await(4, TimeUnit.MINUTES));
         brightcoveVideoView.stopPlayback();
     }
