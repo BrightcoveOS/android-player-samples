@@ -24,11 +24,11 @@ if (omnitureDependenciesAreSatisfied()) {
 }
 
 boolean freewheelDependenciesAreSatisfied() {
-    File dep = file("${rootProject.projectDir}/libs/AdManager.jar")
+    File dep = file("${System.getProperty("user.home")}/libs/AdManager.jar")
     return dep.exists()
 }
 
 boolean omnitureDependenciesAreSatisfied() {
-    File dep = file("${rootProject.projectDir}/libs/adobeMobileLibrary.jar")
+    File dep = file("${System.getProperty("user.home")}/libs/adobeMobileLibrary.jar")
     return dep.exists()
 }
