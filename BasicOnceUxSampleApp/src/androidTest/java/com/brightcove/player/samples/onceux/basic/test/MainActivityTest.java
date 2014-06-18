@@ -98,7 +98,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         setWifi(false);
         Log.v(TAG, "Wifi should be off.");
         // Turning off Wifi to trigger an error in the AD_DATA_READY event.
-        // Currently disabled due to a bug that makes the test fail. Bug SDK-156
         eventEmitter.on(OnceUxEventType.AD_DATA_READY, new EventListener() {
                 @Override
                 public void processEvent(Event event) {
