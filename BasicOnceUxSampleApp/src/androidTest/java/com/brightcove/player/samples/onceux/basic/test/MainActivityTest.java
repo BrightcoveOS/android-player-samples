@@ -76,22 +76,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         playheadPosition = msec;
         eventEmitter.emit(EventType.SEEK_TO, properties);
     }
-    /*
-    public void testDidPause() throws InterruptedException {
-        final CountDownLatch latch = new CountDownLatch(1);
-        Log.v(TAG, "Checking for DID_PAUSE event.");
-        eventEmitter.once(EventType.DID_PAUSE, new EventListener() {
-                @Override
-                public void processEvent(Event event) {
-                    latch.countDown();
-                    Log.v(TAG, "DID_PAUSE event triggered, should be paused.");
-                }
-            });
-        mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
-        eventEmitter.emit(EventType.PLAY);
-        assertFalse("Test Failed, DID_PAUSE triggered.", latch.await(30, TimeUnit.SECONDS));
-        brightcoveVideoView.stopPlayback();
-    }
 
     public void testNoAdDataEventDoesNotTrigger() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
@@ -108,7 +92,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         assertFalse("Test Failed.", latch.await(15, TimeUnit.SECONDS));
         brightcoveVideoView.stopPlayback();
     }
-    */
+
     public void testAdDataReadyEvent() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(2);
         setWifi(false);
@@ -154,10 +138,10 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
         mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
         eventEmitter.emit(EventType.PLAY);
-        assertTrue("Test Failed", latch.await(90, TimeUnit.SECONDS));
+        assertTrue("Test Failed", latch.await(30, TimeUnit.SECONDS));
         brightcoveVideoView.stopPlayback();
     }
-    /*
+
     public void testSeekControlsPostAdBreak() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(2);
         eventEmitter.on(OnceUxEventType.END_AD_BREAK, new EventListener() {
@@ -186,7 +170,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                 }
             });
 
-        mainActivity.getOnceUxPlugin().processVideo(adUrl);
+        mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
         eventEmitter.emit(EventType.PLAY);
         assertTrue("Timeout occurred.", latch.await(2, TimeUnit.MINUTES));
         brightcoveVideoView.stopPlayback();
@@ -218,5 +202,5 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         assertTrue("Timeout occurred.", latch.await(4, TimeUnit.MINUTES));
         brightcoveVideoView.stopPlayback();
     }
-    */
+
 }
