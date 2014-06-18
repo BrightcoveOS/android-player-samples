@@ -1,15 +1,11 @@
 package com.brightcove.player.samples.onceux.basic.test;
 
-import android.net.wifi.WifiManager;
-import android.os.CountDownTimer;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.content.Context;
 import android.media.MediaPlayer;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-import java.util.HashMap;
-import java.util.Map;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventType;
@@ -20,7 +16,7 @@ import com.brightcove.player.view.BrightcoveVideoView;
 import com.brightcove.plugin.onceux.event.OnceUxEventType;
 import com.brightcove.player.display.VideoDisplayComponent;
 
-public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
+public class NoPlayTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
     private final String TAG = this.getClass().getSimpleName();
 
@@ -33,8 +29,13 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     private VideoDisplayComponent videoDisplay;
     private int playheadPosition;
     private int progress;
+    final CountDownLatch adData = new CountDownLatch(1);
+    final CountDownLatch didPlay = new CountDownLatch(1);
+    final CountDownLatch play = new CountDownLatch(1);
+    final CountDownLatch didPause = new CountDownLatch(1);
+    final CountDownLatch pause = new CountDownLatch(1);
 
-    public MainActivityTest() {
+    public NoPlayTest() {
         super(MainActivity.class);
     }
 
@@ -51,27 +52,77 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                     brightcoveVideoView.start();
                 }
             });
-        eventEmitter.on(EventType.PROGRESS, new EventListener() {
+
+        eventEmitter.on(OnceUxEventType.AD_DATA_READY, new EventListener() {
                 @Override
                 public void processEvent(Event event) {
-                    progress = event.getIntegerProperty(Event.PLAYHEAD_POSITION);
-                    Log.v(TAG, "position at: " + progress);
+                    adData.countDown();
+                    Log.v(TAG, "AD_DATA_READY event triggered.");
+                }
+            });
+
+        eventEmitter.on(EventType.PLAY, new EventListener() {
+                @Override
+                public void processEvent(Event event) {
+                    play.countDown();
+                    Log.v(TAG, "DID_PLAY event triggered.");
+                }
+            });
+
+        eventEmitter.on(EventType.DID_PLAY, new EventListener() {
+                @Override
+                public void processEvent(Event event) {
+                    didPlay.countDown();
+                    Log.v(TAG, "DID_PLAY event triggered.");
+                }
+            });
+
+        eventEmitter.on(EventType.PAUSE, new EventListener() {
+                @Override
+                public void processEvent(Event event) {
+                    pause.countDown();
+                    Log.v(TAG, "PAUSE event triggered.");
+                }
+            });
+
+        eventEmitter.on(EventType.DID_PAUSE, new EventListener() {
+                @Override
+                public void processEvent(Event event) {
+                    didPause.countDown();
+                    Log.v(TAG, "DID_PAUSE event triggered.");
                 }
             });
 
     }
 
-    public void testPlayDidNotPlay() throws InterruptedException {
-        final CountDownLatch latch = new CountDownLatch(1);
-        Log.v(TAG, "Checking for DID_PLAY event.");
-        eventEmitter.once(EventType.DID_PLAY, new EventListener() {
-                @Override
-                public void processEvent(Event event) {
-                    latch.countDown();
-                    Log.v(TAG, "DID_PLAY event triggered, but it should not be playing.");
-                }
-            });
+    public void testPlay() throws InterruptedException {
         mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
-        assertFalse("Test Failed, DID_PLAY triggered unprompted.", latch.await(30, TimeUnit.SECONDS));
+        assertFalse("Test Failed, PLAY event triggered unprompted.", play.await(30, TimeUnit.SECONDS));
         brightcoveVideoView.stopPlayback();
     }
+
+    public void testDidPlay() throws InterruptedException {
+        mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
+        assertFalse("Test Failed, DID_PLAY event triggered unprompted.", didPlay.await(30, TimeUnit.SECONDS));
+        brightcoveVideoView.stopPlayback();
+    }
+
+    public void testPause() throws InterruptedException {
+        mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
+        assertFalse("Test Failed, PAUSE event triggered unprompted.", pause.await(30, TimeUnit.SECONDS));
+        brightcoveVideoView.stopPlayback();
+    }
+
+    public void testDidPause() throws InterruptedException {
+        mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
+        assertFalse("Test Failed, DID_PAUSE event triggered unprompted.", didPause.await(30, TimeUnit.SECONDS));
+        brightcoveVideoView.stopPlayback();
+    }
+
+    public void testAdDataNotReady() throws InterruptedException {
+        mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
+        assertTrue("Test Failed, AD_DATA_READY event did not trigger.", adData.await(30,TimeUnit.SECONDS));
+        brightcoveVideoView.stopPlayback();
+    }
+
+}

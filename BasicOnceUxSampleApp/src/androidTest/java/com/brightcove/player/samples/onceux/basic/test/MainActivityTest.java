@@ -92,7 +92,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         assertFalse("Test Failed, DID_PAUSE triggered.", latch.await(30, TimeUnit.SECONDS));
         brightcoveVideoView.stopPlayback();
     }
-    */
+
     public void testNoAdDataEventDoesNotTrigger() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
         Log.v(TAG, "Checking for Ad Data Url");
@@ -108,10 +108,11 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         assertFalse("Test Failed.", latch.await(15, TimeUnit.SECONDS));
         brightcoveVideoView.stopPlayback();
     }
-
+    */
     public void testAdDataReadyEvent() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(2);
-        //setWifi(false);
+        setWifi(false);
+        Log.v(TAG, "Wifi should be off.");
         // Turning off Wifi to trigger an error in the AD_DATA_READY event.
         // Currently disabled due to a bug that makes the test fail. Bug SDK-156
         eventEmitter.on(OnceUxEventType.AD_DATA_READY, new EventListener() {
@@ -126,34 +127,37 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                             // both are empty
                             Log.v(TAG, "Error: AD_DATA_READY is empty");
                             latch.countDown();
+                            setWifi(true);
+                            latch.countDown();
                         } else {
                             // response is empty, error is not
                             Log.v(TAG, "Error: AD_DATA_READY has at least one error");
+                            latch.countDown();
+                            setWifi(true);
                             latch.countDown();
                         }
                     } else {
                         if (errorMessage == null || errorMessage.equals("")) {
                             // response not empty, error empty
                             Log.v(TAG, "This should not happen. AD_DATA_READY is ready.");
+                            setWifi(true);
                         } else {
                             // both are not empty
                             Log.v(TAG, "Error: AD_DATA_READY is too full");
+                            latch.countDown();
+                            setWifi(true);
                             latch.countDown();
                         }
                     }
                 };
             });
 
-        if (latch.getCount() == 1) {
-            setWifi(true);
-            latch.countDown();
-        }
         mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
         eventEmitter.emit(EventType.PLAY);
-        assertTrue("Test Failed", latch.await(1, TimeUnit.MINUTES));
+        assertTrue("Test Failed", latch.await(90, TimeUnit.SECONDS));
         brightcoveVideoView.stopPlayback();
     }
-
+    /*
     public void testSeekControlsPostAdBreak() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(2);
         eventEmitter.on(OnceUxEventType.END_AD_BREAK, new EventListener() {
@@ -214,5 +218,5 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         assertTrue("Timeout occurred.", latch.await(4, TimeUnit.MINUTES));
         brightcoveVideoView.stopPlayback();
     }
-
+    */
 }
