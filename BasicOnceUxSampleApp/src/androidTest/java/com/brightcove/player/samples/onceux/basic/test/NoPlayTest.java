@@ -56,7 +56,7 @@ public class NoPlayTest extends ActivityInstrumentationTestCase2<MainActivity> {
         eventEmitter.on(OnceUxEventType.AD_DATA_READY, new EventListener() {
                 @Override
                 public void processEvent(Event event) {
-                    adData.countDown();
+                    adDataLatch.countDown();
                     Log.v(TAG, "AD_DATA_READY event triggered.");
                 }
             });
@@ -64,7 +64,7 @@ public class NoPlayTest extends ActivityInstrumentationTestCase2<MainActivity> {
         eventEmitter.on(EventType.PLAY, new EventListener() {
                 @Override
                 public void processEvent(Event event) {
-                    play.countDown();
+                    playLatch.countDown();
                     Log.v(TAG, "DID_PLAY event triggered.");
                 }
             });
@@ -72,7 +72,7 @@ public class NoPlayTest extends ActivityInstrumentationTestCase2<MainActivity> {
         eventEmitter.on(EventType.DID_PLAY, new EventListener() {
                 @Override
                 public void processEvent(Event event) {
-                    didPlay.countDown();
+                    didPlayLatch.countDown();
                     Log.v(TAG, "DID_PLAY event triggered.");
                 }
             });
@@ -80,7 +80,7 @@ public class NoPlayTest extends ActivityInstrumentationTestCase2<MainActivity> {
         eventEmitter.on(EventType.PAUSE, new EventListener() {
                 @Override
                 public void processEvent(Event event) {
-                    pause.countDown();
+                    pauseLatch.countDown();
                     Log.v(TAG, "PAUSE event triggered.");
                 }
             });
@@ -88,7 +88,7 @@ public class NoPlayTest extends ActivityInstrumentationTestCase2<MainActivity> {
         eventEmitter.on(EventType.DID_PAUSE, new EventListener() {
                 @Override
                 public void processEvent(Event event) {
-                    didPause.countDown();
+                    didPauseLatch.countDown();
                     Log.v(TAG, "DID_PAUSE event triggered.");
                 }
             });
@@ -97,31 +97,31 @@ public class NoPlayTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
     public void testPlay() throws InterruptedException {
         mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
-        assertFalse("Test Failed, PLAY event triggered unprompted.", play.await(30, TimeUnit.SECONDS));
+        assertFalse("Test Failed, PLAY event triggered unprompted.", playLatch.await(30, TimeUnit.SECONDS));
         brightcoveVideoView.stopPlayback();
     }
 
     public void testDidPlay() throws InterruptedException {
         mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
-        assertFalse("Test Failed, DID_PLAY event triggered unprompted.", didPlay.await(30, TimeUnit.SECONDS));
+        assertFalse("Test Failed, DID_PLAY event triggered unprompted.", didPlayLatch.await(30, TimeUnit.SECONDS));
         brightcoveVideoView.stopPlayback();
     }
 
     public void testPause() throws InterruptedException {
         mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
-        assertFalse("Test Failed, PAUSE event triggered unprompted.", pause.await(30, TimeUnit.SECONDS));
+        assertFalse("Test Failed, PAUSE event triggered unprompted.", pauseLatch.await(30, TimeUnit.SECONDS));
         brightcoveVideoView.stopPlayback();
     }
 
     public void testDidPause() throws InterruptedException {
         mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
-        assertFalse("Test Failed, DID_PAUSE event triggered unprompted.", didPause.await(30, TimeUnit.SECONDS));
+        assertFalse("Test Failed, DID_PAUSE event triggered unprompted.", didPauseLatch.await(30, TimeUnit.SECONDS));
         brightcoveVideoView.stopPlayback();
     }
 
     public void testAdDataNotReady() throws InterruptedException {
         mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
-        assertTrue("Test Failed, AD_DATA_READY event did not trigger.", adData.await(30,TimeUnit.SECONDS));
+        assertTrue("Test Failed, AD_DATA_READY event did not trigger.", adDataLatch.await(30,TimeUnit.SECONDS));
         brightcoveVideoView.stopPlayback();
     }
 
