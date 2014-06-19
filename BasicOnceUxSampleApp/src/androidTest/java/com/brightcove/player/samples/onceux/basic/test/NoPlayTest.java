@@ -29,11 +29,11 @@ public class NoPlayTest extends ActivityInstrumentationTestCase2<MainActivity> {
     private VideoDisplayComponent videoDisplay;
     private int playheadPosition;
     private int progress;
-    final CountDownLatch adData = new CountDownLatch(1);
-    final CountDownLatch didPlay = new CountDownLatch(1);
-    final CountDownLatch play = new CountDownLatch(1);
-    final CountDownLatch didPause = new CountDownLatch(1);
-    final CountDownLatch pause = new CountDownLatch(1);
+    final CountDownLatch adDataLatch = new CountDownLatch(1);
+    final CountDownLatch didPlayLatch = new CountDownLatch(1);
+    final CountDownLatch playLatch = new CountDownLatch(1);
+    final CountDownLatch didPauseLatch = new CountDownLatch(1);
+    final CountDownLatch pauseLatch = new CountDownLatch(1);
 
     public NoPlayTest() {
         super(MainActivity.class);

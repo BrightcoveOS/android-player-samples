@@ -66,6 +66,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         WifiManager wifiManager = (WifiManager) this.getActivity().getSystemService(Context.WIFI_SERVICE);
         boolean wifiResult = wifiManager.setWifiEnabled(state);
         Log.v(TAG, "Wifi change successful: " + wifiResult);
+        //This utility method manipulates the wifi setting to enabled or disabled (setWifi(true) or setWifi(false), respectively).
         //setWifiEnabled will return a true if the operation succeeds, not necessarily if the Wifi state is changed to enabled.
     }
 
@@ -75,6 +76,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         properties.put(Event.SEEK_POSITION, msec);
         playheadPosition = msec;
         eventEmitter.emit(EventType.SEEK_TO, properties);
+        //This utility method allows programmatic for seeking. Note that it seeks in milliseconds.
     }
 
     public void testNoAdDataEventDoesNotTrigger() throws InterruptedException {
@@ -87,6 +89,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                     latch.countDown();
                 }
             });
+
         mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
         eventEmitter.emit(EventType.PLAY);
         assertFalse("Test Failed.", latch.await(15, TimeUnit.SECONDS));
@@ -97,7 +100,10 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         final CountDownLatch latch = new CountDownLatch(2);
         setWifi(false);
         Log.v(TAG, "Wifi should be off.");
-        // Turning off Wifi to trigger an error in the AD_DATA_READY event.
+        //Turning off Wifi to manipulate the VMAP_ERRORS and VMAP_RESPONSE properties in the AD_DATA_READY event.
+        // VMAP_RESPONSE (the responseMessage Object) should not be null and VMAP_ERRORS (the errorMessage Object)
+        // should not be, as the actual content and ads are not accessible with the wifi off, assuming testing is 
+        // done on an android tablet. The following event handler manages all possible options for both possibilities.
         eventEmitter.on(OnceUxEventType.AD_DATA_READY, new EventListener() {
                 @Override
                 public void processEvent(Event event) {
@@ -107,13 +113,13 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                     Log.v(TAG, "AD_DATA_READY Response: " + responseMessage);
                     if (responseMessage == null || responseMessage.equals("")) {
                         if(errorMessage == null || errorMessage.equals("")) {
-                            // both are empty
+                            //Both properties are empty.
                             Log.v(TAG, "Error: AD_DATA_READY is empty");
                             latch.countDown();
                             setWifi(true);
                             latch.countDown();
                         } else {
-                            // response is empty, error is not
+                            //Response property is null, error property is not. This is the ideal outcome.
                             Log.v(TAG, "Error: AD_DATA_READY has at least one error");
                             latch.countDown();
                             setWifi(true);
@@ -121,11 +127,12 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                         }
                     } else {
                         if (errorMessage == null || errorMessage.equals("")) {
-                            // response not empty, error empty
+                            //Response property is not null, error property is null.
+                            // Turning the wifi off should prevent this from ever happening.
                             Log.v(TAG, "This should not happen. AD_DATA_READY is ready.");
                             setWifi(true);
                         } else {
-                            // both are not empty
+                            //Both properties are not null.
                             Log.v(TAG, "Error: AD_DATA_READY is too full");
                             latch.countDown();
                             setWifi(true);
@@ -148,7 +155,8 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                 public void processEvent(Event event) {
                     Log.v(TAG, "END_AD_BREAK Emitted. Seeking from: " + progress);
                     seekTo(40000);
-                    //The Seek we are testing.
+                    //This seek to 40 seconds into the total length (ten seconds into content) 
+                    // is the seek that we are testing.
                     latch.countDown();
                 }
             });
@@ -157,14 +165,17 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                 public void processEvent(Event event) {
                     if (progress > 39500) {
                         if (progress < 41500) {
-                            //Due to the asynchronous nature of the request and how android handles HLS, the seek usually lands about 1.2 seconds late.
+                            //Due to the asynchronous nature of the request and how android handles HLS,
+                            // the seek often lands about 1.2 seconds late. This combined with the fact 
+                            // that the progress updates are only accurate to within 500 milliseconds
+                            // defines our parameters for the seek location defined in the previous event handler.
                             Log.v(TAG, "Successful seek at: " + progress);
                             latch.countDown();
                         } else {
-                            Log.v(TAG, "Too far.");
+                            Log.v(TAG,  "Position has extended past the defined seek location.");
                         }
                     } else {
-                        Log.v(TAG, "Not far enough. ");
+                        Log.v(TAG, "Position has not yet reached the defined seek location.");
                     }
                 }
             });
@@ -180,6 +191,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         eventEmitter.on(EventType.HIDE_SEEK_CONTROLS, new EventListener(){
                 @Override
                 public void processEvent(Event event) {
+                    //Simply keeping track of the HIDE_SEEK_CONTROLS events to ensure the viewer cannot use them to skip ads.
                     Log.v(TAG, "Seek controls hidden at: " + progress);
                     latch.countDown();
                 }
@@ -187,6 +199,8 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         eventEmitter.on(OnceUxEventType.END_AD_BREAK, new EventListener(){
                 @Override
                 public void processEvent(Event event) {
+                    //This skips the video content, moving right to the ad breaks
+                    // to allow for slightly expedited testing.
                     latch.countDown();
                     if (latch.getCount() == 4) {
                         seekTo(59500);
@@ -196,6 +210,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
                     }
                 }
             });
+
         mainActivity.getOnceUxPlugin().processVideo(adUrl, contentUrl);
         eventEmitter.emit(EventType.PLAY);
         assertTrue("Timeout occurred.", latch.await(4, TimeUnit.MINUTES));
