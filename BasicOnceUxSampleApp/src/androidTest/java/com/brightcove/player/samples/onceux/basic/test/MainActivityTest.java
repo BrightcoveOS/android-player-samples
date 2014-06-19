@@ -163,8 +163,10 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         eventEmitter.on(EventType.PROGRESS, new EventListener() {
                 @Override
                 public void processEvent(Event event) {
-                    if (progress > 39500) {
-                        if (progress < 41500) {
+                    int playheadPositionBefore = 39500;
+                    int playheadPositionAfter = 41500;
+                    if (progress > playheadPositionBefore) {
+                        if (progress < playheadPositionAfter) {
                             //Due to the asynchronous nature of the request and how android handles HLS,
                             // the seek often lands about 1.2 seconds late. This combined with the fact 
                             // that the progress updates are only accurate to within 500 milliseconds
