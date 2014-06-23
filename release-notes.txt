@@ -1,0 +1,8 @@
+Brightcove Player Samples for Android, Release Notes:
+
+Version 1.0.0:
+
+  BasicOnceUxSampleApp changes:
+
+    * Added inital support for blackbox testing using the Android **uiautomator** feature.
+
