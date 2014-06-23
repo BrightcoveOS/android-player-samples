@@ -1,4 +1,3 @@
-
 package com.brightcove.player.samples.onceux.basic.test;
 
 import com.android.uiautomator.core.UiObject;
@@ -19,10 +18,11 @@ public class UiAutomatorTest extends UiAutomatorTestCase {
 
     // Public methods.
 
-    public void testDemo() throws UiObjectNotFoundException {   
-      
+    public void testCheckForSampleApp() throws UiObjectNotFoundException {   
+        
       // Simulate a short press on the HOME button.
       getUiDevice().pressHome();
+      Log.v(TAG, "Pressing the home button.");
       
       // We’re now in the home screen. Next, we want to simulate 
       // a user bringing up the All Apps screen.
@@ -34,6 +34,7 @@ public class UiAutomatorTest extends UiAutomatorTestCase {
       
       // Simulate a click to bring up the All Apps screen.
       allAppsButton.clickAndWaitForNewWindow();
+      Log.v(TAG, "Pressing the All Apps button.");
       
       // In the All Apps screen, the Settings app is located in 
       // the Apps tab. To simulate the user bringing up the Apps tab,
@@ -43,6 +44,7 @@ public class UiAutomatorTest extends UiAutomatorTestCase {
       
       // Simulate a click to enter the Apps tab.
       appsTab.click();
+      Log.v(TAG, "Pressing the Apps tab.");
 
       // Next, in the apps tabs, we can simulate a user swiping until
       // they come to the Settings app icon.  Since the container view 
@@ -54,11 +56,18 @@ public class UiAutomatorTest extends UiAutomatorTestCase {
       
       // Create a UiSelector to find the Settings app and simulate      
       // a user click to launch the app. 
-      UiObject calendarApp = appViews.getChildByText(new UiSelector().className(android.widget.TextView.class.getName()), "Calendar");
+      UiObject basicOnceUxSampleApp = appViews.getChildByText(new UiSelector().className(android.widget.TextView.class.getName()), "Basic ONCE UX Sample App");
       
       // Validate that the calendar app exists.
-      assertTrue("Unable to detect Calendar app.", calendarApp != null);
-      calendarApp.clickAndWaitForNewWindow();
+      assertTrue("Unable to detect Basic Once Ux Sample app.", basicOnceUxSampleApp != null);
+      basicOnceUxSampleApp.clickAndWaitForNewWindow();
+      Log.v(TAG, "Pressing the Basic Once Ux Sample App.");
   }   
+
+    public void testCloseApp() throws UiObjectNotFoundException {
+        getUiDevice().pressRecentApps();
+        Log.v(TAG, "Pressing Recent Apps button.");
+
+    }
 
 }
