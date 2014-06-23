@@ -1,0 +1,3 @@
+// Disable running connectedCheck on the OnceUxSampleApp as it is
+// configured to run 'uiautomator' instead of integration tests.
+task connectedCheck(overwrite: true) {}
