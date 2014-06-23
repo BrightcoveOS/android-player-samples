@@ -15,8 +15,15 @@ public class AdOverlayPressLearnMore extends UiAutomatorTestCase {
     //For Logcat.
     private final String TAG = this.getClass().getSimpleName();
 
-    public void testAdOverlayPressLearnMore() throws UiObjectNotFoundException {
+    // Utility Methods
+    private void learnMoreCheck() {
+        //Does the actual checking for the "Learn More" ui object.
+    }
 
+    // Test Method
+    public void testAdOverlayPressLearnMore() throws UiObjectNotFoundException {
+        // Does actual pressing off "Learn More" button
+        // Assess if browser opens, and if the correct URL has loaded.
     }
 
 }

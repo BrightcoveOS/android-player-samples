@@ -16,16 +16,21 @@ public class AdOverlayLearnMore extends UiAutomatorTestCase {
     //For Logcat.
     private final String TAG = this.getClass().getSimpleName();
 
-    public void testAdOverlayLearnMorePreRoll() throws UiObjectNotFoundException {
 
+    // Utility Methods
+    private void learnMoreCheck() {
+        //Does the actual checking for learn more, will assertTrue for it to be there.
+    }
+    //Consider adding seekTo utility method to expedite testing.
+
+    private void adBreakCheck() {
+        // Determines which ad roll is occurring.
+        // If preroll or postroll, there should be a "Learn More" button. If midroll, there should not be a "Learn More" button.
     }
 
-    public void testAdOverlayLearnMoreMidRoll() throws UiObjectNotFoundException {
-        //Midroll Ad Break should not have the Learn More button.
-    }
-
-    public void testAdOverlayLearnMorePostRoll() throws UiObjectNotFoundException {
-
+    // Test Method
+    public void testAdOverlayLearnMoreCheck() throws UiObjectNotFoundException {
+        //Calls upon both utility methods, makes assertions that midroll should not have the "Learn More" ui object, and other ad breaks should.
     }
 
 }

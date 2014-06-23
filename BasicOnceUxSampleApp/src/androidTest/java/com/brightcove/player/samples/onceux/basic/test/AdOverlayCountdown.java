@@ -15,8 +15,13 @@ public class AdOverlayCountdown extends UiAutomatorTestCase {
     //For Logcat.
     private final String TAG = this.getClass().getSimpleName();
 
-    public void testAdOverlayCountdown() throws UiObjectNotFoundException {
+    //Requires private ints/methods that get the two numbers into comparable amounts.
 
+    public void testAdOverlayCountdown() throws UiObjectNotFoundException {
+        //Compare Ad Overlay's counter to the progress bar. The two should 
+        // add up to at least 29 and no more than 31 for the entirety of 
+        // the ad break. This check should occur every second until the ad
+        // break has concluded.
     }
 
 }

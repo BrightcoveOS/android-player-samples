@@ -58,16 +58,18 @@ public class UiAutomatorTest extends UiAutomatorTestCase {
       // a user click to launch the app. 
       UiObject basicOnceUxSampleApp = appViews.getChildByText(new UiSelector().className(android.widget.TextView.class.getName()), "Basic ONCE UX Sample App");
       
-      // Validate that the calendar app exists.
+      // Validate that the Basix OnceUx Sample App exists.
       assertTrue("Unable to detect Basic Once Ux Sample app.", basicOnceUxSampleApp != null);
+
+      // Press on the app's icon, launching it.
       basicOnceUxSampleApp.clickAndWaitForNewWindow();
       Log.v(TAG, "Pressing the Basic Once Ux Sample App.");
   }   
 
-    public void testCloseApp() throws UiObjectNotFoundException {
+    public void tearDown() {
         getUiDevice().pressRecentApps();
         Log.v(TAG, "Pressing Recent Apps button.");
-
+        //TODO: determine how to swipe away the app from the recent apps menu, thus closing it.
     }
 
 }
