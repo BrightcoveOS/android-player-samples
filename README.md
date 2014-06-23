@@ -1,7 +1,7 @@
 android-player-samples
 ======================
 
-Still under development and is experimental  - please use at your own risk.
+Still under development and is experimental  - please use at your own risk.  See release notes in the top level file **release-notes.txt**.
 
 ======================
 
