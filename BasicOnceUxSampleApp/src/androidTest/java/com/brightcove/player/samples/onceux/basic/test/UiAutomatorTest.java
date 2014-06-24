@@ -1,7 +1,5 @@
 package com.brightcove.player.samples.onceux.basic.test;
 
-import com.brightcove.player.event.Event;
-
 import android.util.Log;
 
 import com.android.uiautomator.core.UiObject;
@@ -71,11 +69,33 @@ public class UiAutomatorTest extends UiAutomatorTestCase {
   }   
 
     public void tearDown() throws Exception {
+      // We now want to leave the app and close it entirely. First, 
+      // we will press the home button to leave the Sample App.
+      getUiDevice().pressHome();
+      Log.v(TAG, "Pressing the All Apps button.");
 
-        
-        getUiDevice().pressRecentApps();
-        Log.v(TAG, "Pressing Recent Apps button.");
-        //TODO: determine how to swipe away the app from the recent apps menu, thus closing it.
+      // Next, we will bring up the recent apps screen.
+      getUiDevice().pressRecentApps();
+      Log.v(TAG, "Pressing Recent Apps button.");
+      
+      // Now, we will need to find the UiObject that represents the activity
+      // of the Basic Once Ux Sample App and swipe it away.
+      UiObject basicOnceUxSampleAppRecentMode = new UiObject(new UiSelector().description("Basic ONCE UX Sample App"));
+      if(basicOnceUxSampleAppRecentMode.exists()) {
+          // If it exists, we do a long click that will bring up the options for the list.
+          basicOnceUxSampleAppRecentMode.longClick();
+          Log.v(TAG, "Long Pressing the Basic OnceUx Sample App Recent Mode button.");
+          
+          // Then, we click that button and it removes the app from the list. 
+          UiObject removeFromList = new UiObject(new UiSelector().text("Remove from list"));
+          removeFromList.click();
+          Log.v(TAG, "Pressing the Remove From List button");
+      }
+
+      // Then press the home button again to leave the recent apps menu.
+      getUiDevice().pressHome();
+      Log.v(TAG, "Pressing the Home button.");
+
     }
 
 }
