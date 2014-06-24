@@ -60,14 +60,38 @@ public class AdOverlayLearnMoreCheck extends UiAutomatorTestCase {
     }
 
     // Utility Methods
-    private void learnMoreCheck() {
-        //Does the actual checking for learn more, will assertTrue for it to be there.
+    private void learnMoreCheck() throws UiObjectNotFoundException {
+        //Does the actual checking for learn more.
+        UiObject learnMoreButton = new UiObject(new UiSelector().text("Learn More > >"));
+        if(learnMoreButton.exists() && learnMoreButton.isEnabled()) {
+            Log.v(TAG, "Learn More button found.");
+            learnMoreLatch.countDown();
+        }
     }
     //Consider adding seekTo utility method to expedite testing.
 
     private void adBreakCheck() {
-        // Determines which ad roll is occurring.
-        // If preroll or postroll, there should be a "Learn More" button. If midroll, there should not be a "Learn More" button.
+        // Determines which ad roll is occurring. If preroll or postroll, 
+        // there should be a "Learn More" button. If midroll, there should 
+        // not be a "Learn More" button.
+        eventEmitter.on(OnceUxEventType.START_AD_BREAK, new EventListener() {
+                @Override public void processEvent(Event event) {
+                    Log.v(TAG, "Ad Break started.");
+                    if(adBreakLatch.getCount() == 3) {
+                        Log.v(TAG, "Preroll ads...");
+                    }if(adBreakLatch.getCount() == 2) {
+                        Log.v(TAG, "Midroll ads...");
+                    }if(adBreakLatch.getCount() == 1) {
+                        Log.v(TAG, "Postroll ads...");
+                    }
+                }
+            });
+        eventEmitter.on(OnceUxEventType.END_AD_BREAK, new EventListener() {
+                @Override public void processEvent(Event event) {
+                    Log.v(TAG, "Ad Break ended.");
+                    adBreakLatch.countDown();
+                }
+            });
     }
 
     // Test Method
@@ -76,9 +100,10 @@ public class AdOverlayLearnMoreCheck extends UiAutomatorTestCase {
     }
 
     @Override protected void tearDown() throws Exception {
+        Log.v(TAG, "beginning tearDown...");
         // For a more in-depth explanation of this tearDown method, look in com.brightcove.player.samples.onceux.basic.test.UiAutomatorTest.java
         getUiDevice().pressHome();
-        Log.v(TAG, "Pressing the All Apps button.");
+        Log.v(TAG, "Pressing the Home button.");
         getUiDevice().pressRecentApps();
         Log.v(TAG, "Pressing Recent Apps button.");
         UiObject basicOnceUxSampleAppRecentMode = new UiObject(new UiSelector().description("Basic ONCE UX Sample App"));
