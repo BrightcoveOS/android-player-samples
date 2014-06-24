@@ -5,7 +5,7 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:0.10.+'
+    classpath 'com.android.tools.build:gradle:0.11.+'
     classpath 'de.undercouch:gradle-download-task:0.+'
   }
 }
@@ -13,13 +13,16 @@ buildscript {
 println "Using Android Native Player version: $anpVersion"
 
 project.ext {
+  // The directory that will be used to reference dependent libraries.
+  // Modify as needed. Defaulted to users home directory.
+  libraryDirectory = "${System.getProperty("user.home")}/libs/"
   imaAndroidSdkJarFileName = "ima-android-sdk-beta7.jar"
 }
 
 // Automatically download the Google IMA third party zip file and
 // extract the jar to satisfy the dependency.
 def downloadIMA() {
-  def libsdk = 'libs/' + imaAndroidSdkJarFileName
+  def libsdk = libraryDirectory + imaAndroidSdkJarFileName
 
   // Conditionally download the Google IMA SDK during
   // configuration.  This step is done once.  The 'clean' task will not
@@ -32,7 +35,7 @@ def downloadIMA() {
 
     download {
       src 'https://dl.google.com/in-stream/google_sdk/android/v3/' + imaAndroidSdkJarFileName
-      dest file("${System.getProperty("user.home")}/libs/ima-android-sdk.jar")
+      dest file(libraryDirectory + imaAndroidSdkJarFileName)
     }
   }
 }
@@ -57,7 +60,7 @@ subprojects {
     // dependencies which are either downloaded directly (not using a
     // Maven repo) or installed manually for something like VisualOn.
     flatDir {
-      dirs "${System.getProperty("user.home")}/libs"
+      dirs libraryDirectory
     }
   }
 
@@ -77,7 +80,7 @@ subprojects {
 
   if (project.name.contains('AdobePass')) {
     dependencies {
-      compile files("${rootProject.projectDir}/libs/android_accessenabler-1.7.2.jar")
+      compile files(libraryDirectory + "android_accessenabler-1.7.2.jar")
       compile 'com.google.code.gson:gson:2.+'
     }
   }
@@ -92,7 +95,7 @@ subprojects {
     downloadIMA()
     dependencies {
       compile "com.brightcove.player:android-ima-plugin:${anpVersion}"
-      compile files("${rootProject.projectDir}/libs/" + imaAndroidSdkJarFileName)
+      compile files(libraryDirectory + imaAndroidSdkJarFileName)
     }
   }
 
@@ -149,7 +152,7 @@ subprojects {
   if (project.name.contains('FreeWheel')) {
     dependencies {
       compile "com.brightcove.player:android-freewheel-plugin:${anpVersion}"
-      compile files("${rootProject.projectDir}/libs/AdManager.jar")
+      compile files(libraryDirectory + "AdManager.jar")
     }
   }
 
