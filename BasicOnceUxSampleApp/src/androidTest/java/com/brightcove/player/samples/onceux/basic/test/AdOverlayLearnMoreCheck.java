@@ -11,7 +11,7 @@ import com.android.uiautomator.testrunner.UiAutomatorTestCase;
  * tests the Preroll adbreak, one checks the Midroll adbreak, where the "Learn
  * More" button should not be present, and one checks the Postroll adbreak.
  */
-public class AdOverlayLearnMore extends UiAutomatorTestCase {
+public class AdOverlayLearnMoreCheck extends UiAutomatorTestCase {
 
     //For Logcat.
     private final String TAG = this.getClass().getSimpleName();

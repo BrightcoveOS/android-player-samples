@@ -1,5 +1,9 @@
 package com.brightcove.player.samples.onceux.basic.test;
 
+import com.brightcove.player.event.Event;
+
+import android.util.Log;
+
 import com.android.uiautomator.core.UiObject;
 import com.android.uiautomator.core.UiObjectNotFoundException;
 import com.android.uiautomator.core.UiScrollable;
@@ -66,7 +70,9 @@ public class UiAutomatorTest extends UiAutomatorTestCase {
       Log.v(TAG, "Pressing the Basic Once Ux Sample App.");
   }   
 
-    public void tearDown() {
+    public void tearDown() throws Exception {
+
+        
         getUiDevice().pressRecentApps();
         Log.v(TAG, "Pressing Recent Apps button.");
         //TODO: determine how to swipe away the app from the recent apps menu, thus closing it.

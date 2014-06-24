@@ -11,7 +11,7 @@ import com.android.uiautomator.testrunner.UiAutomatorTestCase;
  * methods organization revolves around testing during ad breaks and before 
  * the preroll.
  */
-public class SeekControlsBeforeAd extends UiAutomatorTestCase {
+public class SeekControls extends UiAutomatorTestCase {
 
     //For Logcat.
     private final String TAG = this.getClass().getSimpleName();
