@@ -90,7 +90,11 @@ public class UiAutomatorTest extends UiAutomatorTestCase {
         
         // Set the swiping mode to horizontal (the default is vertical)
         appViews.setAsHorizontalList();
-        
+        appViews.scrollForward();
+        Log.v(TAG, "Scrolling forward...");
+        appViews.scrollForward();
+        Log.v(TAG, "Scrolling forward...");
+
         // Validate that the settings app is found and exists.
         UiObject settingsApp = appViews.getChildByText(new UiSelector().className(android.widget.TextView.class.getName()), "Settings");
         assertTrue("Unable to detect Settings app.", settingsApp != null);
@@ -104,25 +108,47 @@ public class UiAutomatorTest extends UiAutomatorTestCase {
         settingsAppsTab.click();
         Log.v(TAG, "Pressing the Apps tab in the Settings App.");
 
+        // Now, we have to register the list object here and scroll down to the Basic Once Ux Sample App
+        UiScrollable appSettingsView = new UiScrollable(new UiSelector().scrollable(true));
+        appSettingsView.setAsVerticalList();
+        appSettingsView.scrollForward();
+        Log.v(TAG, "Scrolling forward...");
+
         // Next, we must choose the "Basic ONCE UX Sample App" in the apps settings tab.
         UiObject basicOnceUxSampleAppSettings = new UiObject (new UiSelector().text("Basic ONCE UX Sample App"));
         basicOnceUxSampleAppSettings.click();
         Log.v(TAG, "Pressing the Basic ONCE UX Sample App in the Apps Settings field.");
 
-        // Now, we must register the new scrollable area
-        //UiScrollable basicOnceUxSampleAppScrollable = new UiScrollable(new UiSelector().scrollable(true).className(android.widget.ScrollView.class));
+        // Next, we register the Force stop button and press it to force stop.
+        UiObject forceStopButton = new UiObject(new UiSelector().text("Force stop").className(android.widget.Button.class.getName()));
+        forceStopButton.clickAndWaitForNewWindow();
 
-        // Next, we order it to force stop.
-        UiObject forceStopButton = new UiObject (new UiSelector().className(android.widget.Button.class.getName()), "Force Stop");
-        forceStopButton.click();
-
-        // And push OK.
+        // And register and push the OK button.
         UiObject okButton = new UiObject(new UiSelector().text("OK").className(android.widget.Button.class));
-        forceStopButton.click();
+        okButton.click();
        
         // Then press the home button again to leave the settings app.
         getUiDevice().pressHome();
         Log.v(TAG, "Pressing the Home button.");
+
+        // The following is an alternative to the first method, or can be used in conjunction with it.
+        // It only works for android devices that have a recent apps button. We want to go to the recent 
+        // apps screen to swipe away the recent activity in the Basic ONCE UX Sample App.
+        // First, we press home, just in case.
+        getUiDevice().pressHome();
+        Log.v(TAG, "Pressing the Home button.");
+
+        // Then, we press the recent apps button.
+        getUiDevice().pressRecentApps();
+        Log.v(TAG, "Pressing the Recent Apps button.");
+
+        // Then we register the UiObject and swipe it down in order to remove it from the recent activity screen.
+        UiObject basicOnceUxSampleAppRecentActivity = new UiObject(new UiSelector().description("Basic ONCE UX Sample App"));
+        basicOnceUxSampleAppRecentActivity.swipeDown(20);
+        Log.v(TAG, "Swiping away the Basic Once Ux Sample App activity Ui Object.");
+
+        // Then we return to home.
+        getUiDevice().pressHome();
+        Log.v(TAG, "Pressing the Home button.");
     }
 }
-

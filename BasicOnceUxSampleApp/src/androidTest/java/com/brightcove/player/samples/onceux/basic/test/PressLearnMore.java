@@ -10,7 +10,7 @@ import com.android.uiautomator.testrunner.UiAutomatorTestCase;
  * Provides a class to test that the Learn More button in the Ad Overlay
  * opens a new window in the browser and goes to the correct URL.
  */
-public class AdOverlayPressLearnMore extends UiAutomatorTestCase {
+public class PressLearnMore extends UiAutomatorTestCase {
 
     //For Logcat.
     private final String TAG = this.getClass().getSimpleName();
