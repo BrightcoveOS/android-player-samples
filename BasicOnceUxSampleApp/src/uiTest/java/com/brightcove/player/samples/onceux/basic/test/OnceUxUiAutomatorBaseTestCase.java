@@ -22,7 +22,7 @@ import com.android.uiautomator.testrunner.UiAutomatorTestCase;
  *
  * @see "Samsung Galaxy Tab Pro"
  */
-public abstract class UiAutomatorBaseTest extends UiAutomatorTestCase {
+public abstract class OnceUxUiAutomatorBaseTestCase extends UiAutomatorTestCase {
 
     // Class constants
     
