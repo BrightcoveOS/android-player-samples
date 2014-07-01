@@ -5,7 +5,7 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:0.11.+'
+    classpath 'com.android.tools.build:gradle:0.12.+'
     classpath 'de.undercouch:gradle-download-task:0.+'
   }
 }
@@ -45,6 +45,7 @@ subprojects {
 
   repositories {
     mavenCentral()
+
     maven {
       url 'http://repo.brightcove.com/snapshots'
     }
@@ -54,7 +55,6 @@ subprojects {
     maven {
       url System.getenv('ANDROID_HOME') + '/extras/google/m2repository'
     }
-    mavenLocal()
 
     // This top level file repository will provide/contain third party
     // dependencies which are either downloaded directly (not using a
@@ -75,7 +75,7 @@ subprojects {
   }
 
   dependencies {
-    compile 'com.android.support:appcompat-v7:+'
+    compile 'com.android.support:appcompat-v7:19.1.0'
   }
 
   if (project.name.contains('AdobePass')) {
@@ -143,9 +143,9 @@ subprojects {
   if (project.name.contains('Cast')) {
     dependencies {
       compile "com.brightcove.player:android-cast-plugin:${anpVersion}"
-      compile 'com.google.sample.castcompanionlibrary:CastCompanionLibrary-android:+'
-      compile 'com.google.android.gms:play-services:+'
-      compile 'com.android.support:mediarouter-v7:+'
+      compile 'com.google.sample.castcompanionlibrary:CastCompanionLibrary-android:1.+'
+      compile 'com.google.android.gms:play-services:4.3.+'
+      compile 'com.android.support:mediarouter-v7:19.0.1'
     }
   }
 
