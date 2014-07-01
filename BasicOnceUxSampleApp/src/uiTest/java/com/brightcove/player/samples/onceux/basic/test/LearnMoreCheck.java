@@ -42,12 +42,12 @@ public class LearnMoreCheck extends OnceUxUiAutomatorBaseTestCase {
     /**
      * The Preroll test checks the preroll ad break for the presence of the Learn More button.
      * If the button is present, the test will pass. This is done by calling upon the playVideo
-     * utility method to begin then waiting a few seconds for the ad break to start, then it
-     * calls upon adBreakHandler, which performs the check.
+     * utility method from the superclass to begin then waiting a few seconds for the ad break 
+     * to start, then it calls upon adBreakHandler, which performs the check.
      */
     public void testLearnMoreCheckPrerolls() throws Exception {
         //Calls upon utility methods, makes assertions that prerolls should have the "Learn More" UiObject.
-        playVideo();
+        super.playVideo();
         Log.v(TAG, "Beginning check in Preroll ads.");
         shouldHaveLearnMore = true;
         TimeUnit.SECONDS.sleep(10);
@@ -58,12 +58,12 @@ public class LearnMoreCheck extends OnceUxUiAutomatorBaseTestCase {
     /**
      * The Midroll test checks the midroll ad break for the presence of the Learn More button. If 
      * the button is not present, the test will pass. This is done by calling upon the playVideo
-     * utility method to begin, then waiting a for the ad break to start, then it calls upon the 
-     * adBreakHandler utility method, which performs the check.
+     * utility method from the superclass to begin, then waiting a for the ad break to start, then 
+     * it calls upon the adBreakHandler utility method, which performs the check.
      */
     public void testLearnMoreCheckMidrolls() throws Exception {
         //Calls upon utility methods, makes assertions that midrolls should not have the "Learn More" UiObject.
-        playVideo();
+        super.playVideo();
         Log.v(TAG, "Beginning check in Midroll ads.");
         shouldHaveLearnMore = false;
         TimeUnit.SECONDS.sleep(70);
@@ -74,12 +74,12 @@ public class LearnMoreCheck extends OnceUxUiAutomatorBaseTestCase {
     /**
      * The Postroll test checks the postroll ad break for the presence of the Learn More button.
      * If the button is present, the test will pass. This is done by calling upon the playVideo
-     * utility method to begin, then waiting a few seconds for the ad break to start, then it
-     * calls upon the adBreakHandler utility method, which performs the check.
+     * utility method from the superclass to begin, then waiting a few seconds for the ad break
+     *  to start, then it calls upon the adBreakHandler utility method, which performs the check.
      */
     public void testLearnMoreCheckPostrolls() throws Exception {
         //Calls upon utility methods, makes assertions that prerolls should have the "Learn More" UiObject.
-        playVideo();
+        super.playVideo();
         Log.v(TAG, "Beginning check in Postroll ads.");
         shouldHaveLearnMore = true;
         TimeUnit.MINUTES.sleep(3);
@@ -89,24 +89,6 @@ public class LearnMoreCheck extends OnceUxUiAutomatorBaseTestCase {
 
 
     // Utility Methods
-
-    /**
-     * playVideo provides a method that allows for universal access to the play function. It was 
-     * created as a separate entity to the tests and setUp to help prevent subtle changes from 
-     * breaking the sample app before function has begun. A universal method helps in this case,
-     * and in order to keep the setUp method universal across all test class, play was kept separate.
-     */
-    private void playVideo() throws Exception {
-        // First, wait for the Sample App to entirely process the video. 10 Seconds is a conservative estimate.
-        TimeUnit.SECONDS.sleep(10);
-        // Then, we tap the screen to reveal the seek controls.
-        getUiDevice().click(500, 500);
-        Log.v(TAG, "Pressing 500, 500 to reveal seek controls and play button.");
-        // Next, we press the play button, initiating play.
-        UiObject playButton = new UiObject(new UiSelector().resourceId("android:id/pause"));
-        Log.v(TAG, "Pressing Play...");
-        playButton.click();
-    }
 
     /**
      * learnMoreChecker provides a way to keep track of and call upon the conditional presence of

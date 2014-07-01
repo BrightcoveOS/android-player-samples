@@ -2,6 +2,8 @@ package com.brightcove.player.samples.onceux.basic.test;
 
 import android.util.Log;
 
+import java.util.concurrent.TimeUnit;
+
 import com.android.uiautomator.core.UiObject;
 import com.android.uiautomator.core.UiObjectNotFoundException;
 import com.android.uiautomator.core.UiScrollable;
@@ -36,7 +38,7 @@ public abstract class OnceUxUiAutomatorBaseTestCase extends UiAutomatorTestCase 
      */
     protected UiObject basicOnceUxSampleApp;
 
-    // Public methods.
+    // Universal setUp and tearDown methods.
 
     /**
      * Test represents a setUp method for the other tests. Using the UiAutomator API, it
@@ -142,4 +144,30 @@ public abstract class OnceUxUiAutomatorBaseTestCase extends UiAutomatorTestCase 
         getUiDevice().pressHome();
         Log.v(TAG, "Pressing the Home button.");
     }
+
+    // Other Universal Utility Methods
+
+    /**
+     * playVideo provides a method that allows for universal access to the play function. It was
+     * created as a separate entity to the tests and setUp to help prevent subtle changes from
+     * breaking the sample app before function has begun. A universal method helps in this case,
+     * and in order to keep the setUp method universal across all test cases, play was kept separate.
+     *
+     * @exception UiObjectNotFoundException playButtonMissing
+     */
+    protected void playVideo() throws Exception {
+        // First, wait for the Sample App to entirely process the video and we tap the screen to reveal the seek controls and press play.
+        TimeUnit.SECONDS.sleep(6);
+        UiObject playButton = new UiObject(new UiSelector().resourceId("android:id/pause"));
+        Log.v(TAG, "Pressing Play...");
+        try {
+            playButton.click();
+        } catch (UiObjectNotFoundException playButtonMissing) {
+            Log.v(TAG, "Play button not found. Trying again.");
+            Log.v(TAG, "Pressing 500, 500 to show seek controls menu.");
+            getUiDevice().click(500, 500);
+            playButton.click();
+        }
+    }
+
 }

@@ -46,7 +46,7 @@ public class LifeCycle extends OnceUxUiAutomatorBaseTestCase {
      */
     public void testLifeCycleAdBreakPlaying() throws Exception {
         Log.v(TAG, "Beginning testLifeCycleAdBreakPlaying");
-        playVideo();
+        super.playVideo();
         TimeUnit.SECONDS.sleep(5);
         lifeCycleInitialCheck();
         pauseVideo();
@@ -61,7 +61,7 @@ public class LifeCycle extends OnceUxUiAutomatorBaseTestCase {
      */
     public void testLifeCycleAdBreakPaused() throws Exception {
         Log.v(TAG, "Beginning testLifeCycleAdBreakPaused");
-        playVideo();
+        super.playVideo();
         TimeUnit.SECONDS.sleep(5);
         pauseVideo();
         lifeCycleInitialCheck();
@@ -78,7 +78,7 @@ public class LifeCycle extends OnceUxUiAutomatorBaseTestCase {
      */
     public void testLifeCycleContentBlockPlaying() throws Exception {
         Log.v(TAG, "Beginning testLifeCycleContentBlockPlaying");
-        playVideo();
+        super.playVideo();
         TimeUnit.SECONDS.sleep(35);
         lifeCycleInitialCheck();
         pauseVideo();
@@ -92,7 +92,7 @@ public class LifeCycle extends OnceUxUiAutomatorBaseTestCase {
      */
     public void testLifeCycleContentBlockPaused() throws Exception {
         Log.v(TAG, "Beginning testLifeCycleContentBlockPaused");
-        playVideo();
+        super.playVideo();
         TimeUnit.SECONDS.sleep(35);
         pauseVideo();
         lifeCycleInitialCheck();
@@ -103,22 +103,6 @@ public class LifeCycle extends OnceUxUiAutomatorBaseTestCase {
 
 
     // Utility Methods
-
-    /**
-     * playVideo provides a method that allows for universal access to the play function. It was
-     * created as a separate entity to the tests and setUp to help prevent subtle changes from
-     * breaking the sample app before function has begun. A universal method helps in this case,
-     * and in order to keep the setUp method universal across all test cases, play was kept separate.
-     */
-    private void playVideo() throws Exception {
-        // First, wait for the Sample App to entirely process the video and we tap the screen to reveal the seek controls and press play.
-        TimeUnit.SECONDS.sleep(6);
-        Log.v(TAG, "Pressing 500, 500 to show seek controls menu.");
-        getUiDevice().click(500, 500);
-        UiObject playButton = new UiObject(new UiSelector().resourceId("android:id/pause"));
-        Log.v(TAG, "Pressing Play...");
-        playButton.click();
-    }
 
     /**
      * The pauseVideo utility method provides a way to pause the sample app using the UiAutomator APIs.
