@@ -41,13 +41,55 @@ public class LearnMoreCheck extends UiAutomatorBaseTest {
      */
     private boolean shouldHaveLearnMore;
 
+
+    // Test Methods
+
     /**
-     * The setUp programmatically opens the sample app that has been installed onto 
-     * the connected device. This process is explained further and in-depth in the 
-     * UiAutomatorBaseTest class file. 
+     * The Preroll test checks the preroll ad break for the presence of the Learn More button.
+     * If the button is present, the test will pass. This is done by calling upon the playVideo
+     * utility method to begin then waiting a few seconds for the ad break to start, then it
+     * calls upon adBreakHandler, which performs the check.
      */
-    @Override protected void setUp() throws Exception {
-        super.setUp();
+    public void testLearnMoreCheckPrerolls() throws Exception {
+        //Calls upon utility methods, makes assertions that prerolls should have the "Learn More" UiObject.
+        playVideo();
+        Log.v(TAG, "Beginning check in Preroll ads.");
+        shouldHaveLearnMore = true;
+        latch.await(10, TimeUnit.SECONDS);
+        adBreakHandler();
+        assertTrue("Preroll ad break does not have the Learn More Button.", learnMoreLatch.await(30, TimeUnit.SECONDS));
+    }
+
+    /**
+     * The Midroll test checks the midroll ad break for the presence of the Learn More button. If 
+     * the button is not present, the test will pass. This is done by calling upon the playVideo
+     * utility method to begin, then waiting a for the ad break to start, then it calls upon the 
+     * adBreakHandler utility method, which performs the check.
+     */
+    public void testLearnMoreCheckMidrolls() throws Exception {
+        //Calls upon utility methods, makes assertions that midrolls should not have the "Learn More" UiObject.
+        playVideo();
+        Log.v(TAG, "Beginning check in Midroll ads.");
+        shouldHaveLearnMore = false;
+        latch.await(70, TimeUnit.SECONDS);
+        adBreakHandler();
+        assertFalse("Midroll ad break does have the Learn More Button.", learnMoreLatch.await(30, TimeUnit.SECONDS));
+    }
+
+    /**
+     * The Postroll test checks the postroll ad break for the presence of the Learn More button.
+     * If the button is present, the test will pass. This is done by calling upon the playVideo
+     * utility method to begin, then waiting a few seconds for the ad break to start, then it
+     * calls upon the adBreakHandler utility method, which performs the check.
+     */
+    public void testLearnMoreCheckPostrolls() throws Exception {
+        //Calls upon utility methods, makes assertions that prerolls should have the "Learn More" UiObject.
+        playVideo();
+        Log.v(TAG, "Beginning check in Postroll ads.");
+        shouldHaveLearnMore = true;
+        latch.await(3, TimeUnit.MINUTES);
+        adBreakHandler();
+        assertTrue("Postroll ad break does not have the Learn More Button.", learnMoreLatch.await(30, TimeUnit.SECONDS));
     }
 
 
@@ -98,24 +140,13 @@ public class LearnMoreCheck extends UiAutomatorBaseTest {
         }
     }
 
-    // Test Methods
-
     /**
-     * The Preroll test checks the preroll ad break for the presence of the Learn More button.
-     * If the button is present, the test will pass. This is done by calling upon the playVideo
-     * utility method to begin, then waiting a few seconds for the ad break to start, before
-     * checking for the presence of the UiObject that is present in every ad, "adMarkerText",
-     * which reads "Your video will resume in" followed by the number of seconds left in the ad. 
-     * If this object is present, then the test will run learnMoreChecker, and assert for the 
-     * learnMoreLatch to count down to zero, and wait for the adMarkerText to disappear. If it 
-     * does not count down in time, the test will fail.
+     * adBreakHandler checks for the presence of the UiObject that is ubiquitous in every ad break,
+     * a text view that reads "Your video will resume in" followed by a number of seconds. Upon seeing
+     * that object and verifying if it is enabled, the check for Learn More is done, then the test 
+     * waits for the object to disappear, signaling the end of the ad break.
      */
-    public void testLearnMoreCheckPrerolls() throws Exception {
-        //Calls upon utility methods, makes assertions that prerolls should have the "Learn More" UiObject.
-        playVideo();
-        Log.v(TAG, "Beginning check in Preroll ads.");
-        shouldHaveLearnMore = true;
-        latch.await(10, TimeUnit.SECONDS);
+    private void adBreakHandler() throws Exception {
         UiObject adMarkerText = new UiObject(new UiSelector().textStartsWith("Your video will resume in"));
         if(adMarkerText.exists() && adMarkerText.isEnabled()) {
             Log.v(TAG, "Ad Break started.");
@@ -123,68 +154,5 @@ public class LearnMoreCheck extends UiAutomatorBaseTest {
             adMarkerText.waitUntilGone(30000);
             Log.v(TAG, "Ad Break ended.");
         }
-        assertTrue("Preroll ad break does not have the Learn More Button.", learnMoreLatch.await(30, TimeUnit.SECONDS));
     }
-
-    /**
-     * The Midroll test checks the preroll ad break for the presence of the Learn More button.
-     * If the button is not present, the test will pass. This is done by calling upon the playVideo
-     * utility method to begin, then waiting a few seconds for the ad break to start, before
-     * checking for the presence of the UiObject that is present in every ad, "adMarkerText",
-     * which reads "Your video will resume in" followed by the number of seconds left in the ad. 
-     * If this object is present, then the test will run learnMoreChecker, and assert for the 
-     * learnMoreLatch to count down to zero, and wait for the adMarkerText to disappear. If it 
-     * does not count down in time, the test will fail.
-     */
-    public void testLearnMoreCheckMidrolls() throws Exception {
-        //Calls upon utility methods, makes assertions that midrolls should not have the "Learn More" UiObject.
-        playVideo();
-        Log.v(TAG, "Beginning check in Midroll ads.");
-        shouldHaveLearnMore = false;
-        latch.await(70, TimeUnit.SECONDS);
-        UiObject adMarkerText = new UiObject(new UiSelector().textStartsWith("Your video will resume in"));
-        if(adMarkerText.exists() && adMarkerText.isEnabled()) {
-            Log.v(TAG, "Ad Break started.");
-            learnMoreChecker();
-            adMarkerText.waitUntilGone(30000);
-            Log.v(TAG, "Ad Break ended.");
-        }
-        assertFalse("Midroll ad break does have the Learn More Button.", learnMoreLatch.await(30, TimeUnit.SECONDS));
-    }
-
-    /**
-     * The Postroll test checks the preroll ad break for the presence of the Learn More button.
-     * If the button is present, the test will pass. This is done by calling upon the playVideo
-     * utility method to begin, then waiting a few seconds for the ad break to start, before
-     * checking for the presence of the UiObject that is present in every ad, "adMarkerText",
-     * which reads "Your video will resume in" followed by the number of seconds left in the ad. 
-     * If this object is present, then the test will run learnMoreChecker, and assert for the 
-     * learnMoreLatch to count down to zero, and wait for the adMarkerText to disappear. If it 
-     * does not count down in time, the test will fail.
-     */
-    public void testLearnMoreCheckPostrolls() throws Exception {
-        //Calls upon utility methods, makes assertions that prerolls should have the "Learn More" UiObject.
-        playVideo();
-        Log.v(TAG, "Beginning check in Postroll ads.");
-        shouldHaveLearnMore = true;
-        latch.await(3, TimeUnit.MINUTES);
-        UiObject adMarkerText = new UiObject(new UiSelector().textStartsWith("Your video will resume in"));
-        if(adMarkerText.exists() && adMarkerText.isEnabled()) {
-            Log.v(TAG, "Ad Break started.");
-            learnMoreChecker();
-            adMarkerText.waitUntilGone(30000);
-            Log.v(TAG, "Ad Break ended.");
-        }
-        assertTrue("Postroll ad break does not have the Learn More Button.", learnMoreLatch.await(30, TimeUnit.SECONDS));
-    }
-
-    /**
-     * The tearDown programmatically force stops the sample app that has been installed onto 
-     * the connected device. It then removes the same program from recent applications. This
-     * process is explained further in-depth in the UiAutomatorBaseTest class file. 
-     */
-    @Override protected void tearDown() throws Exception {
-        super.tearDown();
-    }
-
 }

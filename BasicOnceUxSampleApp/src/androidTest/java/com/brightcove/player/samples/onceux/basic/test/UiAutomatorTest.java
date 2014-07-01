@@ -22,15 +22,6 @@ public class UiAutomatorTest extends UiAutomatorBaseTest {
 
     final CountDownLatch latch = new CountDownLatch(1);
 
-    /**
-     * The setUp programmatically opens the sample app that has been installed onto 
-     * the connected device. This process is explained further and in-depth in the 
-     * UiAutomatorBaseTest class file. 
-     */
-    @Override protected void setUp() throws Exception {
-        super.setUp();
-    }
-
     // Test Methods
 
     /**
@@ -45,14 +36,5 @@ public class UiAutomatorTest extends UiAutomatorBaseTest {
     //TODO: Come up with a way to test the presence of objects in the super.tearDown method.
     // UiObjects that need testing include: forceStopButton, basicOnceUxSampleAppSettings,
     // and settingsApp.
-
-    /**
-     * The tearDown programmatically force stops the sample app that has been installed onto 
-     * the connected device. It then removes the same program from recent applications. This
-     * process is explained further in-depth in the UiAutomatorBaseTest class file. 
-     */
-    @Override protected void tearDown() throws Exception {
-        super.tearDown();
-    }
 
 }

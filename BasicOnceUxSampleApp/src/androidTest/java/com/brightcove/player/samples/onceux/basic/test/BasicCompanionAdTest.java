@@ -15,6 +15,22 @@ public class BasicCompanionAdTest extends UiAutomatorTestCase {
     //For Logcat.
     private final String TAG = this.getClass().getSimpleName();
 
+    // Test Methods
+    /**
+     * Makes the assertion as to whether or not there should be companion ads with the ad breaks.
+     */
+    public void testCompanionAdCheck() throws UiObjectNotFoundException {
+        
+    }
+
+    /**
+     * Upon clicking the companion ad, the test assess if browser opens and the correct URL loads.
+     * Will check the browser's URL when it opens, and assert what it is meant to be.
+     */
+    public void testCompanionAdLink() throws UiObjectNotFoundException {
+        // If companion ad is present, tap
+    }
+
     // Utility Method
     private void companionCheck() {
         // Assessment of companion ad's presence.
@@ -22,16 +38,6 @@ public class BasicCompanionAdTest extends UiAutomatorTestCase {
 
     private void adBreakCheck() {
         // Assessment of which adroll is occurring.
-    }
-
-    // Test Methods
-    public void testCompanionAdCheck() throws UiObjectNotFoundException {
-        // Makes the assertion as to whether or not there should be companion ads with the ad breaks.
-    }
-
-    public void testCompanionAdLink() throws UiObjectNotFoundException {
-        // If companion ad is present, tap
-        // Assess if browser opens and the correct URL loads.
     }
 
 }

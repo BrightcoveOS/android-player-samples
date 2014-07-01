@@ -17,11 +17,14 @@ public class AdOverlayCountdown extends UiAutomatorTestCase {
 
     //Requires private ints/methods that get the two numbers into comparable amounts.
 
+    /**
+     * Compare Ad Overlay's counter to the progress bar. The two should 
+     * add up to at least 29 and no more than 31 for the entirety of 
+     * the ad break. This check should occur every second until the ad
+     * break has concluded.
+     */
     public void testAdOverlayCountdown() throws UiObjectNotFoundException {
-        //Compare Ad Overlay's counter to the progress bar. The two should 
-        // add up to at least 29 and no more than 31 for the entirety of 
-        // the ad break. This check should occur every second until the ad
-        // break has concluded.
+       
     }
 
 }
