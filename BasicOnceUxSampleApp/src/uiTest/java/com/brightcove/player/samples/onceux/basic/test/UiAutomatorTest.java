@@ -18,7 +18,7 @@ import com.android.uiautomator.testrunner.UiAutomatorTestCase;
  * @author Paul Michael Reilly -- pmreilly@brightcove.com
  * @author Bryan Gregory Scott -- bscott@brightcove.com
  */
-public class UiAutomatorTest extends UiAutomatorBaseTest {
+public class UiAutomatorTest extends OnceUxUiAutomatorBaseTestCase {
 
     final CountDownLatch latch = new CountDownLatch(1);
 
