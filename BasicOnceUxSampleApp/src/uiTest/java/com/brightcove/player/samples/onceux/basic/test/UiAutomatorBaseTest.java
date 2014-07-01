@@ -9,17 +9,18 @@ import com.android.uiautomator.core.UiSelector;
 import com.android.uiautomator.testrunner.UiAutomatorTestCase;
 
 /**
- * Provides the setUp and tearDown methods for the other tests. Any changes made to this
- * case should always be made to the UiAutomatorTest case.
+ * Provides the setUp and tearDown methods for the other tests.
  *
  * It also serves as an in-depth explanation of the universal setUp and tearDown methods.
- *
+
  * Due to the varied user interfaces that android supports, it may be that this 
  * method will not work exactly as intended on every device. The following devices
- * do not work for testing with the setUp as it is currently designed.
- * @exception Samsung Galaxy Tab Pro
- * 
+ * do not work for testing with the setUp as it is currently designed. The 
+ * following is a list of known incompatible devices:
+ *
  * @author Bryan Gregory Scott -- bscott@brightcove.com
+ *
+ * @see "Samsung Galaxy Tab Pro"
  */
 public abstract class UiAutomatorBaseTest extends UiAutomatorTestCase {
 
@@ -40,8 +41,8 @@ public abstract class UiAutomatorBaseTest extends UiAutomatorTestCase {
     /**
      * Test represents a setUp method for the other tests. Using the UiAutomator API, it
      * goes to the home menu, opens up applications, sifts through and opens up the Basic
-     * OnceUx Sample App. It asserts that the app with the name that matches "Basic ONCE 
-     * UX Sample App" exists. It then opens that application.
+     * OnceUx Sample App. It opens the application with the name that matches "Basic ONCE 
+     * UX Sample App."
      */
     protected void setUp() throws Exception {   
         // Simulate a short press on the HOME button and navigate to apps screen.

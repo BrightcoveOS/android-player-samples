@@ -30,11 +30,6 @@ public class LearnMoreCheck extends UiAutomatorBaseTest {
     final CountDownLatch learnMoreLatch = new CountDownLatch(1);
 
     /**
-     * Provides an uninhibited way to delay actions.
-     */
-    final CountDownLatch latch = new CountDownLatch(1);
-
-    /**
      * Provides a quick way to validate IF the learn more button SHOULD be present, as
      * opposed to its actual presence. Will return <code>true</code> or <code>false</code> as instructed 
      * by learnMoreChecker.
@@ -55,7 +50,7 @@ public class LearnMoreCheck extends UiAutomatorBaseTest {
         playVideo();
         Log.v(TAG, "Beginning check in Preroll ads.");
         shouldHaveLearnMore = true;
-        latch.await(10, TimeUnit.SECONDS);
+        TimeUnit.SECONDS.sleep(10);
         adBreakHandler();
         assertTrue("Preroll ad break does not have the Learn More Button.", learnMoreLatch.await(30, TimeUnit.SECONDS));
     }
@@ -71,7 +66,7 @@ public class LearnMoreCheck extends UiAutomatorBaseTest {
         playVideo();
         Log.v(TAG, "Beginning check in Midroll ads.");
         shouldHaveLearnMore = false;
-        latch.await(70, TimeUnit.SECONDS);
+        TimeUnit.SECONDS.sleep(70);
         adBreakHandler();
         assertFalse("Midroll ad break does have the Learn More Button.", learnMoreLatch.await(30, TimeUnit.SECONDS));
     }
@@ -87,7 +82,7 @@ public class LearnMoreCheck extends UiAutomatorBaseTest {
         playVideo();
         Log.v(TAG, "Beginning check in Postroll ads.");
         shouldHaveLearnMore = true;
-        latch.await(3, TimeUnit.MINUTES);
+        TimeUnit.MINUTES.sleep(3);
         adBreakHandler();
         assertTrue("Postroll ad break does not have the Learn More Button.", learnMoreLatch.await(30, TimeUnit.SECONDS));
     }
@@ -103,7 +98,7 @@ public class LearnMoreCheck extends UiAutomatorBaseTest {
      */
     private void playVideo() throws Exception {
         // First, wait for the Sample App to entirely process the video. 10 Seconds is a conservative estimate.
-        latch.await(10, TimeUnit.SECONDS);
+        TimeUnit.SECONDS.sleep(10);
         // Then, we tap the screen to reveal the seek controls.
         getUiDevice().click(500, 500);
         Log.v(TAG, "Pressing 500, 500 to reveal seek controls and play button.");
