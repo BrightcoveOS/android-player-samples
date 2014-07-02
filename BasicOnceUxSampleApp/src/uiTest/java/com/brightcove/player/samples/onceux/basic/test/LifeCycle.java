@@ -49,14 +49,17 @@ public class LifeCycle extends OnceUxUiAutomatorBaseTestCase {
         super.playVideo();
         TimeUnit.SECONDS.sleep(5);
         lifeCycleInitialCheck();
-        pauseVideo();
+        super.seekControls();
         lifeCycleFollowUpCheck();
         assertTrue("Strings not identical.", stringComparison());
+        // Leaving the sample app quickly after re-entering it can cause the sample app to crash.
+        // However, if given a moment to compose itself, this can be avoided. Hence the following delay.
+        TimeUnit.SECONDS.sleep(5);
         Log.v(TAG, "Finished testLifeCycleAdBreakPlaying");
     }
     /**
      * testLifeCycleAdBreakPaused performs much the same as testLifeCycleAdBreakPlaying,
-     * with one exception: it waits five seconds after play has begun, then pauses the 
+     * with one exception: it waits five seconds after play has begun, then pauses the
      * video *before* launching lifeCycleInitialCheck. The rest of the process is identical.
      */
     public void testLifeCycleAdBreakPaused() throws Exception {
@@ -64,6 +67,7 @@ public class LifeCycle extends OnceUxUiAutomatorBaseTestCase {
         super.playVideo();
         TimeUnit.SECONDS.sleep(5);
         pauseVideo();
+        super.seekControls();
         lifeCycleInitialCheck();
         lifeCycleFollowUpCheck();
         assertTrue("Strings not identical.", stringComparison());
@@ -79,11 +83,14 @@ public class LifeCycle extends OnceUxUiAutomatorBaseTestCase {
     public void testLifeCycleContentBlockPlaying() throws Exception {
         Log.v(TAG, "Beginning testLifeCycleContentBlockPlaying");
         super.playVideo();
-        TimeUnit.SECONDS.sleep(35);
+        TimeUnit.SECONDS.sleep(45);
         lifeCycleInitialCheck();
-        pauseVideo();
+        super.seekControls();
         lifeCycleFollowUpCheck();
         assertTrue("Strings not identical.", stringComparison());
+        TimeUnit.SECONDS.sleep(5);
+        // Leaving the sample app quickly after re-entering it can cause the sample app to crash.
+        // However, if given a moment to compose itself, this can be avoided. Hence the following delay.
         Log.v(TAG, "Finished testLifeCycleContentBlockPlaying");
     }
     /**
@@ -93,7 +100,7 @@ public class LifeCycle extends OnceUxUiAutomatorBaseTestCase {
     public void testLifeCycleContentBlockPaused() throws Exception {
         Log.v(TAG, "Beginning testLifeCycleContentBlockPaused");
         super.playVideo();
-        TimeUnit.SECONDS.sleep(35);
+        TimeUnit.SECONDS.sleep(45);
         pauseVideo();
         lifeCycleInitialCheck();
         lifeCycleFollowUpCheck();
@@ -113,11 +120,17 @@ public class LifeCycle extends OnceUxUiAutomatorBaseTestCase {
      */
     private void pauseVideo() throws Exception {
         // First, we bring up the play/seek control menu, then press pause.
-        Log.v(TAG, "Pressing 500, 500 to show seek controls menu.");
-        getUiDevice().click(500, 500);
         UiObject pauseButton = new UiObject(new UiSelector().resourceId("android:id/pause"));
+        super.seekControls();
         Log.v(TAG, "Pressing Pause...");
-        pauseButton.click();
+        try {
+            pauseButton.click();
+        } catch (UiObjectNotFoundException pauseButtonNotFound) {
+            Log.v(TAG, "Pause button not found.");
+            pauseButtonNotFound.printStackTrace();
+            super.seekControls();
+            pauseButton.click();
+        }
     }
 
     /**
@@ -129,20 +142,18 @@ public class LifeCycle extends OnceUxUiAutomatorBaseTestCase {
     private void lifeCycleInitialCheck() throws Exception {
         Log.v(TAG, "Beginning Life Cycle Check.");
         // First, to make note of the playhead position, we reveal seek controls and examine the text view that has the time elapsed. 
-        Log.v(TAG, "Pressing 500, 500 to show seek controls menu.");
-        getUiDevice().click(500, 500);
-        UiObject adTimeBeforeLifeCycle = new UiObject(new UiSelector().textStartsWith("00:").index(0));
+        super.seekControls();
+        UiObject adTimeBeforeLifeCycle = new UiObject(new UiSelector().resourceId("android:id/time_current"));
         // Because of the slight inconsistency of the Sample App, we set up try-catch blocks that will be prepared for an exception.
         try {
             adTimeStringBeforeLifeCycle = adTimeBeforeLifeCycle.getText();
         } catch (UiObjectNotFoundException uiPlayheadPositionMissing) {
-            Log.v(TAG, "Ad Time not found. Trying again.");
+            Log.v(TAG, "Initial Ad Time not found. Trying again.");
             // This is often as a result of the seek controls (and consequently the playhead location) being hidden, so we will show them and retry.
-            Log.v(TAG, "Pressing 500, 500 to show seek controls menu.");
-            getUiDevice().click(500, 500);
+            super.seekControls();
             adTimeStringBeforeLifeCycle = adTimeBeforeLifeCycle.getText();            
         }
-        // Then we leave the app, beginning the check, and return to see if everything went as it should.
+        // Then we leave the app, beginning the check, and return to the app.
         getUiDevice().pressHome();
         Log.v(TAG, "Pressing the home button.");
         getUiDevice().pressRecentApps();
@@ -160,18 +171,15 @@ public class LifeCycle extends OnceUxUiAutomatorBaseTestCase {
     private void lifeCycleFollowUpCheck() throws Exception {
         // Now we document our location now that we have returned to the app and enter the text into a string.
         Log.v(TAG, "Beginning the Follow Up check.");
-        getUiDevice().click(500, 500);
-        Log.v(TAG, "Pressing 500, 500 to show seek controls menu.");
-        UiObject adTimeAfterLifeCycle = new UiObject(new UiSelector().textStartsWith("00:").index(0));
+        UiObject adTimeAfterLifeCycle = new UiObject(new UiSelector().resourceId("android:id/time_current"));
         Log.v(TAG, "Getting text from UiObject");
         // Because of the slight inconsistency of the Sample App, we set up try-catch blocks that will be prepared for an exception.
         try {
             adTimeStringAfterLifeCycle = adTimeAfterLifeCycle.getText();
         } catch (UiObjectNotFoundException uiPlayheadPositionMissing) {
-            Log.v(TAG, "Ad Time not found. Trying again.");
+            Log.v(TAG, "Follow up Ad Time not found. Trying again.");
             // This is often as a result of the seek controls (and consequently the playhead location) being hidden, so we will show them and retry.
-            Log.v(TAG, "Pressing 500, 500 to show seek controls menu.");
-            getUiDevice().click(500, 500);
+            super.seekControls();
             adTimeStringAfterLifeCycle = adTimeAfterLifeCycle.getText();
         }
     }

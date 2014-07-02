@@ -83,7 +83,8 @@ public abstract class OnceUxUiAutomatorBaseTestCase extends UiAutomatorTestCase 
         // We now want to leave the app and close it entirely. The first step is to go to the all apps menu and navigate through it.
         getUiDevice().pressHome();
         Log.v(TAG, "Pressing the Home button.");
-      
+
+        TimeUnit.SECONDS.sleep(1);
         UiObject allAppsButton = new UiObject(new UiSelector().description("Apps"));
         allAppsButton.clickAndWaitForNewWindow();
         Log.v(TAG, "Pressing the All Apps button.");
@@ -95,12 +96,6 @@ public abstract class OnceUxUiAutomatorBaseTestCase extends UiAutomatorTestCase 
 
         UiScrollable appViews = new UiScrollable(new UiSelector().scrollable(true));
         appViews.setAsHorizontalList();
-        
-        // UiAutomator often has problems locating the settings app, and can often scroll the wrong direction.
-        appViews.scrollForward();
-        Log.v(TAG, "Scrolling forward...");
-        appViews.scrollForward();
-        Log.v(TAG, "Scrolling forward...");
 
         // Next, we open the settings app, and open the particular section that specifies settings for Apps.
         UiObject settingsApp  = appViews.getChildByText(new UiSelector().className(android.widget.TextView.class.getName()), "Settings");
@@ -153,7 +148,7 @@ public abstract class OnceUxUiAutomatorBaseTestCase extends UiAutomatorTestCase 
      * breaking the sample app before function has begun. A universal method helps in this case,
      * and in order to keep the setUp method universal across all test cases, play was kept separate.
      *
-     * @exception UiObjectNotFoundException playButtonMissing
+     * @throws UiObjectNotFoundException playButtonMissing when the seek controls are hidden.
      */
     protected void playVideo() throws Exception {
         // First, wait for the Sample App to entirely process the video and we tap the screen to reveal the seek controls and press play.
@@ -164,10 +159,19 @@ public abstract class OnceUxUiAutomatorBaseTestCase extends UiAutomatorTestCase 
             playButton.click();
         } catch (UiObjectNotFoundException playButtonMissing) {
             Log.v(TAG, "Play button not found. Trying again.");
-            Log.v(TAG, "Pressing 500, 500 to show seek controls menu.");
-            getUiDevice().click(500, 500);
+            seekControls();
             playButton.click();
         }
+    }
+
+    /**
+     * seekControls provides a method that toggles the accessibility of the seek controls menu,
+     * which contains the rewind, fast forward, and pause/play buttons, as well as the seek bar
+     * and the Ui Objects that contain the current time elapsed and total time.
+     */
+    protected void seekControls() {
+        Log.v(TAG, "Pressing 500, 500 to toggle the seek controls menu.");
+        getUiDevice().click(500, 500);
     }
 
 }
