@@ -3,6 +3,8 @@ package com.brightcove.player.samples.onceux.basic;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
@@ -67,15 +69,21 @@ public class MainActivity extends BrightcovePlayer {
         brightcoveVideoView = (BrightcoveVideoView) findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
 
-        // Setup the event handlers for the OnceUX plugin, register the VMAP data URL inside the
-        // plugin and start the video.  The URL must be registered prior to starting the video,
-        // otherwise the video will not play.  The plugin will detect that the video has been
-        // started and pause it until the ad data is ready or an error condition is detected.
-        // On either event the plugin will continue playing the video.
+        // Setup the event handlers for the OnceUX plugin, set the companion ad container,
+        // register the VMAP data URL inside the plugin and start the video.  The plugin will
+        // detect that the video has been started and pause it until the ad data is ready or an
+        // error condition is detected.  On either event the plugin will continue playing the
+        // video.
         registerEventHandlers();
         plugin = new OnceUxPlugin(this, brightcoveVideoView);
+        View view = findViewById(R.id.ad_frame);
+        if (view != null && view instanceof ViewGroup) {
+            plugin.addCompanionContainer((ViewGroup) view);
+        }
         plugin.processVideo(onceUxAdDataUrl, onceUxContentUrl);
-    }
+
+ 
+   }
 
     // Private instance methods
 
