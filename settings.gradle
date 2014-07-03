@@ -1,8 +1,10 @@
 include ':AdRulesIMASampleApp'
+include ':AdRulesIMAWidevineSampleApp'
 include ':BasicAISWebViewSampleApp'
 include ':BasicBundledVideoSampleApp'
 include ':BasicCastSampleApp'
 include ':BasicIMASampleApp'
+include ':HLSPlayerIMASampleApp'
 include ':BasicIMAWidevineSampleApp'
 include ':BasicOnceUxSampleApp'
 include ':BasicWidevineSampleApp'
@@ -15,6 +17,7 @@ include ':WebVTTSampleApp'
 if (freewheelDependenciesAreSatisfied()) {
     include ':BasicFreeWheelSampleApp'
     include ':BasicFreeWheelWidevineSampleApp'
+    include ':HLSPlayerFreeWheelSampleApp'
 }
 
 // Omniture samples require adobe-adms.jar to be added to the libs
