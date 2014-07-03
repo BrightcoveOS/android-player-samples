@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="google_play_services_version">4452000</integer>
+</resources>
+
+    <!--figure out how to get this from the google play services library TODO:bhnath-->

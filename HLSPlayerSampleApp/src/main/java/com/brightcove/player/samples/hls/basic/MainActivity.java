@@ -6,7 +6,7 @@ import com.brightcove.player.media.Catalog;
 import com.brightcove.player.media.PlaylistListener;
 import com.brightcove.player.model.Playlist;
 import com.brightcove.player.view.BrightcovePlayer;
-import com.brightcove.player.view.BrightcoveVideoView;
+import com.brightcove.player.view.SeamlessVideoView;
 
 /**
  * This app illustrates how to use the Brightcove HLS player for
@@ -25,7 +25,7 @@ public class MainActivity extends BrightcovePlayer {
         // management.  Establish the video object and use it's event emitter to get important
         // notifications and to control logging.
         setContentView(R.layout.activity_main);
-        brightcoveVideoView = (BrightcoveVideoView) findViewById(R.id.brightcove_video_view);
+        brightcoveVideoView = (SeamlessVideoView) findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
 
         Catalog catalog = new Catalog("ErQk9zUeDVLIp8Dc7aiHKq8hDMgkv5BFU7WGshTc-hpziB3BuYh28A..");
