@@ -20,9 +20,9 @@ import com.android.uiautomator.testrunner.UiAutomatorTestCase;
  * do not work for testing with the setUp as it is currently designed. The 
  * following is a list of known incompatible devices:
  *
- * @author Bryan Gregory Scott -- bscott@brightcove.com
+ * Samsung Galaxy Tab Pro
  *
- * @see "Samsung Galaxy Tab Pro"
+ * @author Bryan Gregory Scott -- bscott@brightcove.com
  */
 public abstract class OnceUxUiAutomatorBaseTestCase extends UiAutomatorTestCase {
 
