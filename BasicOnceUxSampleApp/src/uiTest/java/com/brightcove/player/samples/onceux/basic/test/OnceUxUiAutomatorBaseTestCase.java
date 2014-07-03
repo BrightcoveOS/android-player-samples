@@ -159,7 +159,7 @@ public abstract class OnceUxUiAutomatorBaseTestCase extends UiAutomatorTestCase 
             playButton.click();
         } catch (UiObjectNotFoundException playButtonMissing) {
             Log.v(TAG, "Play button not found. Trying again.");
-            seekControls();
+            toggleSeekControlsVisibility();
             playButton.click();
         }
     }
@@ -169,7 +169,7 @@ public abstract class OnceUxUiAutomatorBaseTestCase extends UiAutomatorTestCase 
      * which contains the rewind, fast forward, and pause/play buttons, as well as the seek bar
      * and the Ui Objects that contain the current time elapsed and total time.
      */
-    protected void seekControls() {
+    protected void toggleSeekControlsVisibility() {
         Log.v(TAG, "Pressing 500, 500 to toggle the seek controls menu.");
         getUiDevice().click(500, 500);
     }

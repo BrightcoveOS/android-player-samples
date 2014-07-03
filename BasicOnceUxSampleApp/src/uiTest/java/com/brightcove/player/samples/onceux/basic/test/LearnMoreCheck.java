@@ -1,13 +1,10 @@
 package com.brightcove.player.samples.onceux.basic.test;
 
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import android.util.Log;
-import android.content.res.Resources;
 
 import com.android.uiautomator.core.UiObject;
 import com.android.uiautomator.core.UiObjectNotFoundException;
-import com.android.uiautomator.core.UiScrollable;
 import com.android.uiautomator.core.UiSelector;
 import com.android.uiautomator.testrunner.UiAutomatorTestCase;
 /**
@@ -25,16 +22,18 @@ public class LearnMoreCheck extends OnceUxUiAutomatorBaseTestCase {
     private final String TAG = this.getClass().getSimpleName();
 
     /**
-     * The latch that keeps track if the Learn More button counts down or not.
-     */
-    final CountDownLatch learnMoreLatch = new CountDownLatch(1);
-
-    /**
      * Provides a quick way to validate IF the learn more button SHOULD be present, as
-     * opposed to its actual presence. Will return <code>true</code> or <code>false</code> as instructed 
-     * by learnMoreChecker.
+     * opposed to its actual presence. Will return <code>true</code> or <code>false</code> as instructed by the test.
      */
     private boolean shouldHaveLearnMore;
+
+    /**
+     * The setUp defines shouldHaveLearnMore as false by default, then runs the super.setUp().
+     */
+    protected void setUp() {
+        shouldHaveLearnMore = false;
+        super.setUp();
+    }
 
 
     // Test Methods
@@ -52,14 +51,17 @@ public class LearnMoreCheck extends OnceUxUiAutomatorBaseTestCase {
         shouldHaveLearnMore = true;
         TimeUnit.SECONDS.sleep(10);
         adBreakHandler();
-        assertTrue("Preroll ad break does not have the Learn More Button.", learnMoreLatch.await(30, TimeUnit.SECONDS));
+        assertTrue("Preroll ad break does not have the Learn More Button.", learnMoreChecker());
+        assertTrue("Preroll ad break should always have the Learn More Button.", shouldHaveLearnMore);
     }
 
     /**
      * The Midroll test checks the midroll ad break for the presence of the Learn More button. If 
-     * the button is not present, the test will pass. This is done by calling upon the playVideo
-     * utility method from the superclass to begin, then waiting a for the ad break to start, then 
-     * it calls upon the adBreakHandler utility method, which performs the check.
+     * the button is not present, the test will pass. Note that this is only the case for the video
+     * being used for testing. Other videos may have a Learn More, in which case this test would
+     * need to be altered somewhat. The test is done by calling upon the playVideo utility method 
+     * from the superclass to begin, then waiting a for the ad break to start, then it calls upon 
+     * the adBreakHandler utility method, which performs the check.
      */
     public void testLearnMoreCheckMidrolls() throws Exception {
         //Calls upon utility methods, makes assertions that midrolls should not have the "Learn More" UiObject.
@@ -68,7 +70,8 @@ public class LearnMoreCheck extends OnceUxUiAutomatorBaseTestCase {
         shouldHaveLearnMore = false;
         TimeUnit.SECONDS.sleep(70);
         adBreakHandler();
-        assertFalse("Midroll ad break does have the Learn More Button.", learnMoreLatch.await(30, TimeUnit.SECONDS));
+        assertFalse("Midroll ad break does have the Learn More Button.", learnMoreChecker());
+        assertFalse("Midroll ad break should not have the Learn More Button.", shouldHaveLearnMore);
     }
 
     /**
@@ -84,7 +87,8 @@ public class LearnMoreCheck extends OnceUxUiAutomatorBaseTestCase {
         shouldHaveLearnMore = true;
         TimeUnit.MINUTES.sleep(3);
         adBreakHandler();
-        assertTrue("Postroll ad break does not have the Learn More Button.", learnMoreLatch.await(30, TimeUnit.SECONDS));
+        assertTrue("Postroll ad break does not have the Learn More Button.", learnMoreChecker());
+        assertTrue("Postroll ad break should always have learn more.", shouldHaveLearnMore);
     }
 
 
@@ -95,25 +99,25 @@ public class LearnMoreCheck extends OnceUxUiAutomatorBaseTestCase {
      * the Learn More button. The tests will make assertions based on waiting for this latch to
      * timeout or count down to zero.
      */
-    private void learnMoreChecker() {
+    private boolean learnMoreChecker() {
         // Establishes the Learn More button.
         UiObject learnMoreButton = new UiObject(new UiSelector().text("Learn More >>"));
         // Checks its existence.
-        if(learnMoreButton.exists()) {
-            if(shouldHaveLearnMore == true) {
+        if (learnMoreButton.exists()) {
+            if (shouldHaveLearnMore == true) {
                 // If the Learn More button is present, learnMoreLatch counts down.
                 Log.v(TAG, "Learn More button found. It should be present.");
-                learnMoreLatch.countDown();
             } else {
                 Log.v(TAG, "Learn More button found. It should not be present.");
-                learnMoreLatch.countDown();
             }
+            return true;
         } else {
-            if(shouldHaveLearnMore == false) {
+            if (shouldHaveLearnMore == false) {
                 Log.v(TAG, "Learn More button not found. It should not be present.");
             } else {
                 Log.v(TAG, "Learn More button not found. It should be present."); 
             }
+            return false;
         }
     }
 
@@ -125,7 +129,7 @@ public class LearnMoreCheck extends OnceUxUiAutomatorBaseTestCase {
      */
     private void adBreakHandler() throws Exception {
         UiObject adMarkerText = new UiObject(new UiSelector().textStartsWith("Your video will resume in"));
-        if(adMarkerText.exists() && adMarkerText.isEnabled()) {
+        if (adMarkerText.exists() && adMarkerText.isEnabled()) {
             Log.v(TAG, "Ad Break started.");
             learnMoreChecker();
             adMarkerText.waitUntilGone(30000);
