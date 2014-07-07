@@ -30,7 +30,7 @@ public class LearnMoreTestCase extends OnceUxUiAutomatorBase {
     /**
      * The setUp defines shouldHaveLearnMore as false by default, then runs the super.setUp().
      */
-    protected void setUp() {
+    protected void setUp() throws Exception {
         super.setUp();
         shouldHaveLearnMore = false;
     }
