@@ -24,7 +24,7 @@ import com.android.uiautomator.testrunner.UiAutomatorTestCase;
  *
  * @author Bryan Gregory Scott -- bscott@brightcove.com
  */
-public abstract class OnceUxUiAutomatorBaseTestCase extends UiAutomatorTestCase {
+public abstract class OnceUxUiAutomatorBase extends UiAutomatorTestCase {
 
     // Class constants
     
