@@ -51,8 +51,6 @@ public class LearnMoreTestCase extends OnceUxUiAutomatorBase {
         shouldHaveLearnMore = true;
         TimeUnit.SECONDS.sleep(10);
         adBreakHandler();
-        assertTrue("Preroll ad break should have the Learn More Button.", shouldHaveLearnMore);
-        assertTrue("Preroll ad break does not have the Learn More Button.", learnMoreChecker());
     }
 
     /**
@@ -70,9 +68,7 @@ public class LearnMoreTestCase extends OnceUxUiAutomatorBase {
         shouldHaveLearnMore = false;
         TimeUnit.SECONDS.sleep(70);
         adBreakHandler();
-        assertFalse("Midroll ad break should not have the Learn More Button.", shouldHaveLearnMore);
-        assertFalse("Midroll ad break does have the Learn More Button.", learnMoreChecker());
-    }
+        }
 
     /**
      * The Postroll test checks the postroll ad break for the presence of the Learn More button.
@@ -87,36 +83,33 @@ public class LearnMoreTestCase extends OnceUxUiAutomatorBase {
         shouldHaveLearnMore = true;
         TimeUnit.MINUTES.sleep(3);
         adBreakHandler();
-        assertTrue("Postroll ad break should have the Learn More Button.", shouldHaveLearnMore);
-        assertTrue("Postroll ad break does not have the Learn More Button.", learnMoreChecker());
     }
-
 
     // Utility Methods
 
     /**
      * learnMoreChecker provides a way to keep track of and call upon the conditional presence of
-     * the Learn More button. The tests will make assertions based on waiting for this latch to
-     * timeout or count down to zero.
+     * the Learn More button. If the conditions match, the test will return true.
      */
     private boolean learnMoreChecker() {
         // Establishes the Learn More button.
-        UiObject learnMoreButton = new UiObject(new UiSelector().text("Learn More >>"));
+        UiObject learnMoreButton = new UiObject(new UiSelector().textContains("Learn More"));
         if (learnMoreButton.exists()) {
             if (shouldHaveLearnMore == true) {
-                // If the Learn More button is present, learnMoreLatch counts down.
                 Log.v(TAG, "Learn More button found. It should be present.");
+                return true;
             } else {
                 Log.v(TAG, "Learn More button found. It should not be present.");
+                return false;
             }
-            return true;
         } else {
             if (shouldHaveLearnMore == false) {
                 Log.v(TAG, "Learn More button not found. It should not be present.");
+                return true;
             } else {
                 Log.v(TAG, "Learn More button not found. It should be present."); 
+                return false;
             }
-            return false;
         }
     }
 
@@ -130,9 +123,7 @@ public class LearnMoreTestCase extends OnceUxUiAutomatorBase {
         UiObject adMarkerText = new UiObject(new UiSelector().textStartsWith("Your video will resume in"));
         if (adMarkerText.exists() && adMarkerText.isEnabled()) {
             Log.v(TAG, "Ad Break started.");
-            learnMoreChecker();
-            adMarkerText.waitUntilGone(30000);
-            Log.v(TAG, "Ad Break ended.");
+            assertTrue("Conditions did not match.", learnMoreChecker());
         }
     }
 }
