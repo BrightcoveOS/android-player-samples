@@ -51,7 +51,7 @@ public class LearnMoreCheck extends OnceUxUiAutomatorBaseTestCase {
         shouldHaveLearnMore = true;
         TimeUnit.SECONDS.sleep(10);
         adBreakHandler();
-        assertTrue("Preroll ad break should always have the Learn More Button.", shouldHaveLearnMore);
+        assertTrue("Preroll ad break should have the Learn More Button.", shouldHaveLearnMore);
         assertTrue("Preroll ad break does not have the Learn More Button.", learnMoreChecker());
     }
 
@@ -87,7 +87,7 @@ public class LearnMoreCheck extends OnceUxUiAutomatorBaseTestCase {
         shouldHaveLearnMore = true;
         TimeUnit.MINUTES.sleep(3);
         adBreakHandler();
-        assertTrue("Postroll ad break does not have the Learn More Button.", learnMoreChecker());
+        assertTrue("Postroll ad break should have the Learn More Button.", shouldHaveLearnMore);
         assertTrue("Postroll ad break does not have the Learn More Button.", learnMoreChecker());
     }
 
