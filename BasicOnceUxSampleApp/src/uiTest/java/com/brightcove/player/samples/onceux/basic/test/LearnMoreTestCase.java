@@ -14,7 +14,7 @@ import com.android.uiautomator.testrunner.UiAutomatorTestCase;
  * 
  * @author Bryan Gregory Scott -- bscott@brightcove.com
  */
-public class LearnMoreTestCase extends OnceUxUiAutomatorBaseTestCase {
+public class LearnMoreTestCase extends OnceUxUiAutomatorBase {
 
     /**
      * The Android logcat tag.
