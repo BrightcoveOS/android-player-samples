@@ -12,7 +12,7 @@ import com.android.uiautomator.testrunner.UiAutomatorTestCase;
 /**
  * PlayStartMessTestCase was created in response to a buggy scenario that results when 
  * the play button is pressed the instant the seek controls automatically open. The 
- * scenario consisted of the following: play not being launched despite the play button 
+ * scenario consists of the following: play not being launched despite the play button 
  * being  pressed, the fast forward, rewind, and seek bar being revealed during the ad 
  * break, and a still of the first frame of the video appearing instead of the typical 
  * black space that normally occurred before play had begun.
@@ -84,7 +84,9 @@ public class PlayStartMessTestCase extends OnceUxUiAutomatorBase {
     /**
      * The scenario as described in the class level comment occurs based on an outdated 
      * version of the super.playVideo method. As a result, that version needed to be 
-     * preserved here for testing that scenario.
+     * preserved here for testing that scenario. Unlike the current super.playVideo(),
+     * playVideoSpecialized() does not wait for the video to load, and instead presses play
+     * as soon as the sample app reveals seek controls.
      */
     private void playVideoSpecialized() throws Exception {
         UiObject playButton = new UiObject(new UiSelector().resourceId("android:id/pause"));
