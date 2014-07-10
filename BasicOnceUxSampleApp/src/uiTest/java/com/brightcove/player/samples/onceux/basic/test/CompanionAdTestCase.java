@@ -158,7 +158,7 @@ public class CompanionAdTestCase extends OnceUxUiAutomatorBase {
      * @param  String adType the string identifier for the specific adbreak the method plans to wait to. Only effects logcat.
      * @return the results of companionCheck()
      */
-    private boolean waitForEndOfAdCheck(string adType) throws Exception {
+    private boolean waitForEndOfAdCheck(String adType) throws Exception {
         Log.v(TAG, "Beginning waitForEndOfAdCheck");
         if (companionAd.waitUntilGone(msecAdBreakLength)) {
             super.toggleSeekControlsVisibility();
