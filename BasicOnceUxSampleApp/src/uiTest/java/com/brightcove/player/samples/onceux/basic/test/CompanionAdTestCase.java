@@ -17,6 +17,8 @@ import com.android.uiautomator.testrunner.UiAutomatorTestCase;
  */
 public class CompanionAdTestCase extends OnceUxUiAutomatorBase {
 
+
+    // Class Constants
     /**
      * The Android logcat tag.
      */
@@ -31,7 +33,8 @@ public class CompanionAdTestCase extends OnceUxUiAutomatorBase {
      * The UiObject that represents the text that is present at every Ad Break. It reads "Your video will
      * resume in" followed by how many seconds are left in the ad break.
      */
-    private UiObject adText = new UiObject(new UiSelector().textStartsWith("Your video will resume in"));
+    private UiObject adTextView = new UiObject(new UiSelector().textStartsWith("Your video will resume in"));
+
 
     // Test Methods
     /**
@@ -40,11 +43,11 @@ public class CompanionAdTestCase extends OnceUxUiAutomatorBase {
     public void testCompanionAd() throws Exception {
         Log.v(TAG, "Beginning testCompanionAd");
         super.playVideo();
-        assertTrue("Companion ad not found in preroll ad break.", toCompanionAdCheck(5000));
-        toEndOfAdCheck();
-        assertTrue("Companion ad not found in midroll ad break.", toCompanionAdCheck(35000));
-        toEndOfAdCheck();
-        assertTrue("Companion ad not found in postroll ad break.", toCompanionAdCheck(112000));
+        assertTrue("Companion ad not found in preroll ad break.", waitForCompanionAdCheck(msecToPreroll, ADTYPE_PREROLL));
+        waitForEndOfAdCheck(ADTYPE_PREROLL);
+        assertTrue("Companion ad not found in midroll ad break.", waitForCompanionAdCheck(msecToMidroll, ADTYPE_MIDROLL));
+        waitForEndOfAdCheck(ADTYPE_MIDROLL);
+        assertTrue("Companion ad not found in postroll ad break.", waitForCompanionAdCheck(msecToPostroll, ADTYPE_POSTROLL));
         Log.v(TAG, "Finished testCompanionAd");
     }
 
@@ -58,7 +61,7 @@ public class CompanionAdTestCase extends OnceUxUiAutomatorBase {
     public void testCompanionAdLink() throws Exception {
         Log.v(TAG, "Beginning testCompanionAdLink");
         super.playVideo();
-        assertTrue("Ad Break did not begin within given time.", adText.waitForExists(5000));
+        assertTrue("Ad Break did not begin within given time.", adTextView.waitForExists(msecToPreroll));
         UiObject companionAdUrl = new UiObject(new UiSelector().textContains("starbucks.com"));
         if (companionCheck()) {
             companionAd.clickAndWaitForNewWindow();
@@ -81,18 +84,18 @@ public class CompanionAdTestCase extends OnceUxUiAutomatorBase {
 
         // The following tests that the companion ad vanishes after prerolls.
         Log.v(TAG, "Prerolls...");
-        toCompanionAdCheck(5000);
-        assertFalse("Companion ad still present after preroll ad break.", toEndOfAdCheck());
+        waitForCompanionAdCheck(msecToPreroll, ADTYPE_PREROLL);
+        assertFalse("Companion ad still present after preroll ad break.", waitForEndOfAdCheck(ADTYPE_PREROLL));
 
         // Next, the companion ad that accompanies the Midroll ad break is tested.
         Log.v(TAG, "Midrolls...");
-        toCompanionAdCheck(35000);
-        assertFalse("Companion ad still present after midroll ad break.", toEndOfAdCheck());
+        waitForCompanionAdCheck(msecToMidroll, ADTYPE_MIDROLL);
+        assertFalse("Companion ad still present after midroll ad break.", waitForEndOfAdCheck(ADTYPE_MIDROLL));
 
         // Next, the companion ad that accompanies the Postroll ad break is tested.
         Log.v(TAG, "Postrolls...");
-        toCompanionAdCheck(112000);
-        assertFalse("Companion ad still present after postroll ad break.", toEndOfAdCheck());
+        waitForCompanionAdCheck(msecToPostroll, ADTYPE_POSTROLL);
+        assertFalse("Companion ad still present after postroll ad break.", waitForEndOfAdCheck(ADTYPE_POSTROLL));
         Log.v(TAG, "Finished testCompanionAdVanish");
     }
 
@@ -131,18 +134,19 @@ public class CompanionAdTestCase extends OnceUxUiAutomatorBase {
     }
 
     /**
-     * Waits for the adText UiObject to be present, then performs companionCheck. If the wait for the ad
+     * Waits for adTextView UiObject to be present, then performs companionCheck. If the wait for the ad
      * break times out, then a fail is initiated.
      *
-     * @param  msec the desired number of milliseconds to wait before giving up on the next ad break loading
+     * @param  int msec the desired number of milliseconds to wait before giving up on the next ad break loading
+     * @param  String adType the string identifier for the specific adbreak the method plans to wait to. Only effects logcat.
      * @return the results of companionCheck()
      */
-    private boolean toCompanionAdCheck(int msec) throws Exception {
+    private boolean waitForCompanionAdCheck(int msec, String adType) throws Exception {
         Log.v(TAG, "Beginning toCompanionAdCheck");
-        if (adText.waitForExists(msec)) {
+        if (adTextView.waitForExists(msec)) {
             return (companionCheck());
         } else {
-            fail("Ad break did not begin in time.");
+            fail("The " + adType + "ad break did not begin in time.");
             return false;
         }
     }
@@ -151,15 +155,16 @@ public class CompanionAdTestCase extends OnceUxUiAutomatorBase {
      * Waits until the CompanionAd is hidden by the seek controls appearing at the end of an ad break,
      * then, it hides them and performs companion check.
      *
+     * @param  String adType the string identifier for the specific adbreak the method plans to wait to. Only effects logcat.
      * @return the results of companionCheck()
      */
-    private boolean toEndOfAdCheck() throws Exception {
-        Log.v(TAG, "Beginning toEndOfAdCheck");
-        if (companionAd.waitUntilGone(30000)) {
+    private boolean waitForEndOfAdCheck(string adType) throws Exception {
+        Log.v(TAG, "Beginning waitForEndOfAdCheck");
+        if (companionAd.waitUntilGone(msecAdBreakLength)) {
             super.toggleSeekControlsVisibility();
             return (companionCheck());
         } else { 
-            fail("Ad Break did not complete in time.");
+            fail("The " + adType + "Ad Break did not complete in time.");
             return false;
         }
     }
