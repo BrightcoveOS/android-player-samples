@@ -34,6 +34,41 @@ public abstract class OnceUxUiAutomatorBase extends UiAutomatorTestCase {
     private final String TAG = this.getClass().getSimpleName();
 
     /**
+     * The timeout to the first ad break in milliseconds.
+     */
+    protected final int msecToPreroll = 5000;
+
+    /**
+     * The timeout to the second ad break in milliseconds
+     */
+    protected final int msecToMidroll = 35000;
+
+    /**
+     * The timeout to the third ad break in milliseconds
+     */
+    protected final int msecToPostroll = 112000;
+
+    /**
+     * The length of the ad breaks in milliseconds 
+     */
+    protected final int msecAdBreakLength = 30000;
+
+    /**
+     * The string that identifies a preroll ad type
+     */
+    protected final String ADTYPE_PREROLL = "preroll";
+
+    /**
+     * The string that identifies a midroll ad type
+     */
+    protected final String ADTYPE_MIDROLL = "midroll";
+
+    /**
+     * The string that identifies a postroll ad type
+     */
+    protected final String ADTYPE_POSTROLL = "postroll";
+
+    /**
      * The UiObject that represents the Basic ONCE UX Sample App.
      */
     protected UiObject basicOnceUxSampleApp;
