@@ -36,7 +36,7 @@ public abstract class OnceUxUiAutomatorBase extends UiAutomatorTestCase {
     /**
      * The timeout to the first ad break in milliseconds.
      */
-    protected final int msecToPreroll = 5000;
+    protected final int msecToPreroll = 8000;
 
     /**
      * The timeout to the second ad break in milliseconds
