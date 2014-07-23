@@ -44,6 +44,7 @@ subprojects {
   apply plugin: 'android'
 
   repositories {
+    mavenLocal()
     mavenCentral()
 
     maven {
@@ -120,6 +121,12 @@ subprojects {
   if (project.name.contains('HLS')) {
     dependencies {
       compile "com.brightcove.player:android-hls-player:${anpVersion}"
+    }
+  }
+
+  if (project.name.contains('ExoPlayer')) {
+    dependencies {
+      compile "com.brightcove.player:exoplayer:${anpVersion}"
     }
   }
 
