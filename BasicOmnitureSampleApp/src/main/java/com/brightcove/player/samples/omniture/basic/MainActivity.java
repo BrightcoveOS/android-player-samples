@@ -10,7 +10,6 @@ import android.view.WindowManager;
 import android.widget.MediaController;
 import android.widget.RelativeLayout;
 
-import com.adobe.mobile.Media;
 import com.brightcove.omniture.OmnitureComponent;
 import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
