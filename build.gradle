@@ -99,6 +99,13 @@ subprojects {
     }
   }
 
+  if (project.name.contains('Omniture')) {
+    dependencies {
+      compile "com.brightcove.player:android-omniture-plugin:${anpVersion}"
+      compile files(libraryDirectory + "adobeMobileLibrary.jar")
+    }
+  }
+
   if (project.name.contains('OnceUx')) {
     dependencies {
       compile "com.brightcove.player:android-onceux-plugin:${anpVersion}"
