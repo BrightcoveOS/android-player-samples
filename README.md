@@ -34,7 +34,7 @@ Note that in order to enable the FreeWheel sample apps, you must independently o
 
 * [Basic Omniture Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicOmnitureSampleApp"): This app shows how to configure an app to use the Brightcove native Android player Omniture Plugin to play a video.
 
-Note that in order to enable this sample app, you must independently obtain and install the file **adobe-adms.jar** into the top-level directory **libs/**.  Version 3.2.2 of the Adobe provided, non-free, jar file was used to test this sample app.
+Note that in order to enable this sample app, you must independently obtain and install the file **adobeMobileLibrary.jar** into the top-level directory **libs/**.  Version 3.2.2 of the Adobe provided, non-free, jar file was used to test this sample app.
 
 * [Basic Widevine Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicWidevineSampleApp"): This app shows how to configure an app to use the Brightcove native Android player Widevine Plugin to play a video.
 

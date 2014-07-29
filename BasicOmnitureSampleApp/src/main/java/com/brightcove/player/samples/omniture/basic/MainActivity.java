@@ -23,8 +23,6 @@ import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
 
-import java.lang.Override;
-
 /**
  * This app illustrates how to use the Omniture plugin with the Brightcove Player for Android.
  *
