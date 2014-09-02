@@ -1,0 +1,3 @@
+dependencies {
+  compile "com.brightcove.player:android-onceux-plugin:${anpVersion}"
+}
