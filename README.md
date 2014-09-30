@@ -36,6 +36,8 @@ Note that in order to enable the FreeWheel sample apps, you must independently o
 
 Note that in order to enable this sample app, you must independently obtain and install the file **adobeMobileLibrary.jar** into the top-level directory **libs/**.  Version 3.2.2 of the Adobe provided, non-free, jar file was used to test this sample app.
 
+* [Basic OnceUx Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicOnceUxSampleApp"): This app shows how to configure an app to use the Brightcove Native Player for Android OnceUx Plugin to play a video.
+
 * [Basic Widevine Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicWidevineSampleApp"): This app shows how to configure an app to use the Brightcove native Android player Widevine Plugin to play a video.
 
 * [HLS Player FreeWheel Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "HLSPlayerFreeWheelSampleApp"): This app shows how to configure an app to use the HLS Player with the FreeWheel Plugin to play a video.
