@@ -125,6 +125,11 @@ subprojects {
   }
 
   if (project.name.contains('ExoPlayer')) {
+      android {
+          defaultConfig {
+              minSdkVersion 16
+          }
+      }
     dependencies {
       compile "com.brightcove.player:exoplayer:${anpVersion}"
     }
