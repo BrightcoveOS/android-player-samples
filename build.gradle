@@ -6,6 +6,7 @@ buildscript {
   }
   dependencies {
     classpath 'com.android.tools.build:gradle:0.12.+'
+    classpath 'de.undercouch:gradle-download-task:0.+'
   }
 }
 
