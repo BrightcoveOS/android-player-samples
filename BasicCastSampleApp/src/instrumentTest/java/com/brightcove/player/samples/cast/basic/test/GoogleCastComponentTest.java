@@ -15,7 +15,7 @@
  *
  * "Brightcove" is a trademark of Brightcove, Inc.
  */
-package com.brightcove.player.samples.cast.basic;
+package com.brightcove.player.samples.cast.basic.test;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;

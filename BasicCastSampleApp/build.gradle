@@ -17,8 +17,8 @@ android {
     defaultConfig {
         minSdkVersion 11
         targetSdkVersion 19
-        testPackageName "com.brightcove.player.samples.cast.basic.test"
-        testInstrumentationRunner "com.brightcove.player.samples.cast.basic.test.Runner"
+        testApplicationId "com.brightcove.player.samples.cast.basic.test"
+        testInstrumentationRunner "android.test.InstrumentationTestRunner"
     }
 }
 
