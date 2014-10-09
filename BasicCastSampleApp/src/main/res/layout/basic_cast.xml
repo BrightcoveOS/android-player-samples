@@ -5,11 +5,9 @@
     android:orientation="vertical"
     tools:context=".MainActivity" >
 
-    <!-- A simple frame layout for the GoogleCastSampleFragment -->
-    <FrameLayout
+    <fragment android:name="com.brightcove.player.samples.cast.basic.GoogleCastSampleFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/brightcove_video_view_fragment">
-    </FrameLayout>
+        android:id="@+id/brightcove_video_view_fragment"/>
 
 </FrameLayout>

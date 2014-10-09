@@ -16,7 +16,7 @@ project.ext {
   // The directory that will be used to reference dependent libraries.
   // Modify as needed. Defaulted to users home directory.
   libraryDirectory = "${System.getProperty("user.home")}/libs/"
-  imaAndroidSdkJarFileName = "ima-android-sdk-beta7.jar"
+  imaAndroidSdkJarFileName = "ima-android-sdk-beta8.jar"
 }
 
 // Automatically download the Google IMA third party zip file and
@@ -96,6 +96,7 @@ subprojects {
     dependencies {
       compile "com.brightcove.player:android-ima-plugin:${anpVersion}"
       compile files(libraryDirectory + imaAndroidSdkJarFileName)
+      compile 'com.google.android.gms:play-services:5.2.08'
     }
   }
 
@@ -151,7 +152,7 @@ subprojects {
     dependencies {
       compile "com.brightcove.player:android-cast-plugin:${anpVersion}"
       compile 'com.google.sample.castcompanionlibrary:CastCompanionLibrary-android:1.+'
-      compile 'com.google.android.gms:play-services:4.3.+'
+      compile 'com.google.android.gms:play-services:5.2.08'
       compile 'com.android.support:mediarouter-v7:19.0.1'
     }
   }

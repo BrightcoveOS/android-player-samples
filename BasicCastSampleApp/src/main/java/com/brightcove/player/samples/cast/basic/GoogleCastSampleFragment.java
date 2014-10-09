@@ -1,9 +1,10 @@
 package com.brightcove.player.samples.cast.basic;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -23,20 +24,12 @@ import java.util.Map;
 public class GoogleCastSampleFragment extends BrightcovePlayerFragment {
     public static final String TAG = GoogleCastSampleFragment.class.getSimpleName();
 
-    private static EventEmitter eventEmitter;
-    private static Context context;
     private GoogleCastComponent googleCastComponent;
     private MiniController miniController;
+    private EventEmitter eventEmitter;
 
-    /**
-     * Static initializer method for the fragment to get easy access to the EventEmitter
-     * and Context from the top level Activity.
-     */
-    public static GoogleCastSampleFragment newInstance(EventEmitter emitter, Context theContext) {
-        GoogleCastSampleFragment googleCastSampleFragment = new GoogleCastSampleFragment();
-        eventEmitter = emitter;
-        context = theContext;
-        return googleCastSampleFragment;
+    public GoogleCastSampleFragment() {
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -44,13 +37,13 @@ public class GoogleCastSampleFragment extends BrightcovePlayerFragment {
         // Perform the internal wiring to be able to make use of the BrightcovePlayerFragment.
         View view = inflater.inflate(R.layout.basic_cast_fragment, container, false);
         brightcoveVideoView = (BrightcoveVideoView) view.findViewById(R.id.brightcove_video_view);
-        brightcoveVideoView.setEventEmitter(eventEmitter);
+        eventEmitter = brightcoveVideoView.getEventEmitter();
         super.onCreateView(inflater, container, savedInstanceState);
 
         // Initialize the android_cast_plugin which requires the application id of your Cast
         // receiver application.
         String applicationId = getResources().getString(R.string.application_id);
-        googleCastComponent = new GoogleCastComponent(eventEmitter, applicationId, context);
+        googleCastComponent = new GoogleCastComponent(eventEmitter, applicationId, getActivity());
 
         // Initialize the MiniController widget which will allow control of remote media playback.
         miniController = (MiniController) view.findViewById(R.id.miniController1);
@@ -84,21 +77,15 @@ public class GoogleCastSampleFragment extends BrightcovePlayerFragment {
         return properties;
     }
 
-    /**
-     * Handle resuming Chromecast notifications on a resume lifecycle event.
-     */
     @Override
-    public void onResume() {
-        super.onResume();
-        eventEmitter.emit(GoogleCastEventType.SET_NOTIFICATIONS);
-    }
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        Log.v(TAG, "onCreateOptionsMenu");
+        inflater.inflate(R.menu.main, menu);
+        super.onCreateOptionsMenu(menu, inflater);
 
-    /**
-     * Handle pausing Chromecast nofications on a pause lifecycle event.
-     */
-    @Override
-    public void onPause() {
-        super.onPause();
-        eventEmitter.emit(GoogleCastEventType.UNSET_NOTIFICATIONS);
+        Map<String, Object> properties = new HashMap<String, Object>();
+        properties.put(GoogleCastComponent.CAST_MENU, menu);
+        properties.put(GoogleCastComponent.CAST_MENU_RESOURCE_ID, R.id.media_router_menu_item);
+        eventEmitter.emit(GoogleCastEventType.SET_CAST_BUTTON, properties);
     }
 }
