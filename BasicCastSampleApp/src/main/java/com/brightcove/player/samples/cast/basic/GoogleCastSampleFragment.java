@@ -1,6 +1,7 @@
 package com.brightcove.player.samples.cast.basic;
 
 import android.os.Bundle;
+import android.content.res.Resources;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -52,10 +53,14 @@ public class GoogleCastSampleFragment extends BrightcovePlayerFragment {
         eventEmitter.emit(GoogleCastEventType.SET_MINI_CONTROLLER, properties);
 
         // Send the location of the media (url) and its metadata information for remote playback.
-        String url = getResources().getString(R.string.media_url);
-        String imageUrl = getResources().getString(R.string.media_image);
+        Resources resources = getResources();
+        String title = resources.getString(R.string.media_title);
+        String studio = resources.getString(R.string.media_studio);
+        String url = resources.getString(R.string.media_url);
+        String thumbnailUrl = resources.getString(R.string.media_thumbnail);
+        String imageUrl = resources.getString(R.string.media_image);
         eventEmitter.emit(GoogleCastEventType.SET_MEDIA_METADATA,
-                buildMetadataProperties("subTitle", "title", "studio", imageUrl, imageUrl, url));
+                buildMetadataProperties("subTitle", title, studio, thumbnailUrl, imageUrl, url));
 
         brightcoveVideoView.setVideoPath(url);
 

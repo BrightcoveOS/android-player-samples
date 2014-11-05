@@ -75,7 +75,7 @@ subprojects {
   }
 
   dependencies {
-    compile 'com.android.support:appcompat-v7:19.1.0'
+    compile 'com.android.support:appcompat-v7:20.0.0'
   }
 
   if (project.name.contains('AdobePass')) {
@@ -96,7 +96,7 @@ subprojects {
     dependencies {
       compile "com.brightcove.player:android-ima-plugin:${anpVersion}"
       compile files(libraryDirectory + imaAndroidSdkJarFileName)
-      compile 'com.google.android.gms:play-services:5.2.08'
+      compile 'com.google.android.gms:play-services:6.1.71'
     }
   }
 
@@ -152,8 +152,8 @@ subprojects {
     dependencies {
       compile "com.brightcove.player:android-cast-plugin:${anpVersion}"
       compile 'com.google.sample.castcompanionlibrary:CastCompanionLibrary-android:1.+'
-      compile 'com.google.android.gms:play-services:5.2.08'
-      compile 'com.android.support:mediarouter-v7:19.0.1'
+      compile 'com.google.android.gms:play-services:6.1.71'
+      compile 'com.android.support:mediarouter-v7:20.0.0'
     }
   }
 
