@@ -35,7 +35,6 @@ public class MainActivity extends BrightcovePlayer {
             @Override
             public void onVideo(Video video) {
                 brightcoveVideoView.add(video);
-                brightcoveVideoView.start();
             }
 
             @Override

@@ -10,6 +10,7 @@ import com.brightcove.player.event.EventType;
 import com.brightcove.player.view.BrightcoveVideoView;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 /**
  * White box style tests for DFXP/TTML closed captioning in the Brightcove SDK.
@@ -45,9 +46,10 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     /**
      * Test
      */
-    public void testBlank() throws InterruptedException {
+    public void testCaptionsRendered() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(2);
-        Log.v(TAG, "testPlay");
-        assertTrue(true);
+        Log.v(TAG, "testCaptionsRendered");
+
+        assertTrue("Timeout occurred.", latch.await(2, TimeUnit.MINUTES));
     }
 }
