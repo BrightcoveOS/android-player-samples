@@ -8,6 +8,7 @@ import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventType;
 import com.brightcove.player.view.BrightcoveVideoView;
+import com.robotium.solo.Solo;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -19,6 +20,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
     private final String TAG = this.getClass().getSimpleName();
 
+    private Solo solo;
     private BrightcoveVideoView brightcoveVideoView;
     private EventEmitter eventEmitter;
     private MainActivity mainActivity;
@@ -32,6 +34,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         super.setUp();
         setActivityInitialTouchMode(false);
         mainActivity = getActivity();
+        solo = new Solo(getInstrumentation(), mainActivity);
         brightcoveVideoView = (BrightcoveVideoView) mainActivity.findViewById(R.id.brightcove_video_view);
         eventEmitter = brightcoveVideoView.getEventEmitter();
 
@@ -46,10 +49,21 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     /**
      * Test
      */
-    public void testCaptionsRendered() throws InterruptedException {
-        final CountDownLatch latch = new CountDownLatch(2);
-        Log.v(TAG, "testCaptionsRendered");
+    public void testCaptionsLoaded() throws InterruptedException {
+        final CountDownLatch latch = new CountDownLatch(1);
+        Log.v(TAG, "testCaptionsLoaded");
+        eventEmitter.once(EventType.DID_LOAD_CAPTIONS, new EventListener() {
+            @Override
+            public void processEvent(Event event) {
+                Log.v(TAG, "DERP CAPS LOADED");
+                latch.countDown();
+            }
+        });
+        assertTrue("Timeout occurred.", latch.await(30, TimeUnit.SECONDS));
+    }
 
-        assertTrue("Timeout occurred.", latch.await(2, TimeUnit.MINUTES));
+    @Override
+    public void tearDown() throws Exception {
+        solo.finishOpenedActivities();
     }
 }
