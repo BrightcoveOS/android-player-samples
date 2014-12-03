@@ -64,11 +64,11 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
             public void processEvent(Event event) {
                 View parent = solo.getView(R.id.brightcove_video_view);
                 ArrayList<BrightcoveClosedCaptioningView> captioningViews = solo.getCurrentViews(BrightcoveClosedCaptioningView.class, parent);
-                assertTrue("A BrightcoveClosedCaptioningView was added.", captioningViews.size() == 1);
+                assertEquals("A BrightcoveClosedCaptioningView was supposed to be added, but wasn't.", captioningViews.size(), 1);
                 latch.countDown();
             }
         });
-        assertTrue("Timeout occurred.", latch.await(2, TimeUnit.MINUTES));
+        assertTrue("Timeout occurred.", latch.await(1, TimeUnit.MINUTES));
     }
 
     /**
@@ -76,36 +76,24 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      * of rendered DFXP captions.
      */
     public void testNumberDFXPCaptionsRendered() throws InterruptedException {
-        final CountDownLatch latch = new CountDownLatch(1);
         Log.v(TAG, "testNumberDFXPCaptionsRendered:");
+
+        final int[] numDFXPCaptions = new int[1];
 
         eventEmitter.once(EventType.DID_LOAD_CAPTIONS, new EventListener() {
             @Override
             public void processEvent(Event event) {
-                int numDFXPCaptions = getNumberDFXPCaptions(event);
-                View parent = solo.getView(R.id.brightcove_video_view);
-                ArrayList<BrightcoveClosedCaptioningView> captioningViews = solo.getCurrentViews(BrightcoveClosedCaptioningView.class, parent);
-                if (captioningViews.size() == 1) {
-                    ArrayList<BrightcoveClosedCaptioningTextView> captioningTextViews = solo.getCurrentViews(BrightcoveClosedCaptioningTextView.class, captioningViews.get(0));
-                    assertTrue("All DFXP captions received have a rendered view.", captioningTextViews.size() == numDFXPCaptions);
-                    latch.countDown();
-                }
+                numDFXPCaptions[0] = getNumberDFXPCaptions(event);
             }
         });
-        assertTrue("Timeout occurred.", latch.await(2, TimeUnit.MINUTES));
 
-    }
-
-    /**
-     * Verify that captions are invisible when they are disabled via SharedPreferences.
-     */
-    public void testCaptionsInvisibleWhenDisabled() throws InterruptedException {
-        Log.v(TAG, "testCaptionsInvisibleWhenDisabled:");
-
-        solo.clickOnActionBarItem(R.id.action_cc_settings);
-        solo.clickOnRadioButton(1);
-
-        assertFalse("Captions are currently hidden.", areCaptionsVisible());
+        View parent = solo.getView(R.id.brightcove_video_view);
+        solo.sleep(3500);
+        ArrayList<BrightcoveClosedCaptioningView> captioningViews = solo.getCurrentViews(BrightcoveClosedCaptioningView.class,  parent);
+        if (captioningViews.size() == 1) {
+            ArrayList<BrightcoveClosedCaptioningTextView> captioningTextViews = solo.getCurrentViews(BrightcoveClosedCaptioningTextView.class, captioningViews.get(0));
+            assertEquals("Not all DFXP captions have a rendered view.", captioningTextViews.size(), numDFXPCaptions[0]);
+        }
     }
 
     /**
@@ -113,11 +101,21 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      */
     public void testCaptionsVisibleWhenEnabled() throws InterruptedException {
         Log.v(TAG, "testCaptionsVisibleWhenEnabled:");
-
         solo.clickOnActionBarItem(R.id.action_cc_settings);
         solo.clickOnRadioButton(0);
+        solo.sleep(1000);
+        assertTrue("Captions are supposed to currently be visible.", areCaptionsVisible());
+    }
 
-        assertTrue("Captions are currently visible.", areCaptionsVisible());
+    /**
+     * Verify that captions are invisible when they are disabled via SharedPreferences.
+     */
+    public void testCaptionsInvisibleWhenDisabled() throws InterruptedException {
+        Log.v(TAG, "testCaptionsInvisibleWhenDisabled:");
+        solo.clickOnActionBarItem(R.id.action_cc_settings);
+        solo.clickOnRadioButton(1);
+        solo.sleep(1000);
+        assertFalse("Captions are supposed to currently be hidden.", areCaptionsVisible());
     }
 
     @Override
@@ -125,43 +123,31 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         solo.finishOpenedActivities();
     }
 
+    /**
+     * Helper method to get the number of DFXP captions from the SDK.
+     * @param event - The event containing the DFXP document.
+     * @return the number of DFXP captions.
+     */
     private int getNumberDFXPCaptions(Event event) {
         TTMLDocument document = (TTMLDocument) event.properties.get(Event.TTML_DOCUMENT);
         return document.getCaptions().size();
     }
 
-    private boolean isCaptioningViewAttached() {
-        View parent = solo.getView(R.id.brightcove_video_view);
-        ArrayList<BrightcoveClosedCaptioningView> captioningViews = solo.getCurrentViews(BrightcoveClosedCaptioningView.class, parent);
-        if (captioningViews.size() == 1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
+    /**
+     * Helper method to check if a caption textview is visible.
+     * @return true if visible, false otherwise.
+     */
     private boolean areCaptionsVisible() {
-        int numVisibile = 0;
-        int numInvisible = 0;
-
         View parent = solo.getView(R.id.brightcove_video_view);
         ArrayList<BrightcoveClosedCaptioningView> captioningViews = solo.getCurrentViews(BrightcoveClosedCaptioningView.class, parent);
         if (captioningViews.size() == 1) {
             ArrayList<BrightcoveClosedCaptioningTextView> captioningTextViews = solo.getCurrentViews(BrightcoveClosedCaptioningTextView.class, captioningViews.get(0));
             for (BrightcoveClosedCaptioningTextView textView : captioningTextViews) {
                 if (textView.isShown()) {
-                    numVisibile++;
-                } else {
-                    numInvisible++;
+                    return true;
                 }
             }
         }
-        if (numVisibile > 0 && numInvisible == 0) {
-            return true;
-        } else if (numInvisible > 0 && numVisibile == 0) {
-            return false;
-        } else {
-            return false;
-        }
+        return false;
     }
 }
