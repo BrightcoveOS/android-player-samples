@@ -1,4 +1,4 @@
-package com.brightcove.samples.android.closedcaptioning.dfxp;
+package com.brightcove.player.samples.captioning.dfxp;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
@@ -12,6 +12,8 @@ import com.brightcove.player.event.EventType;
 import com.brightcove.player.model.TTMLDocument;
 import com.brightcove.player.view.BrightcoveClosedCaptioningView;
 import com.brightcove.player.view.BrightcoveVideoView;
+import com.brightcove.samples.android.closedcaptioning.dfxp.MainActivity;
+import com.brightcove.samples.android.closedcaptioning.dfxp.R;
 import com.robotium.solo.Solo;
 
 import java.util.ArrayList;
