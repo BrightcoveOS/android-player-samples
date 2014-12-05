@@ -1,10 +1,6 @@
 android-player-samples
 ======================
 
-Still under development and is experimental  - please use at your own risk.  See release notes in the top level file **release-notes.txt**.
-
-======================
-
 Provides sample apps for the Brightcove Player SDK and Plugins for Android.
 
 The Android sample app projects in this repository can be inserted directly into Android Studio and subsequently executed or simulated.
