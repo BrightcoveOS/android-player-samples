@@ -1,10 +1,6 @@
 OnceUx Plugin
 =============
 
-Still under development and is experimental  - please use at your own risk.  See release notes in the top level file **release-notes.txt**.
-
-======================
-
 Provides a sample app illustrating how to configure and run the *Brightcove Native Player for Android* **OnceUx Plugin**.
 
 ## Installing and starting the sample app
