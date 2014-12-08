@@ -12,6 +12,7 @@ include ':BasicWidevineSampleApp'
 include ':HLSPlayerID3SampleApp'
 include ':HLSPlayerSampleApp'
 include ':WebVTTSampleApp'
+include ':DFXPClosedCaptioningSampleApp'
 
 // FreeWheel samples require AdManager.jar to be added to the libs
 // folder.  This jar can be acquired from FreeWheel.

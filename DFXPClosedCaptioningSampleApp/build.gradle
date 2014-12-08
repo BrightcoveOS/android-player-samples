@@ -1,0 +1,4 @@
+dependencies {
+    compile "com.brightcove.player:android-sdk:${anpVersion}"
+    compile "com.jayway.android.robotium:robotium-solo:5.2.1"
+}
