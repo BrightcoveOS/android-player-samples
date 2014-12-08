@@ -7,7 +7,7 @@ Provides a sample app illustrating how to configure and run the *Brightcove Nati
 
 To focus solely on the OnceUx Plugin, execute these steps from the top level sample app directory:
 
-    gradle :BasicOnceUxSampleApp:clean :BasicOnceUxSampleApp:build :BasicOnceUxSampleApp:installDebug
+    gradlew :BasicOnceUxSampleApp:clean :BasicOnceUxSampleApp:build :BasicOnceUxSampleApp:installDebug
 
 while a device is connected.  Then start the app by selecting it in the app folder on the device.
 

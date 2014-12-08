@@ -16,7 +16,7 @@ project.ext {
   // The directory that will be used to reference dependent libraries.
   // Modify as needed. Defaulted to users home directory.
   libraryDirectory = "${System.getProperty("user.home")}/libs/"
-  imaAndroidSdkJarFileName = "ima-android-sdk-beta8.jar"
+  imaAndroidSdkJarFileName = "ima-android-sdk-beta9.jar"
 }
 
 // Automatically download the Google IMA third party zip file and
@@ -45,12 +45,14 @@ subprojects {
 
   repositories {
     mavenCentral()
-
     maven {
       url 'http://repo.brightcove.com/snapshots'
     }
     maven {
       url 'http://repo.brightcove.com/releases'
+    }
+    maven {
+      url System.getenv('ANDROID_HOME') + '/extras/android/m2repository'
     }
     maven {
       url System.getenv('ANDROID_HOME') + '/extras/google/m2repository'
