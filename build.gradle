@@ -2,10 +2,10 @@
 
 buildscript {
   repositories {
-    mavenCentral()
+    jcenter()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:0.12.+'
+    classpath 'com.android.tools.build:gradle:1.0.+'
     classpath 'de.undercouch:gradle-download-task:0.+'
   }
 }
@@ -41,10 +41,11 @@ def downloadIMA() {
 }
 
 subprojects {
-  apply plugin: 'android'
+  apply plugin: 'com.android.application'
 
   repositories {
-    mavenCentral()
+    jcenter()
+    mavenLocal()
     maven {
       url 'http://repo.brightcove.com/snapshots'
     }
@@ -67,12 +68,12 @@ subprojects {
   }
 
   android {
-    compileSdkVersion 19
-    buildToolsVersion "19.1.0"
+    compileSdkVersion 21
+    buildToolsVersion "20.0.0"
 
     defaultConfig {
       minSdkVersion 10
-      targetSdkVersion 19
+      targetSdkVersion 21
     }
   }
 
