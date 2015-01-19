@@ -12,8 +12,6 @@ This version of the sample apps supports the latest Brightcove SDK and plugins. 
 
 * [Basic Akamai Identity Services Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicAISWebViewSampleApp"): This app shows how to configure an app to use the Brightcove native Android player with Akamai Identity Services.
 
-* [Basic AdobePass Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicAdobePassWebViewSampleApp"): This app shows how to configure an app to use the Brightcove native Android player with AdobePass.
-
 * [Basic Bundled Video Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicWidevineSampleApp"): This app shows how to play a video that is stored on the device for offline viewing.
 
 * [Basic Cast Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicCastSampleApp"): This add Google Chromecast with the Brightcove native Android player. Note that this app requires installation of the Google Play and Google Repository plugins into the Android Studio. To install these plugins, open Android Studio, and then open the Tools menu. From here, select Android, then SDK Manager. When the SDK Manager opens, scroll to the bottom and select Google Play Services and Google Repository under the Extras menu. Click Install Packages, accept the license agreement, and close the SDK Manager when installation completes.
