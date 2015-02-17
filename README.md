@@ -1,10 +1,6 @@
 android-player-samples
 ======================
 
-Still under development and is experimental  - please use at your own risk.  See release notes in the top level file **release-notes.txt**.
-
-======================
-
 Provides sample apps for the Brightcove Player SDK and Plugins for Android.
 
 The Android sample app projects in this repository can be inserted directly into Android Studio and subsequently executed or simulated.
@@ -15,8 +11,6 @@ This version of the sample apps supports the latest Brightcove SDK and plugins. 
 * [Ad Rules Google IMA Widevine Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "AdRulesIMAWidevineSampleApp"): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules with a Widevine video. This version has been tested and works with v3 of the IMA SDK.
 
 * [Basic Akamai Identity Services Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicAISWebViewSampleApp"): This app shows how to configure an app to use the Brightcove native Android player with Akamai Identity Services.
-
-* [Basic AdobePass Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicAdobePassWebViewSampleApp"): This app shows how to configure an app to use the Brightcove native Android player with AdobePass.
 
 * [Basic Bundled Video Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicWidevineSampleApp"): This app shows how to play a video that is stored on the device for offline viewing.
 
@@ -34,7 +28,9 @@ Note that in order to enable the FreeWheel sample apps, you must independently o
 
 * [Basic Omniture Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicOmnitureSampleApp"): This app shows how to configure an app to use the Brightcove native Android player Omniture Plugin to play a video.
 
-Note that in order to enable this sample app, you must independently obtain and install the file **adobe-adms.jar** into the top-level directory **libs/**.  Version 3.2.2 of the Adobe provided, non-free, jar file was used to test this sample app.
+Note that in order to enable this sample app, you must independently obtain and install the file **adobeMobileLibrary.jar** into the top-level directory **libs/**.  Version 3.2.2 of the Adobe provided, non-free, jar file was used to test this sample app.
+
+* [Basic OnceUx Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicOnceUxSampleApp"): This app shows how to configure an app to use the Brightcove Native Player for Android OnceUx Plugin to play a video.
 
 * [Basic Widevine Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicWidevineSampleApp"): This app shows how to configure an app to use the Brightcove native Android player Widevine Plugin to play a video.
 

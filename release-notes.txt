@@ -1,5 +1,11 @@
 Brightcove Player Samples for Android, Release Notes:
 
+Version 1.0.1:
+
+  BasicOnceUxSampleApp changes:
+
+    * Upgraded to use versions 4.2+.
+
 Version 1.0.0:
 
   BasicOnceUxSampleApp changes:

@@ -2,10 +2,10 @@
 
 buildscript {
   repositories {
-    mavenCentral()
+    jcenter()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:0.12.+'
+    classpath 'com.android.tools.build:gradle:1.0.+'
     classpath 'de.undercouch:gradle-download-task:0.+'
   }
 }
@@ -16,7 +16,7 @@ project.ext {
   // The directory that will be used to reference dependent libraries.
   // Modify as needed. Defaulted to users home directory.
   libraryDirectory = "${System.getProperty("user.home")}/libs/"
-  imaAndroidSdkJarFileName = "ima-android-sdk-beta7.jar"
+  imaAndroidSdkJarFileName = "ima-android-sdk-beta9.jar"
 }
 
 // Automatically download the Google IMA third party zip file and
@@ -41,7 +41,7 @@ def downloadIMA() {
 }
 
 subprojects {
-  apply plugin: 'android'
+  apply plugin: 'com.android.application'
 
   repositories {
     mavenLocal()
@@ -52,6 +52,9 @@ subprojects {
     }
     maven {
       url 'http://repo.brightcove.com/releases'
+    }
+    maven {
+      url System.getenv('ANDROID_HOME') + '/extras/android/m2repository'
     }
     maven {
       url System.getenv('ANDROID_HOME') + '/extras/google/m2repository'
@@ -66,17 +69,17 @@ subprojects {
   }
 
   android {
-    compileSdkVersion 19
-    buildToolsVersion "19.1.0"
+    compileSdkVersion 21
+    buildToolsVersion "20.0.0"
 
     defaultConfig {
       minSdkVersion 10
-      targetSdkVersion 19
+      targetSdkVersion 21
     }
   }
 
   dependencies {
-    compile 'com.android.support:appcompat-v7:19.1.0'
+    compile "com.brightcove.player:android-sdk:${anpVersion}"
   }
 
   if (project.name.contains('AdobePass')) {
@@ -97,6 +100,20 @@ subprojects {
     dependencies {
       compile "com.brightcove.player:android-ima-plugin:${anpVersion}"
       compile files(libraryDirectory + imaAndroidSdkJarFileName)
+      compile 'com.google.android.gms:play-services:6.5.87'
+    }
+  }
+
+  if (project.name.contains('Omniture')) {
+    dependencies {
+      compile "com.brightcove.player:android-omniture-plugin:${anpVersion}"
+      compile files(libraryDirectory + "adobeMobileLibrary.jar")
+    }
+
+    android {
+      defaultConfig {
+        minSdkVersion 16
+      }
     }
   }
 
@@ -139,7 +156,6 @@ subprojects {
     android {
       defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 19
       }
     }
   }
@@ -156,8 +172,7 @@ subprojects {
     dependencies {
       compile "com.brightcove.player:android-cast-plugin:${anpVersion}"
       compile 'com.google.sample.castcompanionlibrary:CastCompanionLibrary-android:1.+'
-      compile 'com.google.android.gms:play-services:4.3.+'
-      compile 'com.android.support:mediarouter-v7:19.0.1'
+      compile 'com.google.android.gms:play-services:6.5.87'
     }
   }
 
