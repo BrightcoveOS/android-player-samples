@@ -27,18 +27,6 @@ public class MainActivity extends BrightcovePlayer {
         brightcoveVideoView = (ExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
 
-//        // Add a test video to the BrightcoveVideoView.
-//        Catalog catalog = new Catalog("ErQk9zUeDVLIp8Dc7aiHKq8hDMgkv5BFU7WGshTc-hpziB3BuYh28A..");
-//        catalog.findPlaylistByReferenceID("stitch", new PlaylistListener() {
-//            public void onPlaylist(Playlist playlist) {
-//                brightcoveVideoView.addAll(playlist.getVideos());
-//            }
-//
-//            public void onError(String error) {
-//                Log.e(TAG, error);
-//            }
-//        });
-//        brightcoveVideoView.setVideoPath("https://ia600408.us.archive.org/26/items/BigBuckBunny_328/BigBuckBunny_512kb.mp4");
         Video video = Video.createVideo("http://www.youtube.com/api/manifest/dash/id/bf5bb2419360daf1/source/youtube?"
                 + "as=fmp4_audio_clear,fmp4_sd_hd_clear&sparams=ip,ipbits,expire,as&ip=0.0.0.0&"
                 + "ipbits=0&expire=19000000000&signature=255F6B3C07C753C88708C07EA31B7A1A10703C8D."

@@ -14,8 +14,8 @@ import com.brightcove.player.event.Event;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
 
-import com.brightcove.plugin.onceux.OnceUxPlugin;
-import com.brightcove.plugin.onceux.event.OnceUxEventType;
+import com.brightcove.onceux.OnceUxComponent;
+import com.brightcove.onceux.event.OnceUxEventType;
 
 /**
  * This app illustrates how to use the Once UX plugin to ensure that:
@@ -26,7 +26,7 @@ import com.brightcove.plugin.onceux.event.OnceUxEventType;
  *
  * - videos are clickable during ad playback and visit the appropriate website,
  *
- * - the companion banner is shown on page switched appropriately as new ads are played 
+ * - the companion banner is shown on page switched appropriately as new ads are played
  *
  * It also covers ensuring that an ad server URL accompanies the content URL.
  *
@@ -54,8 +54,8 @@ public class MainActivity extends BrightcovePlayer {
     // Content suggested by Unicorn for the data url: "http://once.unicornmedia.com/now/od/auto/95ea75e1-dd2a-4aea-851a-28f46f8e8195/43f54cc0-aa6b-4b2c-b4de-63d707167bf9/9b118b95-38df-4b99-bb50-8f53d62f6ef8/content.once";
     // Original from Criss: "http://api16-phx.unicornmedia.com/now/stitched/mp4/b11dbc9b-9d90-4edb-b4ab-769e0049209b/2455340c-8dcd-412e-a917-c6fadfe268c7/3a41c6e4-93a3-4108-8995-64ffca7b9106/18bed8d5-15ec-40c7-8ac8-dd38db9832d9/content.mp4?oasid=e277545e-9b0f-4af8-bf88-6034af781892&umtp=0";
 
-    private OnceUxPlugin plugin;
-    public OnceUxPlugin getOnceUxPlugin(){
+    private OnceUxComponent plugin;
+    public OnceUxComponent getOnceUxPlugin() {
         return plugin;
     }
 
@@ -75,14 +75,14 @@ public class MainActivity extends BrightcovePlayer {
         // error condition is detected.  On either event the plugin will continue playing the
         // video.
         registerEventHandlers();
-        plugin = new OnceUxPlugin(this, brightcoveVideoView);
+        plugin = new OnceUxComponent(this, brightcoveVideoView);
         View view = findViewById(R.id.ad_frame);
         if (view != null && view instanceof ViewGroup) {
             plugin.addCompanionContainer((ViewGroup) view);
         }
-        plugin.processVideo(onceUxAdDataUrl, onceUxContentUrl);
+        plugin.processVideo(onceUxAdDataUrl);
 
- 
+
    }
 
     // Private instance methods

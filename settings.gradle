@@ -1,38 +1,40 @@
-//include ':AdRulesIMASampleApp'
-//include ':AdRulesIMAWidevineSampleApp'
-//include ':BasicAISWebViewSampleApp'
-//include ':BasicBundledVideoSampleApp'
-//include ':BasicCastSampleApp'
-//include ':BasicIMASampleApp'
-//include ':HLSPlayerIMASampleApp'
-//include ':BasicIMAWidevineSampleApp'
-//include ':BasicOnceUxSampleApp'
-//include ':BasicWidevineSampleApp'
-//include ':HLSPlayerID3SampleApp'
-//include ':HLSPlayerSampleApp'
-//include ':WebVTTSampleApp'
+include ':AdRulesIMASampleApp'
+include ':AdRulesIMAWidevineSampleApp'
+include ':BasicAISWebViewSampleApp'
+include ':BasicBundledVideoSampleApp'
+include ':BasicCastSampleApp'
+include ':BasicIMASampleApp'
+include ':HLSPlayerIMASampleApp'
+include ':BasicIMAWidevineSampleApp'
+include ':BasicOnceUxSampleApp'
+include ':BasicTextureViewSampleApp'
+include ':BasicWidevineSampleApp'
+include ':HLSPlayerID3SampleApp'
+include ':HLSPlayerSampleApp'
+include ':WebVTTSampleApp'
+include ':DFXPClosedCaptioningSampleApp'
 include ':ExoPlayerSampleApp'
-//
-//// FreeWheel samples require AdManager.jar to be added to the libs
-//// folder.  This jar can be acquired from FreeWheel.
-//if (freewheelDependenciesAreSatisfied()) {
-//    include ':BasicFreeWheelSampleApp'
-//    include ':BasicFreeWheelWidevineSampleApp'
-//    include ':HLSPlayerFreeWheelSampleApp'
-//}
-//
-//// Omniture samples require adobe-adms.jar to be added to the libs
-//// folder.  This jar can be acquired from Adobe.
-//if (omnitureDependenciesAreSatisfied()) {
-//    include ':BasicOmnitureSampleApp'
-//}
-//
-//boolean freewheelDependenciesAreSatisfied() {
-//    File dep = file("${System.getProperty("user.home")}/libs/AdManager.jar")
-//    return dep.exists()
-//}
-//
-//boolean omnitureDependenciesAreSatisfied() {
-//    File dep = file("${System.getProperty("user.home")}/libs/adobeMobileLibrary.jar")
-//    return dep.exists()
-//}
+
+// FreeWheel samples require AdManager.jar to be added to the libs
+// folder.  This jar can be acquired from FreeWheel.
+if (freewheelDependenciesAreSatisfied()) {
+    include ':BasicFreeWheelSampleApp'
+    include ':BasicFreeWheelWidevineSampleApp'
+    include ':HLSPlayerFreeWheelSampleApp'
+}
+
+// Omniture samples require adobe-adms.jar to be added to the libs
+// folder.  This jar can be acquired from Adobe.
+if (omnitureDependenciesAreSatisfied()) {
+    include ':BasicOmnitureSampleApp'
+}
+
+boolean freewheelDependenciesAreSatisfied() {
+    File dep = file("${System.getProperty("user.home")}/libs/AdManager.jar")
+    return dep.exists()
+}
+
+boolean omnitureDependenciesAreSatisfied() {
+    File dep = file("${System.getProperty("user.home")}/libs/adobeMobileLibrary.jar")
+    return dep.exists()
+}

@@ -1,0 +1,1 @@
+This app demonstrates how to use a TextureView for rendering video content.
