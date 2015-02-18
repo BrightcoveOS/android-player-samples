@@ -1,4 +1,4 @@
-include ':AdRulesIMASampleApp'
+include ':AdRulesIMASampleApp', ':src'
 include ':AdRulesIMAWidevineSampleApp'
 include ':BasicAISWebViewSampleApp'
 include ':BasicBundledVideoSampleApp'
@@ -38,3 +38,5 @@ boolean omnitureDependenciesAreSatisfied() {
     File dep = file("${System.getProperty("user.home")}/libs/adobeMobileLibrary.jar")
     return dep.exists()
 }
+
+project(':src').projectDir = new File('HLSPlayerDFXPSampleApp')

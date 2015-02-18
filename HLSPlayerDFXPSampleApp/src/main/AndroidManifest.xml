@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.brightcove.player.samples.hls.dfxp.MainActivity"
+            android:name=".MainActivity"
             android:screenOrientation="unspecified"
             android:configChanges="orientation|screenSize"
             android:label="@string/app_name" >
