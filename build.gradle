@@ -44,8 +44,9 @@ subprojects {
   apply plugin: 'com.android.application'
 
   repositories {
-    jcenter()
     mavenLocal()
+    mavenCentral()
+
     maven {
       url 'http://repo.brightcove.com/snapshots'
     }
@@ -137,6 +138,18 @@ subprojects {
   if (project.name.contains('HLS')) {
     dependencies {
       compile "com.brightcove.player:android-hls-player:${anpVersion}"
+    }
+  }
+
+  if (project.name.contains('ExoPlayer')) {
+    dependencies {
+      compile "com.brightcove.player:exoplayer:${anpVersion}"
+    }
+
+    android {
+      defaultConfig {
+        minSdkVersion 16
+      }
     }
   }
 
