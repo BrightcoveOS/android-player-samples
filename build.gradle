@@ -46,6 +46,7 @@ subprojects {
   repositories {
     mavenLocal()
     mavenCentral()
+
     maven {
       url 'http://repo.brightcove.com/snapshots'
     }
