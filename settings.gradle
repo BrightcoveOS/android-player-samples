@@ -13,8 +13,9 @@ include ':HLSPlayerID3SampleApp'
 include ':HLSPlayerSampleApp'
 include ':WebVTTSampleApp'
 include ':DFXPClosedCaptioningSampleApp'
-include ':HLSPlayerDFXPSampleApp'
+include ':HLSPlayerDFXPCaptioningSampleApp'
 include ':ExoPlayerSampleApp'
+include ':ExoPlayerDFXPCaptioningSampleApp'
 
 // FreeWheel samples require AdManager.jar to be added to the libs
 // folder.  This jar can be acquired from FreeWheel.
@@ -40,4 +41,4 @@ boolean omnitureDependenciesAreSatisfied() {
     return dep.exists()
 }
 
-project(':src').projectDir = new File('HLSPlayerDFXPSampleApp')
+project(':src').projectDir = new File('HLSPlayerDFXPCaptioningSampleApp')

@@ -31,7 +31,7 @@ public class MainActivity extends BrightcovePlayer {
 
         // Add a test video to the BrightcoveVideoView.
         Catalog catalog = new Catalog("ZUPNyrUqRdcAtjytsjcJplyUc9ed8b0cD_eWIe36jXqNWKzIcE6i8A..");
-        catalog.findVideoByID("3637288623001", new VideoListener() {
+        catalog.findVideoByID("4028212970001", new VideoListener() {
             @Override
             public void onVideo(Video video) {
                 brightcoveVideoView.add(video);

@@ -33,7 +33,7 @@ public class MainActivity extends BrightcovePlayer {
         super.onCreate(savedInstanceState);
 
         Catalog catalog = new Catalog("UV3EUeje-jlI5sUpJAGsDZ2jki26BZl78pRKemVDxNTXAxyVOabPdA..");
-        catalog.findVideoByID("3963535001001", new VideoListener() {
+        catalog.findVideoByReferenceID("10sec-en-xml-caps", new VideoListener() {
             public void onVideo(Video video) {
                 brightcoveVideoView.add(video);
             }
