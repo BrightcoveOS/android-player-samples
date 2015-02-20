@@ -1,4 +1,4 @@
-include ':AdRulesIMASampleApp', ':src'
+include ':AdRulesIMASampleApp'
 include ':AdRulesIMAWidevineSampleApp'
 include ':BasicAISWebViewSampleApp'
 include ':BasicBundledVideoSampleApp'
@@ -16,6 +16,9 @@ include ':DFXPClosedCaptioningSampleApp'
 include ':HLSPlayerDFXPCaptioningSampleApp'
 include ':ExoPlayerSampleApp'
 include ':ExoPlayerDFXPCaptioningSampleApp'
+include ':ExoPlayerIMASampleApp'
+include ':ExoPlayerIMAWidevineSampleApp'
+include ':ExoPlayerWidevineSampleApp'
 
 // FreeWheel samples require AdManager.jar to be added to the libs
 // folder.  This jar can be acquired from FreeWheel.
@@ -40,5 +43,3 @@ boolean omnitureDependenciesAreSatisfied() {
     File dep = file("${System.getProperty("user.home")}/libs/adobeMobileLibrary.jar")
     return dep.exists()
 }
-
-project(':src').projectDir = new File('HLSPlayerDFXPCaptioningSampleApp')
