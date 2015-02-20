@@ -39,21 +39,26 @@ public class MainActivity extends BrightcovePlayer {
                                         "as=fmp4_audio_clear,fmp4_sd_hd_clear&sparams=ip,ipbits,expire,as&ip=0.0.0.0&" +
                                         "ipbits=0&expire=19000000000&signature=255F6B3C07C753C88708C07EA31B7A1A10703C8D." +
                                         "2D6A28B21F921D0B245CDCF36F7EB54A2B5ABFC2&key=ik0";
+
+        // HLS Live, no DVR
+        String bcovLiveHLSURL = "http://bcoveliveios-i.akamaihd.net/hls/live/215102/master_english/398/master.m3u8?playerId=255166148200&lineupId=&affiliateId=&pubId=2402232199001&videoId=2552000984001";
+
+        // Akamai HD2 HLS, non-encrypted
         String hd2HLSURL = "http://bcqaus-vh.akamaihd.net/i/370335738/201402/370335738_32502,70843,70819,58359,70818,70824,70825,001_Punisher.mp4.csmil/master.m3u8?videoId=3250236582001";
 
-        // Returns a 403
+        // Akamai HD2 HLS, encrypted - Returns a 403
         String hd2HLSTokenAuthURL = "http://bcqausauth-vh.akamaihd.net/i/370335738/201402/370335738_32512971,81,91,83,80,78,82,001_Punisher.mp4.csmil/master.m3u8?videoId=3251176046001&hdnea=st=1393280474~exp=1424816474~acl=/*~hmac=f0687ccc31cda7c074a9b9ed75f1928e0503780c69d22317e4eb761d0e800b89";
+
+        // HLS served over https
+        String bcovHttpsHLSURL = "https://secure.brightcove.com/services/mobile/streaming/index/master.m3u8?videoId=4073047675001";
+
+        // Not currently supported
         String onceAdaptiveContinuousTimestampHLSURL = "http://once.unicornmedia.com/now/ctadaptive/m3u8/77128e82-3acd-4064-ab71-f6de437aba5d/da63d706-dae8-4110-9035-e7e79b753ed0/f1a96e7e-d5b8-4737-a527-45c0f79702d9/content.m3u8";
         String onceLongFormNoAdsURL = "http://onceux.unicornmedia.com/now/ads/vmap/od/auto/28c23297-a1ab-4eb5-a697-7d6942db4efb/d202862f-bb88-41c0-921e-27baf5ade003/7d5bdb24-2e0d-4b09-b2c9-7dbf01838f8f/content.once";
 
-        Video video = Video.createVideo(onceLongFormNoAdsURL);
-        video.getProperties().put(Video.Fields.CONTENT_ID, "bf5bb2419360daf1");
-        brightcoveVideoView.add(video);
-
-        // To Do:
-        // Retrieve a genuine Brightcove MPEG-Dash stream
-//        Video video = Video.createVideo("http://solutions.brightcove.com/jwhisenant/testpages/dash-cors/manifest_mpm4sav_mvnumber.mpd");
+//        Video video = Video.createVideo(hd2HLSURL);
 //        video.getProperties().put(Video.Fields.CONTENT_ID, "bf5bb2419360daf1");
+//        brightcoveVideoView.add(video);
 
         // The examples below can all use the Brightcove APIs to retrieve sample/test content
         String hlsOnlyAPIToken = "UV3EUeje-jlI5sUpJAGsDZ2jki26BZl78pRKemVDxNTXAxyVOabPdA..";
@@ -69,23 +74,25 @@ public class MainActivity extends BrightcovePlayer {
         // HLS, multiple renditions
         String hlsOnlyMultiRenditionReferenceId = "66sec-multi-rendition-with-audio-rendition";
 
+        // HLSe, segments served over https
+        String hlsHTTPSReferenceId = "kungfu-secure";
+
         // MP4, multiple renditions
         String mp4OnlyMultiRenditionReferenceId = "75sec-mp4-multi-rendition";
 
         // Add a test video to the BrightcoveVideoView.
-//        Catalog catalog = new Catalog(dashAPIToken);
-//        catalog.findVideoByReferenceID(dashReferenceId, new VideoListener() {
-//            @Override
-//            public void onVideo(Video video) {
-//                brightcoveVideoView.add(video);
-//            }
-//
-//            @Override
-//            public void onError(String s) {
-//                Log.e(TAG, "Could not load video: " + s);
-//            }
-//        });
+        Catalog catalog = new Catalog(mp4OnlyAPIToken);
+        catalog.findVideoByReferenceID(mp4OnlyMultiRenditionReferenceId, new VideoListener() {
+            @Override
+            public void onVideo(Video video) {
+                brightcoveVideoView.add(video);
+            }
 
+            @Override
+            public void onError(String s) {
+                Log.e(TAG, "Could not load video: " + s);
+            }
+        });
 
         // Log whether or not instance state in non-null.
         if (savedInstanceState != null) {
