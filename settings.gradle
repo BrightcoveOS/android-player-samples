@@ -13,7 +13,10 @@ include ':HLSPlayerID3SampleApp'
 include ':HLSPlayerSampleApp'
 include ':WebVTTSampleApp'
 include ':DFXPClosedCaptioningSampleApp'
-include ':ExoPlayerSampleApp'
+
+// The ExoPlayer integration in the Brightcove Native Player SDK for Android
+// is still in extensive internal testing. This is a placeholder.
+// include ':ExoPlayerSampleApp'
 
 // FreeWheel samples require AdManager.jar to be added to the libs
 // folder.  This jar can be acquired from FreeWheel.
