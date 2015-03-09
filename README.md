@@ -8,19 +8,19 @@ Learn more about the [Brightcove Native Player SDKs](http://docs.brightcove.com/
 The Android sample app projects in this repository can be inserted directly into Android Studio and subsequently executed or simulated.
 This version of the sample apps supports the latest Brightcove SDK and plugins.  The following sample apps are included:
 
-* [Ad Rules Google IMA Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "AdRulesIMASampleApp"): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules. This version has been tested and works with v3 of the IMA SDK.
+* [Ad Rules Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/AdRulesIMASampleApp): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules. This version has been tested and works with v3 of the IMA SDK.
 
-* [Ad Rules Google IMA Widevine Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "AdRulesIMAWidevineSampleApp"): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules with a Widevine video. This version has been tested and works with v3 of the IMA SDK.
+* [Ad Rules Google IMA Widevine Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/AdRulesIMAWidevineSampleApp): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules with a Widevine video. This version has been tested and works with v3 of the IMA SDK.
 
-* [Basic Akamai Identity Services Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicAISWebViewSampleApp"): This app shows how to configure an app to use the Brightcove native Android player with Akamai Identity Services.
+* [Basic Akamai Identity Services Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicAISWebViewSampleApp): This app shows how to configure an app to use the Brightcove native Android player with Akamai Identity Services.
 
-* [Basic Bundled Video Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicWidevineSampleApp"): This app shows how to play a video that is stored on the device for offline viewing.
+* [Basic Bundled Video Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicBundledVideoSampleApp): This app shows how to play a video that is stored on the device for offline viewing.
 
-* [Basic Cast Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicCastSampleApp"): This add Google Chromecast with the Brightcove native Android player. Note that this app requires installation of the Google Play and Google Repository plugins into the Android Studio. To install these plugins, open Android Studio, and then open the Tools menu. From here, select Android, then SDK Manager. When the SDK Manager opens, scroll to the bottom and select Google Play Services and Google Repository under the Extras menu. Click Install Packages, accept the license agreement, and close the SDK Manager when installation completes.
+* [Basic Cast Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicCastSampleApp): This add Google Chromecast with the Brightcove native Android player. Note that this app requires installation of the Google Play and Google Repository plugins into the Android Studio. To install these plugins, open Android Studio, and then open the Tools menu. From here, select Android, then SDK Manager. When the SDK Manager opens, scroll to the bottom and select Google Play Services and Google Repository under the Extras menu. Click Install Packages, accept the license agreement, and close the SDK Manager when installation completes.
 
-* [Basic FreeWheel Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicFreeWheelSampleApp"): This app shows how to configure an app to use the Brightcove native Android player FreeWheel Plugin to play a video.
+* [Basic FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicFreeWheelSampleApp): This app shows how to configure an app to use the Brightcove native Android player FreeWheel Plugin to play a video.
 
-* [Basic FreeWheel Widevine Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicFreeWheelWidevineSampleApp"): This app shows how to configure an app to use the Brightcove native Android player FreeWheel Plugin to play a Widevine video.
+* [Basic FreeWheel Widevine Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicFreeWheelWidevineSampleApp): This app shows how to configure an app to use the Brightcove native Android player FreeWheel Plugin to play a Widevine video.
 
 Note that in order to enable the FreeWheel sample apps, you must independently obtain and install the non-free file **AdManager.jar** into the top-level directory **libs/**.  The FreeWheel sample apps were tested with version 5.7.2.  Contact [FreeWheel](http://www.freewheel.tv/about/contact "FreeWheel") directly for more information on how to obtain their products.
 
