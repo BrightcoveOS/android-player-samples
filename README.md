@@ -24,27 +24,27 @@ This version of the sample apps supports the latest Brightcove SDK and plugins. 
 
 Note that in order to enable the FreeWheel sample apps, you must independently obtain and install the non-free file **AdManager.jar** into the top-level directory **libs/**.  The FreeWheel sample apps were tested with version 5.7.2.  Contact [FreeWheel](http://www.freewheel.tv/about/contact "FreeWheel") directly for more information on how to obtain their products.
 
-* [Basic Google IMA Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicIMASampleApp"): This app shows how to setup to use the Google IMA Plugin to play ads before, during and after a video. This version has been tested and works with v3 of the IMA SDK.
+* [Basic Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicIMASampleApp): This app shows how to setup to use the Google IMA Plugin to play ads before, during and after a video. This version has been tested and works with v3 of the IMA SDK.
 
-* [Basic Google IMA Widevine Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicIMAWidevineSampleApp"): This app shows how to setup to use the Google IMA Plugin to play ads before, during and after a Widevine video. This version has been tested and works with v3 of the IMA SDK.
+* [Basic Google IMA Widevine Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicIMAWidevineSampleApp): This app shows how to setup to use the Google IMA Plugin to play ads before, during and after a Widevine video. This version has been tested and works with v3 of the IMA SDK.
 
-* [Basic Omniture Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicOmnitureSampleApp"): This app shows how to configure an app to use the Brightcove native Android player Omniture Plugin to play a video.
+* [Basic Omniture Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicOmnitureSampleApp): This app shows how to configure an app to use the Brightcove native Android player Omniture Plugin to play a video.
 
 Note that in order to enable this sample app, you must independently obtain and install the file **adobeMobileLibrary.jar** into the top-level directory **libs/**.  Version 3.2.2 of the Adobe provided, non-free, jar file was used to test this sample app.
 
-* [Basic OnceUx Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicOnceUxSampleApp"): This app shows how to configure an app to use the Brightcove Native Player for Android OnceUx Plugin to play a video.
+* [Basic OnceUx Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicOnceUxSampleApp): This app shows how to configure an app to use the Brightcove Native Player for Android OnceUx Plugin to play a video.
 
-* [Basic Widevine Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "BasicWidevineSampleApp"): This app shows how to configure an app to use the Brightcove native Android player Widevine Plugin to play a video.
+* [Basic Widevine Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicWidevineSampleApp): This app shows how to configure an app to use the Brightcove native Android player Widevine Plugin to play a video.
 
-* [HLS Player FreeWheel Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "HLSPlayerFreeWheelSampleApp"): This app shows how to configure an app to use the HLS Player with the FreeWheel Plugin to play a video.
+* [HLS Player FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/HLSPlayerFreeWheelSampleApp/src/main): This app shows how to configure an app to use the HLS Player with the FreeWheel Plugin to play a video.
 
-* [HLS Player ID3 Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "HLSPlayerID3SampleApp"): This app shows how to use ID3 tags with the HLS player.
+* [HLS Player ID3 Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/HLSPlayerID3SampleApp/src/main): This app shows how to use ID3 tags with the HLS player.
 
-* [HLS Player Google IMA Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "HLSPlayerIMASampleApp"): This app shows how to configure an app to use the HLS Player with the Google IMA Plugin to play a video.
+* [HLS Player Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/HLSPlayerIMASampleApp): This app shows how to configure an app to use the HLS Player with the Google IMA Plugin to play a video.
 
-* [HLS Player Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "HLSPlayerSampleApp"): This app shows how to setup the HLS player to play.
+* [HLS Player Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/HLSPlayerSampleApp/src/main): This app shows how to setup the HLS player to play.
 
-* [WebVTT Sample App](http://docs.brightcove.com/en/video-cloud/brightcove-player-sdk-for-android/index.html "WebVTTSampleApp"): This app shows how to implement closed captioning using WebVTT files with Android 4.4.
+* [WebVTT Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/WebVTTSampleApp): This app shows how to implement closed captioning using WebVTT files with Android 4.4.
 
 ## Installing the sample apps
 Currently, all of the sample app projects must be installed together as a bundle. Individual sample app projects also have specific dependencies. For those specific dependencies, see the individual project descriptions above for details.
