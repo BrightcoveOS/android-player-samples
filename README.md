@@ -3,6 +3,8 @@ android-player-samples
 
 Provides sample apps for the Brightcove Player SDK and Plugins for Android.
 
+Learn more about the [Brightcove Native Player SDKs](http://docs.brightcove.com/en/video-cloud/mobile-sdks/index.html).
+
 The Android sample app projects in this repository can be inserted directly into Android Studio and subsequently executed or simulated.
 This version of the sample apps supports the latest Brightcove SDK and plugins.  The following sample apps are included:
 
