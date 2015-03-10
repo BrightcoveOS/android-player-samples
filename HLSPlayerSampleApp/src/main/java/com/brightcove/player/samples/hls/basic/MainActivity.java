@@ -28,8 +28,8 @@ public class MainActivity extends BrightcovePlayer {
         brightcoveVideoView = (SeamlessVideoView) findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
 
-        Catalog catalog = new Catalog("ErQk9zUeDVLIp8Dc7aiHKq8hDMgkv5BFU7WGshTc-hpziB3BuYh28A..");
-        catalog.findPlaylistByReferenceID("stitch", new PlaylistListener() {
+        Catalog catalog = new Catalog("UV3EUeje-jlI5sUpJAGsDZ2jki26BZl78pRKemVDxNTXAxyVOabPdA..");
+        catalog.findPlaylistByReferenceID("hls_playlist_1_video", new PlaylistListener() {
                 public void onPlaylist(Playlist playlist) {
                     brightcoveVideoView.addAll(playlist.getVideos());
                 }

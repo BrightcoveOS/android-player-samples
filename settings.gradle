@@ -19,6 +19,7 @@ include ':ExoPlayerDFXPCaptioningSampleApp'
 include ':ExoPlayerIMASampleApp'
 include ':ExoPlayerIMAWidevineSampleApp'
 include ':ExoPlayerWidevineSampleApp'
+include ':ExoPlayerWebVTTSampleApp'
 
 // FreeWheel samples require AdManager.jar to be added to the libs
 // folder.  This jar can be acquired from FreeWheel.

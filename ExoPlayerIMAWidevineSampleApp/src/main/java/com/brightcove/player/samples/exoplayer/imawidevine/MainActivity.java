@@ -106,10 +106,10 @@ public class MainActivity extends BrightcovePlayer {
      */
     private String[] googleAds = {
             // Honda Pilot
-            // "http://pubads.g.doubleclick.net/gampad/ads?sz=400x300&iu=%2F6062%2Fhanna_MA_group%2Fvideo_comp_app&ciu_szs=&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&m_ast=vast&url=[referrer_url]&correlator=[timestamp]"
+            "http://pubads.g.doubleclick.net/gampad/ads?sz=400x300&iu=%2F6062%2Fhanna_MA_group%2Fvideo_comp_app&ciu_szs=&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&m_ast=vast&url=[referrer_url]&correlator=[timestamp]"
 
             // Plato running locally
-            "http://192.168.1.9:9090/formats/IMA3/responses/local-mp4-response.handlebars"
+            //"http://192.168.1.10:9090/formats/IMA3/responses/local-mp4-response.handlebars"
 
             // Plato running at xiappsci.vidmark.local
             // "http://xiappsci.vidmark.local:9090/formats/IMA3/responses/local-mp4-response.handlebars"

@@ -3,6 +3,10 @@ package com.brightcove.player.samples.webvtt;
 import android.media.MediaFormat;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
 
@@ -33,4 +37,23 @@ public class MainActivity extends BrightcovePlayer {
         mediaFormat = MediaFormat.createSubtitleFormat("text/vtt", "nl");
         brightcoveVideoView.addSubtitleSource(getResources().openRawResource(R.raw.sintel_trailer_nl), mediaFormat);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_cc_settings:
+                showClosedCaptioningDialog();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }

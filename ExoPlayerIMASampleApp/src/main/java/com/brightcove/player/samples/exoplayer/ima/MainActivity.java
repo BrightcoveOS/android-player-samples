@@ -124,7 +124,13 @@ public class MainActivity extends BrightcovePlayer {
             "http://pubads.g.doubleclick.net/gampad/ads?sz=400x300&iu=%2F6062%2Fhanna_MA_group%2Fvideo_comp_app&ciu_szs=&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&m_ast=vast&url=[referrer_url]&correlator=[timestamp]"
 
             // Plato running locally, valid VAST response
-//            "http://192.168.1.9:9090/formats/IMA3/responses/local-mp4-response.handlebars"
+//            "http://192.168.1.10:9090/formats/IMA3/responses/local-mp4-response.handlebars"
+
+            // Plato running locally, VMAP, single preroll
+//            "http://192.168.1.10:9090/formats/IMA3/preroll/local-mp4-only-playlist.handlebars"
+
+            // Plato running locally, VMAP, preroll/midroll/postroll
+//            "http://192.168.1.10:9090/formats/IMA3/combined/pre-mid-post-playlist-single-preroll.handlebars"
 
             // Plato running at xiappsci.vidmark.local, valid VAST response
             // "http://xiappsci.vidmark.local:9090/formats/IMA3/responses/local-mp4-response.handlebars"
@@ -142,6 +148,8 @@ public class MainActivity extends BrightcovePlayer {
      * abastraction for the Google IMA Plugin setup code.
      */
     private void setupCuePoints(Source source) {
+
+        Log.v(TAG, "Setting up Cue Points");
         String cuePointType = "ad";
         Map<String, Object> properties = new HashMap<String, Object>();
         Map<String, Object> details = new HashMap<String, Object>();
@@ -165,6 +173,7 @@ public class MainActivity extends BrightcovePlayer {
         cuePoint = new CuePoint(CuePoint.PositionType.AFTER, cuePointType, properties);
         details.put(Event.CUE_POINT, cuePoint);
         eventEmitter.emit(EventType.SET_CUE_POINT, details);
+        Log.v(TAG, "Done setting up Cue Points");
     }
 
     /**
