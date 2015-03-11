@@ -22,6 +22,8 @@ include ':ExoPlayerWidevineSampleApp'
 include ':ExoPlayerWebVTTSampleApp'
 include ':ExoPlayerFreeWheelSampleApp'
 include ':BasicFreeWheelSampleApp'
+include ':ExoPlayerIMAAdRulesSampleApp'
+
 
 // FreeWheel samples require AdManager.jar to be added to the libs
 // folder.  This jar can be acquired from FreeWheel.
@@ -30,7 +32,6 @@ if (freewheelDependenciesAreSatisfied()) {
     include ':BasicFreeWheelWidevineSampleApp'
     include ':HLSPlayerFreeWheelSampleApp'
     include ':ExoPlayerFreeWheelSampleApp'
-    include ':ExoPlayerIMAAdRulesSampleApp'
 }
 
 // Omniture samples require adobe-adms.jar to be added to the libs

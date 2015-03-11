@@ -138,7 +138,7 @@ public class MainActivity extends BrightcovePlayer {
                 // Build an ads request object and point it to the ad
                 // display container created above.
                 AdsRequest adsRequest = sdkFactory.createAdsRequest();
-                adsRequest.setAdTagUrl(platoPreMidPostrollVMAP);
+                adsRequest.setAdTagUrl(platoPrerollOnlyVMAP);
                 adsRequest.setAdDisplayContainer(container);
 
                 ArrayList<AdsRequest> adsRequests = new ArrayList<AdsRequest>(1);
