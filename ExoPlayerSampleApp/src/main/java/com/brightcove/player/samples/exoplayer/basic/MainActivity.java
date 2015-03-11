@@ -85,7 +85,7 @@ public class MainActivity extends BrightcovePlayer {
 
         // Add a test video to the BrightcoveVideoView.
         Catalog catalog = new Catalog(hlsOnlyAPIToken);
-        catalog.findVideoByReferenceID(hlsEncryptedReferenceId, new VideoListener() {
+        catalog.findVideoByReferenceID(hlsOnlyMultiRenditionReferenceId, new VideoListener() {
             @Override
             public void onVideo(Video video) {
                 brightcoveVideoView.add(video);
