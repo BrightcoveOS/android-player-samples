@@ -30,6 +30,7 @@ if (freewheelDependenciesAreSatisfied()) {
     include ':BasicFreeWheelWidevineSampleApp'
     include ':HLSPlayerFreeWheelSampleApp'
     include ':ExoPlayerFreeWheelSampleApp'
+    include ':ExoPlayerIMAAdRulesSampleApp'
 }
 
 // Omniture samples require adobe-adms.jar to be added to the libs

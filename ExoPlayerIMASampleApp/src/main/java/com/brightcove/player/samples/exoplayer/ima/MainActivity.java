@@ -126,20 +126,14 @@ public class MainActivity extends BrightcovePlayer {
             // Plato running locally, valid VAST response
 //            "http://192.168.1.10:9090/formats/IMA3/responses/local-mp4-response.handlebars"
 
-            // Plato running locally, VMAP, single preroll
-//            "http://192.168.1.10:9090/formats/IMA3/preroll/local-mp4-only-playlist.handlebars"
-
-            // Plato running locally, VMAP, preroll/midroll/postroll
-//            "http://192.168.1.10:9090/formats/IMA3/combined/pre-mid-post-playlist-single-preroll.handlebars"
-
             // Plato running at xiappsci.vidmark.local, valid VAST response
             // "http://xiappsci.vidmark.local:9090/formats/IMA3/responses/local-mp4-response.handlebars"
 
             // Plato running locally, empty VAST response
-//            "http://192.168.1.9:9090/formats/IMA3/responses/empty.handlebars"
+//            "http://192.168.1.10:9090/formats/IMA3/responses/empty.handlebars"
 
             // Plato running locally, 30-second server timeout
-//            "http://192.168.1.9:9090/formats/IMA3/responses/local-mp4-response.handlebars?sleep=30000"
+//            "http://192.168.1.10:9090/formats/IMA3/responses/local-mp4-response.handlebars?sleep=30000"
 
     };
 
@@ -164,7 +158,7 @@ public class MainActivity extends BrightcovePlayer {
         // midroll at 10 seconds.
         // Due HLS bugs in the Android MediaPlayer, midrolls are not supported.
         if (!source.getDeliveryType().equals(DeliveryType.HLS)) {
-            cuePoint = new CuePoint(10 * (int) DateUtils.SECOND_IN_MILLIS, cuePointType, properties);
+            cuePoint = new CuePoint(20 * (int) DateUtils.SECOND_IN_MILLIS, cuePointType, properties);
             details.put(Event.CUE_POINT, cuePoint);
             eventEmitter.emit(EventType.SET_CUE_POINT, details);
         }
