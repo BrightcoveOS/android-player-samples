@@ -20,6 +20,7 @@ include ':ExoPlayerIMASampleApp'
 include ':ExoPlayerIMAWidevineSampleApp'
 include ':ExoPlayerWidevineSampleApp'
 include ':ExoPlayerWebVTTSampleApp'
+include ':ExoPlayerFreeWheelSampleApp'
 include ':BasicFreeWheelSampleApp'
 
 // FreeWheel samples require AdManager.jar to be added to the libs
