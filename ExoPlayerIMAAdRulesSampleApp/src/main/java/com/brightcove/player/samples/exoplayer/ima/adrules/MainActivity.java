@@ -32,6 +32,7 @@ import java.util.Map;
  *
  * @author Paul Matthew Reilly (original code)
  * @author Paul Michael Reilly (added explanatory comments)
+ * @author Jim Whisenant (adapted this example from the AdRulesIMASampleApp, and added test data)
  */
 public class MainActivity extends BrightcovePlayer {
 

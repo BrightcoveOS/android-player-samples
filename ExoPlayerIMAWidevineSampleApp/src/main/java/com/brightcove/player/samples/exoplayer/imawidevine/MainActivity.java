@@ -39,7 +39,8 @@ import java.util.Map;
  * This app illustrates how to use the ExoPlayer, IMA and Widevine with the Brightcove
  * Native Player SDK for Android.
  *
- * @author Jim Whisenant (jwhisenant@brightcove.com)
+ * @author Billy Hnath (original code)
+ * @author Jim Whisenant (adapted this example from BasicIMAWidevineSampleApp, and added test data)
  */
 public class MainActivity extends BrightcovePlayer {
 

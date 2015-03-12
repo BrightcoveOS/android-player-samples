@@ -20,7 +20,11 @@ import com.brightcove.player.view.ExoPlayerVideoView;
  * This app illustrates how to use the ExoPlayer with the Brightcove
  * Native Player SDK for Android and Web-VTT Captions.
  *
- * @author Jim Whisenant (jwhisenant@brightcove.com)
+ * @author Paul Matthew Reilly (original code, based on Github history)
+ * @author Jim Whisenant (
+ *          adapted this example from WebVTTSampleApp
+ *          added test data
+ *          added a WIP Task to retrieve captions instead of load them from the local filesystem)
  */
 public class MainActivity extends BrightcovePlayer {
 

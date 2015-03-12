@@ -16,7 +16,8 @@ import com.brightcove.player.view.SeamlessVideoView;
  * This app illustrates how to use the Brightcove HLS player for
  * Android, with DFXP Captions.
  *
- * @author Jim Whisenant
+ * @author Billy Hnath (original code)
+ * @author Jim Whisenant (adapted this example from DFXPClosedCaptioningSampleApp)
  */
 public class MainActivity extends BrightcovePlayer {
 

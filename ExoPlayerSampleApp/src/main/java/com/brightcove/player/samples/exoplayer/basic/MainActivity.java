@@ -14,6 +14,7 @@ import com.brightcove.player.view.ExoPlayerVideoView;
  * Native Player SDK for Android.
  *
  * @author Billy Hnath (bhnath@brightcove.com)
+ * @author JIm Whisenant (added test data)
  */
 public class MainActivity extends BrightcovePlayer {
 
