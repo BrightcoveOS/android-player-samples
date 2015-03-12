@@ -41,6 +41,10 @@ public class MainActivity extends BrightcovePlayer {
     private GoogleIMAComponent googleIMAComponent;
     private String adRulesURL = "http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=%2F15018773%2Feverything2&ciu_szs=300x250%2C468x60%2C728x90&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=dummy&correlator=[timestamp]&cmsid=133&vid=10XWSh7W4so&ad_rule=1";
 
+    // Local ad server simulator data
+    private String platoUrlBase = "http://192.168.1.10:9090";
+    private String platoAdRulesURL = platoUrlBase + "/formats/IMA3/combined/pre-mid-post-playlist.handlebars";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // When extending the BrightcovePlayer, we must assign the BrightcoveVideoView before
