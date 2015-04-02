@@ -66,9 +66,57 @@ Additionally, you will need to enforce a minimum of API level 16 (Android 4.1+).
 The BrightcoveExoPlayer integration serves as a bridge between [Google's ExoPlayer]() and the [Brightcove Native Player SDK for Android]().
 The following example is taken from the ExoPlayerSampleApp:
 
-<CODE>
+        // MainActivity.java
+    [1] public class MainActivity extends BrightcovePlayer {
 
-EXPLAIN CODE
+        private final String TAG = this.getClass().getSimpleName();
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            // When extending the BrightcovePlayer, we must assign the brightcoveVideoView before
+            // entering the superclass. This allows for some stock video player lifecycle
+            // management.  Establish the video object and use it's event emitter to get important
+            // notifications and to control logging.
+            setContentView(R.layout.activity_main);
+    [2]     brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
+            super.onCreate(savedInstanceState);
+
+            // Add a test video to the BrightcoveVideoView.
+    [3]     Catalog catalog = new Catalog("ZUPNyrUqRdcAtjytsjcJplyUc9ed8b0cD_eWIe36jXqNWKzIcE6i8A..");
+            catalog.findVideoByID("4147927164001", new VideoListener() {
+                @Override
+                public void onVideo(Video video) {
+                    brightcoveVideoView.add(video);
+                }
+
+                @Override
+                public void onError(String s) {
+                    Log.e(TAG, "Could not load video: " + s);
+                }
+            });
+
+            // Log whether or not instance state in non-null.
+            if (savedInstanceState != null) {
+                Log.v(TAG, "Restoring saved position");
+            } else {
+                Log.v(TAG, "No saved state");
+            }
+        }
+
+        // res/layout/activity_main.xml
+    [4] <com.brightcove.player.view.BrightcoveExoPlayerVideoView
+            android:id="@+id/brightcove_video_view"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:layout_gravity="center_horizontal|top"/>
+
+To explain in more detail:
+ 1. Extends *MainActivity* to use the *BrightcovePlayer* class, which handles activity lifecycle behavior for the Brightcove player used.
+ 2. Instantiates the BrightcoveExoPlayerVideoView from the layout XML set with *setContentView()* and assigns to the *brightcoveVideoView* member variable of the *BrightcovePlayer* class.
+ 3. Loads a sample video from the Media API of Brightcove VideoCloud, given an authorization token and an video id.
+ 4. A XML declaration for the BrightcoveExoPlayerVideoView from the activity's layout file.
+
+
 
 ## Known Issues
 
