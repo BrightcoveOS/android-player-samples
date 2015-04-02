@@ -63,7 +63,7 @@ Additionally, you will need to enforce a minimum of API level 16 (Android 4.1+).
 
 ## Quick Start
 
-The BrightcoveExoPlayer integration serves as a bridge between [Google's ExoPlayer]() and the [Brightcove Native Player SDK for Android]().
+The BrightcoveExoPlayer integration serves as a bridge between [Google's ExoPlayer](https://github.com/google/ExoPlayer) and the [Brightcove Native Player SDK for Android](http://docs.brightcove.com/en/video-cloud/mobile-sdks/brightcove-player-sdk-for-android/index.html).
 The following example is taken from the ExoPlayerSampleApp:
 
         // MainActivity.java
