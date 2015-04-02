@@ -12,6 +12,13 @@ The following sample applications are included:
 
 * BasicExoPlayerSampleApp: Creates an instance of the Brightcove ExoPlayer plugin and demonstrates playback functionality for an MP4 video.
 
+### Features
+
+The Brightcove ExoPlayer plugin currently supports the following:
+* HLS playback
+* EIA-608 embedded captions
+* WebVTT and TTML sidecar captions
+
 ## Requirements
 
 The Brightcove ExoPlayer plugin requires:
@@ -47,13 +54,20 @@ Additionally, you will need to enforce a minimum of API level 16 (Android 4.1+).
 
 ### Playback
 
+#### HLS
+* There is currently no support for HLS Live DVR playback with sliding windows.
+* There is currently no support for HLSe playback with token authorization.
+
 ### Closed Captions
+* There is currently no support for multiple sidecar or embedded captions files with multiple locales. You may only provide a single captions file at this time.
 
 ### Advertising
 
 ### Digital Rights Management
+* There is no official support for DRM (Widevine, PlayReady, etc) in this beta.
 
 ### Specific Devices Issues
+* We have seen a number of problems with video loading and playback on Samsung devices running Android version 4.1 and 4.2. We are actively looking into these issues.
 
 ## Reporting Bugs
 
