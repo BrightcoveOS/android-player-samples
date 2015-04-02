@@ -1,34 +1,34 @@
 BrightcoveExoPlayer-Samples
 ======================
 
-**_Note: The Brightcove ExoPlayer plugin used in these sample applications is in beta._**
+**_Note: The BrightcoveExoPlayer integration used in these sample applications is in beta._**
 
 ## Description
 
-A collection of sample applications using the Brightcove Player SDK for Android with the Brightcove ExoPlayer plugin.
+A collection of sample applications using the Brightcove Player SDK for Android with the BrightcoveExoPlayer integration.
 
 These sample applications are built to be modified and run from Android Studio and support the latest Brightcove SDK and plugins.
 The following sample applications are included:
 
-* BasicExoPlayerSampleApp: Creates an instance of the Brightcove ExoPlayer plugin and demonstrates playback functionality for an MP4 video.
+* BasicExoPlayerSampleApp: Creates an instance of the BrightcoveExoPlayer integration and demonstrates playback functionality for an MP4 video.
 
 ## Features
 
-The Brightcove ExoPlayer plugin currently supports the following:
+The BrightcoveExoPlayer integration currently supports the following:
 * HLS playback
 * EIA-608 embedded captions
 * WebVTT and TTML sidecar captions
 
 ## Requirements
 
-The Brightcove ExoPlayer plugin requires:
+The BrightcoveExoPlayer integration requires:
 * Android version 4.1 and above (API level 16 and up)
 
-The Brightcove ExoPlayer plugin is currently developed with Android Studio and Gradle. Eclipse is not officially supported.
+The BrightcoveExoPlayer integration is currently developed with Android Studio and Gradle. Eclipse is not officially supported.
 
 ## Installation
 
-As demonstrated in the sample applications, adding the following to your applications dependencies will allow the Brightcove ExoPlayer plugin to be invoked:
+As demonstrated in the sample applications, adding the following to your applications dependencies will allow the BrightcoveExoPlayer integration to be invoked:
 
     # build.gradle
 
@@ -77,7 +77,7 @@ Additionally, you will need to enforce a minimum of API level 16 (Android 4.1+).
 
 ## Reporting Bugs
 
-To report any bugs or otherwise odd behavior found within the Brightcove ExoPlayer plugin, please submit the following
+To report any bugs or otherwise odd behavior found within the BrightcoveExoPlayer integration, please submit the following
 to the [Brightcove Native Player SDKs Google Group](https://groups.google.com/forum/#!forum/brightcove-native-player-sdks):
 
 1. Please preface your post with an [ExoPlayer] tag.
