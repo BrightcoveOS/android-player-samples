@@ -45,6 +45,16 @@ Additionally, you will need to enforce a minimum of API level 16 (Android 4.1+).
 
 ## Known Issues
 
+### Playback
+
+### Closed Captions
+
+### Advertising
+
+### Digital Rights Management
+
+### Specific Devices Issues
+
 ## Reporting Bugs
 
 To report any bugs or otherwise odd behavior found within the Brightcove ExoPlayer plugin, please submit the following
@@ -55,3 +65,4 @@ to the [Brightcove Native Player SDKs Google Group](https://groups.google.com/fo
 2. Include steps to reproduce the problem.
 3. Include the version of Android and manufacturer of the device(s) you are testing on.
 4. Include a full logcat of the execution of your sample application demonstrating the problem.
+5. Include any screenshots that help to demonstrate the problem.
