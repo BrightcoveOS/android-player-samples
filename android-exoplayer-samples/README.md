@@ -1,4 +1,4 @@
-android-exoplayer-samples
+BrightcoveExoPlayer-Samples
 ======================
 
 **_Note: The Brightcove ExoPlayer plugin used in these sample applications is in beta._**
@@ -30,17 +30,23 @@ The Brightcove ExoPlayer plugin is currently developed with Android Studio and G
 
 As demonstrated in the sample applications, adding the following to your applications dependencies will allow the Brightcove ExoPlayer plugin to be invoked:
 
+    # build.gradle
+
     dependencies {
           compile "com.brightcove.player:exoplayer:${anpVersion}"
     }
 
 Where *anpVersion* is a gradle.properties property set to indicate the version of the Brightcove Player SDK you are using:
 
+    # gradle.properties
+
     # Use this property to select the most recent Brightcove Android
     # Native Player version.
     anpVersion=4.3.6
 
 Additionally, you will need to enforce a minimum of API level 16 (Android 4.1+). To do this, add the following to your gradle configuration:
+
+    # build.gradle
 
     android {
           defaultConfig {
