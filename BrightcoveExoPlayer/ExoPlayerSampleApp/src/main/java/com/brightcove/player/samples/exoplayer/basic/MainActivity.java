@@ -6,7 +6,7 @@ import android.util.Log;
 import com.brightcove.player.media.Catalog;
 import com.brightcove.player.media.VideoListener;
 import com.brightcove.player.model.Video;
-import com.brightcove.player.view.BrightcoveExoVideoView;
+import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
 
 /**
@@ -26,7 +26,7 @@ public class MainActivity extends BrightcovePlayer {
         // management.  Establish the video object and use it's event emitter to get important
         // notifications and to control logging.
         setContentView(R.layout.activity_main);
-        brightcoveVideoView = (BrightcoveExoVideoView) findViewById(R.id.brightcove_video_view);
+        brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
 
         // Add a test video (MP4) to the BrightcoveVideoView.

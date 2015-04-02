@@ -27,7 +27,7 @@ The BrightcoveExoPlayer integration currently supports the following:
 The BrightcoveExoPlayer integration requires:
 * Android version 4.1 and above (API level 16 and up)
 
-The BrightcoveExoPlayer integration is currently developed with:
+The BrightcoveExoPlayer sample applications are currently developed with:
 * Android Studio 1.1.0
 * Gradle 2.2.1
 
@@ -63,6 +63,13 @@ Additionally, you will need to enforce a minimum of API level 16 (Android 4.1+).
 
 ## Quick Start
 
+The BrightcoveExoPlayer integration serves as a bridge between [Google's ExoPlayer]() and the [Brightcove Native Player SDK for Android]().
+The following example is taken from the ExoPlayerSampleApp:
+
+<CODE>
+
+EXPLAIN CODE
+
 ## Known Issues
 
 ### Playback
@@ -82,7 +89,7 @@ Additionally, you will need to enforce a minimum of API level 16 (Android 4.1+).
 ### Specific Devices Issues
 * We have seen a number of problems with video loading and playback on Samsung devices running Android version 4.1 and 4.2. We are actively looking into these issues.
 
-## Reporting Bugs
+## Reporting Bugs and Submitting Feedback
 
 To report any bugs or otherwise odd behavior found within the BrightcoveExoPlayer integration, please submit the following
 to the [Brightcove Native Player SDKs Google Group](https://groups.google.com/forum/#!forum/brightcove-native-player-sdks):
