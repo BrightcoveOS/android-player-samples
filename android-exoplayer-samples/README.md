@@ -3,6 +3,8 @@ android-exoplayer-samples
 
 **_Note: The Brightcove ExoPlayer plugin used in these sample applications is in beta._**
 
+## Description
+
 A collection of sample applications using the Brightcove Player SDK for Android with the Brightcove ExoPlayer plugin.
 
 These sample applications are built to be modified and run from Android Studio and support the latest Brightcove SDK and plugins.
@@ -43,4 +45,13 @@ Additionally, you will need to enforce a minimum of API level 16 (Android 4.1+).
 
 ## Known Issues
 
-## FAQ
+## Reporting Bugs
+
+To report any bugs or otherwise odd behavior found within the Brightcove ExoPlayer plugin, please submit the following
+to the [Brightcove Native Player SDKs Google Group](https://groups.google.com/forum/#!forum/brightcove-native-player-sdks):
+
+1. Please preface your post with a [ExoPlayer] tag.
+..* [ExoPlayer] HLS playback fails with token authorization.
+2. Include steps to reproduce the problem.
+3. Include the version of Android and manufacturer of the device(s) you are testing on.
+4. Include a full logcat of the execution of your sample application demonstrating the problem.
