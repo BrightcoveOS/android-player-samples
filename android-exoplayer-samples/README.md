@@ -12,7 +12,7 @@ The following sample applications are included:
 
 * BasicExoPlayerSampleApp: Creates an instance of the Brightcove ExoPlayer plugin and demonstrates playback functionality for an MP4 video.
 
-### Features
+## Features
 
 The Brightcove ExoPlayer plugin currently supports the following:
 * HLS playback
