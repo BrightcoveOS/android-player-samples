@@ -41,4 +41,4 @@ boolean omnitureDependenciesAreSatisfied() {
 
 // For building exoplayer-specific sample apps, which are located under the 'exoplayer' directory.
 include ':ExoPlayerSampleApp'
-project(':ExoPlayerSampleApp').projectDir = new File(settingsDir, 'exoplayer/ExoPlayerSampleApp')
+project(':ExoPlayerSampleApp').projectDir = new File(settingsDir, 'BrightcoveExoPlayer-Samples/ExoPlayerSampleApp')
