@@ -50,8 +50,8 @@ Additionally, you will need to enforce a minimum of API level 16 (Android 4.1+).
 To report any bugs or otherwise odd behavior found within the Brightcove ExoPlayer plugin, please submit the following
 to the [Brightcove Native Player SDKs Google Group](https://groups.google.com/forum/#!forum/brightcove-native-player-sdks):
 
-1. Please preface your post with a [ExoPlayer] tag.
-..* [ExoPlayer] HLS playback fails with token authorization.
+1. Please preface your post with an [ExoPlayer] tag.
+⋅⋅* [ExoPlayer] HLS playback fails with token authorization.
 2. Include steps to reproduce the problem.
 3. Include the version of Android and manufacturer of the device(s) you are testing on.
 4. Include a full logcat of the execution of your sample application demonstrating the problem.
