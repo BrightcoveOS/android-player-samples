@@ -113,7 +113,7 @@ The following example is taken from the ExoPlayerSampleApp:
 To explain in more detail:
  1. Extends *MainActivity* to use the *BrightcovePlayer* class, which handles activity lifecycle behavior for the Brightcove player used.
  2. Instantiates the BrightcoveExoPlayerVideoView from the layout XML set with *setContentView()* and assigns to the *brightcoveVideoView* member variable of the *BrightcovePlayer* class.
- 3. Loads a sample video from the Media API of Brightcove VideoCloud, given an authorization token and an video id.
+ 3. Loads a sample video from the Media API of Brightcove VideoCloud, given an authorization token and a video id.
  4. A XML declaration for the BrightcoveExoPlayerVideoView from the activity's layout file.
 
 
