@@ -25,6 +25,7 @@ The BrightcoveExoPlayer integration requires:
 * Android version 4.1 and above (API level 16 and up)
 
 The BrightcoveExoPlayer integration is currently developed with Android Studio and Gradle. Eclipse is not officially supported.
+Android Studio version 1.0 and up has been tested and is supported. 
 
 ## Installation
 
@@ -42,7 +43,7 @@ Where *anpVersion* is a gradle.properties property set to indicate the version o
 
     # Use this property to select the most recent Brightcove Android
     # Native Player version.
-    anpVersion=4.3.6
+    anpVersion=4.3+
 
 Additionally, you will need to enforce a minimum of API level 16 (Android 4.1+). To do this, add the following to your gradle configuration:
 
