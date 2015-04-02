@@ -1,4 +1,4 @@
-BrightcoveExoPlayer-Samples
+BrightcoveExoPlayer
 ======================
 
 **_Note: The BrightcoveExoPlayer integration used in these sample applications is in beta._**
