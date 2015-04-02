@@ -10,14 +10,17 @@ A collection of sample applications using the Brightcove Player SDK for Android 
 These sample applications are built to be modified and run from Android Studio and support the latest Brightcove SDK and plugins.
 The following sample applications are included:
 
-* BasicExoPlayerSampleApp: Creates an instance of the BrightcoveExoPlayer integration and demonstrates playback functionality for an MP4 video.
+* BasicExoPlayerSampleApp: Creates an instance of the BrightcoveExoPlayer integration and demonstrates playback functionality.
 
 ## Features
 
 The BrightcoveExoPlayer integration currently supports the following:
-* HLS playback
-* EIA-608 embedded captions
-* WebVTT and TTML sidecar captions
+* Media Playback
+ * HLS
+* Closed Captioning
+ * EIA-608
+ * WebVTT 
+ * DFXP/TTML
 
 ## Requirements
 
@@ -28,7 +31,7 @@ The BrightcoveExoPlayer integration is currently developed with:
 * Android Studio 1.1.0
 * Gradle 2.2.1
 
-Eclipse is not officially supported.
+Using the Eclipse IDE is not officially supported.
 
 ## Installation
 
