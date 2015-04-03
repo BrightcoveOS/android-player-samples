@@ -130,9 +130,9 @@ To explain in more detail:
 * There is currently no support for multiple sidecar or embedded captions files with multiple locales. You may only provide a single captions file at this time.
 
 ### Advertising
-* We are investigating user interface issues in relation to advertising:
-** A progress bar artifact still visible if seeking past midroll ads, when the ad itself plays
-** After a preroll ad plays, the scrubber will sometimes be set to a point in the player's progress bar equal to the duration of the ad itself.
+We are investigating user interface issues in relation to advertising:
+* A progress bar artifact still visible if seeking past midroll ads, when the ad itself plays
+* After a preroll ad plays, the scrubber will sometimes be set to a point in the player's progress bar equal to the duration of the ad itself.
 
 ### Digital Rights Management
 * There is no official support for DRM (Widevine, PlayReady, etc) in this beta.
