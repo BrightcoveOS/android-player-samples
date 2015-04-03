@@ -4,15 +4,20 @@ include ':BasicAISWebViewSampleApp'
 include ':BasicBundledVideoSampleApp'
 include ':BasicCastSampleApp'
 include ':BasicIMASampleApp'
-include ':brightcove-hls:IMASampleApp'
 include ':BasicIMAWidevineSampleApp'
 include ':BasicOnceUxSampleApp'
 include ':BasicTextureViewSampleApp'
 include ':BasicWidevineSampleApp'
+include ':DFXPClosedCaptioningSampleApp'
+include ':WebVTTSampleApp'
+
+// For building hls-specific sample apps, which are located under the 'brightcove-hls' directory.
+include ':brightcove-hls:IMASampleApp'
 include ':brightcove-hls:ID3SampleApp'
 include ':brightcove-hls:BasicSampleApp'
-include ':WebVTTSampleApp'
-include ':DFXPClosedCaptioningSampleApp'
+
+// For building exoplayer-specific sample apps, which are located under the 'brightcove-exoplayer' directory.
+include ':brightcove-exoplayer:BasicSampleApp'
 
 // FreeWheel samples require AdManager.jar to be added to the libs
 // folder.  This jar can be acquired from FreeWheel.
@@ -37,6 +42,3 @@ boolean omnitureDependenciesAreSatisfied() {
     File dep = file("${System.getProperty("user.home")}/libs/adobeMobileLibrary.jar")
     return dep.exists()
 }
-
-// For building exoplayer-specific sample apps, which are located under the 'brightcove-exoplayer' directory.
-include ':brightcove-exoplayer:BasicSampleApp'
