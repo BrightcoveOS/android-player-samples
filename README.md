@@ -36,15 +36,21 @@ Note that in order to enable this sample app, you must independently obtain and 
 
 * [Basic Widevine Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicWidevineSampleApp): This app shows how to configure an app to use the Brightcove native Android player Widevine Plugin to play a video.
 
-* [HLS Player FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/HLSPlayerFreeWheelSampleApp/src/main): This app shows how to configure an app to use the HLS Player with the FreeWheel Plugin to play a video.
-
-* [HLS Player ID3 Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/HLSPlayerID3SampleApp/src/main): This app shows how to use ID3 tags with the HLS player.
-
-* [HLS Player Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/HLSPlayerIMASampleApp): This app shows how to configure an app to use the HLS Player with the Google IMA Plugin to play a video.
-
-* [HLS Player Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/HLSPlayerSampleApp/src/main): This app shows how to setup the HLS player to play.
-
 * [WebVTT Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/WebVTTSampleApp): This app shows how to implement closed captioning using WebVTT files with Android 4.4.
+
+## Brightcove HLS Player sample apps:
+
+* [Basic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-hls/BasicSampleApp/src/main): This app shows how to setup the HLS Player to play.
+
+* [FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-hls/FreeWheelSampleApp/src/main): This app shows how to configure an app to use the HLS Player with the FreeWheel Plugin to play a video.
+
+* [ID3 Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-hls/ID3SampleApp/src/main): This app shows how to use ID3 tags with the HLS Player.
+
+* [Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-hls/IMASampleApp): This app shows how to configure an app to use the HLS Player with the Google IMA Plugin to play a video.
+
+## Brightcove ExoPlayer sample apps:
+
+* [Basic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicSampleApp/src/main): This app shows how to setup the Brightcove ExoPlayer to play.
 
 ## Installing the sample apps
 Currently, all of the sample app projects must be installed together as a bundle. Individual sample app projects also have specific dependencies. For those specific dependencies, see the individual project descriptions above for details.
