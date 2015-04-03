@@ -3,8 +3,8 @@ package com.brightcove.player.samples.exoplayer.basic;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.brightcove.player.media.Catalog;
-import com.brightcove.player.media.VideoListener;
+import com.brightcove.player.edge.Catalog;
+import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
@@ -29,17 +29,15 @@ public class MainActivity extends BrightcovePlayer {
         brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
 
-        // Add a test video (MP4) to the BrightcoveVideoView.
-        Catalog catalog = new Catalog("ZUPNyrUqRdcAtjytsjcJplyUc9ed8b0cD_eWIe36jXqNWKzIcE6i8A..");
-        catalog.findVideoByID("4147927164001", new VideoListener() {
+        Catalog catalog = new Catalog(brightcoveVideoView.getEventEmitter(), "3636334163001",
+                                      "BCpkADawqM1W-vUOMe6RSA3pA6Vw-VWUNn5rL0lzQabvrI63-VjS93gVUugDlmBpHIxP16X8TSe5LSKM415UHeMBmxl7pqcwVY_AZ4yKFwIpZPvXE34TpXEYYcmulxJQAOvHbv2dpfq-S_cm");
+
+        catalog.findVideoByID("3637773814001", new VideoListener() {
             @Override
             public void onVideo(Video video) {
+                Log.v(TAG, "onVideo: video = " + video);
                 brightcoveVideoView.add(video);
-            }
-
-            @Override
-            public void onError(String s) {
-                Log.e(TAG, "Could not load video: " + s);
+                brightcoveVideoView.start();
             }
         });
 

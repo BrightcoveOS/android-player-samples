@@ -4,13 +4,13 @@ include ':BasicAISWebViewSampleApp'
 include ':BasicBundledVideoSampleApp'
 include ':BasicCastSampleApp'
 include ':BasicIMASampleApp'
-include ':HLSPlayerIMASampleApp'
+include ':brightcove-hls:IMASampleApp'
 include ':BasicIMAWidevineSampleApp'
 include ':BasicOnceUxSampleApp'
 include ':BasicTextureViewSampleApp'
 include ':BasicWidevineSampleApp'
-include ':HLSPlayerID3SampleApp'
-include ':HLSPlayerSampleApp'
+include ':brightcove-hls:ID3SampleApp'
+include ':brightcove-hls:BasicSampleApp'
 include ':WebVTTSampleApp'
 include ':DFXPClosedCaptioningSampleApp'
 
@@ -19,7 +19,7 @@ include ':DFXPClosedCaptioningSampleApp'
 if (freewheelDependenciesAreSatisfied()) {
     include ':BasicFreeWheelSampleApp'
     include ':BasicFreeWheelWidevineSampleApp'
-    include ':HLSPlayerFreeWheelSampleApp'
+    include ':brightcove-hls:FreeWheelSampleApp'
 }
 
 // Omniture samples require adobe-adms.jar to be added to the libs
