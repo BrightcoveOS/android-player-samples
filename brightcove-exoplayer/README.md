@@ -137,7 +137,7 @@ We are investigating user interface issues in relation to advertising:
 ### Digital Rights Management
 * There is no official support for DRM (Widevine, PlayReady, etc) in this beta.
 
-### Device- and OS Level-Specific Issues
+### Device and OS Level-Specific Issues
 We are actively investigating a number of device- and OS Level-specific issues found in testing:
 * We have seen a number of problems with video loading and playback on Samsung devices running Android version 4.1 and 4.2.
 * We have seen an issue where the video progress timer and video duration display do not load on devices running Android version 4.1.1.
