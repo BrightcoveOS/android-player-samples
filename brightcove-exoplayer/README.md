@@ -138,7 +138,7 @@ We are investigating user interface issues in relation to advertising:
 * There is no official support for DRM (Widevine, PlayReady, etc) in this beta.
 
 ### Device and OS Level-Specific Issues
-We are actively investigating a number of device- and OS Level-specific issues found in testing:
+We are actively investigating a number of device and OS Level-specific issues found in testing:
 * We have seen a number of problems with video loading and playback on Samsung devices running Android version 4.1 and 4.2.
 * We have seen an issue where the video progress timer and video duration display do not load on devices running Android version 4.1.1.
 * We have seen issues where bringing the player back to the foreground (for example, after tapping the "Learn More" button when an ad is playing) can cause an application leak, which can in turn cause the video to restart.
