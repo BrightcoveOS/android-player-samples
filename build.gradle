@@ -40,7 +40,7 @@ def downloadIMA() {
   }
 }
 
-subprojects {
+configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
   apply plugin: 'com.android.application'
 
   repositories {
@@ -141,7 +141,7 @@ subprojects {
     }
   }
 
-  if (project.name.contains('ExoPlayer')) {
+  if (project.parent.name.equals('brightcove-exoplayer')) {
     dependencies {
       compile "com.brightcove.player:exoplayer:${anpVersion}"
     }

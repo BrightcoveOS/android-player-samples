@@ -10,7 +10,7 @@ A collection of sample applications using the Brightcove Player SDK for Android 
 These sample applications are built to be modified and run from Android Studio and support the latest Brightcove SDK and plugins.
 The following sample applications are included:
 
-* BasicExoPlayerSampleApp: Creates an instance of the BrightcoveExoPlayer integration and demonstrates playback functionality.
+* BasicSampleApp: Creates an instance of the BrightcoveExoPlayer integration and demonstrates playback functionality.
 
 ## Features
 
@@ -19,7 +19,7 @@ The BrightcoveExoPlayer integration currently supports the following:
  * HLS
 * Closed Captioning
  * EIA-608
- * WebVTT 
+ * WebVTT
  * DFXP/TTML
 
 ## Requirements
@@ -64,7 +64,7 @@ Additionally, you will need to enforce a minimum of API level 16 (Android 4.1+).
 ## Quick Start
 
 The BrightcoveExoPlayer integration serves as a bridge between [Google's ExoPlayer](https://github.com/google/ExoPlayer) and the [Brightcove Native Player SDK for Android](http://docs.brightcove.com/en/video-cloud/mobile-sdks/brightcove-player-sdk-for-android/index.html).
-The following example is taken from the ExoPlayerSampleApp:
+The following example is taken from the BasicSampleApp:
 
         // MainActivity.java
     [1] public class MainActivity extends BrightcovePlayer {
