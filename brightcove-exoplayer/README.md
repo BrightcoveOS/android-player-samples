@@ -21,6 +21,11 @@ The BrightcoveExoPlayer integration currently supports the following:
  * EIA-608
  * WebVTT
  * DFXP/TTML
+* Ad Integrations
+ * FreeWheel
+ * Google IMA
+* Analytics
+ * Omniture
 
 ## Requirements
 
