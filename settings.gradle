@@ -19,6 +19,13 @@ include ':brightcove-hls:BasicSampleApp'
 // For building exoplayer-specific sample apps, which are located under the 'brightcove-exoplayer' directory.
 include ':brightcove-exoplayer:BasicSampleApp'
 
+// For building Brightcove Player Controls specific sample apps, which are located under the 'brightcove-player-controls' directory.
+include ':brightcove-player-controls:BasicPlayerControlsSampleApp'
+include ':brightcove-player-controls:RewindArrowLeftSampleApp'
+include ':brightcove-player-controls:RewindBackwardSampleApp'
+include ':brightcove-player-controls:RewindStepBackwardSampleApp'
+include ':brightcove-player-controls:SeekBarColorsSampleApp'
+
 // FreeWheel samples require AdManager.jar to be added to the libs
 // folder.  This jar can be acquired from FreeWheel.
 if (freewheelDependenciesAreSatisfied()) {
