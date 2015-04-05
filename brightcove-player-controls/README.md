@@ -25,19 +25,18 @@ The Brightcove Player Controls integration currently supports the following:
 The Brightcove Player Controls integration requires:
 * Android version 2.3.3 and above (API level 10 and up)
 
-The Brightcove Player Controls integration is currently developed with:
-* Android Studio 1.1.0
+The Brightcove Player Controls integration is developed with:
 * Gradle 2.2.1
+
+The Brightcove Player Controls integration has been tested using:
+* Android Studio 1.1.0
+* Android Studio 1.2 Beta
 
 Eclipse is not officially supported.
 
 ## Installation
 
-The Brightcove Player Controls come with the Android Native Player version 4.3.6 and higher.  Simply ensure that the top level build.gradle file is configured as follows:
-
-    # build.gradle
-
-Where *anpVersion* is a gradle.properties property set to indicate the version of the Brightcove Player SDK you are using:
+The Brightcove Player Controls are available with the Android Native Player version 4.3.6 and higher.  Simply ensure that a top level Gradle properties file is provided that defines *anpVersion* with the value "4.3+", for example:
 
     # gradle.properties
 
