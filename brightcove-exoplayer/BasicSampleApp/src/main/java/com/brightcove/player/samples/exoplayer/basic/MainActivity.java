@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.brightcove.player.edge.Catalog;
 import com.brightcove.player.edge.VideoListener;
+import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
@@ -19,6 +20,8 @@ public class MainActivity extends BrightcovePlayer {
 
     private final String TAG = this.getClass().getSimpleName();
 
+    private EventEmitter eventEmitter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // When extending the BrightcovePlayer, we must assign the brightcoveVideoView before
@@ -29,10 +32,15 @@ public class MainActivity extends BrightcovePlayer {
         brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
 
-        Catalog catalog = new Catalog(brightcoveVideoView.getEventEmitter(), "3636334163001",
-                                      "BCpkADawqM1W-vUOMe6RSA3pA6Vw-VWUNn5rL0lzQabvrI63-VjS93gVUugDlmBpHIxP16X8TSe5LSKM415UHeMBmxl7pqcwVY_AZ4yKFwIpZPvXE34TpXEYYcmulxJQAOvHbv2dpfq-S_cm");
+        // Get the event emitter from the SDK and create a catalog request to fetch a video from the
+        // Brightcove Edge service, given a video id, an account id and a policy key.
+        eventEmitter = brightcoveVideoView.getEventEmitter();
+        Catalog catalog = new Catalog(eventEmitter, getString(R.string.account), getString(R.string.policy));
 
-        catalog.findVideoByID("3637773814001", new VideoListener() {
+        catalog.findVideoByID(getString(R.string.videoId), new VideoListener() {
+
+            // Add the video found to the queue with add().
+            // Start playback of the video with start().
             @Override
             public void onVideo(Video video) {
                 Log.v(TAG, "onVideo: video = " + video);
