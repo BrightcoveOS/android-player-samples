@@ -56,6 +56,28 @@ The Brightcove Player Controls are available with the Android Native Player vers
 ### End Time Text View prior to starting the video
 * There is currently a known bug where the duration text view does not show the video length prior to starting the video.  Once the video is started, the text view value is updated correctly.
 
+## Upcoming
+
+After the Beta period, we will be looking at new features to include in the Brightcove Player Controls.  The following is some of the features we are considering:
+
+### Overlays
+
+-- Pause/Play overlay
+-- End screen replay overlay
+
+### Buffering indicator overlay
+
+Header displaying title name.
+
+### New buttons
+
+-- Social Sharing
+-- ChromeCast
+
+### Advertising Support
+
+Provide uniform UI for advertisers.
+
 ## Reporting Bugs
 
 To report any bugs or otherwise odd behavior found within the Brightcove Player Controls integration, please submit the following
