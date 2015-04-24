@@ -12,8 +12,8 @@ import com.brightcove.player.event.EventType;
 import com.brightcove.player.model.TTMLDocument;
 import com.brightcove.player.view.BrightcoveClosedCaptioningView;
 import com.brightcove.player.view.BrightcoveVideoView;
-import com.brightcove.samples.android.closedcaptioning.dfxp.MainActivity;
-import com.brightcove.samples.android.closedcaptioning.dfxp.R;
+import com.brightcove.player.samples.closedcaptioning.dfxp.MainActivity;
+import com.brightcove.player.samples.closedcaptioning.dfxp.R;
 import com.robotium.solo.Solo;
 
 import java.util.ArrayList;

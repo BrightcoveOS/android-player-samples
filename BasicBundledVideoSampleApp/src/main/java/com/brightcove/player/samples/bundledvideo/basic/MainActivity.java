@@ -1,4 +1,4 @@
-package com.brightcove.samples.android.bundledvideo.basic;
+package com.brightcove.player.samples.bundledvideo.basic;
 
 import android.net.Uri;
 import android.os.Bundle;
