@@ -1,4 +1,4 @@
-package com.brightcove.samples.android.closedcaptioning.dfxp;
+package com.brightcove.player.samples.closedcaptioning.dfxp;
 
 import android.os.Bundle;
 import android.util.Log;
