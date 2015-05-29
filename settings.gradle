@@ -13,6 +13,7 @@ include ':brightcove-hls:ID3SampleApp'
 include ':brightcove-hls:BasicSampleApp'
 include ':WebVTTSampleApp'
 include ':DFXPClosedCaptioningSampleApp'
+include ':BasicVMAPSampleApp'
 
 // FreeWheel samples require AdManager.jar to be added to the libs
 // folder.  This jar can be acquired from FreeWheel.

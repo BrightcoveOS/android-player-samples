@@ -28,8 +28,6 @@ import com.brightcove.onceux.event.OnceUxEventType;
  *
  * - the companion banner is shown on page switched appropriately as new ads are played
  *
- * It also covers ensuring that an ad server URL accompanies the content URL.
- *
  * @author Paul Michael Reilly
  */
 public class MainActivity extends BrightcovePlayer {
@@ -40,19 +38,12 @@ public class MainActivity extends BrightcovePlayer {
 
     // Private instance variables
 
-    //Provide a pair of URLs, one for the VMAP data that will tell the plugin when to send
-    //tracking beacons, when to hide the player controls and what the click through URL for the
-    //ads shoud be.  The VMAP data will also identify what the componion ad should be and what
-    //it's click through URL is.
-
-    // The OnceUX plugin VMAP data URL.
+    // The OnceUX plugin VMAP data URL, which tells the plugin when to
+    // send tracking beacons, when to hide the player controls and
+    // what the click through URL for the ads shoud be.  The VMAP data
+    // will also identify what the companion ad should be and what
+    // it's click through URL is.
     private String onceUxAdDataUrl = "http://onceux.unicornmedia.com/now/ads/vmap/od/auto/95ea75e1-dd2a-4aea-851a-28f46f8e8195/43f54cc0-aa6b-4b2c-b4de-63d707167bf9/9b118b95-38df-4b99-bb50-8f53d62f6ef8??umtp=0";
-    // Original from Criss: "http://onceux.unicornmedia.com/now/ads/vmap/od/auto/b11dbc9b-9d90-4edb-b4ab-769e0049209b/2455340c-8dcd-412e-a917-c6fadfe268c7/3a41c6e4-93a3-4108-8995-64ffca7b9106/bigbuckbunny?umtp=0";
-
-    // The OnceUX plugin content URL.
-    private String onceUxContentUrl = "http://cdn5.unicornmedia.com/now/stitched/mp4/95ea75e1-dd2a-4aea-851a-28f46f8e8195/00000000-0000-0000-0000-000000000000/3a41c6e4-93a3-4108-8995-64ffca7b9106/9b118b95-38df-4b99-bb50-8f53d62f6ef8/0/0/105/1438852996/content.mp4";
-    // Content suggested by Unicorn for the data url: "http://once.unicornmedia.com/now/od/auto/95ea75e1-dd2a-4aea-851a-28f46f8e8195/43f54cc0-aa6b-4b2c-b4de-63d707167bf9/9b118b95-38df-4b99-bb50-8f53d62f6ef8/content.once";
-    // Original from Criss: "http://api16-phx.unicornmedia.com/now/stitched/mp4/b11dbc9b-9d90-4edb-b4ab-769e0049209b/2455340c-8dcd-412e-a917-c6fadfe268c7/3a41c6e4-93a3-4108-8995-64ffca7b9106/18bed8d5-15ec-40c7-8ac8-dd38db9832d9/content.mp4?oasid=e277545e-9b0f-4af8-bf88-6034af781892&umtp=0";
 
     private OnceUxComponent plugin;
     public OnceUxComponent getOnceUxPlugin() {
@@ -62,9 +53,8 @@ public class MainActivity extends BrightcovePlayer {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // When extending the BrightcovePlayer, we must assign the BrightcoveVideoView before
-        // entering the superclass. This allows for some stock video player lifecycle
-        // management.  Establish the video object and use it's event emitter to get important
-        // notifications and to control logging.
+        // entering the superclass.  This allows for some stock video player lifecycle
+        // management.
         setContentView(R.layout.onceux_activity_main);
         brightcoveVideoView = (BrightcoveVideoView) findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
@@ -81,8 +71,6 @@ public class MainActivity extends BrightcovePlayer {
             plugin.addCompanionContainer((ViewGroup) view);
         }
         plugin.processVideo(onceUxAdDataUrl);
-
-
    }
 
     // Private instance methods
@@ -102,5 +90,4 @@ public class MainActivity extends BrightcovePlayer {
             }
         });
     }
-
 }
