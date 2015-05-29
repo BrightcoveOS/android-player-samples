@@ -10,6 +10,7 @@ include ':BasicTextureViewSampleApp'
 include ':BasicWidevineSampleApp'
 include ':DFXPClosedCaptioningSampleApp'
 include ':WebVTTSampleApp'
+include ':BasicVMAPSampleApp'
 
 // For building hls-specific sample apps, which are located under the 'brightcove-hls' directory.
 include ':brightcove-hls:IMASampleApp'
