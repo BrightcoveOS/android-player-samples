@@ -1,0 +1,14 @@
+# These classes use some Android closed captioning hidden APIs, so don't warn on them.
+-dontwarn com.brightcove.player.display.VideoDisplayComponent
+-dontwarn com.brightcove.player.view.BrightcoveClosedCaptioningSurfaceView
+-dontwarn com.brightcove.player.view.BrightcoveClosedCaptioningSurfaceView$1
+
+-keep public class com.brightcove.player.** {
+    public *;
+}
+-keepclassmembers public class com.brightcove.player.** {
+    public *;
+}
+-keepclasseswithmembers public class com.brightcove.player.** {
+    public *;
+}

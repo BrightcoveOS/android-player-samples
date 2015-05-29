@@ -21,6 +21,11 @@ The BrightcoveExoPlayer integration currently supports the following:
  * EIA-608
  * WebVTT
  * DFXP/TTML
+* Ad Integrations
+ * FreeWheel
+ * Google IMA
+* Analytics
+ * Omniture
 
 ## Requirements
 
@@ -130,12 +135,18 @@ To explain in more detail:
 * There is currently no support for multiple sidecar or embedded captions files with multiple locales. You may only provide a single captions file at this time.
 
 ### Advertising
+We are investigating user interface issues in relation to advertising:
+* A progress bar artifact still visible if seeking past midroll ads, when the ad itself plays
+* After a preroll ad plays, the scrubber will sometimes be set to a point in the player's progress bar equal to the duration of the ad itself.
 
 ### Digital Rights Management
 * There is no official support for DRM (Widevine, PlayReady, etc) in this beta.
 
-### Specific Devices Issues
-* We have seen a number of problems with video loading and playback on Samsung devices running Android version 4.1 and 4.2. We are actively looking into these issues.
+### Device and OS Level-Specific Issues
+We are actively investigating a number of device and OS Level-specific issues found in testing:
+* We have seen a number of problems with video loading and playback on Samsung devices running Android version 4.1 and 4.2.
+* We have seen an issue where the video progress timer and video duration display do not load on devices running Android version 4.1.1.
+* We have seen issues where bringing the player back to the foreground (for example, after tapping the "Learn More" button when an ad is playing) can cause an application leak, which can in turn cause the video to restart.
 
 ## Reporting Bugs and Submitting Feedback
 
@@ -143,7 +154,7 @@ To report any bugs or otherwise odd behavior found within the BrightcoveExoPlaye
 to the [Brightcove Native Player SDKs Google Group](https://groups.google.com/forum/#!forum/brightcove-native-player-sdks):
 
 1. Please preface your post with an [ExoPlayer] tag.
-  * [ExoPlayer] HLS playback fails with token authorization.
+  * [HLS Beta] Playback fails with token authorization.
 2. Include steps to reproduce the problem.
 3. Include the version of Android and manufacturer of the device(s) you are testing on.
 4. Include a full logcat of the execution of your sample application demonstrating the problem.
