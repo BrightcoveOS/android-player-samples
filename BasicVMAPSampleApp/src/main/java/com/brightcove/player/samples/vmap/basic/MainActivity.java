@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.VideoView;
 import com.brightcove.player.media.DeliveryType;
 import com.brightcove.player.media.VideoFields;
-import com.brightcove.player.mediacontroller.BrightcoveMediaController;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
@@ -31,7 +30,6 @@ public class MainActivity extends BrightcovePlayer {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
         brightcoveVideoView = (BrightcoveVideoView) findViewById(R.id.brightcove_video_view);
-        brightcoveVideoView.setMediaController(new BrightcoveMediaController(brightcoveVideoView));
         super.onCreate(savedInstanceState);
 
         vmapComponent = new VMAPComponent(brightcoveVideoView);
