@@ -1,8 +1,6 @@
 BrightcoveExoPlayer
 ======================
 
-**_Note: The BrightcoveExoPlayer integration used in these sample applications is in beta._**
-
 ## Description
 
 A collection of sample applications using the Brightcove Player SDK for Android with the BrightcoveExoPlayer integration.
@@ -140,7 +138,7 @@ We are investigating user interface issues in relation to advertising:
 * After a preroll ad plays, the scrubber will sometimes be set to a point in the player's progress bar equal to the duration of the ad itself.
 
 ### Digital Rights Management
-* There is no official support for DRM (Widevine, PlayReady, etc) in this beta.
+* There is no official support for DRM (Widevine, PlayReady, etc) in this release.
 
 ### Device and OS Level-Specific Issues
 We are actively investigating a number of device and OS Level-specific issues found in testing:
@@ -154,7 +152,7 @@ To report any bugs or otherwise odd behavior found within the BrightcoveExoPlaye
 to the [Brightcove Native Player SDKs Google Group](https://groups.google.com/forum/#!forum/brightcove-native-player-sdks):
 
 1. Please preface your post with an [ExoPlayer] tag.
-  * [HLS Beta] Playback fails with token authorization.
+  * [ExoPlayer] Playback fails with token authorization.
 2. Include steps to reproduce the problem.
 3. Include the version of Android and manufacturer of the device(s) you are testing on.
 4. Include a full logcat of the execution of your sample application demonstrating the problem.
