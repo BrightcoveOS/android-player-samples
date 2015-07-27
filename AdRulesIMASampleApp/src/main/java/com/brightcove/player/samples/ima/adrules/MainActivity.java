@@ -1,6 +1,7 @@
 package com.brightcove.player.samples.ima.adrules;
 
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.util.Log;
 import com.brightcove.ima.GoogleIMAComponent;
 import com.brightcove.ima.GoogleIMAEventType;
@@ -12,11 +13,13 @@ import com.brightcove.player.event.EventType;
 import com.brightcove.player.media.Catalog;
 import com.brightcove.player.media.VideoFields;
 import com.brightcove.player.media.VideoListener;
+import com.brightcove.player.mediacontroller.BrightcoveMediaController;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
 import com.brightcove.player.util.StringUtil;
 import com.google.ads.interactivemedia.v3.api.AdDisplayContainer;
+import com.google.ads.interactivemedia.v3.api.AdsManager;
 import com.google.ads.interactivemedia.v3.api.AdsRequest;
 import com.google.ads.interactivemedia.v3.api.ImaSdkFactory;
 import java.util.ArrayList;
@@ -48,6 +51,21 @@ public class MainActivity extends BrightcovePlayer {
         // management.
         setContentView(R.layout.ima_activity_main);
         brightcoveVideoView = (BrightcoveVideoView) findViewById(R.id.brightcove_video_view);
+        final BrightcoveMediaController mediaController = new BrightcoveMediaController(brightcoveVideoView);
+
+        // Add "Ad Markers" where the Ads Manager says ads will appear.
+        mediaController.addListener(GoogleIMAEventType.ADS_MANAGER_LOADED, new EventListener() {
+            @Override
+            public void processEvent(Event event) {
+                AdsManager manager = (AdsManager) event.properties.get("adsManager");
+                List<Float> cuepoints = manager.getAdCuePoints();
+                for (int i = 0; i < cuepoints.size(); i++) {
+                    Float cuepoint = cuepoints.get(i);
+                    mediaController.getBrightcoveSeekBar().addMarker((int) (cuepoint * DateUtils.SECOND_IN_MILLIS));
+                }
+            }
+        });
+        brightcoveVideoView.setMediaController(mediaController);
         super.onCreate(savedInstanceState);
         eventEmitter = brightcoveVideoView.getEventEmitter();
 
