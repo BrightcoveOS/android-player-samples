@@ -1,4 +1,4 @@
-package com.brightcove.player.samples.exoplayer.basic;
+package com.brightcove.player.samples.exoplayer.texture;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -7,14 +7,12 @@ import com.brightcove.player.edge.Catalog;
 import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.model.Video;
-import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
+import com.brightcove.player.view.BrightcoveExoPlayerTextureVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
 
 /**
- * This app illustrates how to use the ExoPlayer with the Brightcove
- * Native Player SDK for Android.
- *
- * @author Billy Hnath (bhnath@brightcove.com)
+ * This app illustrates how to use the ExoPlayer and a TextureView
+ * with the Brightcove Native Player SDK for Android.
  */
 public class MainActivity extends BrightcovePlayer {
 
@@ -27,7 +25,7 @@ public class MainActivity extends BrightcovePlayer {
         // management.  Establish the video object and use it's event emitter to get important
         // notifications and to control logging.
         setContentView(R.layout.activity_main);
-        brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
+        brightcoveVideoView = (BrightcoveExoPlayerTextureVideoView) findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
 
         // Get the event emitter from the SDK and create a catalog request to fetch a video from the

@@ -4,5 +4,5 @@
 
     <!-- Use the Font Awesome fa-stepbackward icon for the rewind
          button face. -->
-    <string name="rewind">&#xf048;</string>
+    <string name="brightcove_controls_rewind">&#xf048;</string>
 </resources>

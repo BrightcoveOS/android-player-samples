@@ -1,20 +1,17 @@
-package com.brightcove.player.samples.exoplayer.basic;
+package com.brightcove.player.samples.exoplayer.widevine;
 
 import android.os.Bundle;
 import android.util.Log;
 
 import com.brightcove.player.edge.Catalog;
 import com.brightcove.player.edge.VideoListener;
-import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
 
 /**
- * This app illustrates how to use the ExoPlayer with the Brightcove
- * Native Player SDK for Android.
- *
- * @author Billy Hnath (bhnath@brightcove.com)
+ * This app illustrates how to use the ExoPlayer and Widevine Modular
+ * with the Brightcove Native Player SDK for Android.
  */
 public class MainActivity extends BrightcovePlayer {
 
@@ -30,20 +27,19 @@ public class MainActivity extends BrightcovePlayer {
         brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
 
-        // Get the event emitter from the SDK and create a catalog request to fetch a video from the
-        // Brightcove Edge service, given a video id, an account id and a policy key.
-        EventEmitter eventEmitter = brightcoveVideoView.getEventEmitter();
-        Catalog catalog = new Catalog(eventEmitter, getString(R.string.account), getString(R.string.policy));
+        Catalog catalog = new Catalog(brightcoveVideoView.getEventEmitter(), "3303963094001",
+                                      "BCpkADawqM3zXLtsEM0nAyA_3o3TmZnG6bZTXFmjZ8X_rmFMqlpB78l0aiRELs7MWACf4mYN92qMOLMxfZN6Xr3cQ_0R3G2qBiho3X3Nc2yTv7DH4APQ-EimMJQ3crX0zc0mJMy9CtSqkmli");
 
-        catalog.findVideoByID(getString(R.string.videoId), new VideoListener() {
-
-            // Add the video found to the queue with add().
-            // Start playback of the video with start().
+        catalog.findVideoByID("4283173439001", new VideoListener() {
             @Override
             public void onVideo(Video video) {
-                Log.v(TAG, "onVideo: video = " + video);
                 brightcoveVideoView.add(video);
                 brightcoveVideoView.start();
+            }
+
+            @Override
+            public void onError(String s) {
+                Log.e(TAG, "Could not load video: " + s);
             }
         });
     }
