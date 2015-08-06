@@ -22,7 +22,9 @@ The BrightcoveExoPlayer integration currently supports the following:
 * Ad Integrations
  * FreeWheel
  * Google IMA
+ * VMAP
 * Analytics
+ * Brightcove
  * Omniture
 
 ## Requirements
@@ -52,7 +54,7 @@ Where *anpVersion* is a gradle.properties property set to indicate the version o
 
     # Use this property to select the most recent Brightcove Android
     # Native Player version.
-    anpVersion=4.3+
+    anpVersion=4.4+
 
 Additionally, you will need to enforce a minimum of API level 16 (Android 4.1+). To do this, add the following to your gradle configuration:
 
@@ -84,7 +86,7 @@ The following example is taken from the BasicSampleApp:
     [2]     brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
             super.onCreate(savedInstanceState);
 
-            // Add a test video to the BrightcoveVideoView.
+            // Add a test video to the BrightcoveExoPlayerVideoView.
     [3]     Catalog catalog = new Catalog("ZUPNyrUqRdcAtjytsjcJplyUc9ed8b0cD_eWIe36jXqNWKzIcE6i8A..");
             catalog.findVideoByID("4147927164001", new VideoListener() {
                 @Override
