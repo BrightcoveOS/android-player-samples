@@ -2,6 +2,9 @@
 -dontwarn com.brightcove.player.display.VideoDisplayComponent
 -dontwarn com.brightcove.player.view.BrightcoveClosedCaptioningSurfaceView
 -dontwarn com.brightcove.player.view.BrightcoveClosedCaptioningSurfaceView$1
+-dontwarn com.google.ads.**
+-dontwarn tv.freewheel.**
+-dontwarn com.adobe.**
 
 -keep public class com.brightcove.player.** {
     public *;
