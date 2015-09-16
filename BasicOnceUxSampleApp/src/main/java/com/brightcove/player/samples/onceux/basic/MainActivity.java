@@ -12,7 +12,7 @@ import com.brightcove.player.event.EventType;
 import com.brightcove.player.event.Event;
 
 import com.brightcove.player.view.BrightcovePlayer;
-import com.brightcove.player.view.BrightcoveVideoView;
+import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 
 import com.brightcove.onceux.OnceUxComponent;
 import com.brightcove.onceux.event.OnceUxEventType;
@@ -52,11 +52,11 @@ public class MainActivity extends BrightcovePlayer {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // When extending the BrightcovePlayer, we must assign the BrightcoveVideoView before
+        // When extending the BrightcovePlayer, we must assign brightcoveVideoView before
         // entering the superclass.  This allows for some stock video player lifecycle
         // management.
         setContentView(R.layout.onceux_activity_main);
-        brightcoveVideoView = (BrightcoveVideoView) findViewById(R.id.brightcove_video_view);
+        brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
 
         // Setup the event handlers for the OnceUX plugin, set the companion ad container,
