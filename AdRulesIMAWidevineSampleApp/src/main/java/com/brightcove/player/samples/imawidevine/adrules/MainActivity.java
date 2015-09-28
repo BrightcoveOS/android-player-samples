@@ -60,7 +60,7 @@ public class MainActivity extends BrightcovePlayer {
 
         // Create the catalog object which will start and play the video.
         Catalog catalog = new Catalog("FqicLlYykdimMML7pj65Gi8IHl8EVReWMJh6rLDcTjTMqdb5ay_xFA..");
-        catalog.findVideoByID("2142125168001", new VideoListener() {
+        catalog.findVideoByID("2142114984001", new VideoListener() {
             @Override
             public void onVideo(Video video) {
                 brightcoveVideoView.add(video);
