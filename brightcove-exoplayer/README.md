@@ -20,6 +20,7 @@ The BrightcoveExoPlayer integration currently supports the following:
  * WebVTT
  * DFXP/TTML
 * Ad Integrations
+ * OnceUX
  * FreeWheel
  * Google IMA
  * VMAP
@@ -34,7 +35,7 @@ The BrightcoveExoPlayer integration requires:
 
 The BrightcoveExoPlayer sample applications are currently developed with:
 * Android Studio 1.1.0
-* Gradle 2.2.1
+* Gradle 2.4
 
 Using the Eclipse IDE is not officially supported.
 
@@ -54,16 +55,16 @@ Where *anpVersion* is a gradle.properties property set to indicate the version o
 
     # Use this property to select the most recent Brightcove Android
     # Native Player version.
-    anpVersion=4.4+
+    anpVersion=4.6+
 
 Additionally, you will need to enforce a minimum of API level 16 (Android 4.1+). To do this, add the following to your gradle configuration:
 
     # build.gradle
 
     android {
-          defaultConfig {
+        defaultConfig {
             minSdkVersion 16
-          }
+        }
     }
 
 ## Quick Start
@@ -78,13 +79,14 @@ The following example is taken from the BasicSampleApp:
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
             // When extending the BrightcovePlayer, we must assign the brightcoveVideoView before
             // entering the superclass. This allows for some stock video player lifecycle
             // management.  Establish the video object and use it's event emitter to get important
             // notifications and to control logging.
             setContentView(R.layout.activity_main);
     [2]     brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
-            super.onCreate(savedInstanceState);
 
             // Add a test video to the BrightcoveExoPlayerVideoView.
     [3]     Catalog catalog = new Catalog("ZUPNyrUqRdcAtjytsjcJplyUc9ed8b0cD_eWIe36jXqNWKzIcE6i8A..");
@@ -129,7 +131,6 @@ To explain in more detail:
 
 #### HLS
 * There is currently no support for HLS Live DVR playback with sliding windows.
-* There is currently no support for HLSe playback with token authorization.
 
 ### Closed Captions
 * There is currently no support for multiple sidecar or embedded captions files with multiple locales. You may only provide a single captions file at this time.
@@ -137,10 +138,6 @@ To explain in more detail:
 ### Advertising
 We are investigating user interface issues in relation to advertising:
 * A progress bar artifact still visible if seeking past midroll ads, when the ad itself plays
-* After a preroll ad plays, the scrubber will sometimes be set to a point in the player's progress bar equal to the duration of the ad itself.
-
-### Digital Rights Management
-* There is no official support for DRM (Widevine, PlayReady, etc) in this release.
 
 ### Device and OS Level-Specific Issues
 We are actively investigating a number of device and OS Level-specific issues found in testing:
@@ -154,7 +151,6 @@ To report any bugs or otherwise odd behavior found within the BrightcoveExoPlaye
 to the [Brightcove Native Player SDKs Google Group](https://groups.google.com/forum/#!forum/brightcove-native-player-sdks):
 
 1. Please preface your post with an [ExoPlayer] tag.
-  * [ExoPlayer] Playback fails with token authorization.
 2. Include steps to reproduce the problem.
 3. Include the version of Android and manufacturer of the device(s) you are testing on.
 4. Include a full logcat of the execution of your sample application demonstrating the problem.

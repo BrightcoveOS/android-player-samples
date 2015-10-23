@@ -1,6 +1,6 @@
 package com.brightcove.player.samples.cast.basic;
 
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 /**
@@ -9,7 +9,7 @@ import android.os.Bundle;
  *
  * @author Billy Hnath (bhnath@brightcove.com)
  */
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
