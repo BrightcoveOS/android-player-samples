@@ -69,12 +69,12 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
   }
 
   android {
-    compileSdkVersion 21
-    buildToolsVersion "22.0.1"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
 
     defaultConfig {
       minSdkVersion 10
-      targetSdkVersion 21
+      targetSdkVersion 22
     }
 
     signingConfigs {
@@ -91,6 +91,12 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
         signingConfig signingConfigs.release
         minifyEnabled true
         proguardFiles getDefaultProguardFile('proguard-android.txt'), "${rootDir}/proguard-project.txt"
+      }
+    }
+
+    gradle.projectsEvaluated {
+      tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
       }
     }
   }
@@ -196,8 +202,6 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
   if (project.name.contains('Cast')) {
     dependencies {
       compile "com.brightcove.player:android-cast-plugin:${anpVersion}"
-      compile 'com.google.sample.castcompanionlibrary:CastCompanionLibrary-android:1.+'
-      compile 'com.google.android.gms:play-services:6.5.87'
     }
   }
 

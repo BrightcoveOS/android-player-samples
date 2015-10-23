@@ -1,6 +1,5 @@
 include ':AdRulesIMASampleApp'
 include ':AdRulesIMAWidevineSampleApp'
-include ':BasicAISWebViewSampleApp'
 include ':BasicBundledVideoSampleApp'
 include ':BasicCastSampleApp'
 include ':BasicIMASampleApp'
@@ -24,6 +23,7 @@ include ':brightcove-exoplayer:TextureViewSampleApp'
 include ':brightcove-exoplayer:WidevineModularSampleApp'
 include ':brightcove-exoplayer:AdRulesIMAWidevineModularSampleApp'
 include ':brightcove-exoplayer:FreeWheelWidevineModularSampleApp'
+include ':brightcove-exoplayer:ID3SampleApp'
 
 // For building Brightcove Player Controls specific sample apps, which are located under the 'brightcove-player-controls' directory.
 include ':brightcove-player-controls:RewindArrowLeftSampleApp'

@@ -9,7 +9,7 @@ import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventType;
 import com.brightcove.player.view.BrightcoveVideoView;
-import com.google.sample.castcompanionlibrary.cast.player.VideoCastControllerActivity;
+import com.google.android.libraries.cast.companionlibrary.cast.player.VideoCastControllerActivity;
 import com.robotium.solo.Solo;
 
 import java.util.List;

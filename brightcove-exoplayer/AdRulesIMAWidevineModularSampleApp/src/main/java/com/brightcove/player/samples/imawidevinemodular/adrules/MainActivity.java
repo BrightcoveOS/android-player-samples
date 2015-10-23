@@ -82,7 +82,7 @@ public class MainActivity extends BrightcovePlayer {
         final ImaSdkFactory sdkFactory = ImaSdkFactory.getInstance();
 
         // Enable logging up ad start.
-        eventEmitter.on(GoogleIMAEventType.DID_START_AD, new EventListener() {
+        eventEmitter.on(EventType.AD_STARTED, new EventListener() {
             @Override
             public void processEvent(Event event) {
                 Log.v(TAG, event.getType());
@@ -98,7 +98,7 @@ public class MainActivity extends BrightcovePlayer {
         });
 
         // Enable Logging upon ad completion.
-        eventEmitter.on(GoogleIMAEventType.DID_COMPLETE_AD, new EventListener() {
+        eventEmitter.on(EventType.AD_COMPLETED, new EventListener() {
             @Override
             public void processEvent(Event event) {
                 Log.v(TAG, event.getType());
