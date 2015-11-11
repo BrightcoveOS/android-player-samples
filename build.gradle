@@ -74,7 +74,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
 
     defaultConfig {
       minSdkVersion 10
-      targetSdkVersion 22
+      targetSdkVersion 23
     }
 
     signingConfigs {
