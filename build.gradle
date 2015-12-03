@@ -123,7 +123,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     dependencies {
       compile "com.brightcove.player:android-ima-plugin:${anpVersion}"
       compile files(libraryDirectory + imaAndroidSdkJarFileName)
-      compile 'com.google.android.gms:play-services:6.5.87'
+      compile 'com.google.android.gms:play-services:8.1.0'
     }
   }
 

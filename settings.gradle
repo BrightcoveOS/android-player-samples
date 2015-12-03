@@ -22,7 +22,6 @@ include ':brightcove-exoplayer:LiveSampleApp'
 include ':brightcove-exoplayer:TextureViewSampleApp'
 include ':brightcove-exoplayer:WidevineModularSampleApp'
 include ':brightcove-exoplayer:AdRulesIMAWidevineModularSampleApp'
-include ':brightcove-exoplayer:FreeWheelWidevineModularSampleApp'
 include ':brightcove-exoplayer:ID3SampleApp'
 
 // For building Brightcove Player Controls specific sample apps, which are located under the 'brightcove-player-controls' directory.
@@ -37,6 +36,8 @@ if (freewheelDependenciesAreSatisfied()) {
     include ':BasicFreeWheelSampleApp'
     include ':BasicFreeWheelWidevineSampleApp'
     include ':brightcove-hls:FreeWheelSampleApp'
+    include ':brightcove-exoplayer:FreeWheelSampleApp'
+    include ':brightcove-exoplayer:FreeWheelWidevineModularSampleApp'
 }
 
 // Omniture samples require adobe-adms.jar to be added to the libs

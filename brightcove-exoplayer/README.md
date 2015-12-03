@@ -80,13 +80,7 @@ The following example is taken from the BasicSampleApp:
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-
-            // When extending the BrightcovePlayer, we must assign the brightcoveVideoView before
-            // entering the superclass. This allows for some stock video player lifecycle
-            // management.  Establish the video object and use it's event emitter to get important
-            // notifications and to control logging.
-            setContentView(R.layout.activity_main);
-    [2]     brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
+    [2]     setContentView(R.layout.activity_main);
 
             // Add a test video to the BrightcoveExoPlayerVideoView.
     [3]     Catalog catalog = new Catalog("ZUPNyrUqRdcAtjytsjcJplyUc9ed8b0cD_eWIe36jXqNWKzIcE6i8A..");
@@ -119,7 +113,7 @@ The following example is taken from the BasicSampleApp:
 
 To explain in more detail:
  1. Extends *MainActivity* to use the *BrightcovePlayer* class, which handles activity lifecycle behavior for the Brightcove player used.
- 2. Instantiates the BrightcoveExoPlayerVideoView from the layout XML set with *setContentView()* and assigns to the *brightcoveVideoView* member variable of the *BrightcovePlayer* class.
+ 2. Instantiates the BrightcoveExoPlayerVideoView from the layout XML set with *setContentView()*.
  3. Loads a sample video from the Media API of Brightcove VideoCloud, given an authorization token and a video id.
  4. A XML declaration for the BrightcoveExoPlayerVideoView from the activity's layout file.
 
