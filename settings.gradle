@@ -36,7 +36,6 @@ if (freewheelDependenciesAreSatisfied()) {
     include ':BasicFreeWheelSampleApp'
     include ':BasicFreeWheelWidevineSampleApp'
     include ':brightcove-hls:FreeWheelSampleApp'
-    include ':brightcove-exoplayer:FreeWheelSampleApp'
     include ':brightcove-exoplayer:FreeWheelWidevineModularSampleApp'
 }
 
