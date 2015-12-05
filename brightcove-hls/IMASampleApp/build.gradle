@@ -1,8 +1,7 @@
 android {
-
   defaultConfig {
+    applicationId = "com.brightcove.player.samples.ima.hls"
     testApplicationId "com.brightcove.player.samples.ima.hls.test"
     testInstrumentationRunner "android.test.InstrumentationTestRunner"
   }
-
 }
