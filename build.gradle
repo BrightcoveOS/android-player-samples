@@ -16,26 +16,29 @@ project.ext {
   // The directory that will be used to reference dependent libraries.
   // Modify as needed. Defaulted to users home directory.
   libraryDirectory = "${System.getProperty("user.home")}/libs/"
-  imaAndroidSdkJarFileName = "ima-android-sdk-beta9.jar"
+  imaAndroidSdkZipFileName = "ima-android-v3-3.b13.3.zip"
 }
 
 // Automatically download the Google IMA third party zip file and
 // extract the jar to satisfy the dependency.
 def downloadIMA() {
-  def libsdk = libraryDirectory + imaAndroidSdkJarFileName
-
   // Conditionally download the Google IMA SDK during
   // configuration.  This step is done once.  The 'clean' task will not
   // remove libraries from /libs/.
-  File dep = file(libsdk)
+  File dep = file(libraryDirectory + "lib/sdk.jar")
   if (!dep.exists()) {
     apply plugin: 'download-task'
 
     println "Downloading the Google IMA SDK..."
 
     download {
-      src 'https://dl.google.com/in-stream/google_sdk/android/v3/' + imaAndroidSdkJarFileName
-      dest file(libraryDirectory + imaAndroidSdkJarFileName)
+      src 'http://imasdk.googleapis.com/native/downloads/' + imaAndroidSdkZipFileName
+      dest file(libraryDirectory + imaAndroidSdkZipFileName)
+    }
+
+    copy {
+      from(zipTree(file(libraryDirectory + imaAndroidSdkZipFileName)))
+      into file(libraryDirectory)
     }
   }
 }
@@ -122,8 +125,8 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     downloadIMA()
     dependencies {
       compile "com.brightcove.player:android-ima-plugin:${anpVersion}"
-      compile files(libraryDirectory + imaAndroidSdkJarFileName)
-      compile 'com.google.android.gms:play-services:8.1.0'
+      compile files(libraryDirectory + "lib/sdk.jar")
+      compile 'com.google.android.gms:play-services-ads:8.1.0'
     }
   }
 
