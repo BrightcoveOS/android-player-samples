@@ -60,7 +60,7 @@ public class MainActivity extends BrightcovePlayer {
 
         // Create the catalog object which will start and play the video.
         Catalog catalog = new Catalog("FqicLlYykdimMML7pj65Gi8IHl8EVReWMJh6rLDcTjTMqdb5ay_xFA..");
-        catalog.findVideoByID("2142125168001", new VideoListener() {
+        catalog.findVideoByID("2142114984001", new VideoListener() {
             @Override
             public void onVideo(Video video) {
                 brightcoveVideoView.add(video);
@@ -84,7 +84,7 @@ public class MainActivity extends BrightcovePlayer {
         final ImaSdkFactory sdkFactory = ImaSdkFactory.getInstance();
 
         // Enable logging up ad start.
-        eventEmitter.on(GoogleIMAEventType.DID_START_AD, new EventListener() {
+        eventEmitter.on(EventType.AD_STARTED, new EventListener() {
             @Override
             public void processEvent(Event event) {
                 Log.v(TAG, event.getType());
@@ -100,7 +100,7 @@ public class MainActivity extends BrightcovePlayer {
         });
 
         // Enable Logging upon ad completion.
-        eventEmitter.on(GoogleIMAEventType.DID_COMPLETE_AD, new EventListener() {
+        eventEmitter.on(EventType.AD_COMPLETED, new EventListener() {
             @Override
             public void processEvent(Event event) {
                 Log.v(TAG, event.getType());

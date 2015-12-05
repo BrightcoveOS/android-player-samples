@@ -14,7 +14,7 @@ import com.brightcove.cast.GoogleCastEventType;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.view.BrightcovePlayerFragment;
 import com.brightcove.player.view.BrightcoveVideoView;
-import com.google.sample.castcompanionlibrary.widgets.MiniController;
+import com.google.android.libraries.cast.companionlibrary.widgets.MiniController;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +35,11 @@ public class GoogleCastSampleFragment extends BrightcovePlayerFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Initialize the Cast Companion Library's VideCastManager, so
+        // the MiniController can find it when it's inflated.
+        String applicationId = getResources().getString(R.string.application_id);
+        GoogleCastComponent.initializeVideoCastManager(getActivity(), applicationId, null);
+
         // Perform the internal wiring to be able to make use of the BrightcovePlayerFragment.
         View view = inflater.inflate(R.layout.basic_cast_fragment, container, false);
         brightcoveVideoView = (BrightcoveVideoView) view.findViewById(R.id.brightcove_video_view);
@@ -43,7 +48,6 @@ public class GoogleCastSampleFragment extends BrightcovePlayerFragment {
 
         // Initialize the android_cast_plugin which requires the application id of your Cast
         // receiver application.
-        String applicationId = getResources().getString(R.string.application_id);
         googleCastComponent = new GoogleCastComponent(eventEmitter, applicationId, getActivity());
 
         // Initialize the MiniController widget which will allow control of remote media playback.
@@ -85,8 +89,8 @@ public class GoogleCastSampleFragment extends BrightcovePlayerFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         Log.v(TAG, "onCreateOptionsMenu");
-        inflater.inflate(R.menu.main, menu);
         super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.main, menu);
 
         Map<String, Object> properties = new HashMap<String, Object>();
         properties.put(GoogleCastComponent.CAST_MENU, menu);

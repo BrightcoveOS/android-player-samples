@@ -16,6 +16,7 @@ import com.brightcove.player.media.Catalog;
 import com.brightcove.player.media.DeliveryType;
 import com.brightcove.player.media.PlaylistListener;
 import com.brightcove.player.media.VideoFields;
+import com.brightcove.player.mediacontroller.BrightcoveMediaController;
 import com.brightcove.player.model.CuePoint;
 import com.brightcove.player.model.Playlist;
 import com.brightcove.player.model.Source;
@@ -46,6 +47,7 @@ public class MainActivity extends BrightcovePlayer {
 
     private EventEmitter eventEmitter;
     private GoogleIMAComponent googleIMAComponent;
+    private BrightcoveMediaController mediaController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,8 @@ public class MainActivity extends BrightcovePlayer {
         // notifications and to control logging.
         setContentView(R.layout.ima_activity_main);
         brightcoveVideoView = (BrightcoveVideoView) findViewById(R.id.brightcove_video_view);
+        mediaController = new BrightcoveMediaController(brightcoveVideoView);
+        brightcoveVideoView.setMediaController(mediaController);
         super.onCreate(savedInstanceState);
         eventEmitter = brightcoveVideoView.getEventEmitter();
 
@@ -107,9 +111,12 @@ public class MainActivity extends BrightcovePlayer {
         // midroll at 10 seconds.
         // Due HLS bugs in the Android MediaPlayer, midrolls are not supported.
         if (!source.getDeliveryType().equals(DeliveryType.HLS)) {
-            cuePoint = new CuePoint(10 * (int) DateUtils.SECOND_IN_MILLIS, cuePointType, properties);
+            int cuepointTime = 10 * (int) DateUtils.SECOND_IN_MILLIS;
+            cuePoint = new CuePoint(cuepointTime, cuePointType, properties);
             details.put(Event.CUE_POINT, cuePoint);
             eventEmitter.emit(EventType.SET_CUE_POINT, details);
+            // Add a marker where the ad will be.
+            mediaController.getBrightcoveSeekBar().addMarker(cuepointTime);
         }
 
         // postroll
@@ -136,7 +143,7 @@ public class MainActivity extends BrightcovePlayer {
         final ImaSdkFactory sdkFactory = ImaSdkFactory.getInstance();
 
         // Enable logging of ad starts
-        eventEmitter.on(GoogleIMAEventType.DID_START_AD, new EventListener() {
+        eventEmitter.on(EventType.AD_STARTED, new EventListener() {
             @Override
             public void processEvent(Event event) {
                 Log.v(TAG, event.getType());
@@ -152,7 +159,7 @@ public class MainActivity extends BrightcovePlayer {
         });
 
         // Enable logging of ad completions.
-        eventEmitter.on(GoogleIMAEventType.DID_COMPLETE_AD, new EventListener() {
+        eventEmitter.on(EventType.AD_COMPLETED, new EventListener() {
             @Override
             public void processEvent(Event event) {
                 Log.v(TAG, event.getType());

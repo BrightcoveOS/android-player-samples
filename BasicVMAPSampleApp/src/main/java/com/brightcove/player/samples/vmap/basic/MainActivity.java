@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.VideoView;
 import com.brightcove.player.media.DeliveryType;
 import com.brightcove.player.media.VideoFields;
-import com.brightcove.player.mediacontroller.BrightcoveMediaController;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
@@ -31,7 +30,6 @@ public class MainActivity extends BrightcovePlayer {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
         brightcoveVideoView = (BrightcoveVideoView) findViewById(R.id.brightcove_video_view);
-        brightcoveVideoView.setMediaController(new BrightcoveMediaController(brightcoveVideoView));
         super.onCreate(savedInstanceState);
 
         vmapComponent = new VMAPComponent(brightcoveVideoView);
@@ -45,7 +43,7 @@ public class MainActivity extends BrightcovePlayer {
         }
 
         Video video = Video.createVideo("http://media.w3.org/2010/05/sintel/trailer.mp4", DeliveryType.MP4);
-        video.getProperties().put(VMAPComponent.VMAP_URL, "http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=%2F15018773%2Feverything2&ciu_szs=300x250%2C468x60%2C728x90&impl=s&gdfp_req=1&env=vp&output=xml_vmap1&unviewed_position_start=1&url=[referrer_url]&correlator=[timestamp]&cmsid=133&vid=10XWSh7W4so&ad_rule=1");
+        video.getProperties().put(VMAPComponent.VMAP_URL, "http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ar%3Dpremidpost&cmsid=496&vid=short_onecue&correlator=");
 
         brightcoveVideoView.add(video);
         brightcoveVideoView.start();

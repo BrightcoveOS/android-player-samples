@@ -20,8 +20,6 @@ public class MainActivity extends BrightcovePlayer {
 
     private final String TAG = this.getClass().getSimpleName();
 
-    private EventEmitter eventEmitter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // When extending the BrightcovePlayer, we must assign the brightcoveVideoView before
@@ -34,7 +32,7 @@ public class MainActivity extends BrightcovePlayer {
 
         // Get the event emitter from the SDK and create a catalog request to fetch a video from the
         // Brightcove Edge service, given a video id, an account id and a policy key.
-        eventEmitter = brightcoveVideoView.getEventEmitter();
+        EventEmitter eventEmitter = brightcoveVideoView.getEventEmitter();
         Catalog catalog = new Catalog(eventEmitter, getString(R.string.account), getString(R.string.policy));
 
         catalog.findVideoByID(getString(R.string.videoId), new VideoListener() {
@@ -48,12 +46,5 @@ public class MainActivity extends BrightcovePlayer {
                 brightcoveVideoView.start();
             }
         });
-
-        // Log whether or not instance state in non-null.
-        if (savedInstanceState != null) {
-            Log.v(TAG, "Restoring saved position");
-        } else {
-            Log.v(TAG, "No saved state");
-        }
     }
 }

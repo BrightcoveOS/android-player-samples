@@ -1,16 +1,11 @@
 Brightcove Player Controls for Android - Samples
 ======================
 
-**_Note: The Brightcove Player Controls feature used in these sample applications is in beta._**
-
 ## Description
 
 A collection of sample applications using the Brightcove Player SDK with the Brightcove Player Controls integration.
 
 These sample applications are built to be modified and run from Android Studio and support the latest Brightcove SDK and plugins.
-The following sample applications are included:
-
-* Basic Player Controls SampleApp: Creates an instance of the Brightcove Player Controls and demonstrates playback functionality for an MP4 video.
 
 ## Features
 
@@ -36,13 +31,13 @@ Eclipse is not officially supported.
 
 ## Installation
 
-The Brightcove Player Controls are available with the Android Native Player version 4.3.6 and higher.  Simply ensure that a top level Gradle properties file is provided that defines *anpVersion* with the value "4.3+", for example:
+The Brightcove Player Controls are available with the Android Native Player version 4.3.6 and higher.  Simply ensure that a top level Gradle properties file is provided that defines *anpVersion* with the value "4.4+", for example:
 
     # gradle.properties
 
     # Use this property to select the most recent Brightcove Android
     # Native Player version.
-    anpVersion=4.3+
+    anpVersion=4.4+
 
 ## Quick Start
 

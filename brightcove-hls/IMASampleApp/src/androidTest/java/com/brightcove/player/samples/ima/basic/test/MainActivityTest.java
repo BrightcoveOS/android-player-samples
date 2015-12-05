@@ -64,7 +64,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         final CountDownLatch latch = new CountDownLatch(2);
         Log.v(TAG, "testPlay");
 
-        eventEmitter.on(GoogleIMAEventType.DID_START_AD, new EventListener() {
+        eventEmitter.on(EventType.AD_STARTED, new EventListener() {
             @Override
             public void processEvent(Event event) {
                 assertTrue("Should not have started an ad: " + state, state != State.STARTED_AD);
@@ -87,7 +87,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
             }
         });
 
-        eventEmitter.on(GoogleIMAEventType.DID_COMPLETE_AD, new EventListener() {
+        eventEmitter.on(EventType.AD_COMPLETED, new EventListener() {
             @Override
             public void processEvent(Event event) {
                 assertTrue("Should have started an ad: " + state, state == State.STARTED_AD);
@@ -172,7 +172,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     public void testAdPauseResume() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
 
-        eventEmitter.on(GoogleIMAEventType.DID_START_AD, new EventListener() {
+        eventEmitter.on(EventType.AD_STARTED, new EventListener() {
             @Override
             public void processEvent(Event event) {
                 Instrumentation instrumentation = MainActivityTest.this.getInstrumentation();
@@ -184,7 +184,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
             }
         });
 
-        eventEmitter.on(GoogleIMAEventType.DID_COMPLETE_AD, new EventListener() {
+        eventEmitter.on(EventType.AD_COMPLETED, new EventListener() {
             @Override
             public void processEvent(Event event) {
                 latch.countDown();

@@ -1,6 +1,5 @@
 include ':AdRulesIMASampleApp'
 include ':AdRulesIMAWidevineSampleApp'
-include ':BasicAISWebViewSampleApp'
 include ':BasicBundledVideoSampleApp'
 include ':BasicCastSampleApp'
 include ':BasicIMASampleApp'
@@ -18,10 +17,18 @@ include ':brightcove-hls:ID3SampleApp'
 include ':brightcove-hls:BasicSampleApp'
 
 // For building exoplayer-specific sample apps, which are located under the 'brightcove-exoplayer' directory.
+include ':brightcove-exoplayer:AdRulesIMASampleApp'
+include ':brightcove-exoplayer:AdRulesIMAWidevineModularSampleApp'
+include ':brightcove-exoplayer:AppCompatActivitySampleApp'
+include ':brightcove-exoplayer:AppCompatFragmentSampleApp'
 include ':brightcove-exoplayer:BasicSampleApp'
+include ':brightcove-exoplayer:ID3SampleApp'
+include ':brightcove-exoplayer:LiveSampleApp'
+include ':brightcove-exoplayer:TextureViewSampleApp'
+include ':brightcove-exoplayer:VMAPSampleApp'
+include ':brightcove-exoplayer:WidevineModularSampleApp'
 
 // For building Brightcove Player Controls specific sample apps, which are located under the 'brightcove-player-controls' directory.
-include ':brightcove-player-controls:BasicPlayerControlsSampleApp'
 include ':brightcove-player-controls:RewindArrowLeftSampleApp'
 include ':brightcove-player-controls:RewindBackwardSampleApp'
 include ':brightcove-player-controls:RewindStepBackwardSampleApp'
@@ -33,6 +40,7 @@ if (freewheelDependenciesAreSatisfied()) {
     include ':BasicFreeWheelSampleApp'
     include ':BasicFreeWheelWidevineSampleApp'
     include ':brightcove-hls:FreeWheelSampleApp'
+    include ':brightcove-exoplayer:FreeWheelWidevineModularSampleApp'
 }
 
 // Omniture samples require adobe-adms.jar to be added to the libs

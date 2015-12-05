@@ -10,7 +10,7 @@ This version of the sample apps supports the latest Brightcove SDK and plugins. 
 
 * [Ad Rules Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/AdRulesIMASampleApp): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules. This version has been tested and works with v3 of the IMA SDK.
 
-* [Ad Rules Google IMA Widevine Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/AdRulesIMAWidevineSampleApp): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules with a Widevine video. This version has been tested and works with v3 of the IMA SDK.
+* [Ad Rules Google IMA Widevine Classic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/AdRulesIMAWidevineSampleApp): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules with a Widevine video. This version has been tested and works with v3 of the IMA SDK.
 
 * [Basic Akamai Identity Services Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicAISWebViewSampleApp): This app shows how to configure an app to use the Brightcove native Android player with Akamai Identity Services.
 
@@ -20,13 +20,13 @@ This version of the sample apps supports the latest Brightcove SDK and plugins. 
 
 * [Basic FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicFreeWheelSampleApp): This app shows how to configure an app to use the Brightcove native Android player FreeWheel Plugin to play a video.
 
-* [Basic FreeWheel Widevine Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicFreeWheelWidevineSampleApp): This app shows how to configure an app to use the Brightcove native Android player FreeWheel Plugin to play a Widevine video.
+* [Basic FreeWheel Widevine Classic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicFreeWheelWidevineSampleApp): This app shows how to configure an app to use the Brightcove native Android player FreeWheel Plugin to play a Widevine video.
 
 Note that in order to enable the FreeWheel sample apps, you must independently obtain and install the non-free file **AdManager.jar** into the top-level directory **libs/**.  The FreeWheel sample apps were tested with version 5.7.2.  Contact [FreeWheel](http://www.freewheel.tv/about/contact "FreeWheel") directly for more information on how to obtain their products.
 
 * [Basic Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicIMASampleApp): This app shows how to setup to use the Google IMA Plugin to play ads before, during and after a video. This version has been tested and works with v3 of the IMA SDK.
 
-* [Basic Google IMA Widevine Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicIMAWidevineSampleApp): This app shows how to setup to use the Google IMA Plugin to play ads before, during and after a Widevine video. This version has been tested and works with v3 of the IMA SDK.
+* [Basic Google IMA Widevine Classic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicIMAWidevineSampleApp): This app shows how to setup to use the Google IMA Plugin to play ads before, during and after a Widevine video. This version has been tested and works with v3 of the IMA SDK.
 
 * [Basic Omniture Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicOmnitureSampleApp): This app shows how to configure an app to use the Brightcove native Android player Omniture Plugin to play a video.
 
@@ -34,23 +34,45 @@ Note that in order to enable this sample app, you must independently obtain and 
 
 * [Basic OnceUx Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicOnceUxSampleApp): This app shows how to configure an app to use the Brightcove Native Player for Android OnceUx Plugin to play a video.
 
-* [Basic Widevine Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicWidevineSampleApp): This app shows how to configure an app to use the Brightcove native Android player Widevine Plugin to play a video.
+* [Basic Widevine Classic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicWidevineSampleApp): This app shows how to configure an app to use the Brightcove native Android player Widevine Plugin to play a video.
 
 * [WebVTT Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/WebVTTSampleApp): This app shows how to implement closed captioning using WebVTT files with Android 4.4.
 
 ## Brightcove HLS Player sample apps:
 
-* [Basic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-hls/BasicSampleApp/src/main): This app shows how to setup the HLS Player to play.
+* [Basic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-hls/BasicSampleApp): This app shows how to setup the HLS Player to play.
 
-* [FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-hls/FreeWheelSampleApp/src/main): This app shows how to configure an app to use the HLS Player with the FreeWheel Plugin to play a video.
+* [FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-hls/FreeWheelSampleApp): This app shows how to configure an app to use the HLS Player with the FreeWheel Plugin to play a video.
 
-* [ID3 Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-hls/ID3SampleApp/src/main): This app shows how to use ID3 tags with the HLS Player.
+* [ID3 Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-hls/ID3SampleApp): This app shows how to use ID3 tags with the HLS Player.
 
 * [Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-hls/IMASampleApp): This app shows how to configure an app to use the HLS Player with the Google IMA Plugin to play a video.
 
 ## Brightcove ExoPlayer sample apps:
 
-* [Basic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicSampleApp/src/main): This app shows how to setup the Brightcove ExoPlayer to play.
+* [Ad Rules Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/AdRulesIMASampleApp): This app shows how to the Brightcove ExoPlayer with Google IMA ads.
+
+* [Ad Rules Widevine Modular Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/AdRulesIMAWidevineModularSampleApp): This app shows how to use the Brightcove ExoPlayer with Google IMA ads and Widevine Modular content.
+
+* [AppCompat Activity Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/AppCompatActivitySampleApp): This app shows how to setup the Brightcove ExoPlayer with the AppCompat plugin and an Activity.
+
+* [AppCompat Fragment Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/AppCompatFragmentSampleApp): This app shows how to setup the Brightcove ExoPlayer with the AppCompat plugin and a Fragment.
+
+* [Basic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicSampleApp): This app shows how to setup the Brightcove ExoPlayer to play.
+
+* [FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/FreeWheelSampleApp): This app shows how to use the Brightcove ExoPlayer with FreeWheel ads.
+
+* [FreeWheel Widevine Modular Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/FreeWheelWidevineModularSampleApp): This app shows how to use the Brightcove ExoPlayer with FreeWheel ads and Widevine Modular content.
+
+* [ID3 Tags Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/ID3SampleApp): This app shows how to use the Brightcove ExoPlayer with ID3 tags.
+
+* [HLS Live Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/LiveSampleApp): This app shows how to use the Brightcove ExoPlayer with HLS Live content.
+
+* [TextureView Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/TextureViewSampleApp): This app shows how to use the Brightcove ExoPlayer with TextureView.
+
+* [VMAP Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/VMAPSampleApp): This app shows how to use the Brightcove ExoPlayer with VMAP ads.
+
+* [Widevine Modular Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/WidevineModularSampleApp): This app shows how to setup the Brightcove ExoPlayer with Widevine Modular content.
 
 ## Installing the sample apps
 Currently, all of the sample app projects must be installed together as a bundle. Individual sample app projects also have specific dependencies. For those specific dependencies, see the individual project descriptions above for details.

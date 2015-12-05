@@ -3,7 +3,6 @@ package com.brightcove.player.samples.webvtt;
 import android.net.Uri;
 import android.os.Bundle;
 import com.brightcove.player.captioning.BrightcoveCaptionFormat;
-import com.brightcove.player.mediacontroller.BrightcoveMediaController;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
 
@@ -17,7 +16,6 @@ public class MainActivity extends BrightcovePlayer {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
         brightcoveVideoView = (BrightcoveVideoView) findViewById(R.id.brightcove_video_view);
-        brightcoveVideoView.setMediaController(new BrightcoveMediaController(brightcoveVideoView));
         super.onCreate(savedInstanceState);
 
         brightcoveVideoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.sintel_trailer));
