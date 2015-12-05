@@ -117,15 +117,13 @@ To explain in more detail:
  3. Loads a sample video from the Media API of Brightcove VideoCloud, given an authorization token and a video id.
  4. A XML declaration for the BrightcoveExoPlayerVideoView from the activity's layout file.
 
-
-
 ## Limitations
 
 #### HLS
 * There is currently no support for HLS Live DVR playback with sliding windows.
 
 #### DRM
-* DRM is not supported in Android versions prior to 4.3. For more information, please refer to the [ExoPlayer Developer 
+* DRM is not supported in Android versions prior to 4.3. For more information, please refer to the [ExoPlayer Developer
 Forum](http://google.github.io/ExoPlayer/guide.html#digital-rights-management).
 
 #### Closed Captions
