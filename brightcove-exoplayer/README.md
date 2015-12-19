@@ -41,6 +41,16 @@ Using the Eclipse IDE is not officially supported.
 
 ## Installation
 
+First, make sure you have the Brightcove repository added:
+
+    # build.gradle
+
+    repositories {
+          maven {
+              url "http://repo.brightcove.com/releases"
+        }
+    }
+
 As demonstrated in the sample applications, adding the following to your applications dependencies will allow the BrightcoveExoPlayer integration to be invoked:
 
     # build.gradle
