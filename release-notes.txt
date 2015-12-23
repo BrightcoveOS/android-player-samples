@@ -2,7 +2,10 @@ Brightcove Player Samples for Android, Release Notes:
 
 Known Issues
 Widevine Modular Playback Issue
-  Testing has uncovered a playback issue in our Widevine Modular integration that prevents playback in most cases. We are actively working on a solution that will be included in our next release. Because of this, we are advising consumers of the Android SDK who integrate with Widevine Modular to use the Android SDK version 4.6.4.
+Testing has uncovered a playback issue in the Widevine Modular integration for the Brightcove Android Player SDK
+that prevents playback in most cases. We are actively working on a solution that will be included in our next Android
+Player SDK release. Because of this, we are advising consumers of our Android Player SDK who integrate with Widevine 
+Modular (those using Brightcove ExoPlayer instead of the Widevine plugin) to use the Android Player SDK version 4.6.4.
 
 Version 1.0.1:
 
