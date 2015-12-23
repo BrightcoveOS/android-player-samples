@@ -127,10 +127,6 @@ To explain in more detail:
  3. Loads a sample video from the Media API of Brightcove VideoCloud, given an authorization token and a video id.
  4. An XML declaration for the BrightcoveExoPlayerVideoView from the activity's layout file.
 
-## Known Issues
-### Widevine Modular Playback Issue
-* Testing has uncovered a playback issue in our Widevine Modular integration that prevents playback in most cases. We are actively working on a solution that will be included in our next release. Because of this, we are advising consumers of the Android SDK who integrate with Widevine Modular to use the Android SDK version 4.6.4.
-
 ## Limitations
 
 #### HLS
