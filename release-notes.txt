@@ -1,11 +1,17 @@
 Brightcove Player Samples for Android, Release Notes:
 
-Known Issues
-Widevine Modular Playback Issue
-Testing has uncovered a playback issue in the Widevine Modular integration for the Brightcove Android Player SDK
-that prevents playback in most cases. We are actively working on a solution that will be included in our next Android
-Player SDK release. Because of this, we are advising consumers of our Android Player SDK who integrate with Widevine 
-Modular (those using Brightcove ExoPlayer instead of the Widevine plugin) to use the Android Player SDK version 4.6.4.
+Version 4.6.6:
+
+  brightcove-exoplayer/WidevineModularSampleApp known issues:
+
+    * Widevine Modular Playback Issue:
+
+      Testing has uncovered a playback issue in the Widevine Modular
+      integration for the Brightcove Android Player SDK that prevents
+      playback in most cases. We are actively working on a solution to
+      be released as soon as possible. Those using Brightcove
+      ExoPlayer instead of the Widevine plugin should continue to use
+      the Android Native Player SDK version 4.6.4.
 
 Version 1.0.1:
 
@@ -17,5 +23,4 @@ Version 1.0.0:
 
   BasicOnceUxSampleApp changes:
 
-    * Added inital support for blackbox testing using the Android **uiautomator** feature.
-
+    * Added initial support for blackbox testing using the Android **uiautomator** feature.
