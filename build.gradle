@@ -168,12 +168,6 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     }
   }
 
-  if (project.parent.name.equals('brightcove-hls')) {
-    dependencies {
-      compile "com.brightcove.player:android-hls-player:${anpVersion}"
-    }
-  }
-
   if (project.parent.name.equals('brightcove-exoplayer')) {
     dependencies {
       compile "com.brightcove.player:exoplayer:${anpVersion}"

@@ -38,16 +38,6 @@ Note that in order to enable this sample app, you must independently obtain and 
 
 * [WebVTT Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/WebVTTSampleApp): This app shows how to implement closed captioning using WebVTT files with Android 4.4.
 
-## Brightcove HLS Player sample apps:
-
-* [Basic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-hls/BasicSampleApp): This app shows how to setup the HLS Player to play.
-
-* [FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-hls/FreeWheelSampleApp): This app shows how to configure an app to use the HLS Player with the FreeWheel Plugin to play a video.
-
-* [ID3 Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-hls/ID3SampleApp): This app shows how to use ID3 tags with the HLS Player.
-
-* [Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-hls/IMASampleApp): This app shows how to configure an app to use the HLS Player with the Google IMA Plugin to play a video.
-
 ## Brightcove ExoPlayer sample apps:
 
 * [Ad Rules Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/AdRulesIMASampleApp): This app shows how to the Brightcove ExoPlayer with Google IMA ads.

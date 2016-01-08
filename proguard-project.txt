@@ -5,7 +5,6 @@
 -dontwarn com.google.**
 -dontwarn tv.freewheel.**
 -dontwarn com.adobe.**
--dontwarn com.visualon.**
 
 -keep public class com.brightcove.player.** {
     public *;
@@ -15,20 +14,4 @@
 }
 -keepclasseswithmembers public class com.brightcove.player.** {
     public *;
-}
-
--keep public class com.visualon.** {
-    public *;
-    protected *;
-    private *;
-}
--keepclassmembers public class com.visualon.** {
-    public *;
-    protected *;
-    private *;
-}
--keepclasseswithmembers public class com.visualon.** {
-    public *;
-    protected *;
-    private *;
 }
