@@ -11,11 +11,6 @@ include ':DFXPClosedCaptioningSampleApp'
 include ':WebVTTSampleApp'
 include ':BasicVMAPSampleApp'
 
-// For building hls-specific sample apps, which are located under the 'brightcove-hls' directory.
-include ':brightcove-hls:IMASampleApp'
-include ':brightcove-hls:ID3SampleApp'
-include ':brightcove-hls:BasicSampleApp'
-
 // For building exoplayer-specific sample apps, which are located under the 'brightcove-exoplayer' directory.
 include ':brightcove-exoplayer:AdRulesIMASampleApp'
 include ':brightcove-exoplayer:AdRulesIMAWidevineModularSampleApp'
@@ -39,7 +34,6 @@ include ':brightcove-player-controls:SeekBarColorsSampleApp'
 if (freewheelDependenciesAreSatisfied()) {
     include ':BasicFreeWheelSampleApp'
     include ':BasicFreeWheelWidevineSampleApp'
-    include ':brightcove-hls:FreeWheelSampleApp'
     include ':brightcove-exoplayer:FreeWheelWidevineModularSampleApp'
 }
 
