@@ -5,6 +5,10 @@ import android.os.Bundle;
 import com.brightcove.player.captioning.BrightcoveCaptionFormat;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
+import com.brightcove.player.controller.BrightcoveClosedCaptioningController;
+import com.brightcove.player.event.Event;
+import com.brightcove.player.event.EventListener;
+import com.brightcove.player.event.EventType;
 
 /**
  * This activity demonstrates how to play a video with closed
@@ -32,5 +36,14 @@ public class MainActivity extends BrightcovePlayer {
         brightcoveVideoView.addSubtitleSource(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.sintel_trailer_it), brightcoveCaptionFormat);
         brightcoveCaptionFormat = BrightcoveCaptionFormat.createCaptionFormat("text/vtt", "nl");
         brightcoveVideoView.addSubtitleSource(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.sintel_trailer_nl), brightcoveCaptionFormat);
+
+        brightcoveVideoView.getEventEmitter().once(EventType.CAPTIONS_LANGUAGES, new EventListener() {
+            @Override
+            public void processEvent(Event event) {
+                brightcoveVideoView.setClosedCaptioningEnabled(true);
+                brightcoveVideoView.setSubtitleLocale("en");
+            }
+        });
+
     }
 }

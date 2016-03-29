@@ -46,27 +46,8 @@ public class MainActivity extends BrightcovePlayer {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // When extending the BrightcovePlayer, we must assign the BrightcoveVideoView before
-        // entering the superclass. This allows for some stock video player lifecycle
-        // management.
-        setContentView(R.layout.ima_activity_main);
-        brightcoveVideoView = (BrightcoveVideoView) findViewById(R.id.brightcove_video_view);
-        final BrightcoveMediaController mediaController = new BrightcoveMediaController(brightcoveVideoView);
-
-        // Add "Ad Markers" where the Ads Manager says ads will appear.
-        mediaController.addListener(GoogleIMAEventType.ADS_MANAGER_LOADED, new EventListener() {
-            @Override
-            public void processEvent(Event event) {
-                AdsManager manager = (AdsManager) event.properties.get("adsManager");
-                List<Float> cuepoints = manager.getAdCuePoints();
-                for (int i = 0; i < cuepoints.size(); i++) {
-                    Float cuepoint = cuepoints.get(i);
-                    mediaController.getBrightcoveSeekBar().addMarker((int) (cuepoint * DateUtils.SECOND_IN_MILLIS));
-                }
-            }
-        });
-        brightcoveVideoView.setMediaController(mediaController);
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.ima_activity_main);
         eventEmitter = brightcoveVideoView.getEventEmitter();
 
         // Use a procedural abstraction to setup the Google IMA SDK via the plugin.
