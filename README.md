@@ -22,7 +22,7 @@ This version of the sample apps supports the latest Brightcove SDK and plugins. 
 
 * [Basic FreeWheel Widevine Classic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicFreeWheelWidevineSampleApp): This app shows how to configure an app to use the Brightcove native Android player FreeWheel Plugin to play a Widevine video.
 
-Note that in order to enable the FreeWheel sample apps, you must independently obtain and install the non-free file **AdManager.jar** into the top-level directory **libs/**.  The FreeWheel sample apps were tested with version 5.7.2.  Contact [FreeWheel](http://www.freewheel.tv/about/contact "FreeWheel") directly for more information on how to obtain their products.
+Note that in order to enable the FreeWheel sample apps, you must independently obtain and install the non-free file **AdManager.jar** into the directory **libs/** (typically, this directory is located under /home/your-user-name).  The FreeWheel sample apps were tested with versions up to 6.5.0. Brightcove does not distribute the FreeWheel libraries. Contact [FreeWheel](http://www.freewheel.tv/about/contact "FreeWheel") directly for more information on how to obtain their products.
 
 * [Basic Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicIMASampleApp): This app shows how to setup to use the Google IMA Plugin to play ads before, during and after a video. This version has been tested and works with v3 of the IMA SDK.
 
