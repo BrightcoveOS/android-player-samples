@@ -112,6 +112,13 @@ public class MainActivity extends BrightcovePlayer {
             }
         });
 
+        eventEmitter.on(EventType.DID_SET_VIDEO, new EventListener() {
+            @Override
+            public void processEvent(Event event) {
+                brightcoveVideoView.start();
+            }
+        });
+
         eventEmitter.on(FreeWheelEventType.WILL_SUBMIT_AD_REQUEST, new EventListener() {
             @Override
             public void processEvent(Event event) {
