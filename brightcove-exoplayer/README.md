@@ -27,6 +27,7 @@ The BrightcoveExoPlayer integration currently supports the following:
 * Analytics
  * Brightcove
  * Omniture
+* Android TV
 
 ## Requirements
 

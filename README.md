@@ -40,6 +40,8 @@ Note that in order to enable this sample app, you must independently obtain and 
 
 ## Brightcove ExoPlayer sample apps:
 
+The Brightcove ExoPlayer sample apps have now support for Android TV. Note that you are required to specify Brightcove SDK version 4.10.0 or later. In addition to that, you need to to add the android.intent.category.LEANBACK_LAUNCHER as an intent filter category for your Main Activity, so that your app appears in the Android TV home screen.
+
 * [Ad Rules Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/AdRulesIMASampleApp): This app shows how to the Brightcove ExoPlayer with Google IMA ads.
 
 * [Ad Rules Widevine Modular Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/AdRulesIMAWidevineModularSampleApp): This app shows how to use the Brightcove ExoPlayer with Google IMA ads and Widevine Modular content.
@@ -61,8 +63,6 @@ As noted above, you must independently obtain the non-free FreeWheel **AdManager
 * [HLS Live Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/LiveSampleApp): This app shows how to use the Brightcove ExoPlayer with HLS Live content.
 
 * [TextureView Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/TextureViewSampleApp): This app shows how to use the Brightcove ExoPlayer with TextureView.
-
-* [VMAP Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/VMAPSampleApp): This app shows how to use the Brightcove ExoPlayer with VMAP ads.
 
 * [Widevine Modular Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/WidevineModularSampleApp): This app shows how to setup the Brightcove ExoPlayer with Widevine Modular content.
 
