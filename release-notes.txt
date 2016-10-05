@@ -1,5 +1,18 @@
 Brightcove Player Samples for Android, Release Notes:
 
+Version 4.9.0:
+
+  General changes:
+
+    * The Brightcove SDK and its plugins have been updated to use version 4.9.+
+      Along with this version, the ExoPlayer was updated to 1.5.9
+
+  brightcove-exoplayer/ID3SampleApp changes:
+
+    * The ExoPlayerVideoDisplayComponent.Id3MetadataListener() has changed, so now instead of
+      receiving a map on the onId3Metadata callback, you'll get a List<Id3Frame>.
+      The TxxxMetadata does not exist anymore.
+
 Version 4.6.6:
 
   brightcove-exoplayer/WidevineModularSampleApp known issues:

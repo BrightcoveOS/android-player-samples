@@ -23,7 +23,7 @@ public class MainActivity extends BrightcovePlayer {
         brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
 
-        Video video = Video.createVideo("http://vevoplaylist-live.hls.adaptive.level3.net/vevo/ch1/appleman.m3u8");
+        Video video = Video.createVideo("http://nasatv-lh.akamaihd.net/i/NASA_101@319270/master.m3u8");
         brightcoveVideoView.add(video);
         brightcoveVideoView.start();
     }
