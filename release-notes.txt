@@ -1,5 +1,41 @@
 Brightcove Player Samples for Android, Release Notes:
 
+Version 4.10.0:
+
+  General changes:
+
+    * The Brightcove SDK and its plugins have been updated to use version 4.10.+
+      This version has now support for Android TV.
+      Note that you are required to add <category android:name="android.intent.category.LEANBACK_LAUNCHER"/>
+      as an intent filter category for your Main Activity, so that your app appears in the Android TV home screen.
+
+      The following sample apps have the LEANBACK_LAUNCHER intent filter category, so they can be tested on
+      an Android TV:
+        - brightcove-exoplayer/AdRulesIMASampleApp
+        - brightcove-exoplayer/AdRulesIMAWidevineModularSampleApp
+        - brightcove-exoplayer/AppCompatActivitySampleApp
+        - brightcove-exoplayer/AppCompatFragmentSampleApp
+        - brightcove-exoplayer/BasicSampleApp
+        - brightcove-exoplayer/FreeWheelSampleApp
+        - brightcove-exoplayer/FreeWheelWidevineModularSampleApp
+        - brightcove-exoplayer/ID3SampleApp
+        - brightcove-exoplayer/LiveSampleApp
+        - brightcove-exoplayer/TextureViewSampleApp
+        - brightcove-exoplayer/WidevineModularSampleApp
+
+Version 4.9.0:
+
+  General changes:
+
+    * The Brightcove SDK and its plugins have been updated to use version 4.9.+
+      Along with this version, the ExoPlayer was updated to 1.5.9
+
+  brightcove-exoplayer/ID3SampleApp changes:
+
+    * The ExoPlayerVideoDisplayComponent.Id3MetadataListener() has changed, so now instead of
+      receiving a map on the onId3Metadata callback, you'll get a List<Id3Frame>.
+      The TxxxMetadata does not exist anymore.
+
 Version 4.6.6:
 
   brightcove-exoplayer/WidevineModularSampleApp known issues:
