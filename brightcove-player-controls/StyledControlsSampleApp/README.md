@@ -3,12 +3,12 @@ Styled Controls Sample App
 
 This sample is meant to explain the options you have to style the Brightcove default media controller and the tv media controller.
 
-The most important code in this sample can be found on the styles.xml file (res/values/styles.xml), where you will find the modified style attributes.
+The most important code in this sample can be found in the styles.xml file (res/values/styles.xml), where you will find the modified style attributes.
 
 ### Styling the media controller
 
-You can style the default media controller (default_media_controller.xml) by modifying or adding attributes on each style.
-The list of styles used are below:
+You can style the default media controller (default_media_controller.xml) by modifying or adding attributes in each style.
+The list of styles used is below:
 
 1. **BrightcoveControlBar**. This style is applied to the whole media controller. The main purpose is to enable and disable buttons, as well as to change other parameters. These values are inherited from *BrightcoveControlBarDefault*.
     * *brightcove_audio_tracks*: Boolean (default true).
@@ -27,10 +27,10 @@ The list of styles used are below:
 
 
 2. **BrightcoveSeekBar**. This style is used for the progress/seek bar. Their values are inherited from *BrightcoveSeekBarDefault* which also inherit from *android:Widget.Holo.Light.SeekBar*. Please see [Android SeekBar Attributes](https://developer.android.com/reference/android/widget/SeekBar.html) to know what values can be changed.
-3. **BorderlessButton**. This style is used for the control buttons. Their values are inherited from *BorderlessButtonDefault* which also inherit from *ndroid:Widget.Button*. Please see [Android Button Attibutes](https://developer.android.com/reference/android/widget/Button.html) to know what values can be changed.
+3. **BorderlessButton**. This style is used for the control buttons. Their values are inherited from *BorderlessButtonDefault* which also inherit from *android:Widget.Button*. Please see [Android Button Attibutes](https://developer.android.com/reference/android/widget/Button.html) to know what values can be changed.
 
 You can modify one or more default values to any of the styles listed above.
-For example, you can modify the BrightcoveControlBar to hide the seek bar and the closed captions buttons as shown below:
+For example: you can modify the BrightcoveControlBar to hide the seek bar and the closed captions button as shown below:
 
 In res/values/styles.xml
 ```xml
@@ -41,12 +41,14 @@ In res/values/styles.xml
    </style>
 </resources>
 ```
-It is important to add the parent ```parent="BrightcoveControlBarDefault"``` to inherit the rest of the default values. It’s equally important to keep the same name as BrightcoveControlBar (the same applies for the rest of the styles), so that the default media controller layout will automatically pick up this style.
+**Notes:**
+  * It is important to add the parent ```parent="BrightcoveControlBarDefault"``` to inherit the rest of the default values.
+  * It’s equally important to keep the same name as BrightcoveControlBar (the same applies for the rest of the styles), so that the default media controller layout will automatically pick up this style.
 
 ##### Styling Android TV media controller
-There are some styles which are applied exclusively to the Brightcove media controller used on an Android TV (tv_media_controller.xml).
+There are some styles which are applied exclusively to the Brightcove media controller used in Android TV (tv_media_controller.xml).
 
-On Android, you have the option to [inherit](https://developer.android.com/guide/topics/ui/themes.html#Inheritance) values from a previously defined style without the need to specify the parent attribute, using the Parent.Children pattern. The Android TV styles are used following this pattern, ex. *“BrightcoveControlBar.TV”*.
+In Android, you have the option to [inherit](https://developer.android.com/guide/topics/ui/themes.html#Inheritance) values from a previously defined style without the need to specify the parent attribute, using the Parent.Children pattern. The Android TV styles use this pattern: *“BrightcoveControlBar.TV”*.
 
 1. **BrightcoveControlBar.TV**. This inherit from *BrightcoveControlBar* and there are only a few changes for TV.
      * *brightcove_full_screen*: Now this value is false by default.
@@ -60,7 +62,7 @@ On Android, you have the option to [inherit](https://developer.android.com/guide
 6. **BrightcovePlayerOptionsTitle**. This style is used on the TextView for the Player Options titles, as “Captions” and “Audio Tracks”. Their values are inherited from *BrightcovePlayerOptionsTitleDefault*. You can modify or add more values to it. Please see [TextView attributes](https://developer.android.com/reference/android/widget/TextView.html).
 7. **BrightcovePlayerOptionsButton**. This style is used for the different radio button items under the player options (tv_player_options_item.xml). Their values are inherited from *BrightcovePlayerOptionsTitleDefault*. You can modify or add more values to it. Please see [RadioButton attributes](https://developer.android.com/reference/android/widget/RadioButton.html).
 
-The exceptions to the rule are the new styles created for tv-only items, such as *BrightcovePlayerOptions*, *BrightcovePlayerOptionsTitle* and *BrightcovePlayerOptionsButton*. If you want to customize these styles while inheriting their values, you do need to specify the parent attribute, the same way we did for the BrightcoveControlBar style example.
+The exceptions to the “Parent.Children” pattern are the new styles created for tv-only items, such as *BrightcovePlayerOptions*, *BrightcovePlayerOptionsTitle* and *BrightcovePlayerOptionsButton*. If you want to customize these styles while inheriting their values, you do need to specify the parent attribute. This is the same way we customized styles for the BrightcoveControlBar example.
 ```xml
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
    <style name="BrightcovePlayerOptions" parent="BrightcovePlayerOptionsDefault">
