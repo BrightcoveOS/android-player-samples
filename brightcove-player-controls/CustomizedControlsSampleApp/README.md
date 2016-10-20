@@ -79,7 +79,7 @@ An example of the BrightcoveSeekBar:
 ```
 ###### What are *one_line_spacer* and *two_line_spacer*?
 The *one_line_spacer* and *two_line_spacer* are used in the one row and two row media controller, respectively. Their purpose is to set the fill space between two sets of controller buttons. Some of the properties include *layout_height*, *layout_width* and *layout_weight*.
-In the two row controller the *two_line_spacer is adding the space between the rewind and the fullscreen button. In the onw row controller the *two_line_spacer* is between the BrightcoveSeekBar and the fullscreen button.
+In the two row controller the *two_line_spacer is adding the space between the rewind and the fullscreen button. In the one row controller the *two_line_spacer* is between the BrightcoveSeekBar and the fullscreen button.
 ```xml
 <View
    tools:ignore="InconsistentLayout"
