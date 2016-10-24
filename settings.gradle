@@ -24,6 +24,8 @@ include ':brightcove-exoplayer:VMAPSampleApp'
 include ':brightcove-exoplayer:WidevineModularSampleApp'
 
 // For building Brightcove Player Controls specific sample apps, which are located under the 'brightcove-player-controls' directory.
+include ':brightcove-player-controls:CustomizedControlsSampleApp'
+include ':brightcove-player-controls:StyledControlsSampleApp'
 include ':brightcove-player-controls:RewindArrowLeftSampleApp'
 include ':brightcove-player-controls:RewindBackwardSampleApp'
 include ':brightcove-player-controls:RewindStepBackwardSampleApp'

@@ -168,7 +168,8 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     }
   }
 
-  if (project.parent.name.equals('brightcove-exoplayer')) {
+  if (project.parent.name.equals('brightcove-exoplayer') ||
+          project.parent.name.equals('brightcove-player-controls')) {
     dependencies {
       compile "com.brightcove.player:exoplayer:${anpVersion}"
     }
