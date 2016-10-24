@@ -3,7 +3,7 @@ Customized Controls Sample App
 
 The Brightcove Native SDK fot Android provides two layouts for the media controller:
   1. The controls are shown in two rows by default (layout folder).
-  2. The controls are shown in one row when the minimum available width is 480dp (layout-w480dp folder).
+  2. The controls are shown in one row when the minimum available width is 480dp ([layout-w480dp](https://developer.android.com/guide/practices/screens_support.html#NewQualifiers) folder in the Brightcove Native SDK).
 
 There is a separate layout used only for the Android TV media controller (tv_media_controller.xml in layout folder), which will be picked automatically when the app is running on an Android TV. You can check if you are on TV mode by calling boolean *BrightcoveMediaController.checkTvMode(context)*.
 
