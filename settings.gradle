@@ -10,6 +10,7 @@ include ':BasicWidevineSampleApp'
 include ':DFXPClosedCaptioningSampleApp'
 include ':WebVTTSampleApp'
 include ':BasicVMAPSampleApp'
+include ':360VideoDemo'
 
 // For building exoplayer-specific sample apps, which are located under the 'brightcove-exoplayer' directory.
 include ':brightcove-exoplayer:AdRulesIMASampleApp'

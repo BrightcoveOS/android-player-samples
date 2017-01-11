@@ -6,7 +6,7 @@ buildscript {
   }
 
   dependencies {
-    classpath 'com.android.tools.build:gradle:2.2.2'
+    classpath 'com.android.tools.build:gradle:2.2.3'
     classpath 'de.undercouch:gradle-download-task:0.+'
 
     classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.2.2'
@@ -79,7 +79,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-      minSdkVersion 10
+      minSdkVersion 11
       targetSdkVersion 23
     }
 
