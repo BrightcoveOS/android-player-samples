@@ -1,16 +1,13 @@
-package com.brightcove.a360videodemo;
+package com.brightcove.player.samples.video360;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
-import com.brightcove.player.event.Event;
-import com.brightcove.player.event.EventListener;
-import com.brightcove.player.event.EventType;
 import com.brightcove.player.media.DeliveryType;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
+import com.brightcove.player.view.BrightcovePlayer;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BrightcovePlayer {
     // Settings for MP4 test video
     private static final String VIDEO_URL = "https://secure.brightcove.com/services/mobile/streaming/index/master.m3u8?videoId=5123538633001&pubId=5028486670001&secure=true";
     private static final DeliveryType VIDEO_TYPE = DeliveryType.HLS;
@@ -29,15 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        videoPlayer = (BrightcoveExoPlayerVideoView) findViewById(R.id.video_player);
-        videoPlayer.getEventEmitter().on(EventType.CHANGE_ORIENTATION, new EventListener() {
-            @Override
-            public void processEvent(Event event) {
-                int orientation = event.getIntegerProperty(Event.REQUESTED_ORIENTATION);
-                setRequestedOrientation(orientation);
-            }
-        });
-
+        videoPlayer = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
         Video video = Video.createVideo(VIDEO_URL, VIDEO_TYPE, PROJECTION_FORMAT);
         videoPlayer.add(video);
     }
