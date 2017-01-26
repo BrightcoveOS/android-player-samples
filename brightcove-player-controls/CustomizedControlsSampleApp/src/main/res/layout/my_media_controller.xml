@@ -11,8 +11,7 @@
     android:padding="8dp"
     android:orientation="horizontal"
     android:layout_gravity="bottom"
-    style="@style/BrightcoveControlBar.Land">
-
+    style="@style/BrightcoveControlBar.Custom">
 
     <Button
         android:id="@id/captions"
@@ -73,7 +72,7 @@
         android:visibility="visible"/>
 
     <!-- If you want to remove one default element, you must disable it through the BrightcoveControlBar style
-         Please look at the @style/BrightcoveControlBar.Land -->
+         Please look at the @style/BrightcoveControlBar.Custom -->
     <!--<com.brightcove.player.mediacontroller.BrightcoveSeekBar
         android:id="@id/seek_bar"
         style="@style/BrightcoveSeekBar"

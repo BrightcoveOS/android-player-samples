@@ -111,6 +111,18 @@
         android:visibility="visible"
         android:text="@string/brightcove_controls_audio_tracks"/>
 
+    <!-- This button will only be visible when the video played has the projection format property
+         as Video.ProjectionFormat.EQUIRECTANGULAR.
+         For more info, please check the sample brightcove-exoplayer/360VideoSampleApp. -->
+    <Button
+        style="@style/BorderlessButton"
+        android:id="@id/vr_mode"
+        android:layout_gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:text="@string/brightcove_controls_vr_mode"/>
+
     <Button
         style="@style/BorderlessButton"
         android:id="@id/full_screen"
@@ -120,6 +132,7 @@
         android:layout_width="wrap_content"
         android:visibility="visible"
         android:text="@string/brightcove_controls_enter_full_screen"/>
+
     <Button
         android:id="@+id/thumbs_up"
         style="@style/BorderlessButton"
