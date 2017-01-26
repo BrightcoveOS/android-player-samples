@@ -79,7 +79,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-      minSdkVersion 11
+      minSdkVersion 13
       targetSdkVersion 23
     }
 
