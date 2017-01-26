@@ -12,7 +12,7 @@
 
     android:orientation="horizontal"
     android:layout_gravity="bottom"
-    style="@style/BrightcoveControlBar.TV">
+    style="@style/BrightcoveControlBar.TV.Custom">
 
     <LinearLayout
         android:layout_width="match_parent"
