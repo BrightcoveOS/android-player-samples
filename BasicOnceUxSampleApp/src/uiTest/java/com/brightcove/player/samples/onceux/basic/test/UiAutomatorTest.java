@@ -1,5 +1,9 @@
-
 package com.brightcove.player.samples.onceux.basic.test;
+
+import android.util.Log;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import com.android.uiautomator.core.UiObject;
 import com.android.uiautomator.core.UiObjectNotFoundException;
@@ -8,57 +12,28 @@ import com.android.uiautomator.core.UiSelector;
 import com.android.uiautomator.testrunner.UiAutomatorTestCase;
 
 /**
- * Provide a class to provide test cases.
+ * Provide a test case that tests the setUp method for the other tests. 
+ * It also serves as an in-depth explanation of the universal setUp and tearDown methods.
+ * 
+ * @author Bryan Gregory Scott -- bscott@brightcove.com
  */
-public class UiAutomatorTest extends UiAutomatorTestCase {
+public class UiAutomatorTest extends OnceUxUiAutomatorBaseTestCase {
 
-    // Private class constants
+    final CountDownLatch latch = new CountDownLatch(1);
 
-    // For Logcat.
-    private final String TAG = this.getClass().getSimpleName();
+    // Test Methods
 
-    // Public methods.
-
-    public void testDemo() throws UiObjectNotFoundException {   
-      
-      // Simulate a short press on the HOME button.
-      getUiDevice().pressHome();
-      
-      // We’re now in the home screen. Next, we want to simulate 
-      // a user bringing up the All Apps screen.
-      // If you use the uiautomatorviewer tool to capture a snapshot 
-      // of the Home screen, notice that the All Apps button’s 
-      // content-description property has the value “Apps”.  We can 
-      // use this property to create a UiSelector to find the button. 
-      UiObject allAppsButton = new UiObject(new UiSelector().description("Apps"));
-      
-      // Simulate a click to bring up the All Apps screen.
-      allAppsButton.clickAndWaitForNewWindow();
-      
-      // In the All Apps screen, the Settings app is located in 
-      // the Apps tab. To simulate the user bringing up the Apps tab,
-      // we create a UiSelector to find a tab with the text 
-      // label “Apps”.
-      UiObject appsTab = new UiObject(new UiSelector().text("Apps"));
-      
-      // Simulate a click to enter the Apps tab.
-      appsTab.click();
-
-      // Next, in the apps tabs, we can simulate a user swiping until
-      // they come to the Settings app icon.  Since the container view 
-      // is scrollable, we can use a UiScrollable object.
-      UiScrollable appViews = new UiScrollable(new UiSelector().scrollable(true));
-      
-      // Set the swiping mode to horizontal (the default is vertical)
-      appViews.setAsHorizontalList();
-      
-      // Create a UiSelector to find the Settings app and simulate      
-      // a user click to launch the app. 
-      UiObject calendarApp = appViews.getChildByText(new UiSelector().className(android.widget.TextView.class.getName()), "Calendar");
-      
-      // Validate that the calendar app exists.
-      assertTrue("Unable to detect Calendar app.", calendarApp != null);
-      calendarApp.clickAndWaitForNewWindow();
-  }   
+    /**
+     * testCheckForSampleApp ensures that the setUp method being used for the other 
+     * tests is functioning correctly and finding the Sample App.
+     */
+    public void testCheckForSampleApp() throws Exception {
+        // Identified as a way to establish the success of the setUp method.
+        latch.await(5, TimeUnit.SECONDS);
+        assertTrue("Unable to detect Basic Once Ux Sample app.", basicOnceUxSampleApp != null);
+    }
+    //TODO: Come up with a way to test the presence of objects in the super.tearDown method.
+    // UiObjects that need testing include: forceStopButton, basicOnceUxSampleAppSettings,
+    // and settingsApp.
 
 }
