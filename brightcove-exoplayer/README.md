@@ -28,6 +28,7 @@ The BrightcoveExoPlayer integration currently supports the following:
  * Brightcove
  * Omniture
 * Android TV
+* Video 360
 
 ## Requirements
 
