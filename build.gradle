@@ -159,18 +159,6 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     }
   }
 
-  if (project.name.contains('Widevine')) {
-    dependencies {
-      compile "com.brightcove.player:android-widevine-plugin:${anpVersion}"
-    }
-
-    android {
-      defaultConfig {
-        minSdkVersion 11
-      }
-    }
-  }
-
   if (project.parent.name.equals('brightcove-exoplayer') ||
           project.parent.name.equals('brightcove-player-controls')) {
     dependencies {
