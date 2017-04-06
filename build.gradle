@@ -79,7 +79,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-      minSdkVersion 10
+      minSdkVersion 11
       targetSdkVersion 23
     }
 
@@ -155,18 +155,6 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     android {
       defaultConfig {
         minSdkVersion 16
-      }
-    }
-  }
-
-  if (project.name.contains('Widevine')) {
-    dependencies {
-      compile "com.brightcove.player:android-widevine-plugin:${anpVersion}"
-    }
-
-    android {
-      defaultConfig {
-        minSdkVersion 11
       }
     }
   }

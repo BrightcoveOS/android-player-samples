@@ -10,8 +10,6 @@ This version of the sample apps supports the latest Brightcove SDK and plugins. 
 
 * [Ad Rules Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/AdRulesIMASampleApp): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules. This version has been tested and works with v3.1.3 of the IMA SDK.
 
-* [Ad Rules Google IMA Widevine Classic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/AdRulesIMAWidevineSampleApp): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules with a Widevine video. This version has been tested and works with v3.1.3 of the IMA SDK.
-
 * [Basic Akamai Identity Services Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicAISWebViewSampleApp): This app shows how to configure an app to use the Brightcove native Android player with Akamai Identity Services.
 
 * [Basic Bundled Video Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicBundledVideoSampleApp): This app shows how to play a video that is stored on the device for offline viewing.
@@ -20,21 +18,15 @@ This version of the sample apps supports the latest Brightcove SDK and plugins. 
 
 * [Basic FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicFreeWheelSampleApp): This app shows how to configure an app to use the Brightcove native Android player FreeWheel Plugin to play a video.
 
-* [Basic FreeWheel Widevine Classic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicFreeWheelWidevineSampleApp): This app shows how to configure an app to use the Brightcove native Android player FreeWheel Plugin to play a Widevine video.
-
-Note that in order to enable the FreeWheel sample apps, you must independently obtain the non-free FreeWheel **AdManager.jar** library archive and install it into the directory **libs/** which is typically located at the root of your /home/ directory. The Brightcove Native SDK for Android, and the FreeWheel sample apps here, have been tested with FreeWheel AdManager library version 6.5.0. Please note that Brightcove does not distribute the FreeWheel libraries. Contact [FreeWheel](http://freewheel.tv/about/#contact-us) directly for more information on how to obtain their products.
+Note that in order to run the FreeWheel sample apps, you must independently obtain the non-free FreeWheel **AdManager.jar** library archive and install it into the directory **libs/** which is typically located at the root of your /home/ directory. The Brightcove Native SDK for Android, and the FreeWheel sample apps here, have been tested with FreeWheel AdManager library version 6.5.0. Please note that Brightcove does not distribute the FreeWheel libraries. Contact [FreeWheel](http://freewheel.tv/about/#contact-us) directly for more information on how to obtain their products.
 
 * [Basic Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicIMASampleApp): This app shows how to setup to use the Google IMA Plugin to play ads before, during and after a video. This version has been tested and works with v3.1.3 of the IMA SDK.
-
-* [Basic Google IMA Widevine Classic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicIMAWidevineSampleApp): This app shows how to setup to use the Google IMA Plugin to play ads before, during and after a Widevine video. This version has been tested and works with v3.1.3 of the IMA SDK.
 
 * [Basic Omniture Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicOmnitureSampleApp): This app shows how to configure an app to use the Brightcove native Android player Omniture Plugin to play a video.
 
 Note that in order to enable this sample app, you must independently obtain and install the file **adobeMobileLibrary.jar** into the top-level directory **libs/**.  Version 4.11.0 of the Adobe provided, non-free, jar file was used to test this sample app.
 
 * [Basic OnceUx Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicOnceUxSampleApp): This app shows how to configure an app to use the Brightcove Native Player for Android OnceUx Plugin to play a video.
-
-* [Basic Widevine Classic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicWidevineSampleApp): This app shows how to configure an app to use the Brightcove native Android player Widevine Plugin to play a video.
 
 * [WebVTT Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/WebVTTSampleApp): This app shows how to implement closed captioning using WebVTT files with Android 4.4.
 
@@ -95,7 +87,7 @@ Android Studio will now download/import and build the sample app.  At this point
 By default, the sample apps will build with the most recent Brightcove Android Native Player version at build time. To override this behavior with a specific version, create a file named **.gradle/gradle.properties** in your home directory and set the value of the property *anpVersion* to the desired version.  An invalid version will cause no sample app projects to be configured.
 
 ## Running a sample app
-1. To run a sample app on an Android 4.2.2 or later device, plug the device into the computer and ensure that USB debugging is enabled.  Android Studio will recognize the device as long as the device identifies as running a version between Android 10 and Android 19 otherwise Android Studio will run the sample app in the simulator.  Using the simulator is not recommended as video support is buggy.  This will be resolved as Android Studio and the Android SDK mature.
+1. To run a sample app on an Android 4.2.2 or later device, plug the device into the computer and ensure that USB debugging is enabled.  Android Studio will recognize the device as long as the device identifies as running a version between Android SDK 11 and Android SDK 19 otherwise Android Studio will run the sample app in the simulator.  Using the simulator is not recommended as video support is buggy.  This will be resolved as Android Studio and the Android SDK mature.
 1. Select a sample app from the *Run/Debug Configuration* selector and click on the run (green button) icon to start the sample.
 
 Enjoy!
