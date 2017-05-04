@@ -5,6 +5,8 @@
 -dontwarn com.google.**
 -dontwarn tv.freewheel.**
 -dontwarn com.adobe.**
+-dontwarn com.squareup.okhttp.**
+-dontwarn io.requery.android.**
 
 -keep public class com.brightcove.player.** {
     public *;
