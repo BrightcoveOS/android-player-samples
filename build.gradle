@@ -6,8 +6,8 @@ buildscript {
   }
 
   dependencies {
-    classpath 'com.android.tools.build:gradle:2.2.3'
-    classpath 'de.undercouch:gradle-download-task:0.+'
+    classpath 'com.android.tools.build:gradle:2.3.0'
+    classpath 'de.undercouch:gradle-download-task:3.2.0'
 
     classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.2.2'
   }
@@ -28,9 +28,11 @@ def downloadIMA() {
   // Conditionally download the Google IMA SDK during
   // configuration.  This step is done once.  The 'clean' task will not
   // remove libraries from /libs/.
-  File dep = file(libraryDirectory + "lib/sdk.jar")
+  def IMALibraryDirectory = libraryDirectory + 'lib/'
+  def IMALibraryName = 'sdk.jar'
+  File dep = file(IMALibraryDirectory + IMALibraryName)
   if (!dep.exists()) {
-    apply plugin: 'download-task'
+    apply plugin: 'de.undercouch.download'
 
     println "Downloading the Google IMA SDK..."
 
@@ -39,9 +41,19 @@ def downloadIMA() {
       dest file(libraryDirectory + imaAndroidSdkZipFileName)
     }
 
+    //Find the sdk.jar file
+    FileTree fileTree = zipTree(libraryDirectory + imaAndroidSdkZipFileName)
+    def jarDir
+    for (file in fileTree.getFiles()) {
+      if (file.toString().contains(IMALibraryName)) {
+        jarDir = file
+        break
+      }
+    }
+
     copy {
-      from(zipTree(file(libraryDirectory + imaAndroidSdkZipFileName)))
-      into file(libraryDirectory)
+      from jarDir
+      into file(IMALibraryDirectory)
     }
   }
 }
@@ -75,8 +87,8 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
   }
 
   android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
 
     defaultConfig {
       minSdkVersion 13
@@ -98,6 +110,10 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
         minifyEnabled true
         proguardFiles getDefaultProguardFile('proguard-android.txt'), "${rootDir}/proguard-project.txt"
       }
+    }
+
+    lintOptions {
+      warning 'InvalidPackage'
     }
 
     gradle.projectsEvaluated {
@@ -179,7 +195,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
 
     android {
       defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 18
       }
     }
   }
