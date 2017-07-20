@@ -38,6 +38,7 @@ include ':brightcove-player-controls:SeekBarColorsSampleApp'
 if (freewheelDependenciesAreSatisfied()) {
     include ':BasicFreeWheelSampleApp'
     include ':BasicFreeWheelWidevineSampleApp'
+    include ':brightcove-exoplayer:FreeWheelSampleApp'
     include ':brightcove-exoplayer:FreeWheelWidevineModularSampleApp'
 }
 

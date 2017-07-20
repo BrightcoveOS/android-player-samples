@@ -8,6 +8,10 @@
 -dontwarn com.squareup.okhttp.**
 -dontwarn io.requery.android.**
 
+# These classes aren't used in the Brightcove Android SDK.
+-dontwarn io.requery.android.QueryLoader
+-dontwarn io.requery.android.QueryRecyclerAdapter
+
 -keep public class com.brightcove.player.** {
     public *;
 }
