@@ -75,8 +75,8 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
   }
 
   android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
 
     defaultConfig {
       minSdkVersion 13
@@ -98,6 +98,10 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
         minifyEnabled true
         proguardFiles getDefaultProguardFile('proguard-android.txt'), "${rootDir}/proguard-project.txt"
       }
+    }
+
+    lintOptions {
+      warning 'InvalidPackage'
     }
 
     gradle.projectsEvaluated {
@@ -179,7 +183,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
 
     android {
       defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 18
       }
     }
   }
