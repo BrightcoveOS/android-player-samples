@@ -1,5 +1,26 @@
 Brightcove Player Samples for Android, Release Notes:
 
+Version 5.0.3:
+
+  SDK New Features:
+
+    Offline Playback: Added support for the following:
+      Multiple Audio Tracks
+      VTT Captions
+      Rendition Selection
+
+      Please also note that Offline Playback is currently supported only with Video Cloud Dynamic Delivery and DRM.
+
+  Sample Apps New Features:
+
+    Support for Gradle 4.0.1
+      These sample apps now build with the latest released version of Gradle, 4.0.1.
+      Please note that when building these apps from the command line, that the Gradle daemon is started, and will continue to run after the build completes.
+      To stop the daemon, run the following:
+      `./gradlew --stop`
+
+Please refer to the release-notes.txt in your download of the Android SDK for more details on new features and fixes in later versions of the Brightcove Native Player SDK for Android.
+
 Version 4.10.0:
 
   General changes:
