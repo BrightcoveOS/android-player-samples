@@ -96,6 +96,12 @@ Android Studio will now download/import and build the sample app.  At this point
 ## Overriding the default build behavior
 By default, the sample apps will build with the most recent Brightcove Android Native Player version at build time. To override this behavior with a specific version, create a file named **.gradle/gradle.properties** in your home directory and set the value of the property *anpVersion* to the desired version.  An invalid version will cause no sample app projects to be configured.
 
+## Building with Gradle on the command line
+These sample apps now build with the latest released version of Gradle, 4.0.1. Please note that when building these apps from the command line, that the Gradle daemon is started, and will continue to run after the build completes.
+
+To stop the daemon after the build completes, run the following:
+`./gradlew --stop`
+
 ## Running a sample app
 1. To run a sample app on an Android 4.2.2 or later device, plug the device into the computer and ensure that USB debugging is enabled.  Android Studio will recognize the device as long as the device identifies as running a version between Android 10 and Android 19 otherwise Android Studio will run the sample app in the simulator.  Using the simulator is not recommended as video support is buggy.  This will be resolved as Android Studio and the Android SDK mature.
 1. Select a sample app from the *Run/Debug Configuration* selector and click on the run (green button) icon to start the sample.
