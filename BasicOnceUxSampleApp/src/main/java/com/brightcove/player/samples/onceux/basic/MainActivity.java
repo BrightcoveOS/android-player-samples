@@ -43,7 +43,7 @@ public class MainActivity extends BrightcovePlayer {
     // what the click through URL for the ads shoud be.  The VMAP data
     // will also identify what the companion ad should be and what
     // it's click through URL is.
-    private String onceUxAdDataUrl = "http://onceux.unicornmedia.com/now/ads/vmap/od/auto/c6589dd5-8f31-4ae3-8a5f-a54ca3d7c973/797c44dd-aff0-4c96-a2b5-e503848ec03e/31d1ef83-70f4-4de8-9f4e-2f3608d25517";
+    private String onceUxAdDataUrl = "http://once.unicornmedia.com/now/ads/vmap/od/auto/c501c3ee-7f1c-4020-aa6d-0b1ef0bbd4a9/202ef8bb-0d9d-4f6f-bd18-f45aa3010fe6/8a146f45-9fac-462e-a111-de60ec96198b/content.once";
 
     private OnceUxComponent plugin;
     public OnceUxComponent getOnceUxPlugin() {
