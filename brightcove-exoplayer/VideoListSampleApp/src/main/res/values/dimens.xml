@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="item_view_margin">16dp</dimen>
+    <dimen name="item_video_view_height">200dp</dimen>
+    <dimen name="recycler_margin">8dp</dimen>
+
+    <dimen name="item_title_text_size">28sp</dimen>
+    <dimen name="item_desc_text_size">20sp</dimen>
+</resources>

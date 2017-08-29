@@ -24,6 +24,7 @@ include ':brightcove-exoplayer:OfflinePlaybackSampleApp'
 include ':brightcove-exoplayer:TextureViewSampleApp'
 include ':brightcove-exoplayer:VMAPSampleApp'
 include ':brightcove-exoplayer:WidevineModularSampleApp'
+include ':brightcove-exoplayer:VideoListSampleApp'
 
 // For building Brightcove Player Controls specific sample apps, which are located under the 'brightcove-player-controls' directory.
 include ':brightcove-player-controls:CustomizedControlsSampleApp'
