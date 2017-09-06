@@ -57,6 +57,7 @@ public class MainActivity extends BrightcovePlayer {
         // management.
         setContentView(R.layout.onceux_activity_main);
         brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
+        brightcoveVideoView.getAnalytics().setAccount("5420904993001");
         super.onCreate(savedInstanceState);
 
         // Setup the event handlers for the OnceUX plugin, set the companion ad container,

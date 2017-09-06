@@ -1,5 +1,6 @@
 package com.brightcove.player.demo.stepbackwardrewind;
 
+import com.brightcove.player.media.DeliveryType;
 import com.brightcove.player.mediacontroller.BrightcoveMediaController;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
@@ -8,6 +9,8 @@ import com.brightcove.player.view.BrightcoveVideoView;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+
+import static android.provider.ContactsContract.Directory.PACKAGE_NAME;
 
 /**
  * This app illustrates customizing the rewind button glyph using the Brightcove media controller.  The code for the
@@ -32,8 +35,10 @@ public class MainActivity extends BrightcovePlayer {
 
         // Add a test video from the res/raw directory to the BrightcoveVideoView.
         String PACKAGE_NAME = getApplicationContext().getPackageName();
-        Uri video = Uri.parse("android.resource://" + PACKAGE_NAME + "/" + R.raw.shark);
-        brightcoveVideoView.add(Video.createVideo(video.toString()));
+        Uri videoUri = Uri.parse("android.resource://" + PACKAGE_NAME + "/" + R.raw.shark);
+        Video video = Video.createVideo(videoUri.toString(), DeliveryType.MP4);
+        video.getProperties().put(Video.Fields.PUBLISHER_ID, "5420904993001");
+        brightcoveVideoView.add(video);
     }
 
 }

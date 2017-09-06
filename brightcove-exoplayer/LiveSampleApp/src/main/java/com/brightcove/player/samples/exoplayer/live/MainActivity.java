@@ -1,6 +1,8 @@
 package com.brightcove.player.samples.exoplayer.live;
 
 import android.os.Bundle;
+
+import com.brightcove.player.media.DeliveryType;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
@@ -23,7 +25,8 @@ public class MainActivity extends BrightcovePlayer {
         brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
 
-        Video video = Video.createVideo("http://nasatv-lh.akamaihd.net/i/NASA_101@319270/master.m3u8");
+        Video video = Video.createVideo("YOUR_LIVE_HLS_STREAM", DeliveryType.HLS);
+        video.getProperties().put(Video.Fields.PUBLISHER_ID, "YOUR_VIDEOCLOUD_PUBLISHER_ID");
         brightcoveVideoView.add(video);
         brightcoveVideoView.start();
     }
