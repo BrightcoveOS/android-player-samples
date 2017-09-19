@@ -6,6 +6,7 @@ import com.brightcove.player.display.ExoPlayerVideoDisplayComponent;
 import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventType;
 import com.brightcove.player.event.EventListener;
+import com.brightcove.player.media.DeliveryType;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.google.android.exoplayer.metadata.id3.Id3Frame;
@@ -43,7 +44,8 @@ public class MainActivity extends BrightcovePlayer {
             }
         });
 
-        Video video = Video.createVideo("https://s3.amazonaws.com/as-zencoder/hls-timed-metadata/test.m3u8");
+        Video video = Video.createVideo("https://s3.amazonaws.com/as-zencoder/hls-timed-metadata/test.m3u8", DeliveryType.HLS);
+        video.getProperties().put(Video.Fields.PUBLISHER_ID, "5420904993001");
         brightcoveVideoView.add(video);
         brightcoveVideoView.start();
 

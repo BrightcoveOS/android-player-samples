@@ -7,7 +7,6 @@ buildscript {
 
   dependencies {
     classpath 'com.android.tools.build:gradle:2.3.0'
-    classpath 'de.undercouch:gradle-download-task:3.2.0'
 
     classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.2.2'
   }
@@ -19,43 +18,7 @@ project.ext {
   // The directory that will be used to reference dependent libraries.
   // Modify as needed. Defaulted to users home directory.
   libraryDirectory = "${System.getProperty("user.home")}/libs/"
-  imaAndroidSdkZipFileName = "ima-android-v3-3.1.3.zip"
-}
-
-// Automatically download the Google IMA third party zip file and
-// extract the jar to satisfy the dependency.
-def downloadIMA() {
-  // Conditionally download the Google IMA SDK during
-  // configuration.  This step is done once.  The 'clean' task will not
-  // remove libraries from /libs/.
-  def IMALibraryDirectory = libraryDirectory + 'lib/'
-  def IMALibraryName = 'sdk.jar'
-  File dep = file(IMALibraryDirectory + IMALibraryName)
-  if (!dep.exists()) {
-    apply plugin: 'de.undercouch.download'
-
-    println "Downloading the Google IMA SDK..."
-
-    download {
-      src 'http://imasdk.googleapis.com/native/downloads/' + imaAndroidSdkZipFileName
-      dest file(libraryDirectory + imaAndroidSdkZipFileName)
-    }
-
-    //Find the sdk.jar file
-    FileTree fileTree = zipTree(libraryDirectory + imaAndroidSdkZipFileName)
-    def jarDir
-    for (file in fileTree.getFiles()) {
-      if (file.toString().contains(IMALibraryName)) {
-        jarDir = file
-        break
-      }
-    }
-
-    copy {
-      from jarDir
-      into file(IMALibraryDirectory)
-    }
-  }
+  imaAndroidSdkVersion = '3.7.4'
 }
 
 configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
@@ -141,10 +104,9 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
   }
 
   if (project.name.contains('IMA')) {
-    downloadIMA()
     dependencies {
       compile "com.brightcove.player:android-ima-plugin:${anpVersion}"
-      compile files(libraryDirectory + "lib/sdk.jar")
+      compile 'com.google.ads.interactivemedia.v3:interactivemedia:'+imaAndroidSdkVersion
       compile 'com.google.android.gms:play-services-ads:8.1.0'
     }
   }
