@@ -1,15 +1,15 @@
-include ':AdRulesIMASampleApp'
-include ':AdRulesIMAWidevineSampleApp'
-include ':BasicBundledVideoSampleApp'
-include ':BasicCastSampleApp'
-include ':BasicIMASampleApp'
-include ':BasicIMAWidevineSampleApp'
+include ':brightcove-mediaplayer:AdRulesIMASampleApp'
+include ':brightcove-mediaplayer:AdRulesIMAWidevineSampleApp'
+include ':brightcove-mediaplayer:BasicBundledVideoSampleApp'
+include ':brightcove-mediaplayer:BasicCastSampleApp'
+include ':brightcove-mediaplayer:BasicIMASampleApp'
+include ':brightcove-mediaplayer:BasicIMAWidevineSampleApp'
 include ':BasicOnceUxSampleApp'
-include ':BasicTextureViewSampleApp'
-include ':BasicWidevineSampleApp'
-include ':DFXPClosedCaptioningSampleApp'
-include ':WebVTTSampleApp'
-include ':BasicVMAPSampleApp'
+include ':brightcove-mediaplayer:BasicTextureViewSampleApp'
+include ':brightcove-mediaplayer:BasicWidevineSampleApp'
+include ':brightcove-mediaplayer:DFXPClosedCaptioningSampleApp'
+include ':brightcove-mediaplayer:WebVTTSampleApp'
+include ':brightcove-mediaplayer:BasicVMAPSampleApp'
 
 // For building exoplayer-specific sample apps, which are located under the 'brightcove-exoplayer' directory.
 include ':brightcove-exoplayer:360VideoSampleApp'
@@ -37,8 +37,8 @@ include ':brightcove-player-controls:SeekBarColorsSampleApp'
 // FreeWheel samples require AdManager.jar to be added to the libs
 // folder.  This jar can be acquired from FreeWheel.
 if (freewheelDependenciesAreSatisfied()) {
-    include ':BasicFreeWheelSampleApp'
-    include ':BasicFreeWheelWidevineSampleApp'
+    include ':brightcove-mediaplayer:BasicFreeWheelSampleApp'
+    include ':brightcove-mediaplayer:BasicFreeWheelWidevineSampleApp'
     include ':brightcove-exoplayer:FreeWheelSampleApp'
     include ':brightcove-exoplayer:FreeWheelWidevineModularSampleApp'
 }
@@ -46,7 +46,7 @@ if (freewheelDependenciesAreSatisfied()) {
 // Omniture samples require adobe-adms.jar to be added to the libs
 // folder.  This jar can be acquired from Adobe.
 if (omnitureDependenciesAreSatisfied()) {
-    include ':BasicOmnitureSampleApp'
+    include ':brightcove-mediaplayer:BasicOmnitureSampleApp'
 }
 
 boolean freewheelDependenciesAreSatisfied() {
