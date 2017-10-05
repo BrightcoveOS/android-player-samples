@@ -10,9 +10,9 @@ import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventType;
-import com.brightcove.player.media.Catalog;
+import com.brightcove.player.edge.Catalog;
 import com.brightcove.player.media.VideoFields;
-import com.brightcove.player.media.VideoListener;
+import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.mediacontroller.BrightcoveMediaController;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
@@ -58,8 +58,8 @@ public class MainActivity extends BrightcovePlayer {
         values.remove(VideoFields.HLS_URL);
         options.put("video_fields", StringUtil.join(values, ","));
 
-        Catalog catalog = new Catalog("ErQk9zUeDVLIp8Dc7aiHKq8hDMgkv5BFU7WGshTc-hpziB3BuYh28A..");
-        catalog.findVideoByReferenceID("shark", new VideoListener() {
+        Catalog catalog = new Catalog(eventEmitter, getString(R.string.account_id), getString(R.string.policy_key));
+        catalog.findVideoByReferenceID("75sec-mp4-multi-rendition", new VideoListener() {
             public void onVideo(Video video) {
                 brightcoveVideoView.add(video);
 

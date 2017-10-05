@@ -2,5 +2,7 @@
 <resources>
 
     <string name="app_name">Ad Rules IMA Widevine Classic Sample App</string>
+    <string name="account_id">1760897681001</string>
+    <string name="policy_key">BCpkADawqM1BYxUFaA71B4ls-MO6Ru1CsNGkns7HvCQirxb6cCWzYtpy3f6LOWZkeDt5bIS-AfCftaVZFJGmLUEwtSeEhSkz2Yv4vX2sG6CzdL80vCAHUthVpfsDMGmFQg9xvib6M3GOKxWF</string>
 
 </resources>

@@ -10,9 +10,9 @@ import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventType;
-import com.brightcove.player.media.Catalog;
+import com.brightcove.player.edge.Catalog;
 import com.brightcove.player.media.VideoFields;
-import com.brightcove.player.media.VideoListener;
+import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
@@ -59,8 +59,8 @@ public class MainActivity extends BrightcovePlayer {
         setupWidevine();
 
         // Create the catalog object which will start and play the video.
-        Catalog catalog = new Catalog("FqicLlYykdimMML7pj65Gi8IHl8EVReWMJh6rLDcTjTMqdb5ay_xFA..");
-        catalog.findVideoByID("2142114984001", new VideoListener() {
+        Catalog catalog = new Catalog(eventEmitter, getString(R.string.account_id), getString(R.string.policy_key));
+        catalog.findVideoByID("2223563030001", new VideoListener() {
             @Override
             public void onVideo(Video video) {
                 brightcoveVideoView.add(video);
