@@ -1,37 +1,27 @@
 package com.brightcove.player.samples.exoplayer.freewheel.basic;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
-import android.widget.MediaController;
-import android.widget.RelativeLayout;
 
 import com.brightcove.freewheel.controller.FreeWheelController;
 import com.brightcove.freewheel.event.FreeWheelEventType;
 import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
-import com.brightcove.player.event.EventLogger;
-import com.brightcove.player.event.EventType;
 import com.brightcove.player.model.Video;
-import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
+import com.brightcove.player.view.BrightcovePlayer;
 
 import java.util.List;
 
 import tv.freewheel.ad.interfaces.IAdContext;
 import tv.freewheel.ad.interfaces.IConstants;
 import tv.freewheel.ad.interfaces.ISlot;
+import tv.freewheel.ad.request.config.AdRequestConfiguration;
+import tv.freewheel.ad.request.config.NonTemporalSlotConfiguration;
+import tv.freewheel.ad.request.config.TemporalSlotConfiguration;
+import tv.freewheel.ad.request.config.VideoAssetConfiguration;
 
 /**
  * This app illustrates how to use the FreeWheel plugin with the Brightcove Player for Android.
@@ -43,8 +33,6 @@ public class MainActivity extends BrightcovePlayer {
     private final String TAG = this.getClass().getSimpleName();
 
     private EventEmitter eventEmitter;
-    private FreeWheelController freeWheelController;
-    private FrameLayout adFrame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +43,9 @@ public class MainActivity extends BrightcovePlayer {
         brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
 
-        adFrame = (FrameLayout) findViewById(R.id.ad_frame);
         eventEmitter = brightcoveVideoView.getEventEmitter();
 
-        brightcoveVideoView.add(Video.createVideo("http://www.nielseninternet.com/Elemental1/TravelEast/prog_index.m3u8"));
+        brightcoveVideoView.add(Video.createVideo("https://devimages.apple.com.edgekey.net/streaming/examples/bipbop_4x3/bipbop_4x3_variant.m3u8"));
 
         setupFreeWheel();
 
@@ -68,7 +55,7 @@ public class MainActivity extends BrightcovePlayer {
     private void setupFreeWheel() {
 
         //change this to new FrameLayout based constructor.
-        freeWheelController = new FreeWheelController(this, brightcoveVideoView, eventEmitter);
+        FreeWheelController freeWheelController = new FreeWheelController(this, brightcoveVideoView, eventEmitter);
         //configure your own IAdManager or supply connection information
         freeWheelController.setAdURL("http://demo.v.fwmrm.net/");
         freeWheelController.setAdNetworkId(90750);
@@ -107,23 +94,27 @@ public class MainActivity extends BrightcovePlayer {
                 Video video = (Video) event.properties.get(Event.VIDEO);
                 IAdContext adContext = (IAdContext) event.properties.get(FreeWheelController.AD_CONTEXT_KEY);
                 IConstants adConstants = adContext.getConstants();
+                AdRequestConfiguration adRequestConfiguration =
+                        (AdRequestConfiguration) event.properties.get(FreeWheelController.AD_REQUEST_CONFIGURATION_KEY);
 
                 // This overrides what the plugin does by default for setVideoAsset() which is to pass in currentVideo.getId().
-                adContext.setVideoAsset("3pqa_video",                       // video ID
-                        brightcoveVideoView.getDuration() / 1000,           // FW uses their duration as seconds; Android is in milliseconds
-                        null,                                               // location
-                        adConstants.VIDEO_ASSET_AUTO_PLAY_TYPE_ATTENDED(),  // auto play type
-                        (int)Math.floor(Math.random() * Integer.MAX_VALUE), // a random number
-                        0,                                                  // setting networkId for 0 as it's the default value for this method
-                        adConstants.ID_TYPE_CUSTOM(),                       // type of video ID passed (customer created or FW issued)
-                        0,                                                  // fallback ID
-                        adConstants.VIDEO_ASSET_DURATION_TYPE_EXACT());     // duration type
+                VideoAssetConfiguration fwVideoAssetConfiguration = new VideoAssetConfiguration(
+                        "3pqa_video",
+                        adConstants.ID_TYPE_CUSTOM(),
+                        //FW uses their duration as seconds; Android is in milliseconds
+                        video.getDuration()/1000,
+                        adConstants.VIDEO_ASSET_DURATION_TYPE_EXACT(),
+                        adConstants.VIDEO_ASSET_AUTO_PLAY_TYPE_ATTENDED());
+                adRequestConfiguration.setVideoAssetConfiguration(fwVideoAssetConfiguration);
 
-                adContext.addSiteSectionNonTemporalSlot("300x250slot", null, 300, 250, null, true, null, null);
+                NonTemporalSlotConfiguration companionSlot = new NonTemporalSlotConfiguration("300x250slot", null, 300, 250);
+                companionSlot.setCompanionAcceptance(true);
+                adRequestConfiguration.addSlotConfiguration(companionSlot);
 
                 // Add preroll
                 Log.v(TAG, "Adding temporal slot for prerolls");
-                adContext.addTemporalSlot("larry", "PREROLL", 0, null, 0, 0, null, null, 0);
+                TemporalSlotConfiguration prerollSlot = new TemporalSlotConfiguration("larry", adConstants.ADUNIT_PREROLL(), 0);
+                adRequestConfiguration.addSlotConfiguration(prerollSlot);
 
                 // Add midroll
                 Log.v(TAG, "Adding temporal slot for midrolls: duration = " + brightcoveVideoView.getDuration());
@@ -131,17 +122,21 @@ public class MainActivity extends BrightcovePlayer {
                 int midrollCount = 4;
                 int segmentLength = (brightcoveVideoView.getDuration() / 1000) / (midrollCount + 1);
 
+                TemporalSlotConfiguration midrollSlot;
                 for (int i = 0; i < midrollCount; i++) {
-                    adContext.addTemporalSlot("moe" + i, "MIDROLL", segmentLength * (i + 1), null, 0, 0, null, null, 0);
+                    midrollSlot = new TemporalSlotConfiguration("moe" + i, adConstants.ADUNIT_MIDROLL(), segmentLength * (i + 1));
+                    adRequestConfiguration.addSlotConfiguration(midrollSlot);
                 }
 
                 // Add postroll
                 Log.v(TAG, "Adding temporal slot for postrolls");
-                adContext.addTemporalSlot("curly", "POSTROLL", brightcoveVideoView.getDuration() / 1000, null, 0, 0, null, null, 0);
+                TemporalSlotConfiguration postrollSlot = new TemporalSlotConfiguration("curly", adConstants.ADUNIT_POSTROLL(), video.getDuration() / 1000);
+                adRequestConfiguration.addSlotConfiguration(postrollSlot);
 
                 // Add overlay
                 Log.v(TAG, "Adding temporal slot for overlays");
-                adContext.addTemporalSlot("shemp", "OVERLAY", 8, null, 0, 0, null, null, 0);
+                TemporalSlotConfiguration overlaySlot = new TemporalSlotConfiguration("shemp", adConstants.ADUNIT_OVERLAY(), 8);
+                adRequestConfiguration.addSlotConfiguration(overlaySlot);
             }
         });
         freeWheelController.enable();
