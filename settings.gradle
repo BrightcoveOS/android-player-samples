@@ -4,9 +4,7 @@ include ':BasicCastSampleApp'
 include ':BasicIMASampleApp'
 include ':BasicOnceUxSampleApp'
 include ':BasicTextureViewSampleApp'
-include ':DFXPClosedCaptioningSampleApp'
 include ':WebVTTSampleApp'
-include ':BasicVMAPSampleApp'
 
 // For building exoplayer-specific sample apps, which are located under the 'brightcove-exoplayer' directory.
 include ':brightcove-exoplayer:360VideoSampleApp'
@@ -19,7 +17,6 @@ include ':brightcove-exoplayer:ID3SampleApp'
 include ':brightcove-exoplayer:LiveSampleApp'
 include ':brightcove-exoplayer:OfflinePlaybackSampleApp'
 include ':brightcove-exoplayer:TextureViewSampleApp'
-include ':brightcove-exoplayer:VMAPSampleApp'
 include ':brightcove-exoplayer:WidevineModularSampleApp'
 include ':brightcove-exoplayer:VideoListSampleApp'
 
