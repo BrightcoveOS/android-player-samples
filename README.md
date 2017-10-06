@@ -15,15 +15,15 @@ This version of the sample apps supports the latest Brightcove SDK and plugins. 
 2. The Brightcove ExoPlayer 2 sample apps do not currently support Android TV. Support for this platform will be delivered in a later release.
 3. The Brightcove ExoPlayer 2 sample apps do not currently support Amazon Fire TV or Fire Stick. Support for this platform will be delivered in a later release.
 4. The supported features for this Beta 1 release include:
-  * VOD video formats: Mpeg-DASH, HLS, HLSe, MP4
-  * WebVTT Closed Captions
-  * Multiple Audio Track videos
-  * Client-side advertising with Google IMA and FreeWheel
+   * VOD video formats: Mpeg-DASH, HLS, HLSe, MP4
+   * WebVTT Closed Captions
+   * Multiple Audio Track videos
+   * Client-side advertising with Google IMA and FreeWheel
 5. Features not supported in Beta 1, and planned for an upcoming beta release, include:
-  * Live video, and Live video with DVR
-  * Server-side Ad Insertion
-  * DRM with Widevine Modular
-  * Offline playback of clear and DRM-protected content
+   * Live video, and Live video with DVR
+   * Server-side Ad Insertion
+   * DRM with Widevine Modular
+   * Offline playback of clear and DRM-protected content
 
 * [Ad Rules Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/AdRulesIMASampleApp): This app shows how to use the Brightcove ExoPlayer with Google IMA ads.
 
