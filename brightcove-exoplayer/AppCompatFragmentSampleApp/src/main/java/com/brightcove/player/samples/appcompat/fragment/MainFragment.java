@@ -21,6 +21,7 @@ public class MainFragment extends BrightcovePlayerFragment {
 
         Video video = Video.createVideo("http://media.w3.org/2010/05/sintel/trailer.mp4", DeliveryType.MP4);
         baseVideoView.add(video);
+        baseVideoView.getAnalytics().setAccount("1760897681001");
         baseVideoView.start();
 
         return result;
