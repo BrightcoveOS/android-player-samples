@@ -11,7 +11,7 @@ This version of the sample apps supports the latest Brightcove SDK and plugins. 
 ## Brightcove ExoPlayer 2 sample apps:
 
 ### Important Notes about the ExoPlayer 2 sample apps
-1. The ExoPlayer sample apps on this branch of the repository (ExoPlayer2) only support ExoPlayer2. If you want to run ExoPlayer 1 versions of the ExoPlayer sample apps, please `git checkout master` and run them on the master branch.
+1. The ExoPlayer sample apps on this branch of the repository (ExoPlayer2) only support Google ExoPlayer 2. If you want to run ExoPlayer 1 versions of the ExoPlayer sample apps, please `git checkout master` and run them on the master branch.
 1. The Brightcove ExoPlayer 2 sample apps do not currently support Android TV. Support for this platform will be delivered in a later release.
 1. The Brightcove ExoPlayer 2 sample apps do not currently support Amazon Fire TV or Fire Stick. Support for this platform will be delivered in a later release.
 
