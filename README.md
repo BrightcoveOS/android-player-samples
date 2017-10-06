@@ -24,20 +24,23 @@ This version of the sample apps supports the latest Brightcove SDK and plugins. 
    * Server-side Ad Insertion
    * DRM with Widevine Modular
    * Offline playback of clear and DRM-protected content
+### Only the apps listed below are supported in the Beta 1 release:
 
-* [Ad Rules Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/AdRulesIMASampleApp): This app shows how to use the Brightcove ExoPlayer with Google IMA ads.
+* [Ad Rules Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/ExoPlayer2/brightcove-exoplayer/AdRulesIMASampleApp): This app shows how to use the Brightcove ExoPlayer with Google IMA ads.
 
-* [AppCompat Activity Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/AppCompatActivitySampleApp): This app shows how to setup the Brightcove ExoPlayer with the AppCompat plugin and an Activity.
+* [AppCompat Activity Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/ExoPlayer2/brightcove-exoplayer/AppCompatActivitySampleApp): This app shows how to setup the Brightcove ExoPlayer with the AppCompat plugin and an Activity.
 
-* [AppCompat Fragment Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/AppCompatFragmentSampleApp): This app shows how to setup the Brightcove ExoPlayer with the AppCompat plugin and a Fragment.
+* [AppCompat Fragment Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/ExoPlayer2/brightcove-exoplayer/AppCompatFragmentSampleApp): This app shows how to setup the Brightcove ExoPlayer with the AppCompat plugin and a Fragment.
 
-* [Basic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicSampleApp): This app shows how to setup the Brightcove ExoPlayer to play.
+* [Basic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/ExoPlayer2/brightcove-exoplayer/BasicSampleApp): This app shows how to setup the Brightcove ExoPlayer to play.
 
-* [FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/FreeWheelSampleApp): This app shows how to use the Brightcove ExoPlayer with FreeWheel ads.
+* [FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/ExoPlayer2/brightcove-exoplayer/FreeWheelSampleApp): This app shows how to use the Brightcove ExoPlayer with FreeWheel ads.
 
 As noted above, you must independently obtain the non-free FreeWheel **AdManager.jar** library archive and install it into the directory **libs/** which is typically located at the root of your /home/ directory. The Brightcove Native SDK for Android, and the FreeWheel sample apps here, have been tested with FreeWheel AdManager library version 6.5.0. Please note that Brightcove does not distribute the FreeWheel libraries. Contact [FreeWheel](http://freewheel.tv/about/#contact-us) directly for more information on how to obtain their products.
 
 * [TextureView Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/TextureViewSampleApp): This app shows how to use the Brightcove ExoPlayer with TextureView.
+
+* [VideoList Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/ExoPlayer2/brightcove-exoplayer/VideoListSampleApp): This app shows how to use the Brightcove ExoPlayer with a RecyclerView.
 
 ## Brightcove Android SDK Samples Using the Android MediaPlayer
 
