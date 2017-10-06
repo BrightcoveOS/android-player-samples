@@ -93,24 +93,11 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     compile "com.brightcove.player:android-sdk:${anpVersion}"
   }
 
-  if (project.name.contains('AdobePass')) {
-    dependencies {
-      compile files(libraryDirectory + "android_accessenabler-1.7.2.jar")
-      compile 'com.google.code.gson:gson:2.+'
-    }
-  }
-
-  if (project.name.contains('AIS')) {
-    dependencies {
-      compile 'com.google.code.gson:gson:2.+'
-    }
-  }
-
   if (project.name.contains('IMA')) {
     dependencies {
       compile "com.brightcove.player:android-ima-plugin:${anpVersion}"
       compile 'com.google.ads.interactivemedia.v3:interactivemedia:'+imaAndroidSdkVersion
-      compile 'com.google.android.gms:play-services-ads:8.1.0'
+      compile 'com.google.android.gms:play-services-ads:11.0.4'
     }
 
     android {
@@ -169,14 +156,6 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     android {
       defaultConfig {
         minSdkVersion 19
-      }
-    }
-  }
-
-  if (project.name.contains('WebView')) {
-    android {
-      lintOptions {
-        disable 'SetJavaScriptEnabled'
       }
     }
   }
