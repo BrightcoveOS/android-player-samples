@@ -38,29 +38,29 @@ This version of the sample apps supports the latest Brightcove SDK and plugins. 
 
 As noted above, you must independently obtain the non-free FreeWheel **AdManager.jar** library archive and install it into the directory **libs/** which is typically located at the root of your /home/ directory. The Brightcove Native SDK for Android, and the FreeWheel sample apps here, have been tested with FreeWheel AdManager library version 6.5.0. Please note that Brightcove does not distribute the FreeWheel libraries. Contact [FreeWheel](http://freewheel.tv/about/#contact-us) directly for more information on how to obtain their products.
 
-* [TextureView Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/TextureViewSampleApp): This app shows how to use the Brightcove ExoPlayer with TextureView.
+* [TextureView Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/ExoPlayer2/brightcove-exoplayer/TextureViewSampleApp): This app shows how to use the Brightcove ExoPlayer with TextureView.
 
 * [VideoList Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/ExoPlayer2/brightcove-exoplayer/VideoListSampleApp): This app shows how to use the Brightcove ExoPlayer with a RecyclerView.
 
 ## Brightcove Android SDK Samples Using the Android MediaPlayer
 
-* [Ad Rules Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/AdRulesIMASampleApp): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules. This version has been tested and works with v3.1.3 of the IMA SDK.
+* [Ad Rules Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/ExoPlayer2/AdRulesIMASampleApp): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules. This version has been tested and works with v3.1.3 of the IMA SDK.
 
-* [Basic Bundled Video Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicBundledVideoSampleApp): This app shows how to play a video that is stored on the device for offline viewing.
+* [Basic Bundled Video Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/ExoPlayer2/BasicBundledVideoSampleApp): This app shows how to play a video that is stored on the device for offline viewing.
 
-* [Basic Cast Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicCastSampleApp): This add Google Chromecast with the Brightcove native Android player. Note that this app requires installation of the Google Play and Google Repository plugins into the Android Studio. To install these plugins, open Android Studio, and then open the Tools menu. From here, select Android, then SDK Manager. When the SDK Manager opens, scroll to the bottom and select Google Play Services and Google Repository under the Extras menu. Click Install Packages, accept the license agreement, and close the SDK Manager when installation completes.
+* [Basic Cast Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/ExoPlayer2/BasicCastSampleApp): This add Google Chromecast with the Brightcove native Android player. Note that this app requires installation of the Google Play and Google Repository plugins into the Android Studio. To install these plugins, open Android Studio, and then open the Tools menu. From here, select Android, then SDK Manager. When the SDK Manager opens, scroll to the bottom and select Google Play Services and Google Repository under the Extras menu. Click Install Packages, accept the license agreement, and close the SDK Manager when installation completes.
 
-* [Basic FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicFreeWheelSampleApp): This app shows how to configure an app to use the Brightcove native Android player FreeWheel Plugin to play a video.
+* [Basic FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/ExoPlayer2/BasicFreeWheelSampleApp): This app shows how to configure an app to use the Brightcove native Android player FreeWheel Plugin to play a video.
 
 Note that in order to enable the FreeWheel sample apps, you must independently obtain the non-free FreeWheel **AdManager.jar** library archive and install it into the directory **libs/** which is typically located at the root of your /home/ directory. The Brightcove Native SDK for Android, and the FreeWheel sample apps here, have been tested with FreeWheel AdManager library version 6.5.0. Please note that Brightcove does not distribute the FreeWheel libraries. Contact [FreeWheel](http://freewheel.tv/about/#contact-us) directly for more information on how to obtain their products.
 
-* [Basic Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicIMASampleApp): This app shows how to setup to use the Google IMA Plugin to play ads before, during and after a video. This version has been tested and works with v3.1.3 of the IMA SDK.
+* [Basic Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/ExoPlayer2/BasicIMASampleApp): This app shows how to setup to use the Google IMA Plugin to play ads before, during and after a video. This version has been tested and works with v3.1.3 of the IMA SDK.
 
-* [Basic Omniture Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicOmnitureSampleApp): This app shows how to configure an app to use the Brightcove native Android player Omniture Plugin to play a video.
+* [Basic Omniture Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/ExoPlayer2/BasicOmnitureSampleApp): This app shows how to configure an app to use the Brightcove native Android player Omniture Plugin to play a video.
 
 Note that in order to enable this sample app, you must independently obtain and install the file **adobeMobileLibrary.jar** into the top-level directory **libs/**.  Version 4.11.0 of the Adobe provided, non-free, jar file was used to test this sample app.
 
-* [WebVTT Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/WebVTTSampleApp): This app shows how to implement closed captioning using WebVTT files with Android 4.4.
+* [WebVTT Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/ExoPlayer2/WebVTTSampleApp): This app shows how to implement closed captioning using WebVTT files with Android 4.4.
 
 To install the sample apps into Android Studio follow these steps:
 
