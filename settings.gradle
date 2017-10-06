@@ -1,12 +1,9 @@
 include ':AdRulesIMASampleApp'
-include ':AdRulesIMAWidevineSampleApp'
 include ':BasicBundledVideoSampleApp'
 include ':BasicCastSampleApp'
 include ':BasicIMASampleApp'
-include ':BasicIMAWidevineSampleApp'
 include ':BasicOnceUxSampleApp'
 include ':BasicTextureViewSampleApp'
-include ':BasicWidevineSampleApp'
 include ':DFXPClosedCaptioningSampleApp'
 include ':WebVTTSampleApp'
 include ':BasicVMAPSampleApp'
@@ -38,7 +35,6 @@ include ':brightcove-player-controls:SeekBarColorsSampleApp'
 // folder.  This jar can be acquired from FreeWheel.
 if (freewheelDependenciesAreSatisfied()) {
     include ':BasicFreeWheelSampleApp'
-    include ':BasicFreeWheelWidevineSampleApp'
     include ':brightcove-exoplayer:FreeWheelSampleApp'
     include ':brightcove-exoplayer:FreeWheelWidevineModularSampleApp'
 }

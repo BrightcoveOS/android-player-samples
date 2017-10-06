@@ -45,7 +45,7 @@ public class MainActivity extends BrightcovePlayer {
 
         eventEmitter = brightcoveVideoView.getEventEmitter();
 
-        brightcoveVideoView.add(Video.createVideo("https://devimages.apple.com.edgekey.net/streaming/examples/bipbop_4x3/bipbop_4x3_variant.m3u8"));
+        brightcoveVideoView.add(Video.createVideo("https://hlsak-a.akamaihd.net/3636334163001/3636334163001_5566790474001_5566768721001.m3u8?pubId=3636334163001&videoId=5566768721001"));
 
         setupFreeWheel();
 

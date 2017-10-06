@@ -28,5 +28,6 @@ public class MainActivity extends BrightcovePlayer {
         String PACKAGE_NAME = getApplicationContext().getPackageName();
         Uri video = Uri.parse("android.resource://" + PACKAGE_NAME + "/" + R.raw.shark);
         brightcoveVideoView.add(Video.createVideo(video.toString()));
+        brightcoveVideoView.getAnalytics().setAccount(getString(R.string.account_id));
     }
 }
