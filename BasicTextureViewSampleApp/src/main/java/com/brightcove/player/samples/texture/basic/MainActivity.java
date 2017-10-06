@@ -26,6 +26,7 @@ public class MainActivity extends BrightcovePlayer {
 
         Video video = Video.createVideo("http://media.w3.org/2010/05/sintel/trailer.mp4", DeliveryType.MP4);
         video.getProperties().put(Video.Fields.PUBLISHER_ID, "5420904993001");
+        video.getProperties().put(Video.Fields.NAME, "Sintel Trailer");
         brightcoveVideoView.add(video);
         brightcoveVideoView.start();
     }
