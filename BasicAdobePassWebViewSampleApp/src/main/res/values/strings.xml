@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">Basic AdobePass WebView Sample App</string>
-
-    <string name="requestor_id">BRIGHTCOVE</string>
-    <string name="credential_store_password">adobepass</string>
-</resources>

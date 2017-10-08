@@ -90,19 +90,6 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     compile "com.brightcove.player:android-sdk:${anpVersion}"
   }
 
-  if (project.name.contains('AdobePass')) {
-    dependencies {
-      compile files(libraryDirectory + "android_accessenabler-1.7.2.jar")
-      compile 'com.google.code.gson:gson:2.+'
-    }
-  }
-
-  if (project.name.contains('AIS')) {
-    dependencies {
-      compile 'com.google.code.gson:gson:2.+'
-    }
-  }
-
   if (project.name.contains('IMA')) {
     dependencies {
       compile "com.brightcove.player:android-ima-plugin:${anpVersion}"
@@ -137,18 +124,6 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     }
   }
 
-  if (project.name.contains('Widevine')) {
-    dependencies {
-      compile "com.brightcove.player:android-widevine-plugin:${anpVersion}"
-    }
-
-    android {
-      defaultConfig {
-        minSdkVersion 11
-      }
-    }
-  }
-
   if (project.parent.name.equals('brightcove-exoplayer') ||
           project.parent.name.equals('brightcove-player-controls')) {
     dependencies {
@@ -166,14 +141,6 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     android {
       defaultConfig {
         minSdkVersion 19
-      }
-    }
-  }
-
-  if (project.name.contains('WebView')) {
-    android {
-      lintOptions {
-        disable 'SetJavaScriptEnabled'
       }
     }
   }
