@@ -1,25 +1,13 @@
 package com.brightcove.player.samples.omniture.basic;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.WindowManager;
-import android.widget.MediaController;
-import android.widget.RelativeLayout;
 
 import com.brightcove.omniture.OmnitureComponent;
-import com.brightcove.player.event.Event;
+import com.brightcove.player.edge.Catalog;
+import com.brightcove.player.edge.PlaylistListener;
 import com.brightcove.player.event.EventEmitter;
-import com.brightcove.player.event.EventListener;
-import com.brightcove.player.event.EventLogger;
-import com.brightcove.player.event.EventType;
-import com.brightcove.player.media.Catalog;
-import com.brightcove.player.media.PlaylistListener;
 import com.brightcove.player.model.Playlist;
-import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
 
@@ -49,8 +37,8 @@ public class MainActivity extends BrightcovePlayer {
         setupOmniture();
 
         // Add a test video to the BrightcoveVideoView.
-        Catalog catalog = new Catalog("ErQk9zUeDVLIp8Dc7aiHKq8hDMgkv5BFU7WGshTc-hpziB3BuYh28A..");
-        catalog.findPlaylistByReferenceID("stitch", new PlaylistListener() {
+        Catalog catalog = new Catalog(eventEmitter, getString(R.string.account_id), getString(R.string.policy_key));
+        catalog.findPlaylistByReferenceID("play_2017_4_videos", new PlaylistListener() {
             public void onPlaylist(Playlist playlist) {
                 brightcoveVideoView.addAll(playlist.getVideos());
             }

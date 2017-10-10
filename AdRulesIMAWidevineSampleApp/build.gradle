@@ -1,3 +1,0 @@
-android {
-  defaultConfig.applicationId = "com.brightcove.player.samples.imawidevine.adrules"
-}

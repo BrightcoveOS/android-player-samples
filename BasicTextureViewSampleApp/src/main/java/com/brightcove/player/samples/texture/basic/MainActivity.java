@@ -1,10 +1,11 @@
 package com.brightcove.player.samples.texture.basic;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.MediaController;
-import com.brightcove.player.media.DeliveryType;
+
+import com.brightcove.player.edge.Catalog;
+import com.brightcove.player.edge.VideoListener;
+import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveTextureVideoView;
@@ -17,16 +18,27 @@ import com.brightcove.player.view.BrightcoveTextureVideoView;
 public class MainActivity extends BrightcovePlayer {
 
     public static final String TAG = MainActivity.class.getSimpleName();
+    private EventEmitter eventEmitter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
         brightcoveVideoView = (BrightcoveTextureVideoView) findViewById(R.id.brightcove_video_view);
+        eventEmitter = brightcoveVideoView.getEventEmitter();
+
         super.onCreate(savedInstanceState);
 
-        Video video = Video.createVideo("http://media.w3.org/2010/05/sintel/trailer.mp4", DeliveryType.MP4);
-        video.getProperties().put(Video.Fields.PUBLISHER_ID, "5420904993001");
-        brightcoveVideoView.add(video);
-        brightcoveVideoView.start();
+        // Add a test video to the BrightcoveVideoView.
+        Catalog catalog = new Catalog(eventEmitter, getString(R.string.account_id), getString(R.string.policy_key));
+        catalog.findVideoByID("4866305819001", new VideoListener() {
+            public void onVideo(Video video) {
+                brightcoveVideoView.add(video);
+                brightcoveVideoView.start();
+            };
+
+            public void onError(String error) {
+                Log.e(TAG, error);
+            }
+        });
     }
 }
