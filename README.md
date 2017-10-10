@@ -8,9 +8,9 @@ Learn more about the [Brightcove Native Player SDKs](http://docs.brightcove.com/
 The Android sample app projects in this repository can be inserted directly into Android Studio and subsequently executed or simulated.
 This version of the sample apps supports the latest Brightcove SDK and plugins.  The following sample apps are included:
 
-* [Ad Rules Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/AdRulesIMASampleApp): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules. This version has been tested and works with v3.1.3 of the IMA SDK.
+* [Ad Rules Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/AdRulesIMASampleApp): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules. This version has been tested and works with v3.7.4 of the Google IMA SDK.
 
-* [Ad Rules Google IMA Widevine Classic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/AdRulesIMAWidevineSampleApp): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules with a Widevine video. This version has been tested and works with v3.1.3 of the IMA SDK.
+* [Ad Rules Google IMA Widevine Classic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/AdRulesIMAWidevineSampleApp): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules with a Widevine video. This version has been tested and works with v3.7.4 of the Google IMA SDK.
 
 * [Basic Akamai Identity Services Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicAISWebViewSampleApp): This app shows how to configure an app to use the Brightcove native Android player with Akamai Identity Services.
 
@@ -24,9 +24,9 @@ This version of the sample apps supports the latest Brightcove SDK and plugins. 
 
 Note that in order to enable the FreeWheel sample apps, you must independently obtain the non-free FreeWheel **AdManager.jar** library archive and install it into the directory **libs/** which is typically located at the root of your /home/ directory. The Brightcove Native SDK for Android, and the FreeWheel sample apps here, have been tested with FreeWheel AdManager library version 6.17.0. Please note that Brightcove does not distribute the FreeWheel libraries. Contact [FreeWheel](http://freewheel.tv/about/#contact-us) directly for more information on how to obtain their products.
 
-* [Basic Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicIMASampleApp): This app shows how to setup to use the Google IMA Plugin to play ads before, during and after a video. This version has been tested and works with v3.1.3 of the IMA SDK.
+* [Basic Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicIMASampleApp): This app shows how to setup to use the Google IMA Plugin to play ads before, during and after a video. This version has been tested and works with v3.7.4 of the Google IMA SDK.
 
-* [Basic Google IMA Widevine Classic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicIMAWidevineSampleApp): This app shows how to setup to use the Google IMA Plugin to play ads before, during and after a Widevine video. This version has been tested and works with v3.1.3 of the IMA SDK.
+* [Basic Google IMA Widevine Classic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicIMAWidevineSampleApp): This app shows how to setup to use the Google IMA Plugin to play ads before, during and after a Widevine video. This version has been tested and works with v3.7.4 of the Google IMA SDK.
 
 * [Basic Omniture Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicOmnitureSampleApp): This app shows how to configure an app to use the Brightcove native Android player Omniture Plugin to play a video.
 
@@ -36,7 +36,7 @@ Note that in order to enable this sample app, you must independently obtain and 
 
 * [Basic Widevine Classic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicWidevineSampleApp): This app shows how to configure an app to use the Brightcove native Android player Widevine Plugin to play a video.
 
-* [WebVTT Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/WebVTTSampleApp): This app shows how to implement closed captioning using WebVTT files with Android 4.4.
+* [WebVTT Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/WebVTTSampleApp): This app shows how to implement closed captioning using WebVTT files with the Brightcove Native SDK for Android.
 
 ## Brightcove ExoPlayer sample apps:
 
@@ -44,9 +44,9 @@ The Brightcove ExoPlayer sample apps have now support for Android TV. Note that 
 
 * [360 Video Sample app](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/360VideoSampleApp/): This app shows how to use the Brightcove ExoPlayer to play 360 videos.
 
-* [Ad Rules Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/AdRulesIMASampleApp): This app shows how to use the Brightcove ExoPlayer with Google IMA ads.
+* [Ad Rules Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/AdRulesIMASampleApp): This app shows how to use the Brightcove ExoPlayer with Google IMA ads. This version has been tested and works with v3.7.4 of the Google IMA SDK.
 
-* [Ad Rules Widevine Modular Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/AdRulesIMAWidevineModularSampleApp): This app shows how to use the Brightcove ExoPlayer with Google IMA ads and Widevine Modular content.
+* [Ad Rules Widevine Modular Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/AdRulesIMAWidevineModularSampleApp): This app shows how to use the Brightcove ExoPlayer with Google IMA ads and Widevine Modular content. This version has been tested and works with v3.7.4 of the Google IMA SDK.
 
 * [AppCompat Activity Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/AppCompatActivitySampleApp): This app shows how to setup the Brightcove ExoPlayer with the AppCompat plugin and an Activity.
 
