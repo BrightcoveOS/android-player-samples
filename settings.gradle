@@ -1,14 +1,10 @@
 include ':brightcove-mediaplayer:AdRulesIMASampleApp'
-include ':brightcove-mediaplayer:AdRulesIMAWidevineSampleApp'
 include ':brightcove-mediaplayer:BasicBundledVideoSampleApp'
 include ':brightcove-mediaplayer:BasicCastSampleApp'
 include ':brightcove-mediaplayer:BasicIMASampleApp'
-include ':brightcove-mediaplayer:BasicIMAWidevineSampleApp'
 include ':brightcove-mediaplayer:BasicTextureViewSampleApp'
-include ':brightcove-mediaplayer:BasicWidevineSampleApp'
 include ':brightcove-mediaplayer:DFXPClosedCaptioningSampleApp'
 include ':brightcove-mediaplayer:WebVTTSampleApp'
-include ':brightcove-mediaplayer:BasicVMAPSampleApp'
 
 // For building exoplayer-specific sample apps, which are located under the 'brightcove-exoplayer' directory.
 include ':brightcove-exoplayer:360VideoSampleApp'
@@ -22,7 +18,6 @@ include ':brightcove-exoplayer:ID3SampleApp'
 include ':brightcove-exoplayer:LiveSampleApp'
 include ':brightcove-exoplayer:OfflinePlaybackSampleApp'
 include ':brightcove-exoplayer:TextureViewSampleApp'
-include ':brightcove-exoplayer:VMAPSampleApp'
 include ':brightcove-exoplayer:WidevineModularSampleApp'
 include ':brightcove-exoplayer:VideoListSampleApp'
 
@@ -38,7 +33,6 @@ include ':brightcove-player-controls:SeekBarColorsSampleApp'
 // folder.  This jar can be acquired from FreeWheel.
 if (freewheelDependenciesAreSatisfied()) {
     include ':brightcove-mediaplayer:BasicFreeWheelSampleApp'
-    include ':brightcove-mediaplayer:BasicFreeWheelWidevineSampleApp'
     include ':brightcove-exoplayer:FreeWheelSampleApp'
     include ':brightcove-exoplayer:FreeWheelWidevineModularSampleApp'
 }

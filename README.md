@@ -44,8 +44,6 @@ Note that in order to enable the FreeWheel sample apps, you must independently o
 
 * [Ad Rules Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-mediaplayer/AdRulesIMASampleApp): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules. This version has been tested and works with v3.1.3 of the IMA SDK.
 
-* [Ad Rules Google IMA Widevine Classic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-mediaplayer/AdRulesIMAWidevineSampleApp): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules with a Widevine video. This version has been tested and works with v3.1.3 of the IMA SDK.
-
 * [Basic Akamai Identity Services Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-mediaplayer/BasicAISWebViewSampleApp): This app shows how to configure an app to use the Brightcove native Android player with Akamai Identity Services.
 
 * [Basic Bundled Video Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-mediaplayer/BasicBundledVideoSampleApp): This app shows how to play a video that is stored on the device for offline viewing.
@@ -54,19 +52,13 @@ Note that in order to enable the FreeWheel sample apps, you must independently o
 
 * [Basic FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-mediaplayer/BasicFreeWheelSampleApp): This app shows how to configure an app to use the Brightcove native Android player FreeWheel Plugin to play a video.
 
-* [Basic FreeWheel Widevine Classic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-mediaplayer/BasicFreeWheelWidevineSampleApp): This app shows how to configure an app to use the Brightcove native Android player FreeWheel Plugin to play a Widevine video.
-
-As noted above, you must independently obtain the non-free FreeWheel **AdManager.jar** library archive and install it into the directory **libs/** which is typically located at the root of your /home/ directory. The Brightcove Native SDK for Android, and the FreeWheel sample apps here, have been tested with FreeWheel AdManager library version 6.5.0. Please note that Brightcove does not distribute the FreeWheel libraries. Contact [FreeWheel](http://freewheel.tv/about/#contact-us) directly for more information on how to obtain their products.
+As noted above, you must independently obtain the non-free FreeWheel **AdManager.jar** library archive and install it into the directory **libs/** which is typically located at the root of your /home/ directory. The Brightcove Native SDK for Android, and the FreeWheel sample apps here, have been tested with FreeWheel AdManager library version 6.17.0. Please note that Brightcove does not distribute the FreeWheel libraries. Contact [FreeWheel](http://freewheel.tv/about/#contact-us) directly for more information on how to obtain their products.
 
 * [Basic Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-mediaplayer/BasicIMASampleApp): This app shows how to setup to use the Google IMA Plugin to play ads before, during and after a video. This version has been tested and works with v3.1.3 of the IMA SDK.
-
-* [Basic Google IMA Widevine Classic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-mediaplayer/BasicIMAWidevineSampleApp): This app shows how to setup to use the Google IMA Plugin to play ads before, during and after a Widevine video. This version has been tested and works with v3.1.3 of the IMA SDK.
 
 * [Basic Omniture Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-mediaplayer/BasicOmnitureSampleApp): This app shows how to configure an app to use the Brightcove native Android player Omniture Plugin to play a video.
 
 Note that in order to enable this sample app, you must independently obtain and install the file **adobeMobileLibrary.jar** into the top-level directory **libs/**.  Version 4.11.0 of the Adobe provided, non-free, jar file was used to test this sample app.
-
-* [Basic Widevine Classic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-mediaplayer/BasicWidevineSampleApp): This app shows how to configure an app to use the Brightcove native Android player Widevine Plugin to play a video.
 
 * [WebVTT Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-mediaplayer/WebVTTSampleApp): This app shows how to implement closed captioning using WebVTT files with Android 4.4.
 
@@ -83,7 +75,7 @@ From Android Studio using VCS installation:
 
 1. Select the *Checkout From Version Control* option in the new project dialog,
 1. Pick the GITHUB menu entry
-1. Use **git@github.com:BrightcoveOS/android-player-samples.git** for the URL
+1. Use **https://github.com/BrightcoveOS/android-player-samples.git** for the URL
 1. Click on SUBMIT and use default values on subsequent screens.
 
 From Android Studio using Import
