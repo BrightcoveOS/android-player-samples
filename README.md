@@ -30,7 +30,7 @@ The Brightcove ExoPlayer sample apps have now support for Android TV. Note that 
 
 Note that in order to enable the FreeWheel sample apps, you must independently obtain the non-free FreeWheel **AdManager.jar** library archive and install it into the directory **libs/** which is typically located at the root of your /home/ directory. The Brightcove Native SDK for Android, and the FreeWheel sample apps here, have been tested with FreeWheel AdManager library version 6.5.0. Please note that Brightcove does not distribute the FreeWheel libraries. Contact [FreeWheel](http://freewheel.tv/about/#contact-us) directly for more information on how to obtain their products.
 
-* [Basic OnceUx Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/BasicOnceUxSampleApp): This app shows how to configure an app to use the Brightcove Native Player for Android OnceUx Plugin to play a video.
+* [Basic OnceUx Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicOnceUxSampleApp): This app shows how to configure an app to use the Brightcove Native Player for Android OnceUx Plugin to play a video.
 
 * [ID3 Tags Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/ID3SampleApp): This app shows how to use the Brightcove ExoPlayer with ID3 tags.
 
