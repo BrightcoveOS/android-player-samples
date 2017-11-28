@@ -1,10 +1,10 @@
-include ':AdRulesIMASampleApp'
-include ':BasicBundledVideoSampleApp'
-include ':BasicCastSampleApp'
-include ':BasicIMASampleApp'
-include ':BasicOnceUxSampleApp'
-include ':BasicTextureViewSampleApp'
-include ':WebVTTSampleApp'
+include ':brightcove-mediaplayer:AdRulesIMASampleApp'
+include ':brightcove-mediaplayer:BasicBundledVideoSampleApp'
+include ':brightcove-mediaplayer:BasicCastSampleApp'
+include ':brightcove-mediaplayer:BasicIMASampleApp'
+include ':brightcove-mediaplayer:BasicTextureViewSampleApp'
+include ':brightcove-mediaplayer:DFXPClosedCaptioningSampleApp'
+include ':brightcove-mediaplayer:WebVTTSampleApp'
 
 // For building exoplayer-specific sample apps, which are located under the 'brightcove-exoplayer' directory.
 include ':brightcove-exoplayer:360VideoSampleApp'
@@ -12,6 +12,7 @@ include ':brightcove-exoplayer:AdRulesIMASampleApp'
 include ':brightcove-exoplayer:AdRulesIMAWidevineModularSampleApp'
 include ':brightcove-exoplayer:AppCompatActivitySampleApp'
 include ':brightcove-exoplayer:AppCompatFragmentSampleApp'
+include ':brightcove-exoplayer:BasicOnceUxSampleApp'
 include ':brightcove-exoplayer:BasicSampleApp'
 include ':brightcove-exoplayer:ID3SampleApp'
 include ':brightcove-exoplayer:LiveSampleApp'
@@ -31,7 +32,7 @@ include ':brightcove-player-controls:SeekBarColorsSampleApp'
 // FreeWheel samples require AdManager.jar to be added to the libs
 // folder.  This jar can be acquired from FreeWheel.
 if (freewheelDependenciesAreSatisfied()) {
-    include ':BasicFreeWheelSampleApp'
+    include ':brightcove-mediaplayer:BasicFreeWheelSampleApp'
     include ':brightcove-exoplayer:FreeWheelSampleApp'
     include ':brightcove-exoplayer:FreeWheelWidevineModularSampleApp'
 }
@@ -39,7 +40,7 @@ if (freewheelDependenciesAreSatisfied()) {
 // Omniture samples require adobe-adms.jar to be added to the libs
 // folder.  This jar can be acquired from Adobe.
 if (omnitureDependenciesAreSatisfied()) {
-    include ':BasicOmnitureSampleApp'
+    include ':brightcove-mediaplayer:BasicOmnitureSampleApp'
 }
 
 boolean freewheelDependenciesAreSatisfied() {

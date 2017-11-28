@@ -57,7 +57,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     buildToolsVersion "25.0.0"
 
     defaultConfig {
-      minSdkVersion 13
+      minSdkVersion 14
       targetSdkVersion 23
     }
 
@@ -98,6 +98,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
       compile "com.brightcove.player:android-ima-plugin:${anpVersion}"
       compile 'com.google.ads.interactivemedia.v3:interactivemedia:'+imaAndroidSdkVersion
       compile 'com.google.android.gms:play-services-ads:11.0.4'
+      compile 'com.android.support:support-v4:25.4.0'
     }
 
     android {
@@ -130,12 +131,6 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
       defaultConfig {
         minSdkVersion 16
       }
-    }
-  }
-
-  if (project.name.contains('Widevine')) {
-    dependencies {
-      compile "com.brightcove.player:android-widevine-plugin:${anpVersion}"
     }
   }
 
