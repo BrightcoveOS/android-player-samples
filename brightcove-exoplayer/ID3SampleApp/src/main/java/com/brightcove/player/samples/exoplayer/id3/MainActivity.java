@@ -9,7 +9,8 @@ import com.brightcove.player.event.EventListener;
 import com.brightcove.player.media.DeliveryType;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
-import com.google.android.exoplayer.metadata.id3.Id3Frame;
+import com.google.android.exoplayer2.metadata.Metadata;
+import com.google.android.exoplayer2.metadata.id3.Id3Frame;
 
 import java.util.List;
 
@@ -33,11 +34,15 @@ public class MainActivity extends BrightcovePlayer {
             public void processEvent(Event event) {
                 ExoPlayerVideoDisplayComponent exoPlayerVideoDisplayComponent =
                     (ExoPlayerVideoDisplayComponent) brightcoveVideoView.getVideoDisplay();
-                exoPlayerVideoDisplayComponent.setMetadataListener(new ExoPlayerVideoDisplayComponent.Id3MetadataListener() {
+                exoPlayerVideoDisplayComponent.setMetadataListener(new ExoPlayerVideoDisplayComponent.MetadataListener() {
                     @Override
-                    public void onId3Metadata(List<Id3Frame> list) {
-                        for(Id3Frame id3Frame : list) {
-                            Log.v(TAG, "id3 Frame id: " + id3Frame.id);
+                    public void onMetadata(Metadata metadata) {
+                        for(int i = 0; i < metadata.length(); i++) {
+                            Metadata.Entry entry = metadata.get(i);
+                            if (entry instanceof Id3Frame) {
+                                Id3Frame id3Frame = (Id3Frame) entry;
+                                Log.v(TAG, "id3 Frame id: " + id3Frame.id);
+                            }
                         }
                     }
                 });
