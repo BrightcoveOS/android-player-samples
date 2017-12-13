@@ -9,6 +9,7 @@ import com.brightcove.freewheel.event.FreeWheelEventType;
 import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
+import com.brightcove.player.media.DeliveryType;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
@@ -45,7 +46,9 @@ public class MainActivity extends BrightcovePlayer {
 
         eventEmitter = brightcoveVideoView.getEventEmitter();
 
-        brightcoveVideoView.add(Video.createVideo("https://hlsak-a.akamaihd.net/3636334163001/3636334163001_5566790474001_5566768721001.m3u8?pubId=3636334163001&videoId=5566768721001"));
+        Video video = Video.createVideo("https://hlsak-a.akamaihd.net/3636334163001/3636334163001_5566790474001_5566768721001.m3u8?pubId=3636334163001&videoId=5566768721001", DeliveryType.HLS);
+        video.getProperties().put(Video.Fields.PUBLISHER_ID, "3636334163001");
+        brightcoveVideoView.add(video);
 
         setupFreeWheel();
 

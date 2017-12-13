@@ -1,32 +1,32 @@
-package com.brightcove.player.samples.exoplayer.ima.adrules;
+package com.brightcove.player.samples.ima.exoplayer.adrules;
 
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
+
 import com.brightcove.ima.GoogleIMAComponent;
 import com.brightcove.ima.GoogleIMAEventType;
-import com.brightcove.ima.GoogleIMAVideoAdPlayer;
+import com.brightcove.player.edge.Catalog;
+import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventType;
-import com.brightcove.player.media.Catalog;
 import com.brightcove.player.media.VideoFields;
-import com.brightcove.player.media.VideoListener;
 import com.brightcove.player.mediacontroller.BrightcoveMediaController;
+import com.brightcove.player.mediacontroller.BrightcoveSeekBar;
 import com.brightcove.player.model.Video;
-import com.brightcove.player.view.BrightcovePlayer;
-import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
+import com.brightcove.player.view.BaseVideoView;
 import com.brightcove.player.util.StringUtil;
+import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
+import com.brightcove.player.view.BrightcovePlayer;
 import com.google.ads.interactivemedia.v3.api.AdDisplayContainer;
 import com.google.ads.interactivemedia.v3.api.AdsManager;
 import com.google.ads.interactivemedia.v3.api.AdsRequest;
 import com.google.ads.interactivemedia.v3.api.ImaSdkFactory;
+
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * This app illustrates how to use "Ad Rules" the Google IMA plugin
@@ -51,34 +51,18 @@ public class MainActivity extends BrightcovePlayer {
         // management.
         setContentView(R.layout.ima_activity_main);
         brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
-        final BrightcoveMediaController mediaController = new BrightcoveMediaController(brightcoveVideoView);
 
-        // Add "Ad Markers" where the Ads Manager says ads will appear.
-        mediaController.addListener(GoogleIMAEventType.ADS_MANAGER_LOADED, new EventListener() {
-            @Override
-            public void processEvent(Event event) {
-                AdsManager manager = (AdsManager) event.properties.get("adsManager");
-                List<Float> cuepoints = manager.getAdCuePoints();
-                for (int i = 0; i < cuepoints.size(); i++) {
-                    Float cuepoint = cuepoints.get(i);
-                    mediaController.getBrightcoveSeekBar().addMarker((int) (cuepoint * DateUtils.SECOND_IN_MILLIS));
-                }
-            }
-        });
-        brightcoveVideoView.setMediaController(mediaController);
+        // *** This method call is optional *** //
+        setupAdMarkers(brightcoveVideoView);
+
         super.onCreate(savedInstanceState);
         eventEmitter = brightcoveVideoView.getEventEmitter();
 
         // Use a procedural abstraction to setup the Google IMA SDK via the plugin.
         setupGoogleIMA();
 
-        Map<String, String> options = new HashMap<String, String>();
-        List<String> values = new ArrayList<String>(Arrays.asList(VideoFields.DEFAULT_FIELDS));
-        values.remove(VideoFields.HLS_URL);
-        options.put("video_fields", StringUtil.join(values, ","));
-
-        Catalog catalog = new Catalog("ErQk9zUeDVLIp8Dc7aiHKq8hDMgkv5BFU7WGshTc-hpziB3BuYh28A..");
-        catalog.findVideoByReferenceID("shark", new VideoListener() {
+        Catalog catalog = new Catalog(eventEmitter, getString(R.string.account), getString(R.string.policy));
+        catalog.findVideoByID(getString(R.string.videoId), new VideoListener() {
             public void onVideo(Video video) {
                 brightcoveVideoView.add(video);
 
@@ -153,7 +137,32 @@ public class MainActivity extends BrightcovePlayer {
         // Create the Brightcove IMA Plugin and pass in the event
         // emitter so that the plugin can integrate with the SDK.
         googleIMAComponent = new GoogleIMAComponent(brightcoveVideoView, eventEmitter, true);
+    }
 
-        // Calling GoogleIMAComponent.initializeAdsRequests() is no longer necessary.
+    /*
+      This methods show how to the the Google IMA AdsManager, get the cue points and add the markers
+      to the Brightcove Seek Bar.
+     */
+    private void setupAdMarkers(BaseVideoView videoView) {
+        final BrightcoveMediaController mediaController = new BrightcoveMediaController(brightcoveVideoView);
+
+        // Add "Ad Markers" where the Ads Manager says ads will appear.
+        mediaController.addListener(GoogleIMAEventType.ADS_MANAGER_LOADED, new EventListener() {
+            @Override
+            public void processEvent(Event event) {
+                AdsManager manager = (AdsManager) event.properties.get("adsManager");
+                List<Float> cuepoints = manager.getAdCuePoints();
+                for (int i = 0; i < cuepoints.size(); i++) {
+                    Float cuepoint = cuepoints.get(i);
+                    BrightcoveSeekBar brightcoveSeekBar = mediaController.getBrightcoveSeekBar();
+                    // If cuepoint is negative it means it is a POST ROLL.
+                    int markerTime = cuepoint < 0 ? brightcoveSeekBar.getMax() : (int) (cuepoint * DateUtils.SECOND_IN_MILLIS);
+                        mediaController.getBrightcoveSeekBar().addMarker(markerTime);
+
+                }
+            }
+        });
+        videoView.setMediaController(mediaController);
+
     }
 }

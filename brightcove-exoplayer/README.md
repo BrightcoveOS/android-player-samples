@@ -23,7 +23,6 @@ The BrightcoveExoPlayer integration currently supports the following:
  * OnceUX
  * FreeWheel
  * Google IMA
- * VMAP
 * Analytics
  * Brightcove
  * Omniture

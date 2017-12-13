@@ -7,6 +7,7 @@
 -dontwarn com.adobe.**
 -dontwarn com.squareup.okhttp.**
 -dontwarn io.requery.android.**
+-dontwarn android.media.**
 
 # These classes aren't used in the Brightcove Android SDK.
 -dontwarn io.requery.android.QueryLoader
