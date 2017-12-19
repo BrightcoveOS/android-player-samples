@@ -29,6 +29,9 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     jcenter()
 
     maven {
+      url 'https://maven.google.com'
+    }
+    maven {
       url 'http://repo.brightcove.com/snapshots'
     }
     maven {
@@ -54,7 +57,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     buildToolsVersion "25.0.0"
 
     defaultConfig {
-      minSdkVersion 13
+      minSdkVersion 14
       targetSdkVersion 23
     }
 
@@ -94,7 +97,14 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     dependencies {
       compile "com.brightcove.player:android-ima-plugin:${anpVersion}"
       compile 'com.google.ads.interactivemedia.v3:interactivemedia:'+imaAndroidSdkVersion
-      compile 'com.google.android.gms:play-services-ads:8.1.0'
+      compile 'com.google.android.gms:play-services-ads:11.0.4'
+      compile 'com.android.support:support-v4:25.4.0'
+    }
+
+    android {
+      defaultConfig {
+        minSdkVersion 14
+      }
     }
   }
 
@@ -114,7 +124,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
   if (project.name.contains('OnceUx')) {
     dependencies {
       compile "com.brightcove.player:android-onceux-plugin:${anpVersion}"
-      compile "com.brightcove.player:exoplayer:${anpVersion}"
+      compile "com.brightcove.player:exoplayer2:${anpVersion}"
     }
 
     android {
@@ -127,7 +137,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
   if (project.parent.name.equals('brightcove-exoplayer') ||
           project.parent.name.equals('brightcove-player-controls')) {
     dependencies {
-      compile "com.brightcove.player:exoplayer:${anpVersion}"
+      compile "com.brightcove.player:exoplayer2:${anpVersion}"
     }
 
     android {

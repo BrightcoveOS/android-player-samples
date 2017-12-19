@@ -2,5 +2,6 @@
 <resources>
 
     <string name="app_name">Basic Bundled Video Sample App</string>
+    <string name="account_id">3636334163001</string>
 
 </resources>

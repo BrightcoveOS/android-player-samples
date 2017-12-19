@@ -3,14 +3,31 @@ android-player-samples
 
 Provides sample apps for the Brightcove Player SDK and Plugins for Android.
 
-Learn more about the [Brightcove Native Player SDKs](http://docs.brightcove.com/en/video-cloud/mobile-sdks/index.html).
+Learn more about the [Brightcove Native Player SDKs](https://support.brightcove.com/native-player-sdks).
 
 The Android sample app projects in this repository can be inserted directly into Android Studio and subsequently executed or simulated.
 This version of the sample apps supports the latest Brightcove SDK and plugins.  The following sample apps are included:
 
-## Brightcove ExoPlayer sample apps:
+## Brightcove ExoPlayer 2 sample apps:
 
-The Brightcove ExoPlayer sample apps have now support for Android TV. Note that you are required to specify Brightcove SDK version 4.10.0 or later. In addition to that, you need to to add the android.intent.category.LEANBACK_LAUNCHER as an intent filter category for your Main Activity, so that your app appears in the Android TV home screen.
+### Important Notes about the ExoPlayer 2 sample apps
+1. The ExoPlayer sample apps on the master branch only support Google ExoPlayer 2. If you want to run ExoPlayer 1 versions of the ExoPlayer sample apps, please `git checkout ExoPlayerV1` and run them on that branch.
+2. The Brightcove SDK using ExoPlayer v2 supports all features previously supported by ExoPlayer v1, including the following:
+   * VOD video formats: Mpeg-DASH, HLS, HLSe, MP4
+   * WebVTT Closed Captions
+   * Multiple Audio Track videos
+   * Client-side advertising with Google IMA and FreeWheel
+   * Live video, and Live video with DVR
+   * Server-side Ad Insertion
+   * DRM with Widevine Modular
+   * Offline playback of clear and DRM-protected content
+   * Playback in Android TV and Fire TV.
+   * Video 360 playback
+   * Omniture analytics.
+
+3. Please visit [Migrating Exoplayer 2 framework](https://support.brightcove.com/migrating-exoplayer-2-framework) for more information.
+
+### Brightcove sample apps using ExoPlayer 2
 
 * [360 Video Sample app](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/360VideoSampleApp/): This app shows how to use the Brightcove ExoPlayer to play 360 videos.
 
@@ -97,7 +114,7 @@ To stop the daemon after the build completes, run the following:
 `./gradlew --stop`
 
 ## Running a sample app
-1. To run a sample app on an Android 4.2.2 or later device, plug the device into the computer and ensure that USB debugging is enabled.  Android Studio will recognize the device as long as the device identifies as running a version between Android 10 and Android 19 otherwise Android Studio will run the sample app in the simulator.  Using the simulator is not recommended as video support is buggy.  This will be resolved as Android Studio and the Android SDK mature.
+1. To run a sample app on an Android 4.4.4 or later device, plug the device into the computer and ensure that USB debugging is enabled.  Android Studio will recognize the device as long as the device identifies as running a version between Android 10 and Android 19 otherwise Android Studio will run the sample app in the simulator.  Using the simulator is not recommended as video support is buggy.  This will be resolved as Android Studio and the Android SDK mature.
 1. Select a sample app from the *Run/Debug Configuration* selector and click on the run (green button) icon to start the sample.
 
 Enjoy!

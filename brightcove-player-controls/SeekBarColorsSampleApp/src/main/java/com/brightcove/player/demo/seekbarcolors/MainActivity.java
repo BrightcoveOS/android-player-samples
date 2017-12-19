@@ -1,6 +1,6 @@
 package com.brightcove.player.demo.seekbarcolors;
 
-import com.brightcove.player.media.DeliveryType;
+import com.brightcove.player.model.DeliveryType;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;

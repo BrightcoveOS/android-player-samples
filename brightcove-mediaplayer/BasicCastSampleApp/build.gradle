@@ -2,7 +2,7 @@ apply plugin: 'spoon'
 
 android {
     defaultConfig {
-        minSdkVersion 13
+        minSdkVersion 14
         testApplicationId "com.brightcove.player.samples.cast.basic.test"
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
     }

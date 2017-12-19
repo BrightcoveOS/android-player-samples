@@ -6,7 +6,7 @@ import android.util.Log;
 import com.brightcove.player.edge.Catalog;
 import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.event.EventEmitter;
-import com.brightcove.player.media.DeliveryType;
+import com.brightcove.player.model.DeliveryType;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
