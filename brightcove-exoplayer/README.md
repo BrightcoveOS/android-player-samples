@@ -13,21 +13,20 @@ The following sample applications are included:
 ## Features
 
 The BrightcoveExoPlayer integration currently supports the following:
-* Media Playback
+ * Media Playback
  * HLS
-* Closed Captioning
+ * Closed Captioning
  * EIA-608
  * WebVTT
- * DFXP/TTML
-* Ad Integrations
+ * Ad Integrations
  * OnceUX
  * FreeWheel
  * Google IMA
-* Analytics
+ * Analytics
  * Brightcove
- * Omniture
-* Android TV
-* Video 360
+ * Adobe Omniture
+ * Android TV
+ * Video 360
 
 ## Requirements
 
@@ -145,7 +144,8 @@ Forum](http://google.github.io/ExoPlayer/guide.html#digital-rights-management).
 To report any bugs found within the BrightcoveExoPlayer integration, please submit the following to the [Brightcove Native Player SDKs Google Group](https://groups.google.com/forum/#!forum/brightcove-native-player-sdks):
 
 1. Please preface your post with an [ExoPlayer] tag.
-2. Include steps to reproduce the problem.
-3. Include the version of Android and manufacturer of the device(s) you are testing on.
-4. Include a full logcat of the execution of your sample application demonstrating the problem.
-5. Include any screenshots that help to demonstrate the problem.
+2. Please indicate whether you are using ExoPlayer 1 or ExoPlayer 2. Please also include the ExoPlayer version (for example, 1.5.13).
+3. Pleae Include steps to reproduce the problem.
+4. Please Include the version of Android and manufacturer of the device(s) you are testing on.
+5. Please Include a full logcat of the execution of your sample application demonstrating the problem.
+6. Please Include any screenshots that help to demonstrate the problem.
