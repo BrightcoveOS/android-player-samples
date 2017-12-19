@@ -11,7 +11,7 @@ import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventType;
 import com.brightcove.player.edge.Catalog;
-import com.brightcove.player.media.VideoFields;
+import com.brightcove.player.model.VideoFields;
 import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.mediacontroller.BrightcoveMediaController;
 import com.brightcove.player.model.Video;
