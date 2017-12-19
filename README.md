@@ -11,8 +11,8 @@ This version of the sample apps supports the latest Brightcove SDK and plugins. 
 ## Brightcove ExoPlayer 2 sample apps:
 
 ### Important Notes about the ExoPlayer 2 sample apps
-1. The ExoPlayer sample apps on this branch of the repository (ExoPlayer2) only support Google ExoPlayer 2. If you want to run ExoPlayer 1 versions of the ExoPlayer sample apps, please `git checkout master` and run them on the master branch.
-2. The supported features for this Beta 4 release include:
+1. The ExoPlayer sample apps on the master branch only support Google ExoPlayer 2. If you want to run ExoPlayer 1 versions of the ExoPlayer sample apps, please `git checkout ExoPlayerV1` and run them on that branch.
+2. The Brightcove SDK using ExoPlayer v2 supports all features previously supported by ExoPlayer v1, including the following:
    * VOD video formats: Mpeg-DASH, HLS, HLSe, MP4
    * WebVTT Closed Captions
    * Multiple Audio Track videos
@@ -21,9 +21,13 @@ This version of the sample apps supports the latest Brightcove SDK and plugins. 
    * Server-side Ad Insertion
    * DRM with Widevine Modular
    * Offline playback of clear and DRM-protected content
+   * Playback in Android TV and Fire TV.
    * Video 360 playback
+   * Omniture analytics.
 
-The Brightcove ExoPlayer sample apps have now support for Android TV. Note that you are required to specify Brightcove SDK version 4.10.0 or later. In addition to that, you need to to add the android.intent.category.LEANBACK_LAUNCHER as an intent filter category for your Main Activity, so that your app appears in the Android TV home screen.
+3. Please visit [Migrating Exoplayer 2 framework](https://support.brightcove.com/migrating-exoplayer-2-framework) for more information.
+
+### Brightcove sample apps using ExoPlayer 2
 
 * [360 Video Sample app](https://github.com/BrightcoveOS/android-player-samples/tree/ExoPlayer2/brightcove-exoplayer/360VideoSampleApp/): This app shows how to use the Brightcove ExoPlayer to play 360 videos.
 
