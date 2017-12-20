@@ -2,11 +2,12 @@ package com.brightcove.player.samples.exoplayer.id3;
 
 import android.os.Bundle;
 import android.util.Log;
+
 import com.brightcove.player.display.ExoPlayerVideoDisplayComponent;
 import com.brightcove.player.event.Event;
-import com.brightcove.player.event.EventType;
 import com.brightcove.player.event.EventListener;
-import com.brightcove.player.media.DeliveryType;
+import com.brightcove.player.event.EventType;
+import com.brightcove.player.model.DeliveryType;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.google.android.exoplayer.metadata.id3.Id3Frame;
