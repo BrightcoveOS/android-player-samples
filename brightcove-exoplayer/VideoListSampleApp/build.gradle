@@ -9,7 +9,6 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -26,6 +25,4 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.3.0'
     compile 'com.android.support:recyclerview-v7:25.3.0'
-    compile "com.brightcove.player:exoplayer:4.13.+"
-    testCompile 'junit:junit:4.12'
 }

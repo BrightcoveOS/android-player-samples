@@ -1,27 +1,24 @@
 package com.brightcove.player.samples.ima.adrules;
 
 import android.os.Bundle;
-import android.text.format.DateUtils;
 import android.util.Log;
+
 import com.brightcove.ima.GoogleIMAComponent;
 import com.brightcove.ima.GoogleIMAEventType;
-import com.brightcove.ima.GoogleIMAVideoAdPlayer;
+import com.brightcove.player.edge.Catalog;
+import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventType;
-import com.brightcove.player.edge.Catalog;
-import com.brightcove.player.media.VideoFields;
-import com.brightcove.player.edge.VideoListener;
-import com.brightcove.player.mediacontroller.BrightcoveMediaController;
+import com.brightcove.player.model.VideoFields;
 import com.brightcove.player.model.Video;
-import com.brightcove.player.view.BrightcovePlayer;
-import com.brightcove.player.view.BrightcoveVideoView;
 import com.brightcove.player.util.StringUtil;
+import com.brightcove.player.view.BrightcovePlayer;
 import com.google.ads.interactivemedia.v3.api.AdDisplayContainer;
-import com.google.ads.interactivemedia.v3.api.AdsManager;
 import com.google.ads.interactivemedia.v3.api.AdsRequest;
 import com.google.ads.interactivemedia.v3.api.ImaSdkFactory;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;

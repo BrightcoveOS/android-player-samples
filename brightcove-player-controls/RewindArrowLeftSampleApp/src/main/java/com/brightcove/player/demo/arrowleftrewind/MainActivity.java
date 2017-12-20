@@ -1,13 +1,12 @@
 package com.brightcove.player.demo.arrowleftrewind;
 
-import com.brightcove.player.media.DeliveryType;
+import android.net.Uri;
+import android.os.Bundle;
+
+import com.brightcove.player.model.DeliveryType;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
-
-import android.net.Uri;
-import android.os.Bundle;
-import android.util.Log;
 
 /**
  * This app illustrates customizing the rewind button glyph using the Brightcove media controller.  The code for the

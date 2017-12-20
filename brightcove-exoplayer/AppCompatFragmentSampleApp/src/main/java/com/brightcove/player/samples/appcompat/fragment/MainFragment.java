@@ -4,8 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.brightcove.player.appcompat.BrightcovePlayerFragment;
-import com.brightcove.player.media.DeliveryType;
+import com.brightcove.player.model.DeliveryType;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BaseVideoView;
 

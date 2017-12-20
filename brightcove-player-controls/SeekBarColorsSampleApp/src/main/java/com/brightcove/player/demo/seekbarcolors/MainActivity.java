@@ -1,13 +1,12 @@
 package com.brightcove.player.demo.seekbarcolors;
 
-import com.brightcove.player.media.DeliveryType;
+import android.net.Uri;
+import android.os.Bundle;
+
+import com.brightcove.player.model.DeliveryType;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
-
-import android.net.Uri;
-import android.os.Bundle;
-import android.util.Log;
 
 /**
  * This app illustrates the basic behavior of the Android default media controller.

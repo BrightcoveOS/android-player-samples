@@ -2,13 +2,13 @@ package com.brightcove.player.samples.webvtt;
 
 import android.net.Uri;
 import android.os.Bundle;
+
 import com.brightcove.player.captioning.BrightcoveCaptionFormat;
-import com.brightcove.player.view.BrightcovePlayer;
-import com.brightcove.player.view.BrightcoveVideoView;
-import com.brightcove.player.controller.BrightcoveClosedCaptioningController;
 import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventType;
+import com.brightcove.player.view.BrightcovePlayer;
+import com.brightcove.player.view.BrightcoveVideoView;
 
 /**
  * This activity demonstrates how to play a video with closed

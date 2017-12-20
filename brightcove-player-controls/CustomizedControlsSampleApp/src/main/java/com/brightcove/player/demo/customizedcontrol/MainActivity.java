@@ -1,5 +1,11 @@
 package com.brightcove.player.demo.customizedcontrol;
 
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
 import com.brightcove.player.edge.Catalog;
 import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.event.Event;
@@ -9,14 +15,8 @@ import com.brightcove.player.event.EventType;
 import com.brightcove.player.mediacontroller.BrightcoveMediaController;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BaseVideoView;
-import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
-
-import android.graphics.Typeface;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+import com.brightcove.player.view.BrightcovePlayer;
 
 /**
  * This app illustrates how to customize the Android default media controller.

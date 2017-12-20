@@ -1,21 +1,17 @@
 package com.brightcove.player.samples.onceux.basic;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.brightcove.player.event.EventEmitter;
-import com.brightcove.player.event.EventListener;
-import com.brightcove.player.event.EventType;
-import com.brightcove.player.event.Event;
-
-import com.brightcove.player.view.BrightcovePlayer;
-import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
-
 import com.brightcove.onceux.OnceUxComponent;
 import com.brightcove.onceux.event.OnceUxEventType;
+import com.brightcove.player.event.Event;
+import com.brightcove.player.event.EventEmitter;
+import com.brightcove.player.event.EventListener;
+import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
+import com.brightcove.player.view.BrightcovePlayer;
 
 /**
  * This app illustrates how to use the Once UX plugin to ensure that:
