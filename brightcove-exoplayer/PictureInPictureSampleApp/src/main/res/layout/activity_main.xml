@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.brightcove.player.samples.pictureinpicture.MainActivity"
+    android:orientation="vertical">
+
+    <com.brightcove.player.view.BrightcoveExoPlayerVideoView
+        android:id="@+id/brightcove_video_view"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:layout_gravity="center_horizontal|top"/>
+
+    <Button
+        android:id="@+id/configure_pip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/button_margin"
+        android:layout_marginStart="@dimen/button_margin"
+        android:text="@string/configure_picture_in_picture"
+        android:onClick="onClickConfigurePictureInPicture"/>
+
+</LinearLayout>
