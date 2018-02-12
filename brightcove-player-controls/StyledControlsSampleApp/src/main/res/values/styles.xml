@@ -14,6 +14,7 @@
         <!--<item name="brightcove_fast_forward">false</item>-->
         <!--<item name="brightcove_seekbar">true</item>-->
         <!--<item name="brightcove_animation_style">fade</item>-->
+        <!--<item name="brightcove_vr_mode">false</item>-->
         <!--<item name="brightcove_marker_color">@color/bmc_seekbar_marker</item>-->
     </style>
 
@@ -39,6 +40,7 @@
         <item name="brightcove_fast_forward">true</item>
         <item name="brightcove_full_screen">false</item>
         <item name="brightcove_live">true</item>
+        <item name="brightcove_vr_mode">false</item>
 
         <!-- You need to turn this true for Android TV, in order for player options (audio and audio tracks)
              to appear when available (it's the gear icon) -->
