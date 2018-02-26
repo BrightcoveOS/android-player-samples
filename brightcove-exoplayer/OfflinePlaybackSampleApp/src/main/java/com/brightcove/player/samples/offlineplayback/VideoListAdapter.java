@@ -35,6 +35,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.ViewHolder> {
 
+    private static final String TAG = VideoListAdapter.class.getName();
+
     /**
      * The current list of videos.
      */
@@ -43,6 +45,8 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
      * A map of video identifiers and position of video in the list.
      */
     private Map<String, Integer> indexMap = new HashMap<>();
+
+    private boolean downloadPaused = false;
 
     /**
      * A view holder that hold references to the UI components in a list item.
@@ -85,6 +89,14 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
          */
         public final ImageButton downloadButton;
         /**
+         * Reference to the pause/resume download button.
+         */
+        public final ImageButton pauseButton;
+        /**
+         * Reference to the pause/resume download button.
+         */
+        public final ImageButton resumeButton;
+        /**
          * Reference to the delete video button.
          */
         public final ImageButton deleteButton;
@@ -115,6 +127,8 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
             rentButton = ViewUtil.findView(itemView, R.id.rent_button);
             buyButton = ViewUtil.findView(itemView, R.id.buy_button);
             downloadButton = ViewUtil.findView(itemView, R.id.download_button);
+            pauseButton = ViewUtil.findView(itemView, R.id.pause_button);
+            resumeButton = ViewUtil.findView(itemView, R.id.reesume_button);
             deleteButton = ViewUtil.findView(itemView, R.id.delete_button);
             downloadProgressBar = ViewUtil.findView(itemView, R.id.download_progress_bar);
             downloadProgressBar.getProgressDrawable().setColorFilter(Color.DKGRAY, PorterDuff.Mode.SRC_IN);
@@ -416,6 +430,24 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     listener.downloadVideo(holder.video);
+                }
+                return false;
+            }
+        });
+        holder.pauseButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    listener.pauseVideoDownload(holder.video);
+                }
+                return false;
+            }
+        });
+        holder.resumeButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    listener.resumeVideoDownload(holder.video);
                 }
                 return false;
             }

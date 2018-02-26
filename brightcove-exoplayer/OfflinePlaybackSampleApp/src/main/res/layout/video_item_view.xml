@@ -95,6 +95,26 @@
         android:background="@drawable/player_option_item_bg"
         android:src="@drawable/ic_download" />
 
+    <ImageButton
+        android:id="@+id/pause_button"
+        android:layout_width="48dp"
+        android:layout_height="36dp"
+        android:layout_toRightOf="@id/download_button"
+        android:layout_marginTop="10dp"
+        android:layout_alignBottom="@+id/delete_button"
+        android:background="@drawable/player_option_item_bg"
+        android:src="@android:drawable/ic_media_pause" />
+
+    <ImageButton
+        android:id="@+id/reesume_button"
+        android:layout_width="48dp"
+        android:layout_height="36dp"
+        android:layout_toRightOf="@id/pause_button"
+        android:layout_marginTop="10dp"
+        android:layout_alignBottom="@+id/pause_button"
+        android:background="@drawable/player_option_item_bg"
+        android:src="@android:drawable/ic_media_ff" />
+
     <Button
         android:id="@+id/rent_button"
         style="@android:style/Widget.Holo.Button.Borderless"

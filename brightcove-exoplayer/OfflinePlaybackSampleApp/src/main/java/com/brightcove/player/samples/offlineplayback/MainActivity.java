@@ -362,6 +362,16 @@ public class MainActivity extends BrightcovePlayer {
         }
 
         @Override
+        public void pauseVideoDownload(@NonNull Video video) {
+            Log.v(TAG,"Calling pauseVideoDownload.");
+            catalog.pauseVideoDownload(video); }
+
+        @Override
+        public void resumeVideoDownload(@NonNull Video video) {
+            Log.v(TAG,"Calling resumeVideoDownload.");
+            catalog.resumeVideoDownload(video); }
+
+        @Override
         public void downloadVideo(@NonNull Video video) {
             catalog.downloadVideo(video);
         }
