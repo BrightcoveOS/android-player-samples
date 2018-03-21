@@ -30,7 +30,7 @@ import com.brightcove.onceux.event.OnceUxEventType;
  *
  * @author Paul Michael Reilly
  */
-public class MainActivity extends BrightcovePlayer {
+public class MainActivity_old extends BrightcovePlayer {
 
     // Private class constants
 
