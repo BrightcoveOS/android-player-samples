@@ -46,8 +46,6 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
      */
     private Map<String, Integer> indexMap = new HashMap<>();
 
-    private boolean downloadPaused = false;
-
     /**
      * A view holder that hold references to the UI components in a list item.
      */
