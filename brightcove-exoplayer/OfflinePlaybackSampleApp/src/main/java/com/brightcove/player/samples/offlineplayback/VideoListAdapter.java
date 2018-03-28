@@ -366,6 +366,15 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
                 holder.resumeButton.setVisibility(View.GONE);
                 holder.deleteButton.setVisibility(View.GONE);
                 break;
+            case DownloadStatus.STATUS_PENDING:
+            case DownloadStatus.STATUS_QUEUEING:
+                holder.videoStatusText.setText("Press download to save video");
+                holder.downloadButton.setVisibility(View.GONE);
+                holder.downloadProgressBar.setVisibility(View.GONE);
+                holder.pauseButton.setVisibility(View.GONE);
+                holder.resumeButton.setVisibility(View.GONE);
+                holder.deleteButton.setVisibility(View.VISIBLE);
+                break;
             case DownloadStatus.STATUS_DOWNLOADING:
                 holder.videoStatusText.setText(status.getStatusMessage());
                 holder.downloadProgressBar.setVisibility(View.VISIBLE);
