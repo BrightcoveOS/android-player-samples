@@ -44,6 +44,22 @@ public interface VideoListListener {
 
     /**
      * This method will be called by the {@link VideoListAdapter} when the user touches the
+     * pause download button. The handler is expected to pause download of the specified video.
+     *
+     * @param video reference to the video.
+     */
+    void pauseVideoDownload(@NonNull Video video);
+
+    /**
+     * This method will be called by the {@link VideoListAdapter} when the user touches the
+     * resume download button. The handler is expected to resume download of the specified video.
+     *
+     * @param video reference to the video.
+     */
+    void resumeVideoDownload(@NonNull Video video);
+
+    /**
+     * This method will be called by the {@link VideoListAdapter} when the user touches the
      * Delete button. The handler is expected to delete the specified video.
      *
      * @param video reference to the video.

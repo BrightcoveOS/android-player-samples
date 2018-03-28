@@ -32,9 +32,6 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
       url 'https://maven.google.com'
     }
     maven {
-      url 'http://repo.brightcove.com/snapshots'
-    }
-    maven {
       url 'http://repo.brightcove.com/releases'
     }
     maven {

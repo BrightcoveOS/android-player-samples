@@ -35,6 +35,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.ViewHolder> {
 
+    private static final String TAG = VideoListAdapter.class.getName();
+
     /**
      * The current list of videos.
      */
@@ -85,6 +87,14 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
          */
         public final ImageButton downloadButton;
         /**
+         * Reference to the pause/resume download button.
+         */
+        public final ImageButton pauseButton;
+        /**
+         * Reference to the pause/resume download button.
+         */
+        public final ImageButton resumeButton;
+        /**
          * Reference to the delete video button.
          */
         public final ImageButton deleteButton;
@@ -115,6 +125,8 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
             rentButton = ViewUtil.findView(itemView, R.id.rent_button);
             buyButton = ViewUtil.findView(itemView, R.id.buy_button);
             downloadButton = ViewUtil.findView(itemView, R.id.download_button);
+            pauseButton = ViewUtil.findView(itemView, R.id.pause_button);
+            resumeButton = ViewUtil.findView(itemView, R.id.reesume_button);
             deleteButton = ViewUtil.findView(itemView, R.id.delete_button);
             downloadProgressBar = ViewUtil.findView(itemView, R.id.download_progress_bar);
             downloadProgressBar.getProgressDrawable().setColorFilter(Color.DKGRAY, PorterDuff.Mode.SRC_IN);
@@ -263,9 +275,13 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
                 holder.deleteButton.setVisibility(View.GONE);
                 holder.downloadButton.setVisibility(View.GONE);
                 holder.downloadProgressBar.setVisibility(View.GONE);
+                holder.pauseButton.setVisibility(View.GONE);
+                holder.resumeButton.setVisibility(View.GONE);
             } else {
                 holder.rentButton.setVisibility(View.GONE);
                 holder.buyButton.setVisibility(View.GONE);
+                holder.pauseButton.setVisibility(View.GONE);
+                holder.resumeButton.setVisibility(View.GONE);
 
                 if (video.isOwned()) {
                     holder.videoLicenseText.setText("Owned");
@@ -308,6 +324,8 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
             holder.downloadButton.setVisibility(View.GONE);
             holder.deleteButton.setVisibility(View.GONE);
             holder.downloadProgressBar.setVisibility(View.GONE);
+            holder.pauseButton.setVisibility(View.GONE);
+            holder.resumeButton.setVisibility(View.GONE);
         }
 
         holder.videoTitleText.setText(video.getName());
@@ -338,31 +356,66 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
      */
     private void updateDownloadStatus(@NonNull ViewHolder holder, DownloadStatus status) {
         int statusCode = status.getCode();
-        if (statusCode == DownloadStatus.STATUS_NOT_QUEUED) {
-            holder.videoStatusText.setText("Press download to save video");
-            holder.downloadButton.setVisibility(View.VISIBLE);
-            holder.downloadProgressBar.setVisibility(View.GONE);
-        } else {
-            holder.videoStatusText.setText(status.getStatusMessage());
-            holder.downloadButton.setVisibility(View.GONE);
 
-            if (statusCode == DownloadStatus.STATUS_DOWNLOADING) {
+        switch (statusCode) {
+            case DownloadStatus.STATUS_NOT_QUEUED:
+                holder.videoStatusText.setText("Press download to save video");
+                holder.downloadButton.setVisibility(View.VISIBLE);
+                holder.downloadProgressBar.setVisibility(View.GONE);
+                holder.pauseButton.setVisibility(View.GONE);
+                holder.resumeButton.setVisibility(View.GONE);
+                holder.deleteButton.setVisibility(View.GONE);
+                break;
+            case DownloadStatus.STATUS_PENDING:
+            case DownloadStatus.STATUS_QUEUEING:
+                holder.videoStatusText.setText("Press download to save video");
+                holder.downloadButton.setVisibility(View.GONE);
+                holder.downloadProgressBar.setVisibility(View.GONE);
+                holder.pauseButton.setVisibility(View.GONE);
+                holder.resumeButton.setVisibility(View.GONE);
+                holder.deleteButton.setVisibility(View.VISIBLE);
+                break;
+            case DownloadStatus.STATUS_DOWNLOADING:
+                holder.videoStatusText.setText(status.getStatusMessage());
                 holder.downloadProgressBar.setVisibility(View.VISIBLE);
                 holder.downloadProgressBar.setProgress((int) status.getProgress());
-            } else {
+                holder.downloadButton.setVisibility(View.GONE);
+                holder.pauseButton.setVisibility(View.VISIBLE);
+                holder.resumeButton.setVisibility(View.GONE);
+                holder.deleteButton.setVisibility(View.VISIBLE);
+                break;
+            case DownloadStatus.STATUS_COMPLETE:
+                holder.videoStatusText.setText(status.getStatusMessage());
                 holder.downloadProgressBar.setVisibility(View.GONE);
-                if (statusCode == DownloadStatus.STATUS_DELETING) {
-                    holder.videoLicenseText.setVisibility(View.GONE);
-                    holder.rentButton.setVisibility(View.GONE);
-                    holder.buyButton.setVisibility(View.GONE);
-                    holder.downloadButton.setVisibility(View.GONE);
-                    holder.deleteButton.setVisibility(View.GONE);
-                }
-            }
+                holder.downloadProgressBar.setProgress((int) status.getProgress());
+                holder.downloadButton.setVisibility(View.GONE);
+                holder.pauseButton.setVisibility(View.GONE);
+                holder.resumeButton.setVisibility(View.GONE);
+                holder.deleteButton.setVisibility(View.VISIBLE);
+                break;
+            case DownloadStatus.STATUS_PAUSED:
+                holder.videoStatusText.setText(status.getStatusMessage());
+                holder.downloadProgressBar.setVisibility(View.VISIBLE);
+                holder.downloadProgressBar.setProgress((int) status.getProgress());
+                holder.downloadButton.setVisibility(View.GONE);
+                holder.pauseButton.setVisibility(View.GONE);
+                holder.resumeButton.setVisibility(View.VISIBLE);
+                holder.deleteButton.setVisibility(View.VISIBLE);
+                break;
+            case DownloadStatus.STATUS_DELETING:
+                holder.videoLicenseText.setVisibility(View.GONE);
+                holder.rentButton.setVisibility(View.GONE);
+                holder.buyButton.setVisibility(View.GONE);
+                holder.downloadButton.setVisibility(View.GONE);
+                holder.deleteButton.setVisibility(View.GONE);
+                holder.pauseButton.setVisibility(View.GONE);
+                holder.resumeButton.setVisibility(View.GONE);
+                break;
+                default:
+                    break;
         }
 
         holder.videoStatusText.setVisibility(View.VISIBLE);
-        holder.deleteButton.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -416,6 +469,24 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     listener.downloadVideo(holder.video);
+                }
+                return false;
+            }
+        });
+        holder.pauseButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    listener.pauseVideoDownload(holder.video);
+                }
+                return false;
+            }
+        });
+        holder.resumeButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    listener.resumeVideoDownload(holder.video);
                 }
                 return false;
             }
