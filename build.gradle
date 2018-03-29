@@ -50,12 +50,12 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
   }
 
   android {
-    compileSdkVersion 25
+    compileSdkVersion 26
     buildToolsVersion "25.0.0"
 
     defaultConfig {
       minSdkVersion 14
-      targetSdkVersion 23
+      targetSdkVersion 26
     }
 
     signingConfigs {

@@ -26,3 +26,4 @@
 -keep interface com.google.** { *; }
 -keep class com.google.ads.interactivemedia.** { *; }
 -keep interface com.google.ads.interactivemedia.** { *; }
+-keep class net.sqlcipher.** { *; }
