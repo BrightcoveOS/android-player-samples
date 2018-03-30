@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">PictureInPictureSampleApp</string>
+
+    <!-- A sample Brightcove Edge Account ID -->
+    <string name="account">5420904993001</string>
+
+    <!-- A sample Brightcove Edge Policy Key -->
+    <string name="policy">BCpkADawqM1RJu5c_I13hBUAi4c8QNWO5QN2yrd_OgDjTCVsbILeGDxbYy6xhZESTFi68MiSUHzMbQbuLV3q-gvZkJFpym1qYbEwogOqKCXK622KNLPF92tX8AY9a1cVVYCgxSPN12pPAuIM</string>
+
+    <!-- A sample Brightcove Video ID -->
+    <string name="videoId">5733185764001</string>
+
+    <string name="enter_picture_in_picture">ENTER PICTURE IN PICTURE MODE</string>
+    <string name="configure_picture_in_picture">CONFIGURE PICTURE IN PICTURE</string>
+
+    <!-- Picture in Picture Configurations -->
+    <string name="pref_picture_in_picture_title">Brightcove Picture-in-Picture settings</string>
+    <string name="pref_picture_in_picture_on_user_leave_enabled">Enable On-User-Leave</string>
+    <string name="pref_picture_in_picture_on_user_leave_enabled_desc">Enters Picture-in-Picture when user presses the home key</string>
+    <string name="pref_picture_in_picture_cc_enabled_title">Enable Closed Captions</string>
+    <string name="pref_picture_in_picture_cc_enabled_title_desc">Enables Closed Captions when in Picture-in-Picture mode</string>
+    <string name="pref_picture_in_picture_cc_scale_factor">Closed Captions Reduction Scale Factor</string>
+    <string name="pref_picture_in_picture_cc_scale_factor_desc">A reduction percentage for the Closed Captions shown in Picture-in-Picture mode</string>
+    <string name="pref_picture_in_picture_spect_ratio_title">Aspect ratio</string>
+    <string name="pref_picture_in_picture_spect_ratio_title_desc">The Aspect ratio of the activity when in Picture-in-Picture mode</string>
+
+    <string-array name="cc_scale" >
+        <item>10%</item>
+        <item>25%</item>
+        <item>50%</item>
+        <item>75%</item>
+        <item>90%</item>
+        <item>100%</item>
+    </string-array>
+
+    <string-array name="cc_scale_data" >
+        <item>0.10f</item>
+        <item>0.25f</item>
+        <item>0.50f</item>
+        <item>0.75f</item>
+        <item>0.90f</item>
+        <item>1.0f</item>
+    </string-array>
+
+    <string-array name="aspect_ratio" >
+        <item>1:1</item>
+        <item>4:3</item>
+        <item>5:3</item>
+        <item>16:9</item>
+        <item>16:10</item>
+        <item>21:9</item>
+    </string-array>
+
+
+</resources>
