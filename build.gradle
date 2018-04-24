@@ -98,12 +98,6 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
       compile 'com.google.android.gms:play-services-ads:'+PLAY_SERVICES_VERSION
       compile 'com.android.support:support-v4:'+SUPPORT_V4_VERSION
     }
-
-    android {
-      defaultConfig {
-        minSdkVersion 14
-      }
-    }
   }
 
   if (project.name.contains('Omniture')) {
@@ -111,24 +105,12 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
       compile "com.brightcove.player:android-omniture-plugin:${anpVersion}"
       compile files(libraryDirectory + "adobeMobileLibrary.jar")
     }
-
-    android {
-      defaultConfig {
-        minSdkVersion 16
-      }
-    }
   }
 
   if (project.name.contains('OnceUx')) {
     dependencies {
       compile "com.brightcove.player:android-onceux-plugin:${anpVersion}"
       compile "com.brightcove.player:exoplayer2:${anpVersion}"
-    }
-
-    android {
-      defaultConfig {
-        minSdkVersion 16
-      }
     }
   }
 
