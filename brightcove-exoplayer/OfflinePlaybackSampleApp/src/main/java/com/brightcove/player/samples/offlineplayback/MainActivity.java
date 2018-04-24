@@ -104,6 +104,7 @@ public class MainActivity extends BrightcovePlayer {
         super.onStart();
         ConnectivityMonitor.getInstance(this).addListener(connectivityListener);
         catalog.addDownloadEventListener(downloadEventListener);
+        updateVideoList();
     }
 
     @Override
