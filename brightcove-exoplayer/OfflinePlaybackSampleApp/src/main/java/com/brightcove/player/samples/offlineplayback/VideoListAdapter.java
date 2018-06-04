@@ -27,6 +27,7 @@ import java.net.URI;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -34,8 +35,6 @@ import java.util.concurrent.TimeUnit;
  * Video list adapter can be used to show a list of videos on a {@link RecyclerView}.
  */
 public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.ViewHolder> {
-
-    private static final String TAG = VideoListAdapter.class.getName();
 
     /**
      * The current list of videos.
@@ -266,58 +265,81 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
         final Video video = holder.getVideo();
 
         if (video.isOfflinePlaybackAllowed()) {
-            final Date expiryDate = video.getLicenseExpiryDate();
-            if (expiryDate == null) {
-                holder.videoLicenseText.setText("Buy or rent for offline playback");
+            if (video.isClearContent()) {
+                // Video is a Clear video -- show the download button only
+                holder.videoLicenseText.setText(R.string.press_to_save);
                 holder.videoStatusText.setVisibility(View.GONE);
-                holder.rentButton.setVisibility(View.VISIBLE);
-                holder.buyButton.setVisibility(View.VISIBLE);
+                holder.rentButton.setVisibility(View.GONE);
+                holder.buyButton.setVisibility(View.GONE);
                 holder.deleteButton.setVisibility(View.GONE);
-                holder.downloadButton.setVisibility(View.GONE);
                 holder.downloadProgressBar.setVisibility(View.GONE);
                 holder.pauseButton.setVisibility(View.GONE);
                 holder.resumeButton.setVisibility(View.GONE);
-            } else {
-                holder.rentButton.setVisibility(View.GONE);
-                holder.buyButton.setVisibility(View.GONE);
-                holder.pauseButton.setVisibility(View.GONE);
-                holder.resumeButton.setVisibility(View.GONE);
+                holder.videoLicenseText.setText(R.string.clear_content);
 
-                if (video.isOwned()) {
-                    holder.videoLicenseText.setText("Owned");
-                } else {
-                    holder.videoLicenseText.setText(String.format("Rental Expires: %s %s",
-                            DateFormat.getMediumDateFormat(holder.context).format(expiryDate),
-                            DateFormat.getTimeFormat(holder.context).format(expiryDate)));
+                if (video.isOfflineCopy()) {
+                    holder.videoStatusText.setText(R.string.video_download_clear_offline_copy);
+                    holder.pauseButton.setVisibility(View.GONE);
+                    holder.resumeButton.setVisibility(View.GONE);
+                    holder.downloadButton.setVisibility(View.GONE);
+                    holder.deleteButton.setVisibility(View.VISIBLE);
                 }
-
-                if (status == null) {
-                    holder.videoStatusText.setText("Checking download status...");
-                    holder.videoStatusText.setVisibility(View.VISIBLE);
+            }
+            else {
+                // Video is a DRM video -- show the appropriate buy/rent buttons
+                final Date expiryDate = video.getLicenseExpiryDate();
+                if (expiryDate == null) {
+                    holder.videoLicenseText.setText(R.string.video_download_purchase_or_rent);
+                    holder.videoStatusText.setVisibility(View.GONE);
+                    holder.rentButton.setVisibility(View.VISIBLE);
+                    holder.buyButton.setVisibility(View.VISIBLE);
                     holder.deleteButton.setVisibility(View.GONE);
                     holder.downloadButton.setVisibility(View.GONE);
                     holder.downloadProgressBar.setVisibility(View.GONE);
-
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            final DownloadStatus status = catalog.getVideoDownloadStatus(holder.video);
-                            holder.itemView.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    updateDownloadStatus(holder, status);
-                                }
-                            });
-                        }
-                    }).start();
-
+                    holder.pauseButton.setVisibility(View.GONE);
+                    holder.resumeButton.setVisibility(View.GONE);
                 } else {
-                    updateDownloadStatus(holder, status);
+                    holder.rentButton.setVisibility(View.GONE);
+                    holder.buyButton.setVisibility(View.GONE);
+                    holder.pauseButton.setVisibility(View.GONE);
+                    holder.resumeButton.setVisibility(View.GONE);
+                    holder.downloadButton.setVisibility(View.GONE);
+
+                    if (video.isOwned()) {
+                        holder.videoLicenseText.setText(R.string.video_download_purchased);
+                    } else {
+                        holder.videoLicenseText.setText(String.format("Rental Expires: %s %s",
+                                DateFormat.getMediumDateFormat(holder.context).format(expiryDate),
+                                DateFormat.getTimeFormat(holder.context).format(expiryDate)));
+                    }
                 }
+            }
+            if (status == null) {
+                holder.videoStatusText.setText(R.string.checking_download_status);
+                holder.videoStatusText.setVisibility(View.VISIBLE);
+                holder.deleteButton.setVisibility(View.GONE);
+                holder.downloadButton.setVisibility(View.GONE);
+                holder.downloadProgressBar.setVisibility(View.GONE);
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        final DownloadStatus status = catalog.getVideoDownloadStatus(holder.video);
+                        holder.itemView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                updateDownloadStatus(holder, status);
+                            }
+                        });
+                    }
+                }).start();
+
+            } else {
+                updateDownloadStatus(holder, status);
             }
         } else {
             holder.videoLicenseText.setVisibility(View.GONE);
-            holder.videoStatusText.setText("Online Only");
+            holder.videoStatusText.setText(R.string.online_only);
             holder.videoStatusText.setVisibility(View.VISIBLE);
             holder.rentButton.setVisibility(View.GONE);
             holder.buyButton.setVisibility(View.GONE);
@@ -359,7 +381,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
 
         switch (statusCode) {
             case DownloadStatus.STATUS_NOT_QUEUED:
-                holder.videoStatusText.setText("Press download to save video");
+                holder.videoStatusText.setText(R.string.press_to_save);
                 holder.downloadButton.setVisibility(View.VISIBLE);
                 holder.downloadProgressBar.setVisibility(View.GONE);
                 holder.pauseButton.setVisibility(View.GONE);
@@ -368,7 +390,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
                 break;
             case DownloadStatus.STATUS_PENDING:
             case DownloadStatus.STATUS_QUEUEING:
-                holder.videoStatusText.setText("Press download to save video");
+                holder.videoStatusText.setText(R.string.queueing_download);
                 holder.downloadButton.setVisibility(View.GONE);
                 holder.downloadProgressBar.setVisibility(View.GONE);
                 holder.pauseButton.setVisibility(View.GONE);
@@ -515,7 +537,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
      * @return the formatted time span string.
      */
     @NonNull
-    public static String millisecondsToString(long duration) {
+    private static String millisecondsToString(long duration) {
         final TimeUnit scale = TimeUnit.MILLISECONDS;
 
         StringBuilder builder = new StringBuilder();
@@ -529,14 +551,14 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
         long hours = scale.toHours(duration);
         duration -= TimeUnit.HOURS.toMillis(hours);
         if (hours > 0) {
-            builder.append(String.format("%02d:", hours));
+            builder.append(String.format(Locale.getDefault(),"%02d:", hours));
         }
 
         long minutes = scale.toMinutes(duration);
         duration -= TimeUnit.MINUTES.toMillis(minutes);
 
         long seconds = scale.toSeconds(duration);
-        builder.append(String.format("%02d:%02d", minutes, seconds));
+        builder.append(String.format(Locale.getDefault(),"%02d:%02d", minutes, seconds));
 
         return builder.toString();
     }

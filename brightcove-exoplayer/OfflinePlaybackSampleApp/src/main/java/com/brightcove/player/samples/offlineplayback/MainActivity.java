@@ -159,7 +159,7 @@ public class MainActivity extends BrightcovePlayer {
         if (connectivityMonitor.isConnected()) {
             videoListLabel.setVisibility(View.GONE);
             videoListView.setVisibility(View.GONE);
-            emptyListMessage.setText("Fetching playlist...");
+            emptyListMessage.setText(R.string.fetching_playlist);
             emptyListMessage.setVisibility(View.VISIBLE);
 
             playlist.findPlaylist(catalog, new PlaylistListener() {
@@ -178,7 +178,7 @@ public class MainActivity extends BrightcovePlayer {
             });
         } else {
             videoListLabel.setVisibility(View.VISIBLE);
-            videoListLabel.setText("Offline Video List");
+            videoListLabel.setText(R.string.offline_playlist);
             List<Video> videoList = catalog.findAllVideoDownload(DownloadStatus.STATUS_COMPLETE);
             videoListAdapter.setVideoList(videoList);
             onVideoListUpdated(false);
@@ -190,12 +190,12 @@ public class MainActivity extends BrightcovePlayer {
             videoListView.setVisibility(View.GONE);
             if (connectivityMonitor.isConnected()) {
                 if (error) {
-                    emptyListMessage.setText("Unable to fetch the playlist due an error. Please check if your network connection and then try again.");
+                    emptyListMessage.setText(R.string.fetching_playlist_error);
                 } else {
-                    emptyListMessage.setText("There are no videos in this playlist. Please choose another playlist.");
+                    emptyListMessage.setText(R.string.fetching_playlist_no_videos);
                 }
             } else {
-                emptyListMessage.setText("There are no saved videos on the device.");
+                emptyListMessage.setText(R.string.offline_playlist_no_videos);
             }
             emptyListMessage.setVisibility(View.VISIBLE);
         } else {
