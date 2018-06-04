@@ -25,6 +25,7 @@ import com.brightcove.player.model.Video;
 import com.brightcove.player.network.ConnectivityMonitor;
 import com.brightcove.player.network.DownloadStatus;
 import com.brightcove.player.offline.MediaDownloadable;
+import com.brightcove.player.samples.offlineplayback.utils.BrightcoveDownloadUtil;
 import com.brightcove.player.samples.offlineplayback.utils.ViewUtil;
 import com.brightcove.player.view.BrightcovePlayer;
 
@@ -373,8 +374,22 @@ public class MainActivity extends BrightcovePlayer {
             catalog.resumeVideoDownload(video); }
 
         @Override
-        public void downloadVideo(@NonNull Video video) {
-            catalog.downloadVideo(video);
+        public void downloadVideo(@NonNull final Video video) {
+            // bundle has all available captions and audio tracks
+            catalog.getMediaFormatTracksAvailable(video, new MediaDownloadable.MediaFormatListener() {
+                @Override
+                public void onResult(MediaDownloadable mediaDownloadable, Bundle bundle) {
+                    BrightcoveDownloadUtil.selectMediaFormatTracksAvailable(
+                            video, mediaDownloadable, bundle);
+                    try {
+                        catalog.downloadVideo(video);
+                    } catch (IllegalStateException iSE) {
+                        android.util.Log.w(TAG, "Exception when downloading video " + video.getId(), iSE);
+                    }
+                }
+            });
+
+//            catalog.downloadVideo(video);
         }
 
         @Override
