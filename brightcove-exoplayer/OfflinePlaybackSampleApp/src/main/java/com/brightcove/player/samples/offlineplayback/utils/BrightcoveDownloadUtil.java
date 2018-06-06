@@ -20,8 +20,18 @@ public class BrightcoveDownloadUtil {
 
     }
 
-
-    public static void selectMediaFormatTracksAvailable(final Video video, MediaDownloadable mediaDownloadable, Bundle bundle) {
+    /**
+     * An example method that adds the following to the bundle:
+     *
+     * 1.  The main audio track, or, if it does not exist, the first audio track in the AUDIO_LANGUAGES array
+     * 2.  An "alternate" audio track, selected as the first audio track from the unselected audio tracks, if there are any remaining
+     * 3.  The first caption track in the CAPTION_LANGUAGES array as the "default" caption track
+     * 4.  An "alternate" caption track, selected as the first caption from the unselected caption tracks, if there are any remaining
+     *
+     * @param mediaDownloadable - The MediaDownloadable object
+     * @param bundle            - The app bundle
+     */
+    public static void selectMediaFormatTracksAvailable(MediaDownloadable mediaDownloadable, Bundle bundle) {
         boolean didListChange;
 
         ArrayList<MediaFormat> audio = bundle.getParcelableArrayList(MediaDownloadable.AUDIO_LANGUAGES);

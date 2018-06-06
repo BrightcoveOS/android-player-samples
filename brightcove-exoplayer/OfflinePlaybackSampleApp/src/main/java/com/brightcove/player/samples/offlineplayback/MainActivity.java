@@ -379,8 +379,7 @@ public class MainActivity extends BrightcovePlayer {
             catalog.getMediaFormatTracksAvailable(video, new MediaDownloadable.MediaFormatListener() {
                 @Override
                 public void onResult(MediaDownloadable mediaDownloadable, Bundle bundle) {
-                    BrightcoveDownloadUtil.selectMediaFormatTracksAvailable(
-                            video, mediaDownloadable, bundle);
+                    BrightcoveDownloadUtil.selectMediaFormatTracksAvailable(mediaDownloadable, bundle);
                     try {
                         catalog.downloadVideo(video);
                     } catch (IllegalStateException iSE) {
@@ -495,7 +494,7 @@ public class MainActivity extends BrightcovePlayer {
          *
          * @param video the video being searched.
          */
-        public FindVideoListener(Video video) {
+        FindVideoListener(Video video) {
             this.video = video;
         }
 
