@@ -25,6 +25,7 @@ import com.brightcove.player.model.Video;
 import com.brightcove.player.network.ConnectivityMonitor;
 import com.brightcove.player.network.DownloadStatus;
 import com.brightcove.player.offline.MediaDownloadable;
+import com.brightcove.player.samples.offlineplayback.utils.BrightcoveDownloadUtil;
 import com.brightcove.player.samples.offlineplayback.utils.ViewUtil;
 import com.brightcove.player.view.BrightcovePlayer;
 
@@ -159,7 +160,7 @@ public class MainActivity extends BrightcovePlayer {
         if (connectivityMonitor.isConnected()) {
             videoListLabel.setVisibility(View.GONE);
             videoListView.setVisibility(View.GONE);
-            emptyListMessage.setText("Fetching playlist...");
+            emptyListMessage.setText(R.string.fetching_playlist);
             emptyListMessage.setVisibility(View.VISIBLE);
 
             playlist.findPlaylist(catalog, new PlaylistListener() {
@@ -178,7 +179,7 @@ public class MainActivity extends BrightcovePlayer {
             });
         } else {
             videoListLabel.setVisibility(View.VISIBLE);
-            videoListLabel.setText("Offline Video List");
+            videoListLabel.setText(R.string.offline_playlist);
             List<Video> videoList = catalog.findAllVideoDownload(DownloadStatus.STATUS_COMPLETE);
             videoListAdapter.setVideoList(videoList);
             onVideoListUpdated(false);
@@ -190,12 +191,12 @@ public class MainActivity extends BrightcovePlayer {
             videoListView.setVisibility(View.GONE);
             if (connectivityMonitor.isConnected()) {
                 if (error) {
-                    emptyListMessage.setText("Unable to fetch the playlist due an error. Please check if your network connection and then try again.");
+                    emptyListMessage.setText(R.string.fetching_playlist_error);
                 } else {
-                    emptyListMessage.setText("There are no videos in this playlist. Please choose another playlist.");
+                    emptyListMessage.setText(R.string.fetching_playlist_no_videos);
                 }
             } else {
-                emptyListMessage.setText("There are no saved videos on the device.");
+                emptyListMessage.setText(R.string.offline_playlist_no_videos);
             }
             emptyListMessage.setVisibility(View.VISIBLE);
         } else {
@@ -373,8 +374,19 @@ public class MainActivity extends BrightcovePlayer {
             catalog.resumeVideoDownload(video); }
 
         @Override
-        public void downloadVideo(@NonNull Video video) {
-            catalog.downloadVideo(video);
+        public void downloadVideo(@NonNull final Video video) {
+            // bundle has all available captions and audio tracks
+            catalog.getMediaFormatTracksAvailable(video, new MediaDownloadable.MediaFormatListener() {
+                @Override
+                public void onResult(MediaDownloadable mediaDownloadable, Bundle bundle) {
+                    BrightcoveDownloadUtil.selectMediaFormatTracksAvailable(mediaDownloadable, bundle);
+                    try {
+                        catalog.downloadVideo(video);
+                    } catch (IllegalStateException iSE) {
+                        android.util.Log.w(TAG, "Exception when downloading video " + video.getId(), iSE);
+                    }
+                }
+            });
         }
 
         @Override
@@ -482,7 +494,7 @@ public class MainActivity extends BrightcovePlayer {
          *
          * @param video the video being searched.
          */
-        public FindVideoListener(Video video) {
+        FindVideoListener(Video video) {
             this.video = video;
         }
 
