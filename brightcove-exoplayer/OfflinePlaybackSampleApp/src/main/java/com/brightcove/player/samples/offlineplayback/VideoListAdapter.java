@@ -48,71 +48,71 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
     /**
      * A view holder that hold references to the UI components in a list item.
      */
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         /**
          * Reference the item view context
          */
-        public final Context context;
+        final Context context;
         /**
          * Reference to the thumbnail image view.
          */
-        public final ImageView videoThumbnailImage;
+        final ImageView videoThumbnailImage;
         /**
          * Reference to the video title view.
          */
-        public final TextView videoTitleText;
+        final TextView videoTitleText;
         /**
          * Reference to the video status information text view.
          */
-        public final TextView videoStatusText;
+        final TextView videoStatusText;
         /**
          * Reference to the video license information text view.
          */
-        public final TextView videoLicenseText;
+        final TextView videoLicenseText;
         /**
          * Reference to the video duration view.
          */
-        public final TextView videoDurationText;
+        final TextView videoDurationText;
         /**
          * Reference to the rent video button.
          */
-        public final Button rentButton;
+        final Button rentButton;
         /**
          * Reference to the buy video button.
          */
-        public final Button buyButton;
+        final Button buyButton;
         /**
          * Reference to the download video button.
          */
-        public final ImageButton downloadButton;
+        final ImageButton downloadButton;
         /**
          * Reference to the pause/resume download button.
          */
-        public final ImageButton pauseButton;
+        final ImageButton pauseButton;
         /**
          * Reference to the pause/resume download button.
          */
-        public final ImageButton resumeButton;
+        final ImageButton resumeButton;
         /**
          * Reference to the delete video button.
          */
-        public final ImageButton deleteButton;
+        final ImageButton deleteButton;
         /**
          * Reference to the download progress bar.
          */
-        public final ContentLoadingProgressBar downloadProgressBar;
+        final ContentLoadingProgressBar downloadProgressBar;
 
         /**
          * The currently linked video.
          */
-        public Video video;
+        Video video;
 
         /**
          * Constructs a new view holder for the given item view.
          *
          * @param itemView reference to the item.
          */
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             context = itemView.getContext();
@@ -132,7 +132,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
         }
 
         @NonNull
-        public Video getVideo() {
+        Video getVideo() {
             Video result = video;
 
             if (video.isOfflinePlaybackAllowed()) {
@@ -163,7 +163,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
      * @param listener reference to a listener
      * @throws IllegalArgumentException if the catalog or listener is null.
      */
-    public VideoListAdapter(@NonNull OfflineCatalog catalog, @NonNull VideoListListener listener) {
+    VideoListAdapter(@NonNull OfflineCatalog catalog, @NonNull VideoListListener listener) {
         if (listener == catalog) {
             throw new IllegalArgumentException("Catalog is null!");
         }
@@ -179,7 +179,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
      *
      * @param videoList list of {@link Video} objects.
      */
-    public void setVideoList(@Nullable List<Video> videoList) {
+    void setVideoList(@Nullable List<Video> videoList) {
         this.videoList = videoList;
         buildIndexMap();
     }
@@ -203,7 +203,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
      *
      * @param video the video that changed
      */
-    public void notifyVideoChanged(@NonNull Video video) {
+    void notifyVideoChanged(@NonNull Video video) {
         notifyVideoChanged(video, null);
     }
 
@@ -213,7 +213,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
      * @param video  the video that changed
      * @param status optional current download status.
      */
-    public void notifyVideoChanged(@NonNull Video video, @Nullable DownloadStatus status) {
+    void notifyVideoChanged(@NonNull Video video, @Nullable DownloadStatus status) {
         String videoId = video.getId();
         if (indexMap.containsKey(videoId)) {
             int index = indexMap.get(videoId);
@@ -227,23 +227,13 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
      *
      * @param video the video to be removed.
      */
-    public void removeVideo(Video video) {
+    void removeVideo(Video video) {
         String videoId = video.getId();
         if (indexMap.containsKey(videoId)) {
             int index = indexMap.remove(videoId);
             videoList.remove(index);
             buildIndexMap();
         }
-    }
-
-    /**
-     * The current list of {@link Video} objects.
-     *
-     * @return null or a list of list of {@link Video} objects.
-     */
-    @Nullable
-    public List<Video> getVideoList() {
-        return videoList;
     }
 
     @Override
@@ -260,22 +250,22 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
      * @param position the position of the row that should be updated.
      * @param status   optional current download status.
      */
-    public void updateView(@NonNull final ViewHolder holder, int position, @Nullable DownloadStatus status) {
+    private void updateView(@NonNull final ViewHolder holder, int position, @Nullable DownloadStatus status) {
         holder.video = videoList.get(position);
         final Video video = holder.getVideo();
 
         if (video.isOfflinePlaybackAllowed()) {
-            if (video.isClearContent()) {
+            if (video.isClearContent() || video.isRented() || video.isOwned()) {
                 // Video is a Clear video -- show the download button only
                 holder.videoLicenseText.setText(R.string.press_to_save);
                 holder.videoStatusText.setVisibility(View.GONE);
+                holder.downloadButton.setVisibility(View.VISIBLE);
                 holder.rentButton.setVisibility(View.GONE);
                 holder.buyButton.setVisibility(View.GONE);
                 holder.deleteButton.setVisibility(View.GONE);
                 holder.downloadProgressBar.setVisibility(View.GONE);
                 holder.pauseButton.setVisibility(View.GONE);
                 holder.resumeButton.setVisibility(View.GONE);
-                holder.videoLicenseText.setText(R.string.clear_content);
 
                 if (video.isOfflineCopy()) {
                     holder.videoStatusText.setText(R.string.video_download_clear_offline_copy);
@@ -317,9 +307,6 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
             if (status == null) {
                 holder.videoStatusText.setText(R.string.checking_download_status);
                 holder.videoStatusText.setVisibility(View.VISIBLE);
-                holder.deleteButton.setVisibility(View.GONE);
-                holder.downloadButton.setVisibility(View.GONE);
-                holder.downloadProgressBar.setVisibility(View.GONE);
 
                 new Thread(new Runnable() {
                     @Override
@@ -381,8 +368,14 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
 
         switch (statusCode) {
             case DownloadStatus.STATUS_NOT_QUEUED:
-                holder.videoStatusText.setText(R.string.press_to_save);
-                holder.downloadButton.setVisibility(View.VISIBLE);
+                if (holder.video.isClearContent() || holder.video.isRented() || holder.video.isOwned()) {
+                    holder.videoStatusText.setText(R.string.press_to_save);
+                    holder.downloadButton.setVisibility(View.VISIBLE);
+                }
+                else {
+                    holder.videoStatusText.setText("");
+                    holder.downloadButton.setVisibility(View.GONE);
+                }
                 holder.downloadProgressBar.setVisibility(View.GONE);
                 holder.pauseButton.setVisibility(View.GONE);
                 holder.resumeButton.setVisibility(View.GONE);

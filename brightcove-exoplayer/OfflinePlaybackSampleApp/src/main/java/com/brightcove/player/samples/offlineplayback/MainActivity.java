@@ -388,8 +388,6 @@ public class MainActivity extends BrightcovePlayer {
                     }
                 }
             });
-
-//            catalog.downloadVideo(video);
         }
 
         @Override
