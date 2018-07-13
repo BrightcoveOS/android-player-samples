@@ -1,4 +1,4 @@
 dependencies {
-    compile 'com.android.support:appcompat-v7:'+APPCOMPAT_V7_VERSION
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support:appcompat-v7:'+APPCOMPAT_V7_VERSION
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 }

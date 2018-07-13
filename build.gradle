@@ -5,10 +5,11 @@ apply from: 'constants.gradle'
 buildscript {
   repositories {
     jcenter()
+    google()
   }
 
   dependencies {
-    classpath 'com.android.tools.build:gradle:2.3.0'
+    classpath 'com.android.tools.build:gradle:3.1.3'
 
     classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.2.2'
   }
@@ -88,36 +89,36 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
   }
 
   dependencies {
-    compile "com.brightcove.player:android-sdk:${anpVersion}"
+    implementation "com.brightcove.player:android-sdk:${anpVersion}"
   }
 
   if (project.name.contains('IMA')) {
     dependencies {
-      compile "com.brightcove.player:android-ima-plugin:${anpVersion}"
-      compile 'com.google.ads.interactivemedia.v3:interactivemedia:'+GOOGLE_IMA_SDK_VERSION
-      compile 'com.google.android.gms:play-services-ads:'+PLAY_SERVICES_VERSION
-      compile 'com.android.support:support-v4:'+SUPPORT_V4_VERSION
+      implementation "com.brightcove.player:android-ima-plugin:${anpVersion}"
+      implementation 'com.google.ads.interactivemedia.v3:interactivemedia:'+GOOGLE_IMA_SDK_VERSION
+      implementation 'com.google.android.gms:play-services-ads:'+PLAY_SERVICES_VERSION
+      implementation 'com.android.support:support-v4:'+SUPPORT_V4_VERSION
     }
   }
 
   if (project.name.contains('Omniture')) {
     dependencies {
-      compile "com.brightcove.player:android-omniture-plugin:${anpVersion}"
-      compile files(libraryDirectory + "adobeMobileLibrary.jar")
+      implementation "com.brightcove.player:android-omniture-plugin:${anpVersion}"
+      implementation files(libraryDirectory + "adobeMobileLibrary.jar")
     }
   }
 
   if (project.name.contains('OnceUx')) {
     dependencies {
-      compile "com.brightcove.player:android-onceux-plugin:${anpVersion}"
-      compile "com.brightcove.player:exoplayer2:${anpVersion}"
+      implementation "com.brightcove.player:android-onceux-plugin:${anpVersion}"
+      implementation "com.brightcove.player:exoplayer2:${anpVersion}"
     }
   }
 
   if (project.parent.name.equals('brightcove-exoplayer') ||
           project.parent.name.equals('brightcove-player-controls')) {
     dependencies {
-      compile "com.brightcove.player:exoplayer2:${anpVersion}"
+      implementation "com.brightcove.player:exoplayer2:${anpVersion}"
     }
 
     android {
@@ -137,16 +138,20 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
 
   if (project.name.contains('Cast')) {
     dependencies {
-      compile "com.brightcove.player:android-cast-plugin:${anpVersion}"
+      implementation "com.brightcove.player:android-cast-plugin:${anpVersion}"
     }
   }
 
   if (project.name.contains('FreeWheel')) {
     dependencies {
-      compile "com.brightcove.player:android-freewheel-plugin:${anpVersion}"
-      compile files(libraryDirectory + "AdManager.jar")
+      implementation "com.brightcove.player:android-freewheel-plugin:${anpVersion}"
+      implementation files(libraryDirectory + "AdManager.jar")
     }
   }
 
   println "Processing ${project.name}"
+}
+
+repositories {
+  google()
 }
