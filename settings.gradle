@@ -1,6 +1,5 @@
 include ':brightcove-mediaplayer:AdRulesIMASampleApp'
 include ':brightcove-mediaplayer:BasicBundledVideoSampleApp'
-include ':brightcove-mediaplayer:BasicCastSampleApp'
 include ':brightcove-mediaplayer:BasicIMASampleApp'
 include ':brightcove-mediaplayer:BasicTextureViewSampleApp'
 include ':brightcove-mediaplayer:WebVTTSampleApp'
