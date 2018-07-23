@@ -3,6 +3,7 @@ package com.brightcove.player.samples.cast.basic;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.widget.TextView;
@@ -63,6 +64,8 @@ public class VideoPlayerActivity extends BrightcovePlayerActivity {
         });
 
         GoogleCastComponent googleCastComponent = new GoogleCastComponent(eventEmitter, this);
+
+        //You can check if there is a session available
         googleCastComponent.isSessionAvailable();
         baseVideoView.add(video);
     }
@@ -73,15 +76,21 @@ public class VideoPlayerActivity extends BrightcovePlayerActivity {
         GoogleCastComponent.setUpMediaRouteButton(this, menu);
         return true;
     }
-
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         EventEmitter eventEmitter = baseVideoView.getEventEmitter();
+        ActionBar actionBar = getSupportActionBar();
         if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             eventEmitter.emit(EventType.EXIT_FULL_SCREEN);
+            if (actionBar != null) {
+                actionBar.show();
+            }
         } else if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             eventEmitter.emit(EventType.ENTER_FULL_SCREEN);
+            if (actionBar != null) {
+                actionBar.hide();
+            }
         }
     }
 }
