@@ -3,6 +3,9 @@ package com.brightcove.player.samples.cast.basic;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -40,7 +43,13 @@ public class MainActivity extends AppCompatActivity implements VideoListAdapter.
     public void itemClicked(View view, Video video, int position) {
         Intent intent = new Intent(this, VideoPlayerActivity.class);
         intent.putExtra(VideoPlayerActivity.INTENT_EXTRA_VIDEO, (Parcelable) video);
-        startActivity(intent);
+
+        Pair<View, String> imagePair = Pair
+                .create(view, getString(R.string.transition_image));
+        //noinspection unchecked
+        ActivityOptionsCompat options = ActivityOptionsCompat
+                .makeSceneTransitionAnimation(this, imagePair);
+        ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 
     @Override

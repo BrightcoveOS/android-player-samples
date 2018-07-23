@@ -3,6 +3,7 @@ package com.brightcove.player.samples.cast.basic;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -33,6 +34,7 @@ public class VideoPlayerActivity extends BrightcovePlayerActivity {
         // Perform the internal wiring to be able to make use of the BrightcovePlayerFragment.
         Video video  = getIntent().getParcelableExtra(VideoPlayerActivity.INTENT_EXTRA_VIDEO);
         baseVideoView = (BrightcoveVideoView) findViewById(R.id.brightcove_video_view);
+        ViewCompat.setTransitionName(baseVideoView, getString(R.string.transition_image));
 
         String title = video.getName();
         if (!TextUtils.isEmpty(title)) {
