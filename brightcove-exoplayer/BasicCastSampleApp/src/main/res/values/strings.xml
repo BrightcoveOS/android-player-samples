@@ -16,7 +16,7 @@
     <string name="policy">BCpkADawqM1ZEczFURHXFgdyqvGPj4GWHEQka6QIs7hOwSFPffq-UI_ntgaa29FEMKY87rAd0jptOZHueqyDxjVBTGmfek97TLHSLPqJKWAmKx_YSiHdLdLp8uq9hhwTWs6qJIOkN9cA0qqp</string>
 
     <!-- A sample Brightcove Playlist Reference ID -->
-    <string name="playlistRefId">Play2017</string>
+    <string name="playlistRefId">cast_playlist_non_drm</string>
 
 
     <string name="media_title">Big Buck Bunny</string>
