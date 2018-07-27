@@ -103,11 +103,11 @@ public class MainActivity extends BrightcovePlayer {
                 // This overrides what the plugin does by default for setVideoAsset() which is to pass in currentVideo.getId().
                 VideoAssetConfiguration fwVideoAssetConfiguration = new VideoAssetConfiguration(
                         "3pqa_video",
-                        adConstants.ID_TYPE_CUSTOM(),
+                        IConstants.IdType.CUSTOM,
                         //FW uses their duration as seconds; Android is in milliseconds
                         video.getDuration()/1000,
-                        adConstants.VIDEO_ASSET_DURATION_TYPE_EXACT(),
-                        adConstants.VIDEO_ASSET_AUTO_PLAY_TYPE_ATTENDED());
+                        IConstants.VideoAssetDurationType.EXACT,
+                        IConstants.VideoAssetAutoPlayType.ATTENDED);
                 adRequestConfiguration.setVideoAssetConfiguration(fwVideoAssetConfiguration);
 
                 NonTemporalSlotConfiguration companionSlot = new NonTemporalSlotConfiguration("300x250slot", null, 300, 250);
