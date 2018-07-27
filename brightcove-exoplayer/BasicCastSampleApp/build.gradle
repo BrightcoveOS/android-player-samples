@@ -1,4 +1,5 @@
 dependencies {
+    implementation "com.brightcove.player:android-appcompat-plugin:${anpVersion}"
     implementation 'com.android.support:appcompat-v7:'+APPCOMPAT_V7_VERSION
     implementation 'com.android.support:recyclerview-v7:'+APPCOMPAT_V7_VERSION
     implementation 'com.android.support:support-vector-drawable:'+APPCOMPAT_V7_VERSION

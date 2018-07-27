@@ -1,12 +1,12 @@
 include ':brightcove-mediaplayer:AdRulesIMASampleApp'
 include ':brightcove-mediaplayer:BasicBundledVideoSampleApp'
-include ':brightcove-mediaplayer:BasicCastSampleApp'
 include ':brightcove-mediaplayer:BasicIMASampleApp'
 include ':brightcove-mediaplayer:BasicTextureViewSampleApp'
 include ':brightcove-mediaplayer:WebVTTSampleApp'
 
 // For building exoplayer-specific sample apps, which are located under the 'brightcove-exoplayer' directory.
 include ':brightcove-exoplayer:360VideoSampleApp'
+include ':brightcove-exoplayer:BasicCastSampleApp'
 include ':brightcove-exoplayer:AdRulesIMASampleApp'
 include ':brightcove-exoplayer:AdRulesIMAWidevineModularSampleApp'
 include ':brightcove-exoplayer:AppCompatActivitySampleApp'

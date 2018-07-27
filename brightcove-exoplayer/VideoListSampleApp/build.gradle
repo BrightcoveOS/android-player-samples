@@ -19,8 +19,8 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:'+APPCOMPAT_V7_VERSION
-    compile 'com.android.support:recyclerview-v7:'+APPCOMPAT_V7_VERSION
-    testCompile 'junit:junit:4.12'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:'+APPCOMPAT_V7_VERSION
+    implementation 'com.android.support:recyclerview-v7:'+APPCOMPAT_V7_VERSION
+    testImplementation 'junit:junit:4.12'
 }

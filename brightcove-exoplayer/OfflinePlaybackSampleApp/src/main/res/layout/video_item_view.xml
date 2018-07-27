@@ -53,11 +53,11 @@
         android:layout_below="@+id/video_title_text"
         android:layout_marginRight="10dp"
         android:ellipsize="marquee"
-        android:maxLines="1"
         android:minLines="1"
         android:textSize="12sp"
         android:text="License type goes here..."
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:singleLine="true"/>
 
     <TextView
         android:id="@+id/video_status_text"
@@ -68,10 +68,10 @@
         android:layout_below="@+id/video_license_text"
         android:layout_marginRight="10dp"
         android:ellipsize="marquee"
-        android:maxLines="1"
         android:minLines="1"
         android:textSize="12sp"
-        android:text="Video status goes here..." />
+        android:text="Video status goes here..."
+        android:singleLine="true"/>
 
     <ImageButton
         android:id="@+id/delete_button"
