@@ -23,10 +23,10 @@ public class BrightcoveDownloadUtil {
     /**
      * An example method that adds the following to the bundle:
      *
-     * 1.  The main audio track, or, if it does not exist, the first audio track in the AUDIO_LANGUAGES array
-     * 2.  An "alternate" audio track, selected as the first audio track from the unselected audio tracks, if there are any remaining
-     * 3.  The first caption track in the CAPTION_LANGUAGES array as the "default" caption track
-     * 4.  An "alternate" caption track, selected as the first caption from the unselected caption tracks, if there are any remaining
+     * 1.  The main audio track, or, if it does not exist, the first audio track in the AUDIO_LANGUAGES array.
+     * 2.  An "alternate" audio track, selected as the first audio track from the unselected audio tracks, if there are any remaining.
+     * 3.  The first caption track in the CAPTION_LANGUAGES array as the "default" caption language track
+     * 4.  An "alternate" caption track, selected as the first caption from the unselected caption tracks, if there are any remaining.
      *
      * @param mediaDownloadable - The MediaDownloadable object
      * @param bundle            - The app bundle
@@ -38,9 +38,10 @@ public class BrightcoveDownloadUtil {
         int indexMain = -1;
         ArrayList<MediaFormat> newAudio = new ArrayList<>();
 
+        // Check to see if there are audio tracks
         if (audio != null && audio.size() > 0) {
             Log.v(TAG, "Adding the \"main\" audio track.");
-            //First lets find the index of the audio with role main
+            //First let's find the index of the audio with role main
             ArrayList<String> roles = bundle.getStringArrayList(MediaDownloadable.AUDIO_LANGUAGE_ROLES);
             for (int i = 0; i < roles.size(); i++) {
                 if ("main".equalsIgnoreCase(roles.get(i))) {
@@ -59,6 +60,9 @@ public class BrightcoveDownloadUtil {
         }
 
         // Now select the "extra" audio track
+        // In an effort to avoid over-complication of the flow of this demonstration app, we make an assumption here
+        // that the end user has selected the first of the remaining audio tracks that is not the "main" audio track
+        // (if more than one audio track is present)
         if (audio.size() > 1) {
             Log.v(TAG, "Alternate audio track download allowed for this video. Adding an \"alternate\" audio track");
             if (indexMain == 0) {
@@ -74,6 +78,10 @@ public class BrightcoveDownloadUtil {
         bundle.putParcelableArrayList(MediaDownloadable.AUDIO_LANGUAGES, newAudio);
         didListChange = true;
 
+        // All captions are considered "extra" tracks for download
+        // As with the alternate audio track selection above, we make an assumption here that the end user has selected the
+        // first caption track as the "default" caption language, and the second caption track as the "alternate" (if more than
+        // one caption track is present)
         ArrayList<MediaFormat> captions = bundle.getParcelableArrayList(MediaDownloadable.CAPTIONS);
         Log.v(TAG, "Captions array size: " + captions.size());
         if (captions != null && captions.size() > 0) {
@@ -92,8 +100,9 @@ public class BrightcoveDownloadUtil {
             didListChange = true;
         }
 
-        // Why are we checking if the list change?
-        // Because if we always set the bundle to the MediaDownloadble, we're telling to downloading every audio and every caption.
+        // Why are we checking if the list has changed?
+        // Because if we always set the bundle to the MediaDownloadble, we're telling it to download every audio track and
+        // every caption track.
         if (didListChange) {
             mediaDownloadable.setConfigurationBundle(bundle);
         }
