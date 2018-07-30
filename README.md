@@ -41,6 +41,8 @@ This version of the sample apps supports the latest Brightcove SDK and plugins. 
 
 * [Basic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicSampleApp): This app shows how to setup the Brightcove ExoPlayer to play.
 
+* [Basic Cast Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicCastSampleApp): This adds Google Chromecast support to the Brightcove Native Player SDK for Android. Please note that there is limited support for certain VideoCloud features. Please refer to the Release Notes in the v6.3.0 release of the Brightcove Native Player SDK for Android for more information.
+
 * [FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/FreeWheelSampleApp): This app shows how to use the Brightcove ExoPlayer with FreeWheel ads.
 
 * [FreeWheel Widevine Modular Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/FreeWheelWidevineModularSampleApp): This app shows how to use the Brightcove ExoPlayer with FreeWheel ads and Widevine Modular content.
@@ -57,6 +59,10 @@ Note that in order to enable the FreeWheel sample apps, you must independently o
 
 * [Widevine Modular Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/WidevineModularSampleApp): This app shows how to setup the Brightcove ExoPlayer with Widevine Modular content.
 
+* [Offline Playback Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/OfflinePlaybackSampleApp): This app demonstrates the Offline Playback feature.
+
+* [Picture In Picture Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/PictureInPictureSampleApp): This app demonstrates the Picture-in-Picture feature. Please note that Picture-in-Picture is supported only with Android 8.0 and above, and only on phone and tablet devices.
+
 ## Brightcove MediaPlayer sample apps:
 
 * [Ad Rules Google IMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-mediaplayer/AdRulesIMASampleApp): This app shows how to setup to use the Google IMA Plugin to play ads via Ad Rules. This version has been tested and works with v3.1.3 of the IMA SDK.
@@ -64,8 +70,6 @@ Note that in order to enable the FreeWheel sample apps, you must independently o
 * [Basic Akamai Identity Services Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-mediaplayer/BasicAISWebViewSampleApp): This app shows how to configure an app to use the Brightcove native Android player with Akamai Identity Services.
 
 * [Basic Bundled Video Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-mediaplayer/BasicBundledVideoSampleApp): This app shows how to play a video that is stored on the device for offline viewing.
-
-* [Basic Cast Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-mediaplayer/BasicCastSampleApp): This add Google Chromecast with the Brightcove native Android player. Note that this app requires installation of the Google Play and Google Repository plugins into the Android Studio. To install these plugins, open Android Studio, and then open the Tools menu. From here, select Android, then SDK Manager. When the SDK Manager opens, scroll to the bottom and select Google Play Services and Google Repository under the Extras menu. Click Install Packages, accept the license agreement, and close the SDK Manager when installation completes.
 
 * [Basic FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-mediaplayer/BasicFreeWheelSampleApp): This app shows how to configure an app to use the Brightcove native Android player FreeWheel Plugin to play a video.
 
