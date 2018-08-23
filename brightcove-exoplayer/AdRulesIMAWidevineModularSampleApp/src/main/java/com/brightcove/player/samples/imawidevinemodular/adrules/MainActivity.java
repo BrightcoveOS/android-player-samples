@@ -27,7 +27,9 @@ import java.util.Map;
 /**
  * This app illustrates how to use "Ad Rules" with the Google IMA
  * plugin, the Widevine plugin, and the Brightcove Player for Android.
- * Note: cue points are not used with Ad Rules.
+
+ * Note: Video cue points are not used with IMA Ad Rules. The AdCuePoints referenced
+ * in the setupAdMarkers method below are Google IMA objects.
  *
  * @author Paul Matthew Reilly (original code)
  * @author Paul Michael Reilly (added explanatory comments)
