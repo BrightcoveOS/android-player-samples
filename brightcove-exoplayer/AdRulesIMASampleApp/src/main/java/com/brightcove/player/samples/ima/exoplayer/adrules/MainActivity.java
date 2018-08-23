@@ -29,9 +29,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This app illustrates how to use "Ad Rules" the Google IMA plugin
- * and the Brightcove Player for Android.  Note: cue points are not
- * used with Ad Rules.
+ * This app illustrates how to use the Google IMA plugin with Ad Rules (aka VMAP)
+ * with the Brightcove Player for Android.
+ *
+ * Note: Video cue points are not used with IMA Ad Rules. The AdCuePoints referenced
+ * in the setupAdMarkers method below are Google IMA objects.
  *
  * @author Paul Matthew Reilly (original code)
  * @author Paul Michael Reilly (added explanatory comments)
