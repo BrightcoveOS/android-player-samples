@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Accessible Control Sample App</string>
+
+    <!-- A sample Brightcove Edge Account ID -->
+    <string name="account">3636334163001</string>
+
+    <!-- A sample Brightcove Edge Policy Key -->
+    <string name="policy">BCpkADawqM1W-vUOMe6RSA3pA6Vw-VWUNn5rL0lzQabvrI63-VjS93gVUugDlmBpHIxP16X8TSe5LSKM415UHeMBmxl7pqcwVY_AZ4yKFwIpZPvXE34TpXEYYcmulxJQAOvHbv2dpfq-S_cm</string>
+
+    <!-- A sample Brightcove Video ID -->
+    <string name="videoId">5566768721001</string>
+
+    <!-- Below are hex strings taken from the fontawesome-webfont.ttf used in the Brightcove SDK -->
+    <string name="brightcove_controls_rewind">&#xf04a;</string>
+    <string name="custom_button_thumbs_up">&#xf087;</string>
+
+    <string name="caption_controls_description">Subtitles</string>
+    <string name="rewind_description">Rewind</string>
+    <string name="live_description">Live stream indicator</string>
+    <string name="audio_tracks_description">Audio tracks</string>
+    <string name="thumb_description">Thumbs up</string>
+    <string name="video_description">Video. Tap with two fingers to toggle player controls.</string>
+</resources>
