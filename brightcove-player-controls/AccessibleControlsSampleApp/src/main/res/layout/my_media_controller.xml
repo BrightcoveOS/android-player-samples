@@ -14,26 +14,6 @@
     style="@style/BrightcoveControlBar.Custom">
 
     <Button
-        android:id="@id/captions"
-        style="@style/BorderlessButton"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:visibility="visible"
-        android:text="@string/brightcove_controls_captions"
-        android:contentDescription="@string/caption_controls_description"/>
-
-    <Button
-        android:id="@id/rewind"
-        style="@style/BorderlessButton"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:visibility="visible"
-        android:text="@string/brightcove_controls_rewind"
-        android:contentDescription="@string/rewind_description"/>
-
-    <Button
         android:id="@id/play"
         style="@style/BorderlessButton"
         android:layout_height="wrap_content"
@@ -42,6 +22,16 @@
         android:visibility="visible"
         android:text="@string/brightcove_controls_play"/>
     <!-- Play/pause toggles sets English contentDescription text automatically -->
+
+    <!--<Button-->
+        <!--android:id="@id/rewind"-->
+        <!--style="@style/BorderlessButton"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:visibility="visible"-->
+        <!--android:text="@string/brightcove_controls_rewind"-->
+        <!--android:contentDescription="@string/rewind_description"/>-->
 
     <TextView
         android:id="@id/current_time"
@@ -76,7 +66,7 @@
 
     <!-- If you want to remove one default element, you must disable it through the BrightcoveControlBar style
          Please look at the @style/BrightcoveControlBar.Custom -->
-    <!--<com.brightcove.player.mediacontroller.BrightcoveSeekBar
+    <com.brightcove.player.mediacontroller.BrightcoveSeekBar
         android:id="@id/seek_bar"
         style="@style/BrightcoveSeekBar"
         android:layout_height="wrap_content"
@@ -87,7 +77,8 @@
         android:splitTrack="false"
         android:visibility="visible"
         bmc:brightcove_marker_color="@color/bmc_seekbar_marker"
-        bmc:brightcove_marker_width="5.0"/>-->
+        bmc:brightcove_marker_width="5.0"/>
+    <!-- Seek bar label is set automatically -->
 
     <View
         tools:ignore="InconsistentLayout"
@@ -108,6 +99,16 @@
         android:contentDescription="@string/live_description"/>
 
     <Button
+        android:id="@id/captions"
+        style="@style/BorderlessButton"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:visibility="visible"
+        android:text="@string/brightcove_controls_captions"
+        android:contentDescription="@string/caption_controls_description"/>
+
+    <Button
         android:id="@id/audio_tracks"
         style="@style/BorderlessButton"
         android:layout_height="wrap_content"
@@ -126,16 +127,6 @@
         android:layout_width="wrap_content"
         android:visibility="visible"
         android:text="@string/brightcove_controls_enter_full_screen"/>
-    <!-- Enter / exit fullscreen is set automatically -->
-
-    <Button
-        android:id="@+id/thumbs_up"
-        style="@style/BorderlessButton"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:visibility="visible"
-        android:text="@string/custom_button_thumbs_up"
-        android:contentDescription="@string/thumb_description"/>
+    <!-- Enter / exit fullscreen label is set automatically -->
 
 </com.brightcove.player.mediacontroller.BrightcoveControlBar>

@@ -81,19 +81,7 @@ public class MainActivity extends BrightcovePlayer {
     }
 
     private void initButtons(final BaseVideoView brightcoveVideoView) {
-        Typeface font = Typeface.createFromAsset(this.getAssets(), FONT_AWESOME);
-        Button thumbsUp = (Button) brightcoveVideoView.findViewById(R.id.thumbs_up);
-        if (thumbsUp != null) {
-            // By setting this type face, we can use the symbols(icons) present in the font awesome file.
-            thumbsUp.setTypeface(font);
-            thumbsUp.setContentDescription("Thumbs up");
-        }
-        thumbsUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "TEST", Toast.LENGTH_SHORT).show();
-            }
-        });
+        // Custom buttons could be set up here
     }
 
 }
