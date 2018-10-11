@@ -1,7 +1,10 @@
 Accessible Controls Sample App
 ==============================
 
-This is based on the Customized Controls Sample App but has changes for accessibility.
+This is based on the Customized Controls Sample App but has changes for accessibility when TalkBack is enabled.
+
+* Control hiding is toggled by a user interaction rather than a timeout
+* Buttons have appropriate text to be read out
 
 In MainActivity.java, the behaviour of the control bar is changed from its default of hiding after a three second timeout to not disappearing, if TalkBack is enabled.
 
@@ -14,9 +17,9 @@ if (am.isTouchExplorationEnabled()) {
 }
 ```
 
-When TalkBack is enabled, a user needs to tap with two fingers to be passed through TalkBack as a single tap.
+A tap on the player will toggle the controls, but note that when TalkBack is enabled, a user needs to tap with two fingers for that interaction to be passed through TalkBack as a single tap.
 
-In default_activity_main.xml, an `android:contentDescription` is added to set text to be read when the view is focussed which tells the user to tap with two fingers.
+In default_activity_main.xml, an `android:contentDescription` is added to set text to be read when the view is focussed which tells the user to tap with two fingers to show or hide the player.
 
 ```xml
 <com.brightcove.player.view.BrightcoveExoPlayerVideoView
