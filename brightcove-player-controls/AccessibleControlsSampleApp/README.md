@@ -3,7 +3,6 @@ Accessible Controls Sample App
 
 This is based on the Customized Controls Sample App but has changes for accessibility.
 
-
 In MainActivity.java, the behaviour of the control bar is changed from its default of hiding after a three second timeout to not disappearing, if TalkBack is enabled.
 
 ```java
@@ -38,5 +37,6 @@ In my_media_controller.xml, an `android:contentDescription` sets text to be read
 strings.xml contains the actual strings for the `android:contentDescription` attributes
 
 ```xml
+<string name="caption_controls_description">Subtitles</string>
 <string name="video_description">Video. Tap with two fingers to toggle player controls</string>
 ```
