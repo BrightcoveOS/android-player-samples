@@ -107,6 +107,7 @@
         android:visibility="visible"
         android:text="@string/brightcove_controls_captions"
         android:contentDescription="@string/caption_controls_description"/>
+    <!-- Because the text is an icon font, set a contentDescription to be read instead -->
 
     <Button
         android:id="@id/audio_tracks"
