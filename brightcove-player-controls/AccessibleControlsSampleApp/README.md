@@ -25,7 +25,7 @@ In default_activity_main.xml, an `android:contentDescription` is added to set te
     android:contentDescription="@string/video_description"/>
 ```
 
-In my_media_controller.xml, an `android:contentDescription` sets text to be read when controls are focussed. Some buttons use an icon font which can't be read out, so the contentDescription takes precedence.
+In my_media_controller.xml, an `android:contentDescription` sets text to be read when controls are focussed. Some buttons use an icon font as which can't be read out, so the contentDescription takes precedence.
 
 ```xml
 <Button
@@ -33,4 +33,10 @@ In my_media_controller.xml, an `android:contentDescription` sets text to be read
     android:text="@string/brightcove_controls_captions"
     android:contentDescription="@string/caption_controls_description"/>
 <!-- Because the text is an icon font, set a contentDescription to be read instead -->
+```
+
+strings.xml contains the actual strings for the `android:contentDescription` attributes
+
+```xml
+<string name="video_description">Video. Tap with two fingers to toggle player controls</string>
 ```
