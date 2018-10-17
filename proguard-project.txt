@@ -22,6 +22,7 @@
 -keepclasseswithmembers public class com.brightcove.player.** {
     public *;
 }
+-keep class com.brightcove.iab.** { *; }
 -keep class com.google.** { *; }
 -keep interface com.google.** { *; }
 -keep class com.google.ads.interactivemedia.** { *; }
