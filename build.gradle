@@ -4,8 +4,8 @@ apply from: 'constants.gradle'
 
 buildscript {
   repositories {
-    jcenter()
     google()
+    jcenter()
   }
 
   dependencies {
@@ -28,6 +28,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
 
   repositories {
     mavenLocal()
+    google()
     jcenter()
 
     maven {
