@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.brightcove.player.edge.OfflineCallback;
 import com.brightcove.player.edge.OfflineCatalog;
 import com.brightcove.player.edge.PlaylistListener;
 import com.brightcove.player.edge.VideoListener;
@@ -180,9 +181,20 @@ public class MainActivity extends BrightcovePlayer {
         } else {
             videoListLabel.setVisibility(View.VISIBLE);
             videoListLabel.setText(R.string.offline_playlist);
-            List<Video> videoList = catalog.findAllVideoDownload(DownloadStatus.STATUS_COMPLETE);
-            videoListAdapter.setVideoList(videoList);
-            onVideoListUpdated(false);
+            catalog.findAllVideoDownload(
+                    DownloadStatus.STATUS_COMPLETE,
+                    new OfflineCallback<List<Video>>() {
+                        @Override
+                        public void onSuccess(List<Video> videos) {
+                            videoListAdapter.setVideoList(videos);
+                            onVideoListUpdated(false);
+                        }
+
+                        @Override
+                        public void onFailure(Throwable throwable) {
+                            Log.e(TAG, "Error fetching all videos downloaded: ", throwable);
+                        }
+                    });
         }
     }
 
@@ -366,12 +378,34 @@ public class MainActivity extends BrightcovePlayer {
         @Override
         public void pauseVideoDownload(@NonNull Video video) {
             Log.v(TAG,"Calling pauseVideoDownload.");
-            catalog.pauseVideoDownload(video); }
+            catalog.pauseVideoDownload(video, new OfflineCallback<Integer>() {
+                @Override
+                public void onSuccess(Integer integer) {
+                    // Video download was paused successfully
+                }
+
+                @Override
+                public void onFailure(Throwable throwable) {
+                    Log.e(TAG, "Error pausing video download: ", throwable);
+                }
+            });
+        }
 
         @Override
         public void resumeVideoDownload(@NonNull Video video) {
             Log.v(TAG,"Calling resumeVideoDownload.");
-            catalog.resumeVideoDownload(video); }
+            catalog.resumeVideoDownload(video, new OfflineCallback<Integer>() {
+                @Override
+                public void onSuccess(Integer integer) {
+                    // Video download was resumed successfully
+                }
+
+                @Override
+                public void onFailure(Throwable throwable) {
+                    Log.e(TAG, "Error resuming video download: ", throwable);
+                }
+            });
+        }
 
         @Override
         public void downloadVideo(@NonNull final Video video) {
@@ -380,18 +414,35 @@ public class MainActivity extends BrightcovePlayer {
                 @Override
                 public void onResult(MediaDownloadable mediaDownloadable, Bundle bundle) {
                     BrightcoveDownloadUtil.selectMediaFormatTracksAvailable(mediaDownloadable, bundle);
-                    try {
-                        catalog.downloadVideo(video);
-                    } catch (IllegalStateException iSE) {
-                        android.util.Log.w(TAG, "Exception when downloading video " + video.getId(), iSE);
-                    }
+                    catalog.downloadVideo(video, new OfflineCallback<DownloadStatus>() {
+                        @Override
+                        public void onSuccess(DownloadStatus downloadStatus) {
+                            // Video download started successfully
+                            videoListAdapter.notifyVideoChanged(video);
+                        }
+
+                        @Override
+                        public void onFailure(Throwable throwable) {
+                            Log.e(TAG, "Error initializing video download: ", throwable);
+                        }
+                    });
                 }
             });
         }
 
         @Override
         public void deleteVideo(@NonNull Video video) {
-            catalog.deleteVideo(video);
+            catalog.deleteVideo(video, new OfflineCallback<Boolean>() {
+                @Override
+                public void onSuccess(Boolean aBoolean) {
+
+                }
+
+                @Override
+                public void onFailure(Throwable throwable) {
+                    Log.e(TAG, "Error deleting video: ", throwable);
+                }
+            });
         }
     };
 

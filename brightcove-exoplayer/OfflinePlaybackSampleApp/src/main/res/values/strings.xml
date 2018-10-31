@@ -39,4 +39,7 @@
 
     <!-- Queueing download -->
     <string name="queueing_download">Queueing download</string>
+
+
+    <string name="video_estimated_size">Video estimated size goes here…</string>
 </resources>
