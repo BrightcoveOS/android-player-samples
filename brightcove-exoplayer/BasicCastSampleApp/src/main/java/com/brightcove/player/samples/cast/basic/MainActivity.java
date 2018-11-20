@@ -2,7 +2,6 @@ package com.brightcove.player.samples.cast.basic;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
@@ -42,7 +41,8 @@ public class MainActivity extends AppCompatActivity implements VideoListAdapter.
     @Override
     public void itemClicked(View view, Video video, int position) {
         Intent intent = new Intent(this, VideoPlayerActivity.class);
-        intent.putExtra(VideoPlayerActivity.INTENT_EXTRA_VIDEO, (Parcelable) video);
+        video.getProperties().remove(Video.Fields.CAPTION_SOURCES);
+        intent.putExtra(VideoPlayerActivity.INTENT_EXTRA_VIDEO_ID, video.getId());
 
         Pair<View, String> imagePair = Pair
                 .create(view, getString(R.string.transition_image));
