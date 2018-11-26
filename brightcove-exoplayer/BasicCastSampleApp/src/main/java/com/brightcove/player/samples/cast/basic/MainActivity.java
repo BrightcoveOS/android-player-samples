@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements VideoListAdapter.
     @Override
     public void itemClicked(View view, Video video, int position) {
         Intent intent = new Intent(this, VideoPlayerActivity.class);
-        video.getProperties().remove(Video.Fields.CAPTION_SOURCES);
         intent.putExtra(VideoPlayerActivity.INTENT_EXTRA_VIDEO_ID, video.getId());
 
         Pair<View, String> imagePair = Pair
