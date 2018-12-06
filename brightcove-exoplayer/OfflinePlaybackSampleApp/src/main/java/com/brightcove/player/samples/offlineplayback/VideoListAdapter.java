@@ -39,6 +39,12 @@ import java.util.concurrent.TimeUnit;
  */
 public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.ViewHolder> {
     private static final String TAG = VideoListAdapter.class.getSimpleName();
+
+    /**
+     * Megabyte expressed in bytes.
+     */
+    private static final long MEGABYTE_IN_BYTES = 1024 * 1024;
+
     /**
      * The current list of videos.
      */
@@ -286,8 +292,8 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
             holder.estimatedSizeText.setVisibility(View.VISIBLE);
             catalog.estimateSize(video, new MediaDownloadable.OnVideoSizeCallback() {
                 @Override
-                public void onVideoSizeEstimated(long l) {
-                    String sizeStr = String.valueOf(l / 1048576).concat(" MB");
+                public void onVideoSizeEstimated(long bytes) {
+                    String sizeStr = String.valueOf(bytes / MEGABYTE_IN_BYTES).concat(" MB");
                     holder.estimatedSizeText.setText(sizeStr);
                 }
             });
