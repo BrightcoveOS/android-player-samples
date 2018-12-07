@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,9 +18,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.brightcove.player.edge.OfflineCallback;
 import com.brightcove.player.edge.OfflineCatalog;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.network.DownloadStatus;
+import com.brightcove.player.offline.MediaDownloadable;
 import com.brightcove.player.samples.offlineplayback.utils.ViewUtil;
 import com.squareup.picasso.Picasso;
 
@@ -35,6 +38,12 @@ import java.util.concurrent.TimeUnit;
  * Video list adapter can be used to show a list of videos on a {@link RecyclerView}.
  */
 public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.ViewHolder> {
+    private static final String TAG = VideoListAdapter.class.getSimpleName();
+
+    /**
+     * Megabyte expressed in bytes.
+     */
+    private static final long MEGABYTE_IN_BYTES = 1024 * 1024;
 
     /**
      * The current list of videos.
@@ -65,6 +74,12 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
          * Reference to the video status information text view.
          */
         final TextView videoStatusText;
+
+        /**
+         * Reference to the estimated size view.
+         */
+        final TextView estimatedSizeText;
+
         /**
          * Reference to the video license information text view.
          */
@@ -119,6 +134,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
             videoThumbnailImage = ViewUtil.findView(itemView, R.id.video_thumbnail_image);
             videoTitleText = ViewUtil.findView(itemView, R.id.video_title_text);
             videoStatusText = ViewUtil.findView(itemView, R.id.video_status_text);
+            estimatedSizeText = ViewUtil.findView(itemView, R.id.estimated_size_text);
             videoLicenseText = ViewUtil.findView(itemView, R.id.video_license_text);
             videoDurationText = ViewUtil.findView(itemView, R.id.video_duration_text);
             rentButton = ViewUtil.findView(itemView, R.id.rent_button);
@@ -131,18 +147,28 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
             downloadProgressBar.getProgressDrawable().setColorFilter(Color.DKGRAY, PorterDuff.Mode.SRC_IN);
         }
 
-        @NonNull
-        Video getVideo() {
-            Video result = video;
+        void getVideo(final OfflineCallback<Video> callback) {
+            final Video result = video;
 
             if (video.isOfflinePlaybackAllowed()) {
-                Video offlineVideo = catalog.findOfflineVideoById(video.getId());
-                if (offlineVideo != null) {
-                    result = offlineVideo;
-                }
-            }
+                catalog.findOfflineVideoById(video.getId(), new OfflineCallback<Video>() {
+                    @Override
+                    public void onSuccess(Video offlineVideo) {
+                        if (offlineVideo != null) {
+                            callback.onSuccess(offlineVideo);
+                        } else {
+                            callback.onSuccess(video);
+                        }
+                    }
 
-            return result;
+                    @Override
+                    public void onFailure(Throwable throwable) {
+                        callback.onSuccess(result);
+                    }
+                });
+            } else {
+                callback.onSuccess(result);
+            }
         }
     }
 
@@ -242,13 +268,36 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
      *
      * @param holder   reference to the view holder.
      * @param position the position of the row that should be updated.
-     * @param status   optional current download status.
+     * @param downloadStatus   optional current download status.
      */
-    private void updateView(@NonNull final ViewHolder holder, int position, @Nullable DownloadStatus status) {
+    private void updateView(@NonNull final ViewHolder holder,
+                            int position,
+                            @Nullable final DownloadStatus downloadStatus) {
         holder.video = videoList.get(position);
-        final Video video = holder.getVideo();
+        holder.getVideo(new OfflineCallback<Video>() {
+            @Override
+            public void onSuccess(Video video) {
+                handleViewState(holder, video, downloadStatus);
+            }
 
+            @Override
+            public void onFailure(Throwable throwable) {
+                Log.e(TAG, "Error fetching video: ", throwable);
+            }
+        });
+    }
+
+    private void handleViewState(final ViewHolder holder, Video video, DownloadStatus status) {
         if (video.isOfflinePlaybackAllowed()) {
+            holder.estimatedSizeText.setVisibility(View.VISIBLE);
+            catalog.estimateSize(video, new MediaDownloadable.OnVideoSizeCallback() {
+                @Override
+                public void onVideoSizeEstimated(long bytes) {
+                    String sizeStr = String.valueOf(bytes / MEGABYTE_IN_BYTES).concat(" MB");
+                    holder.estimatedSizeText.setText(sizeStr);
+                }
+            });
+
             if (video.isClearContent()) {
                 // Video is a Clear video -- show the download button only
                 holder.videoLicenseText.setText(R.string.press_to_save);
@@ -304,23 +353,22 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
                 holder.videoStatusText.setText(R.string.checking_download_status);
                 holder.videoStatusText.setVisibility(View.VISIBLE);
 
-                new Thread(new Runnable() {
+                catalog.getVideoDownloadStatus(holder.video, new OfflineCallback<DownloadStatus>() {
                     @Override
-                    public void run() {
-                        final DownloadStatus status = catalog.getVideoDownloadStatus(holder.video);
-                        holder.itemView.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                updateDownloadStatus(holder, status);
-                            }
-                        });
+                    public void onSuccess(DownloadStatus downloadStatus) {
+                        updateDownloadStatus(holder, downloadStatus);
                     }
-                }).start();
 
+                    @Override
+                    public void onFailure(Throwable throwable) {
+                        Log.e(TAG, "Error fetching VideoDownloadStatus ", throwable);
+                    }
+                });
             } else {
                 updateDownloadStatus(holder, status);
             }
         } else {
+            holder.estimatedSizeText.setVisibility(View.INVISIBLE);
             holder.videoLicenseText.setVisibility(View.GONE);
             holder.videoStatusText.setText(R.string.online_only);
             holder.videoStatusText.setVisibility(View.VISIBLE);
@@ -350,7 +398,6 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
             holder.videoDurationText.setText(null);
             holder.videoDurationText.setVisibility(View.GONE);
         }
-
     }
 
     /**
@@ -444,7 +491,17 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
                     consumed = true;
                 }
                 if(event.getAction() == MotionEvent.ACTION_UP) {
-                    listener.playVideo(holder.getVideo());
+                    holder.getVideo(new OfflineCallback<Video>() {
+                        @Override
+                        public void onSuccess(Video video) {
+                            listener.playVideo(video);
+                        }
+
+                        @Override
+                        public void onFailure(Throwable throwable) {
+                            Log.e(TAG, "Error fetching the video: ", throwable);
+                        }
+                    });
                     consumed = true;
                 }
                 return consumed;

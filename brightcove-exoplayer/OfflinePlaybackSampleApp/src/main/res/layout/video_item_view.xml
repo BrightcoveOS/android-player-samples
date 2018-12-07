@@ -73,6 +73,17 @@
         android:text="Video status goes here..."
         android:singleLine="true"/>
 
+    <TextView
+        android:id="@+id/estimated_size_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/video_thumbnail_image"
+        android:layout_marginEnd="10dp"
+        android:layout_below="@+id/video_status_text"
+        android:text="@string/video_estimated_size"
+        android:singleLine="true"
+        android:textSize="12sp"/>
+
     <ImageButton
         android:id="@+id/delete_button"
         android:layout_width="48dp"
