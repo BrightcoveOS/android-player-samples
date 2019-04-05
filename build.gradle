@@ -116,6 +116,13 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     }
   }
 
+  if (project.name.contains('Ssai')) {
+    dependencies {
+      implementation "com.brightcove.player:android-onceux-plugin:${anpVersion}"
+      implementation "com.brightcove.player:exoplayer2:${anpVersion}"
+    }
+  }
+
   if (project.parent.name.equals('brightcove-exoplayer') ||
           project.parent.name.equals('brightcove-player-controls')) {
     dependencies {
