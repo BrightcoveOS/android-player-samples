@@ -5,13 +5,13 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.brightcove.onceux.OnceUxComponent;
-import com.brightcove.onceux.event.OnceUxEventType;
 import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
+import com.brightcove.player.event.EventType;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
+import com.brightcove.ssai.SSAIComponent;
 
 public class MainActivity extends BrightcovePlayer {
     // Private class constants
@@ -19,16 +19,16 @@ public class MainActivity extends BrightcovePlayer {
 
     // Private instance variables
 
-    // The OnceUX plugin VMAP data URL, which tells the plugin when to
+    // The SSAI plugin VMAP data URL, which tells the plugin when to
     // send tracking beacons, when to hide the player controls and
     // what the click through URL for the ads shoud be.  The VMAP data
     // will also identify what the companion ad should be and what
     // it's click through URL is.
-    private String onceUxAdDataUrl = "http://once.unicornmedia.com/now/ads/vmap/od/auto/c501c3ee-7f1c-4020-aa6d-0b1ef0bbd4a9/202ef8bb-0d9d-4f6f-bd18-f45aa3010fe6/8a146f45-9fac-462e-a111-de60ec96198b/content.once";
+    private String ssaiAdDataUrl = "http://once.unicornmedia.com/now/ads/vmap/od/auto/c501c3ee-7f1c-4020-aa6d-0b1ef0bbd4a9/202ef8bb-0d9d-4f6f-bd18-f45aa3010fe6/8a146f45-9fac-462e-a111-de60ec96198b/content.once";
 
-    private OnceUxComponent plugin;
+    private SSAIComponent plugin;
 
-    public OnceUxComponent getOnceUxPlugin() {
+    public SSAIComponent getSsaiUxPlugin() {
         return plugin;
     }
 
@@ -42,29 +42,29 @@ public class MainActivity extends BrightcovePlayer {
         brightcoveVideoView.getAnalytics().setAccount("5420904993001");
         super.onCreate(savedInstanceState);
 
-        // Setup the event handlers for the OnceUX plugin, set the companion ad container,
+        // Setup the event handlers for the SSAI plugin, set the companion ad container,
         // register the VMAP data URL inside the plugin and start the video.  The plugin will
         // detect that the video has been started and pause it until the ad data is ready or an
         // error condition is detected.  On either event the plugin will continue playing the
         // video.
         registerEventHandlers();
-        plugin = new OnceUxComponent(this, brightcoveVideoView);
+        plugin = new SSAIComponent(this, brightcoveVideoView);
         View view = findViewById(R.id.ad_frame);
         if (view != null && view instanceof ViewGroup) {
             plugin.addCompanionContainer((ViewGroup) view);
         }
-        plugin.processVideo(onceUxAdDataUrl);
+        plugin.processVideo(ssaiAdDataUrl);
     }
 
     // Private instance methods
 
     /**
-     * Procedural abstraction used to setup event handlers for the OnceUX plugin.
+     * Procedural abstraction used to setup event handlers for the SSAI plugin.
      */
     private void registerEventHandlers() {
         // Handle the case where the ad data URL has not been supplied to the plugin.
         EventEmitter eventEmitter = brightcoveVideoView.getEventEmitter();
-        eventEmitter.on(OnceUxEventType.NO_AD_DATA_URL, new EventListener() {
+        eventEmitter.on(EventType.ERROR, new EventListener() {
             @Override
             public void processEvent(Event event) {
                 // Log the event and display a warning message (later)
