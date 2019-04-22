@@ -28,10 +28,6 @@ public class MainActivity extends BrightcovePlayer {
 
     private SSAIComponent plugin;
 
-    public SSAIComponent getSsaiUxPlugin() {
-        return plugin;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // When extending the BrightcovePlayer, we must assign brightcoveVideoView before
