@@ -32,11 +32,11 @@ include ':brightcove-player-controls:SeekBarColorsSampleApp'
 
 // FreeWheel samples require AdManager.jar to be added to the libs
 // folder.  This jar can be acquired from FreeWheel.
-if (freewheelDependenciesAreSatisfied()) {
-    include ':brightcove-mediaplayer:BasicFreeWheelSampleApp'
+//if (freewheelDependenciesAreSatisfied()) {
+//    include ':brightcove-mediaplayer:BasicFreeWheelSampleApp'
     include ':brightcove-exoplayer:FreeWheelSampleApp'
     include ':brightcove-exoplayer:FreeWheelWidevineModularSampleApp'
-}
+//}
 
 // Omniture samples require adobe-adms.jar to be added to the libs
 // folder.  This jar can be acquired from Adobe.
