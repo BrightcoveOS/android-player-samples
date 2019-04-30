@@ -159,7 +159,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
   if (project.name.contains('FreeWheel')) {
     dependencies {
       implementation "com.brightcove.player:android-freewheel-plugin:${anpVersion}"
-      implementation files(libraryDirectory + "AdManager-6.28.0.aar")
+      implementation files(libraryDirectory + "AdManager.aar")
     }
   }
 

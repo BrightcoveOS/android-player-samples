@@ -45,7 +45,7 @@ if (omnitureDependenciesAreSatisfied()) {
 }
 
 boolean freewheelDependenciesAreSatisfied() {
-    File dep = file("${System.getProperty("user.home")}/libs/AdManager-6.28.0.aar")
+    File dep = file("${System.getProperty("user.home")}/libs/AdManager.aar")
     return dep.exists()
 }
 
