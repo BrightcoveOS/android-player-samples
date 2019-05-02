@@ -61,6 +61,11 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
       targetSdkVersion ANDROID_TARGET_SDK_VERSION
     }
 
+    compileOptions {
+      sourceCompatibility JavaVersion.VERSION_1_8
+      targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     signingConfigs {
       release {
           storeFile file("${rootDir}/release.keystore")
@@ -127,11 +132,12 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
           project.parent.name.equals('brightcove-player-controls')) {
     dependencies {
       implementation "com.brightcove.player:exoplayer2:${anpVersion}"
+      implementation 'com.android.support:support-media-compat:'+APPCOMPAT_V7_VERSION
     }
 
     android {
       defaultConfig {
-        minSdkVersion 18
+        minSdkVersion ANDROID_MIN_SDK_VERSION
       }
     }
   }
@@ -139,7 +145,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
   if (project.name.contains('WebVTT')) {
     android {
       defaultConfig {
-        minSdkVersion 19
+        minSdkVersion ANDROID_MIN_SDK_VERSION
       }
     }
   }
@@ -153,7 +159,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
   if (project.name.contains('FreeWheel')) {
     dependencies {
       implementation "com.brightcove.player:android-freewheel-plugin:${anpVersion}"
-      implementation files(libraryDirectory + "AdManager.jar")
+      implementation files(libraryDirectory + "AdManager.aar")
     }
   }
 

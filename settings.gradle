@@ -30,10 +30,10 @@ include ':brightcove-player-controls:RewindBackwardSampleApp'
 include ':brightcove-player-controls:RewindStepBackwardSampleApp'
 include ':brightcove-player-controls:SeekBarColorsSampleApp'
 
-// FreeWheel samples require AdManager.jar to be added to the libs
-// folder.  This jar can be acquired from FreeWheel.
+// FreeWheel samples require AdManager.aar v6.28.0 to be added to the libs
+// folder under your home directory.
+// This aar archive must be acquired from FreeWheel by you.
 if (freewheelDependenciesAreSatisfied()) {
-    include ':brightcove-mediaplayer:BasicFreeWheelSampleApp'
     include ':brightcove-exoplayer:FreeWheelSampleApp'
     include ':brightcove-exoplayer:FreeWheelWidevineModularSampleApp'
 }
@@ -45,7 +45,7 @@ if (omnitureDependenciesAreSatisfied()) {
 }
 
 boolean freewheelDependenciesAreSatisfied() {
-    File dep = file("${System.getProperty("user.home")}/libs/AdManager.jar")
+    File dep = file("${System.getProperty("user.home")}/libs/AdManager.aar")
     return dep.exists()
 }
 
