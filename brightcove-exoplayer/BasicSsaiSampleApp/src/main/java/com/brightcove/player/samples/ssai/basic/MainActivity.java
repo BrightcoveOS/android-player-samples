@@ -5,10 +5,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.brightcove.player.event.Event;
+import com.brightcove.player.edge.Catalog;
+import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.event.EventEmitter;
-import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventType;
+import com.brightcove.player.model.Video;
+import com.brightcove.player.network.HttpRequestConfig;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.ssai.SSAIComponent;
@@ -17,14 +19,10 @@ public class MainActivity extends BrightcovePlayer {
     // Private class constants
     private final String TAG = this.getClass().getSimpleName();
 
-    // Private instance variables
-
-    // The SSAI plugin VMAP data URL, which tells the plugin when to
-    // send tracking beacons, when to hide the player controls and
-    // what the click through URL for the ads shoud be.  The VMAP data
-    // will also identify what the companion ad should be and what
-    // it's click through URL is.
-    private String ssaiAdDataUrl = "http://once.unicornmedia.com/now/ads/vmap/od/auto/c501c3ee-7f1c-4020-aa6d-0b1ef0bbd4a9/202ef8bb-0d9d-4f6f-bd18-f45aa3010fe6/8a146f45-9fac-462e-a111-de60ec96198b/content.once";
+    @SuppressWarnings("FieldCanBeLocal")
+    private final String AD_CONFIG_ID_QUERY_PARAM_KEY = "ad_config_id";
+    @SuppressWarnings("FieldCanBeLocal")
+    private final String AD_CONFIG_ID_QUERY_PARAM_VALUE = "ba5e4879-77f0-424b-8c98-706ae5ad7eec";
 
     private SSAIComponent plugin;
 
@@ -35,37 +33,42 @@ public class MainActivity extends BrightcovePlayer {
         // management.
         setContentView(R.layout.ssai_activity_main);
         brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
-        brightcoveVideoView.getAnalytics().setAccount("5420904993001");
         super.onCreate(savedInstanceState);
 
-        // Setup the event handlers for the SSAI plugin, set the companion ad container,
-        // register the VMAP data URL inside the plugin and start the video.  The plugin will
-        // detect that the video has been started and pause it until the ad data is ready or an
-        // error condition is detected.  On either event the plugin will continue playing the
-        // video.
-        registerEventHandlers();
+        final EventEmitter eventEmitter = brightcoveVideoView.getEventEmitter();
+        Catalog catalog = new Catalog(eventEmitter,
+                getString(R.string.sdk_demo_account),
+                getString(R.string.sdk_demo_policy_key));
+
+        // Setup the error event handler for the SSAI plugin.
+        registerErrorEventHandler();
         plugin = new SSAIComponent(this, brightcoveVideoView);
         View view = findViewById(R.id.ad_frame);
-        if (view != null && view instanceof ViewGroup) {
+        if (view instanceof ViewGroup) {
+            // Set the companion ad container,
             plugin.addCompanionContainer((ViewGroup) view);
         }
-        plugin.processVideo(ssaiAdDataUrl);
-    }
 
-    // Private instance methods
+        // Set the HttpRequestConfig with the Ad Config Id configured in
+        // your https://studio.brightcove.com account.
+        HttpRequestConfig httpRequestConfig = new HttpRequestConfig.Builder()
+                .addQueryParameter(AD_CONFIG_ID_QUERY_PARAM_KEY, AD_CONFIG_ID_QUERY_PARAM_VALUE)
+                .build();
 
-    /**
-     * Procedural abstraction used to setup event handlers for the SSAI plugin.
-     */
-    private void registerEventHandlers() {
-        // Handle the case where the ad data URL has not been supplied to the plugin.
-        EventEmitter eventEmitter = brightcoveVideoView.getEventEmitter();
-        eventEmitter.on(EventType.ERROR, new EventListener() {
+        catalog.findVideoByID(getString(R.string.video_id), httpRequestConfig, new VideoListener() {
             @Override
-            public void processEvent(Event event) {
-                // Log the event and display a warning message (later)
-                Log.e(TAG, event.getType());
+            public void onVideo(Video video) {
+                // The Video Sources will have a VMAP url which will be processed by the SSAI plugin,
+                // If there is not a VMAP url, or if there are any requesting or parsing error,
+                // an EventType.ERROR event will be emitted.
+                plugin.processVideo(video);
             }
         });
+    }
+
+    private void registerErrorEventHandler() {
+        // Handle the case where the ad data URL has not been supplied to the plugin.
+        EventEmitter eventEmitter = brightcoveVideoView.getEventEmitter();
+        eventEmitter.on(EventType.ERROR, event -> Log.e(TAG, event.getType()));
     }
 }
