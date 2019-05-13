@@ -60,7 +60,7 @@ public class MainActivity extends BrightcovePlayer {
             startActivity(intent);
         } else {
             Toast.makeText(this,
-                    "Picture-in-Picture is currently available only on Android Oreo",
+                    "Picture-in-Picture is currently available only on Android Oreo or Higher",
                     Toast.LENGTH_LONG).show();
         }
     }
