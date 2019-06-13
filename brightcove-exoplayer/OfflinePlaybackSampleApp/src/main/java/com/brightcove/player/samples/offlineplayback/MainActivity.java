@@ -25,6 +25,7 @@ import com.brightcove.player.model.Playlist;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.network.ConnectivityMonitor;
 import com.brightcove.player.network.DownloadStatus;
+import com.brightcove.player.network.HttpRequestConfig;
 import com.brightcove.player.offline.MediaDownloadable;
 import com.brightcove.player.samples.offlineplayback.utils.BrightcoveDownloadUtil;
 import com.brightcove.player.samples.offlineplayback.utils.ViewUtil;
@@ -90,6 +91,12 @@ public class MainActivity extends BrightcovePlayer {
      * Network connectivity state change monitor.
      */
     private ConnectivityMonitor connectivityMonitor;
+
+    /**
+     *
+     */
+    private HttpRequestConfig httpRequestConfig;
+    private String pasToken = "YOUR_PAS_TOKEN";
 
     PlaylistModel playlist = PlaylistModel.byReferenceId("demo_odrm_widevine_dash", "Offline Playback List");
 
@@ -164,11 +171,15 @@ public class MainActivity extends BrightcovePlayer {
             emptyListMessage.setText(R.string.fetching_playlist);
             emptyListMessage.setVisibility(View.VISIBLE);
 
-            playlist.findPlaylist(catalog, new PlaylistListener() {
+            HttpRequestConfig.Builder httpRequestConfigBuilder = new HttpRequestConfig.Builder();
+            httpRequestConfigBuilder.setBrightcoveAuthorizationToken(pasToken);
+            httpRequestConfig = httpRequestConfigBuilder.build();
+            playlist.findPlaylist(catalog, httpRequestConfig, new PlaylistListener() {
                 @Override
                 public void onPlaylist(Playlist playlist) {
                     videoListAdapter.setVideoList(playlist.getVideos());
                     onVideoListUpdated(false);
+                    brightcoveVideoView.addAll(playlist.getVideos());
                 }
 
                 @Override
@@ -370,7 +381,10 @@ public class MainActivity extends BrightcovePlayer {
             catalog.findVideoByID(video.getId(), new FindVideoListener(video) {
                 @Override
                 public void onVideo(Video newVideo) {
-                    catalog.requestPurchaseLicense(video, licenseEventListener);
+                    HttpRequestConfig.Builder httpRequestConfigBuilder = new HttpRequestConfig.Builder();
+                    httpRequestConfigBuilder.setBrightcoveAuthorizationToken(pasToken);
+                    httpRequestConfig = httpRequestConfigBuilder.build();
+                    catalog.requestPurchaseLicense(video, licenseEventListener, httpRequestConfig);
                 }
             });
         }
@@ -504,11 +518,18 @@ public class MainActivity extends BrightcovePlayer {
                 .setListener(new DatePickerFragment.Listener() {
                     @Override
                     public void onDateSelected(@NonNull Date expiryDate) {
-                        long playDuration = video.getDuration();
+                        // Set the playDuration value to the video duration plus 10000ms to account for:
+                        // - Loading the video into the player (which starts the playDuration clock)
+                        // - Starting playback in a manual-start player
+                        long playDuration = video.getDuration() + 10000;
                         if (playDuration == 0) {
                             playDuration = DEFAULT_RENTAL_PLAY_DURATION;
                         }
-                        catalog.requestRentalLicense(video, expiryDate, playDuration, licenseEventListener);
+
+                        HttpRequestConfig.Builder httpRequestConfigBuilder = new HttpRequestConfig.Builder();
+                        httpRequestConfigBuilder.setBrightcoveAuthorizationToken(pasToken);
+                        httpRequestConfig = httpRequestConfigBuilder.build();
+                        catalog.requestRentalLicense(video, expiryDate, playDuration, licenseEventListener, httpRequestConfig);
                     }
                 })
                 .show(getFragmentManager(), "rentalExpiryDatePicker");
