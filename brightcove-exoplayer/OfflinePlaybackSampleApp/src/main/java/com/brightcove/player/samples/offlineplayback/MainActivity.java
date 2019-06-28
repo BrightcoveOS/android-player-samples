@@ -97,6 +97,7 @@ public class MainActivity extends BrightcovePlayer {
      */
     private HttpRequestConfig httpRequestConfig;
     private String pasToken = "YOUR_PAS_TOKEN";
+    private static final int PLAYDURATION_EXTENSION = 10000;
 
     PlaylistModel playlist = PlaylistModel.byReferenceId("demo_odrm_widevine_dash", "Offline Playback List");
 
@@ -518,10 +519,10 @@ public class MainActivity extends BrightcovePlayer {
                 .setListener(new DatePickerFragment.Listener() {
                     @Override
                     public void onDateSelected(@NonNull Date expiryDate) {
-                        // Set the playDuration value to the video duration plus 10000ms to account for:
+                        // Extend the playDuration value to the video duration plus an additional small amount to account for:
                         // - Loading the video into the player (which starts the playDuration clock)
                         // - Starting playback in a manual-start player
-                        long playDuration = video.getDuration() + 10000;
+                        long playDuration = video.getDuration() + PLAYDURATION_EXTENSION;
                         if (playDuration == 0) {
                             playDuration = DEFAULT_RENTAL_PLAY_DURATION;
                         }
