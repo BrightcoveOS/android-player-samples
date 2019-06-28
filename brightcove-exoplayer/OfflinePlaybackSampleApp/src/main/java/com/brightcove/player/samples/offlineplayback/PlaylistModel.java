@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 
 import com.brightcove.player.edge.Catalog;
 import com.brightcove.player.edge.PlaylistListener;
+import com.brightcove.player.network.HttpRequestConfig;
 
 /**
  * Playlist model is an immutable DTO that holds important values related to a Playlist.
@@ -88,11 +89,11 @@ public class PlaylistModel {
      * @param listener reference to a listener instance that will be notified when the search is complete.
      * @throws NullPointerException if the catalog or listener is null.
      */
-    public void findPlaylist(@NonNull Catalog catalog, @NonNull PlaylistListener listener) {
+    public void findPlaylist(@NonNull Catalog catalog, @NonNull HttpRequestConfig httpRequestConfig, @NonNull PlaylistListener listener) {
         if (referenceId != null) {
-            catalog.findPlaylistByReferenceID(referenceId, listener);
+            catalog.findPlaylistByReferenceID(referenceId, httpRequestConfig, listener);
         } else if (id != null) {
-            catalog.findPlaylistByID(id, listener);
+            catalog.findPlaylistByID(id, httpRequestConfig, listener);
         }
     }
 }
