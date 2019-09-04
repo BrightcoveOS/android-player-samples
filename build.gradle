@@ -54,7 +54,6 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
 
   android {
     compileSdkVersion ANDROID_COMPILE_SDK_VERSION
-    buildToolsVersion ANDROID_BUILD_TOOLS_VERSION
 
     defaultConfig {
       minSdkVersion ANDROID_MIN_SDK_VERSION
