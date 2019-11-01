@@ -86,11 +86,8 @@ Note that in order to enable this sample app, you must independently obtain and 
 ## Installing the sample apps
 Currently, all of the sample app projects must be installed together as a bundle. Individual sample app projects also have specific dependencies. For those specific dependencies, see the individual project descriptions above for details.
 
-To install the sample apps into Android Studio follow these steps:
-
-1. Obtain and install the latest version of [Android Studio](http://developer.android.com/sdk/installing/studio.html) using the provided on-line instructions,
-1. Configure Android Studio for Android versions from Android 10 to Android 19 (see Android Studio help for details),
-1. Invoke the new project wizard using the File menu if it is not presented by default,
+To install the sample apps into Android Studio, please make sure you have the latest version. You can obtain and install the latest version from: [Android Studio](http://developer.android.com/sdk/installing/studio.html)
+After Android Studio is installed, please follow the following steps:
 
 From Android Studio using VCS installation:
 
@@ -102,9 +99,9 @@ From Android Studio using VCS installation:
 From Android Studio using Import
 
 1. Clone this repo to your file system.
-1. Select the *Import Project...* option in the new project dialog,
+1. In the File menu, select the *Import Project...* option in the new project dialog,
 1. Using the file selector dialog, select the top level **build.gradle** file from the cloned repo on your system,
-1. Click on OK and use default values on subsequent sceens.
+1. Click on OK and use default values on subsequent screens.
 
 Android Studio will now download/import and build the sample app.  At this point the samples will be in your instance of Android Studio where you can observe the snippets in action on a physical or virtual device, walk through the code using the Android Studio debugger, search on keywords or just browse Android source code.
 
@@ -112,7 +109,7 @@ Android Studio will now download/import and build the sample app.  At this point
 By default, the sample apps will build with the most recent Brightcove Android Native Player version at build time. To override this behavior with a specific version, create a file named **.gradle/gradle.properties** in your home directory and set the value of the property *anpVersion* to the desired version.  An invalid version will cause no sample app projects to be configured.
 
 ## Building with Gradle on the command line
-These sample apps now build with the latest released version of Gradle, 4.0.1. Please note that when building these apps from the command line, that the Gradle daemon is started, and will continue to run after the build completes.
+These sample apps now build with the latest released version of Gradle, 5.4.1. Please note that when building these apps from the command line, that the Gradle daemon is started, and will continue to run after the build completes.
 
 To stop the daemon after the build completes, run the following:
 `./gradlew --stop`

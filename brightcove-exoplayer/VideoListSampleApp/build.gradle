@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion ANDROID_COMPILE_SDK_VERSION
-    buildToolsVersion ANDROID_BUILD_TOOLS_VERSION
     defaultConfig {
         applicationId "com.brightcove.recyclervideoview"
         minSdkVersion 21

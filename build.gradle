@@ -9,7 +9,7 @@ buildscript {
   }
 
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.1.3'
+    classpath 'com.android.tools.build:gradle:3.5.0'
 
     classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.2.2'
   }
@@ -54,7 +54,6 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
 
   android {
     compileSdkVersion ANDROID_COMPILE_SDK_VERSION
-    buildToolsVersion ANDROID_BUILD_TOOLS_VERSION
 
     defaultConfig {
       minSdkVersion ANDROID_MIN_SDK_VERSION
