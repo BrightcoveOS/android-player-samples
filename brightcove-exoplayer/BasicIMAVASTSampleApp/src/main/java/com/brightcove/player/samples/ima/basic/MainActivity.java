@@ -34,8 +34,7 @@ import java.util.Map;
  * This app illustrates how to use the Google IMA plugin with the
  * Brightcove Player for Android.
  *
- * @author Paul Matthew Reilly (original code)
- * @author Paul Michael Reilly (added explanatory comments)
+ * @author Jim Whisenant - ported from brightcove-mediaplayer samples
  */
 public class MainActivity extends BrightcovePlayer {
 
