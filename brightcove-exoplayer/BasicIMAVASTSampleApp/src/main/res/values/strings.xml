@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Basic IMA VAST Sample App</string>
+    <string name="account_id">5420904993001</string>
+    <string name="policy_key">BCpkADawqM1RJu5c_I13hBUAi4c8QNWO5QN2yrd_OgDjTCVsbILeGDxbYy6xhZESTFi68MiSUHzMbQbuLV3q-gvZkJFpym1qYbEwogOqKCXK622KNLPF92tX8AY9a1cVVYCgxSPN12pPAuIM</string>
+    <string name="video_reference_id">dw_android_sdk_1_introduction</string>
+
+</resources>
