@@ -2,9 +2,9 @@ package com.brightcove.player.samples.cast.basic;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.app.ActionBar;
+import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
+import androidx.appcompat.app.ActionBar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.widget.TextView;

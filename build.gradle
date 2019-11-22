@@ -9,7 +9,7 @@ buildscript {
   }
 
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.5.0'
+    classpath 'com.android.tools.build:gradle:3.5.2'
 
     classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.2.2'
   }
@@ -102,7 +102,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
       implementation "com.brightcove.player:android-ima-plugin:${anpVersion}"
       implementation 'com.google.ads.interactivemedia.v3:interactivemedia:'+GOOGLE_IMA_SDK_VERSION
       implementation 'com.google.android.gms:play-services-ads:'+PLAY_SERVICES_VERSION
-      implementation 'com.android.support:support-v4:'+SUPPORT_V4_VERSION
+      implementation "androidx.legacy:legacy-support-v4:${ANDROIDX_LEGACY_SUPPORT_V4}"
     }
   }
 
@@ -131,7 +131,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
           project.parent.name.equals('brightcove-player-controls')) {
     dependencies {
       implementation "com.brightcove.player:exoplayer2:${anpVersion}"
-      implementation 'com.android.support:support-media-compat:'+APPCOMPAT_V7_VERSION
+      implementation "androidx.media:media:${ANDROIDX_MEDIA}"
     }
 
     android {

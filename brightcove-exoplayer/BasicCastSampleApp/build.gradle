@@ -1,9 +1,9 @@
 dependencies {
     implementation "com.brightcove.player:android-appcompat-plugin:${anpVersion}"
-    implementation 'com.android.support:appcompat-v7:'+APPCOMPAT_V7_VERSION
-    implementation 'com.android.support:support-v4:'+SUPPORT_V4_VERSION
-    implementation 'com.android.support:recyclerview-v7:'+APPCOMPAT_V7_VERSION
-    implementation 'com.android.support:support-vector-drawable:'+APPCOMPAT_V7_VERSION
-    implementation 'com.android.support:mediarouter-v7:'+APPCOMPAT_V7_VERSION
+    implementation "androidx.appcompat:appcompat:${ANDROIDX_APPCOMPAT}"
+    implementation "androidx.legacy:legacy-support-v4:${ANDROIDX_LEGACY_SUPPORT_V4}"
+    implementation "androidx.recyclerview:recyclerview:${ANDROIDX_RECYCLER_VIEW}"
+    implementation "androidx.vectordrawable:vectordrawable:${ANDROIDX_VECTOR_DRAWABLE}"
+    implementation "androidx.mediarouter:mediarouter:${ANDROIDX_MEDIA_ROUTER}"
     implementation 'com.squareup.picasso:picasso:2.5.2'
 }

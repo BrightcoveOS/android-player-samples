@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:text="@string/default_video_list_text" />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/video_list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
         android:layout_above="@+id/castMiniController"
         android:layout_below="@+id/video_list_label"
         android:layout_margin="5dp"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <TextView
         android:id="@+id/empty_list_message"
