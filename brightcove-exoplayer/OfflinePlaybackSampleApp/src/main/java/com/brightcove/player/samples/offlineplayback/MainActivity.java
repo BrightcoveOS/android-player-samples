@@ -3,9 +3,10 @@ package com.brightcove.player.samples.offlineplayback;
 import android.content.res.Configuration;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;

@@ -1,7 +1,7 @@
 package com.brightcove.player.samples.offlineplayback;
 
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.brightcove.player.model.Video;
 
