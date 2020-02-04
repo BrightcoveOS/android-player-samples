@@ -28,6 +28,7 @@ import com.brightcove.player.samples.offlineplayback.utils.ViewUtil;
 import com.squareup.picasso.Picasso;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -197,11 +198,15 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
 
     /**
      * Sets the list of videos to be shown. If this value is null, then the list will be empty.
+     * Note that a local copy of the Playlist's video list is made
      *
      * @param videoList list of {@link Video} objects.
      */
     void setVideoList(@Nullable List<Video> videoList) {
-        this.videoList = videoList;
+        this.videoList = new ArrayList<>();
+        if (videoList != null) {
+            this.videoList.addAll(videoList);
+        }
         buildIndexMap();
     }
 
