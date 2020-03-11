@@ -22,7 +22,6 @@ include ':brightcove-exoplayer:TextureViewSampleApp'
 include ':brightcove-exoplayer:WidevineModularSampleApp'
 include ':brightcove-exoplayer:VideoListSampleApp'
 include ':brightcove-exoplayer:BasicIMAVASTSampleApp'
-include ':brightcove-exoplayer:PulseSampleApp'
 
 // For building Brightcove Player Controls specific sample apps, which are located under the 'brightcove-player-controls' directory.
 include ':brightcove-player-controls:CustomizedControlsSampleApp'
@@ -46,6 +45,10 @@ if (omnitureDependenciesAreSatisfied()) {
     include ':brightcove-mediaplayer:BasicOmnitureSampleApp'
 }
 
+if (pulseDependenciesAreSatisfied()) {
+    include ':brightcove-exoplayer:PulseSampleApp'
+}
+
 boolean freewheelDependenciesAreSatisfied() {
     File dep = file("${System.getProperty("user.home")}/libs/AdManager.aar")
     return dep.exists()
@@ -53,5 +56,10 @@ boolean freewheelDependenciesAreSatisfied() {
 
 boolean omnitureDependenciesAreSatisfied() {
     File dep = file("${System.getProperty("user.home")}/libs/adobeMobileLibrary.jar")
+    return dep.exists()
+}
+
+boolean pulseDependenciesAreSatisfied() {
+    File dep = file("${System.getProperty("user.home")}/libs/Pulse.aar")
     return dep.exists()
 }
