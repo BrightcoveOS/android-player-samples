@@ -45,6 +45,10 @@ if (omnitureDependenciesAreSatisfied()) {
     include ':brightcove-mediaplayer:BasicOmnitureSampleApp'
 }
 
+if (pulseDependenciesAreSatisfied()) {
+    include ':brightcove-exoplayer:PulseSampleApp'
+}
+
 boolean freewheelDependenciesAreSatisfied() {
     File dep = file("${System.getProperty("user.home")}/libs/AdManager.aar")
     return dep.exists()
@@ -52,5 +56,10 @@ boolean freewheelDependenciesAreSatisfied() {
 
 boolean omnitureDependenciesAreSatisfied() {
     File dep = file("${System.getProperty("user.home")}/libs/adobeMobileLibrary.jar")
+    return dep.exists()
+}
+
+boolean pulseDependenciesAreSatisfied() {
+    File dep = file("${System.getProperty("user.home")}/libs/Pulse.aar")
     return dep.exists()
 }

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">PulseSampleApp</string>
+
+    <!-- A sample Brightcove Edge Account ID -->
+    <string name="account">5420904993001</string>
+
+    <!-- A sample Brightcove Edge Policy Key -->
+    <string name="policy">BCpkADawqM1RJu5c_I13hBUAi4c8QNWO5QN2yrd_OgDjTCVsbILeGDxbYy6xhZESTFi68MiSUHzMbQbuLV3q-gvZkJFpym1qYbEwogOqKCXK622KNLPF92tX8AY9a1cVVYCgxSPN12pPAuIM</string>
+
+    <!-- A sample Brightcove Video ID -->
+    <string name="videoId">5421538222001</string>
+    <string name="pulse_host_url">https://pulse-demo.videoplaza.tv</string>
+</resources>

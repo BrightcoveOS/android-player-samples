@@ -162,6 +162,13 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     }
   }
 
+  if (project.name.contains('Pulse')) {
+    dependencies {
+      implementation "com.brightcove.player:android-pulse-plugin:${anpVersion}"
+      implementation files(libraryDirectory + "Pulse.aar")
+    }
+  }
+
   println "Processing ${project.name}"
 }
 
