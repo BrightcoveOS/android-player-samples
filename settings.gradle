@@ -46,6 +46,7 @@ if (omnitureDependenciesAreSatisfied()) {
 
 if (pulseDependenciesAreSatisfied()) {
     include ':brightcove-exoplayer:PulseSampleApp'
+    include ':InvidiSampleApp'
 }
 
 boolean freewheelDependenciesAreSatisfied() {

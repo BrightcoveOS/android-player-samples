@@ -1,0 +1,114 @@
+{
+  "pulseHost" : "https://vp-validation.videoplaza.tv",
+  "adConfigs" : [
+    {
+      "name":             "D-001 Multiple video ads per ad break",
+      "tags":             ["standard"],
+      "category":         "validation",
+      "midroll_positions": [10.5, 20, 30],
+      "insertion_point_filters": ["ON_BEFORE_CONTENT", "ON_PAUSE", "PLAYBACK_POSITION"]
+    },
+    {
+      "name":             "D-002 3rd party video ad",
+      "tags":             ["3rd-party-vast"],
+      "category":         "validation",
+      "midroll_positions": [10.5, 20, 30],
+      "insertion_point_filters": ["ON_BEFORE_CONTENT", "ON_PAUSE", "PLAYBACK_POSITION"]
+    },
+    {
+      "name":             "D-003 3rd party VPAID 1.0 ad",
+      "tags":             ["3rd-party-vpaid"],
+      "category":         "validation",
+      "midroll_positions": [10.5, 20, 30],
+      "insertion_point_filters": ["ON_BEFORE_CONTENT", "ON_PAUSE", "PLAYBACK_POSITION"]
+    },
+    {
+      "name":             "D-004 3rd party VPAID 2.0 ad",
+      "tags":             ["3rd-party-vpaid2"],
+      "category":         "validation",
+      "midroll_positions": [10.5, 20, 30],
+      "insertion_point_filters": ["ON_BEFORE_CONTENT", "ON_PAUSE", "PLAYBACK_POSITION"]
+    },
+    {
+      "name":             "E-001 Empty ticket response",
+      "tags":             ["inventory"],
+      "category":         "validation",
+      "midroll_positions": [10.5, 20, 30],
+      "insertion_point_filters": ["ON_BEFORE_CONTENT", "ON_PAUSE", "PLAYBACK_POSITION"]
+    },
+    {
+      "name":             "E-002 404 when loading creative",
+      "tags":             ["404"],
+      "category":         "validation",
+      "midroll_positions": [10.5, 20, 30],
+      "insertion_point_filters": ["ON_BEFORE_CONTENT", "ON_PAUSE", "PLAYBACK_POSITION"]
+    },
+    {
+      "name":             "E-003 Timeout when loading creative",
+      "tags":             ["timeout"],
+      "category":         "validation",
+      "midroll_positions": [10.5, 20, 30],
+      "insertion_point_filters": ["ON_BEFORE_CONTENT", "ON_PAUSE", "PLAYBACK_POSITION"]
+    },
+    {
+      "name":             "E-004 Unsupported creative",
+      "tags":             ["invalid-asset"],
+      "category":         "validation",
+      "midroll_positions": [10.5, 20, 30],
+      "insertion_point_filters": ["ON_BEFORE_CONTENT", "ON_PAUSE", "PLAYBACK_POSITION"]
+    },
+    {
+      "name":             "E-005 Track inventory for second ad position in ad break",
+      "tags":             ["invalid-asset"],
+      "category":         "validation",
+      "midroll_positions": [10.5, 20, 30],
+      "insertion_point_filters": ["ON_BEFORE_CONTENT", "ON_PAUSE", "PLAYBACK_POSITION"]
+    },
+    {
+      "name":             "E-006 404 during request to Pulse",
+      "tags":             []
+    },
+    {
+      "name":             "E-007 Empty ad response from 'nocom' flag",
+      "tags":             ["standard"],
+      "category":         "validation",
+      "flags":            ["nocom"],
+      "midroll_positions": [10.5, 20, 30],
+      "insertion_point_filters": ["ON_BEFORE_CONTENT", "ON_PAUSE", "PLAYBACK_POSITION"]
+    },
+    {
+      "name":             "T-008 Timeout during request to Pulse",
+      "tags":             []
+    },
+    {
+      "name":             "P-001 Passback after empty 3rd party response",
+      "tags":             ["empty"],
+      "category":         "passback",
+      "midroll_positions": [10.5, 20, 30],
+      "insertion_point_filters": ["ON_BEFORE_CONTENT", "ON_PAUSE", "PLAYBACK_POSITION"]
+    },
+    {
+      "name":             "P-002 Passback after 404 from 3rd party",
+      "tags":             ["404"],
+      "category":         "passback",
+      "midroll_positions": [10.5, 20, 30],
+      "insertion_point_filters": ["ON_BEFORE_CONTENT", "ON_PAUSE", "PLAYBACK_POSITION"]
+    },
+    {
+      "name":             "P-003 Passback after timeout from 3rd party",
+      "tags":             ["timeout"],
+      "category":         "passback",
+      "midroll_positions": [10.5, 20, 30],
+      "insertion_point_filters": ["ON_BEFORE_CONTENT", "ON_PAUSE", "PLAYBACK_POSITION"]
+    },
+    {
+      "name":             "P-004 Passback after invalid ad from 3rd party",
+      "tags":             ["invalid-asset"],
+      "category":         "passback",
+      "flags":            ["long_form"],
+      "contentForm":      "longForm",
+      "midroll_positions": [10.5, 20, 30],
+      "insertion_point_filters": ["ON_BEFORE_CONTENT", "ON_PAUSE", "PLAYBACK_POSITION"]
+    }
+  ]
+}
