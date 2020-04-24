@@ -2,5 +2,5 @@ dependencies {
     implementation "androidx.appcompat:appcompat:${ANDROIDX_APPCOMPAT}"
     implementation "androidx.recyclerview:recyclerview:${ANDROIDX_RECYCLER_VIEW}"
     implementation "androidx.vectordrawable:vectordrawable:${ANDROIDX_VECTOR_DRAWABLE}"
-    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
