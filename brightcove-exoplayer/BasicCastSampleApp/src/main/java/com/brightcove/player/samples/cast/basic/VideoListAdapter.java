@@ -74,7 +74,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
         if (imageUri == null) {
             holder.videoThumbnailImage.setImageResource(R.drawable.movie);
         } else {
-            Picasso.with(holder.itemView.getContext()).load(imageUri.toASCIIString()).into(holder.videoThumbnailImage);
+            Picasso.get().load(imageUri.toASCIIString()).into(holder.videoThumbnailImage);
         }
 
         holder.videoThumbnailImage.setOnClickListener(new View.OnClickListener() {
