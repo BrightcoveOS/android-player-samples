@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Application name -->
+    <string name="app_name">Thumbnail Scrubber Sample App</string>
+
+    <!-- A sample Brightcove Edge Account ID -->
+    <string name="account">1752604059001</string>
+
+    <!-- A sample Brightcove Edge Policy Key -->
+    <string name="policy">BCpkADawqM02FzTCDdhMYIwt8Jd-dk8y8_1X858Jl8P79vjkFEKEuW1NTae9M3HStXFpCNrazYe7Yk0VP9TXgSHFdpL8tLXAku6cBpoIv024KlzAmlQy3MohuoANTBi6EsnXPVcOJ6zTIaNh</string>
+
+    <!-- A sample Brightcove Video ID -->
+    <string name="videoId">5686632029001</string>
+
+</resources>
