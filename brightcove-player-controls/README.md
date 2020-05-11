@@ -18,7 +18,7 @@ The Brightcove Player Controls integration currently supports the following:
 ## Requirements
 
 The Brightcove Player Controls integration requires:
-* Android version 4.4 and above (API level 19 and up)
+* Android version 5.1.1 and above (API level 22 and up)
 
 The Brightcove Player Controls integration has been tested using:
 * Android Studio 3.5
@@ -27,25 +27,7 @@ Eclipse is not officially supported.
 
 ## Installation
 
-The Brightcove Player Controls are available with the Android Native Player version 4.3.6 and higher.  Simply ensure that a top level Gradle properties file is provided that defines *anpVersion* with the value "4.4+", for example:
-
-    # gradle.properties
-
-    # Use this property to select the most recent Brightcove Android
-    # Native Player version.
-    anpVersion=4.4+
-
-## Quick Start
-
-## Known Issues
-
-### Orientation Switching
-
-#### SeekBar
-* There is currently a known bug in the reported progress after switching orientation.  After the orientation switch the seek bar shows progress as completed.
-
-### End Time Text View prior to starting the video
-* There is currently a known bug where the duration text view does not show the video length prior to starting the video.  Once the video is started, the text view value is updated correctly.
+The Brightcove Player Controls are available with the Android Native Player version 4.3.6 and higher.  Simply ensure that a top level gradle.properties file is provided that references the latest released SDK version.  See the [gradle.properties file in this repo](https://github.com/BrightcoveOS/android-player-samples/blob/master/gradle.properties) for an example referencing the latest Brightcove Android Native SDK version.
 
 ## Reporting Bugs
 
