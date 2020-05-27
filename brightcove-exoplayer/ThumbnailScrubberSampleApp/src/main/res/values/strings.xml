@@ -5,12 +5,12 @@
     <string name="app_name">Thumbnail Scrubber Sample App</string>
 
     <!-- A sample Brightcove Edge Account ID -->
-    <string name="account">1752604059001</string>
+    <string name="account">5420904993001</string>
 
     <!-- A sample Brightcove Edge Policy Key -->
-    <string name="policy">BCpkADawqM02FzTCDdhMYIwt8Jd-dk8y8_1X858Jl8P79vjkFEKEuW1NTae9M3HStXFpCNrazYe7Yk0VP9TXgSHFdpL8tLXAku6cBpoIv024KlzAmlQy3MohuoANTBi6EsnXPVcOJ6zTIaNh</string>
+    <string name="policy">BCpkADawqM1RJu5c_I13hBUAi4c8QNWO5QN2yrd_OgDjTCVsbILeGDxbYy6xhZESTFi68MiSUHzMbQbuLV3q-gvZkJFpym1qYbEwogOqKCXK622KNLPF92tX8AY9a1cVVYCgxSPN12pPAuIM</string>
 
     <!-- A sample Brightcove Video ID -->
-    <string name="videoId">5686632029001</string>
+    <string name="videoId">5421538222001</string>
 
 </resources>

@@ -25,7 +25,7 @@ public class MainActivity extends BrightcovePlayer {
     @SuppressWarnings("FieldCanBeLocal")
     private static final String CONFIG_ID_QUERY_PARAM_KEY = "config_id";
     @SuppressWarnings("FieldCanBeLocal")
-    private static final String CONFIG_ID_THUMBNAIL_SCRUBBING = "44c91a1d-71f1-40b4-b9cf-3edb94645943";
+    private static final String CONFIG_ID_THUMBNAIL_SCRUBBING = "8ca8d5b0-5cbd-477b-a4ae-0cf0e85942e7";
     @SuppressWarnings("FieldCanBeLocal")
     private static final String EDGE_API_BASE_URL_OVERRIDE = "https://playback.brightcovecdn.com/playback/v1";
 
@@ -46,10 +46,10 @@ public class MainActivity extends BrightcovePlayer {
         // Brightcove Edge service, given a video id, an account id and a policy key.
         EventEmitter eventEmitter = brightcoveVideoView.getEventEmitter();
 
-        Catalog.Builder catalogBuilder = new Catalog.Builder(eventEmitter, getString(R.string.account));
-        catalogBuilder.setBaseURL(EDGE_API_BASE_URL_OVERRIDE);
-        catalogBuilder.setPolicy(getString(R.string.policy));
-        Catalog catalog = catalogBuilder.build();
+        Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.account))
+                            .setBaseURL(EDGE_API_BASE_URL_OVERRIDE)
+                            .setPolicy(getString(R.string.policy))
+                            .build();
 
         // Set the HttpRequestConfig with the Ad Config Id configured in
         // your https://studio.brightcove.com account.
