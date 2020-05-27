@@ -393,7 +393,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
         if (imageUri == null) {
             holder.videoThumbnailImage.setImageResource(R.drawable.movie);
         } else {
-            Picasso.with(holder.context).load(imageUri.toASCIIString()).into(holder.videoThumbnailImage);
+            Picasso.get().load(imageUri.toASCIIString()).into(holder.videoThumbnailImage);
         }
 
         int duration = video.getDuration();
