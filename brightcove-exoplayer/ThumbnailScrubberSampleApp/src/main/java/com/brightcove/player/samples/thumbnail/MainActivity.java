@@ -14,10 +14,7 @@ import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
 
 /**
- * This app illustrates how to use the ExoPlayer with the Brightcove
- * Native Player SDK for Android.
- *
- * @author Billy Hnath (bhnath@brightcove.com)
+ * This app demonstrates the Brightcove Thumbnail Plugin and Thumbnail Scrubbing.
  */
 public class MainActivity extends BrightcovePlayer {
 
