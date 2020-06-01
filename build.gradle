@@ -127,6 +127,12 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     }
   }
 
+  if (project.name.contains('Thumbnail')) {
+    dependencies {
+      implementation "com.brightcove.player:android-thumbnail-plugin:${anpVersion}"
+    }
+  }
+
   if (project.parent.name.equals('brightcove-exoplayer') ||
           project.parent.name.equals('brightcove-player-controls')) {
     dependencies {
