@@ -12,12 +12,10 @@ import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventType;
-import com.brightcove.player.model.VideoFields;
 import com.brightcove.player.mediacontroller.BrightcoveMediaController;
 import com.brightcove.player.mediacontroller.BrightcoveSeekBar;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BaseVideoView;
-import com.brightcove.player.util.StringUtil;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.google.ads.interactivemedia.v3.api.AdDisplayContainer;
@@ -46,6 +44,8 @@ public class MainActivity extends BrightcovePlayer {
     private GoogleIMAComponent googleIMAComponent;
     private String adRulesURL = "http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=%2F15018773%2Feverything2&ciu_szs=300x250%2C468x60%2C728x90&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=dummy&correlator=[timestamp]&cmsid=133&vid=10XWSh7W4so&ad_rule=1";
 
+    private BrightcoveExoPlayerVideoView adsVideoView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // When extending the BrightcovePlayer, we must assign the BrightcoveExoPlayerVideoView before
@@ -53,6 +53,7 @@ public class MainActivity extends BrightcovePlayer {
         // management.
         setContentView(R.layout.ima_activity_main);
         brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
+        adsVideoView = findViewById(R.id.ads_video_view);
 
         // *** This method call is optional *** //
         setupAdMarkers(brightcoveVideoView);
@@ -119,7 +120,7 @@ public class MainActivity extends BrightcovePlayer {
                 // Create a container object for the ads to be presented.
                 AdDisplayContainer container = sdkFactory.createAdDisplayContainer();
                 container.setPlayer(googleIMAComponent.getVideoAdPlayer());
-                container.setAdContainer(brightcoveVideoView);
+                container.setAdContainer(adsVideoView);
 
                 // Build an ads request object and point it to the ad
                 // display container created above.
