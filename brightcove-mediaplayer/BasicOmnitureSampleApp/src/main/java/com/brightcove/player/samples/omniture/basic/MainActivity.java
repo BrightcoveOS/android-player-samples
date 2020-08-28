@@ -6,8 +6,10 @@ import android.util.Log;
 import com.brightcove.omniture.OmnitureComponent;
 import com.brightcove.player.edge.Catalog;
 import com.brightcove.player.edge.PlaylistListener;
+import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.model.Playlist;
+import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
 
@@ -37,14 +39,15 @@ public class MainActivity extends BrightcovePlayer {
         setupOmniture();
 
         // Add a test video to the BrightcoveVideoView.
-        Catalog catalog = new Catalog(eventEmitter, getString(R.string.account_id), getString(R.string.policy_key));
-        catalog.findPlaylistByReferenceID("play_2017_4_videos", new PlaylistListener() {
-            public void onPlaylist(Playlist playlist) {
-                brightcoveVideoView.addAll(playlist.getVideos());
-            }
+        Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.account_id))
+                .setPolicy(getString(R.string.policy_key))
+                .build();
 
-            public void onError(String error) {
-                Log.e(TAG, error);
+        catalog.findVideoByReferenceID("75sec-mp4-multi-rendition", new VideoListener() {
+            @Override
+            public void onVideo(Video video) {
+                brightcoveVideoView.add(video);
+                brightcoveVideoView.start();
             }
         });
     }
