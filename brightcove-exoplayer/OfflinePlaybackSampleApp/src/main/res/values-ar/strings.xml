@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">OfflinePlaybackSampleApp</string>
+
+    <!-- Fetching playlist-->
+    <string name="fetching_playlist">&#8230;إحضار قائمة التشغيل</string>
+
+    <!-- Fetch playlist error -->
+    <string name="fetching_playlist_error">تعذر جلب قائمة التشغيل بسبب خطأ. يرجى التحقق من اتصالك بالشبكة ثم المحاولة مرة أخرى.</string>
+
+    <!-- Fetching playlist-->
+    <string name="fetching_playlist_no_videos">لا توجد مقاطع فيديو في قائمة التشغيل هذه. الرجاء اختيار قائمة تشغيل أخرى.</string>
+
+    <!-- Offline playlist-->
+    <string name="offline_playlist_no_videos">لا توجد مقاطع فيديو محفوظة على هذا الجهاز</string>
+
+    <!-- Offline playlist-->
+    <string name="offline_playlist">&#8230;قائمة التشغيل دون اتصال</string>
+
+    <!-- Clear content designator -->
+    <string name="clear_content">نسخة دون اتصال</string>
+
+    <!-- Offline copy (for clear content) -->
+    <string name="video_download_clear_offline_copy">نسخة دون اتصال</string>
+
+    <!-- Buy or rent for offline playback -->
+    <string name="video_download_purchase_or_rent">اشترِ أو استأجر للتشغيل بلا إنترنت</string>
+
+    <!-- Owned -->
+    <string name="video_download_purchased">تم شراء التنزيل</string>
+
+    <!-- Checking download status -->
+    <string name="checking_download_status">&#8230;التحقق من حالة التنزيل</string>
+
+    <!-- Online only -->
+    <string name="online_only">على الانترنت فقط</string>
+
+    <!-- Press download to save video -->
+    <string name="press_to_save">اضغط على تنزيل لحفظ الفيديو</string>
+
+    <!-- Queueing download -->
+    <string name="queueing_download">تنزيل قائمة الانتظار</string>
+
+
+    <string name="video_estimated_size">…يظهر الحجم المقدر للفيديو هنا</string>
+</resources>
