@@ -8,26 +8,12 @@ Learn more about the [Brightcove Native Player SDKs](https://support.brightcove.
 The Android sample app projects in this repository can be inserted directly into Android Studio and subsequently executed or simulated.
 This version of the sample apps supports the latest Brightcove SDK and plugins.  The following sample apps are included:
 
-## Brightcove ExoPlayer 2 sample apps:
+## Brightcove ExoPlayer sample apps:
 
-### Important Notes about the ExoPlayer 2 sample apps
-1. The ExoPlayer sample apps on the master branch only support Google ExoPlayer 2.
-2. The Brightcove SDK using ExoPlayer v2 supports all features previously supported by ExoPlayer v1, including the following:
-   * VOD video formats: Mpeg-DASH, HLS, HLSe, MP4
-   * WebVTT Closed Captions
-   * Multiple Audio Track videos
-   * Client-side advertising with Google IMA and FreeWheel
-   * Live video, and Live video with DVR
-   * Server-side Ad Insertion
-   * DRM with Widevine Modular
-   * Offline playback of clear and DRM-protected content
-   * Playback in Android TV and Fire TV.
-   * Video 360 playback
-   * Omniture analytics.
+### An important note about the ExoPlayer sample apps
+The ExoPlayer sample apps on the master branch only support Google ExoPlayer 2.10.8, which is the currently supported version of ExoPlayer with the Brightcove Native SDK for Android.
 
-3. Please visit [Migrating Exoplayer 2 framework](https://support.brightcove.com/migrating-exoplayer-2-framework) for more information.
-
-### Brightcove sample apps using ExoPlayer 2
+### Brightcove sample apps using ExoPlayer
 
 * [360 Video Sample app](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/360VideoSampleApp/): This app shows how to use the Brightcove ExoPlayer to play 360 videos.
 
@@ -41,7 +27,9 @@ This version of the sample apps supports the latest Brightcove SDK and plugins. 
 
 * [Basic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicSampleApp): This app shows how to setup the Brightcove ExoPlayer to play.
 
-* [Basic Cast Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicCastSampleApp): This adds Google Chromecast support to the Brightcove Native Player SDK for Android. Please note that there is limited support for certain VideoCloud features. Please refer to the Release Notes in the v6.3.0 release of the Brightcove Native Player SDK for Android for more information.
+* [Basic Cast Sample App with Brightcove Cast Receiver](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicCastBrightcoveReceiverSampleApp): This adds Google Chromecast support to the Brightcove Native Player SDK for Android, and demonstrates integration with the upated Brightcove Cast Receiver app v2.0. Please refer to the Release Notes in the v6.16.0 release of the Brightcove Native Player SDK for Android for more information.
+
+* [Basic Cast Sample App with Google Cast Receiver](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicCastGoogleReceiverSampleApp): This adds Google Chromecast support to the Brightcove Native Player SDK for Android, and demonstrates integration with Google's Demo Receiver app. Please refer to the Release Notes in the v6.16.0 release of the Brightcove Native Player SDK for Android for more information.
 
 * [FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/FreeWheelSampleApp): This app shows how to use the Brightcove ExoPlayer with FreeWheel ads.
 
@@ -101,7 +89,7 @@ From Android Studio using Import
 1. Using the file selector dialog, select the top level **build.gradle** file from the cloned repo on your system,
 1. Click on OK and use default values on subsequent screens.
 
-Android Studio will now download/import and build the sample app.  At this point the samples will be in your instance of Android Studio where you can observe the snippets in action on a physical or virtual device, walk through the code using the Android Studio debugger, search on keywords or just browse Android source code.
+Android Studio will now download, import and build all of the sample apps.  At this point the samples will be in your instance of Android Studio where you can observe the snippets in action on a physical or virtual device, walk through the code using the Android Studio debugger, search on keywords or just browse Android source code.
 
 ## Overriding the default build behavior
 By default, the sample apps will build with the most recent Brightcove Android Native Player version at build time. To override this behavior with a specific version, create a file named **.gradle/gradle.properties** in your home directory and set the value of the property *anpVersion* to the desired version.  An invalid version will cause no sample app projects to be configured.
