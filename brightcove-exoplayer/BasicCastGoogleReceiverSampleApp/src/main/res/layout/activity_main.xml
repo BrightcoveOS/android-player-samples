@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+              android:orientation="vertical"
+             android:background="@android:color/white"
+             tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/video_list_label"
+        style="@android:style/TextAppearance.Holo.Large.Inverse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/default_video_list_text" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/video_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/castMiniController"
+        android:layout_below="@+id/video_list_label"
+        android:layout_margin="5dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <TextView
+        android:id="@+id/empty_list_message"
+        style="@android:style/TextAppearance.Holo.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/video_list_view"
+        android:visibility="gone" />
+
+    <!-- The minicontroller widget used to control playback on a cast device. -->
+    <fragment
+        android:id="@+id/castMiniController"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        class="com.google.android.gms.cast.framework.media.widget.MiniControllerFragment" />
+
+</RelativeLayout>

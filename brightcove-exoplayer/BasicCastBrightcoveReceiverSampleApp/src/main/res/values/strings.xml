@@ -1,29 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Basic Cast Sample App</string>
-
-    <!-- The application ID for the receiver applicaton. -->
-    <string name="cast_receiver_app_id">4F8B3483</string>
+    <string name="app_name">Basic Cast Sample App with Brightcove Receiver</string>
 
     <!-- The text to display on the Chromecast menu title. -->
     <string name="media_route_menu_title">Play on&#8230;</string>
 
     <!-- A sample Brightcove Edge Account ID -->
-    <string name="account">3636334163001</string>
+    <string name="accountId">5420904993001</string>
 
     <!-- A sample Brightcove Edge Policy Key -->
-    <string name="policy">BCpkADawqM1ZEczFURHXFgdyqvGPj4GWHEQka6QIs7hOwSFPffq-UI_ntgaa29FEMKY87rAd0jptOZHueqyDxjVBTGmfek97TLHSLPqJKWAmKx_YSiHdLdLp8uq9hhwTWs6qJIOkN9cA0qqp</string>
+    <string name="policyKey">BCpkADawqM1Ui0_Pf1vky51aMs6LC42kmrxlpeAVxFf1bXtDKneGKJiJQoQklpT4D3aKBBoG7ryONbKKQsxErIVqaXz35LbfeL_UAYIjKqxw8q3jgh8P9j47pMWvrQJON-4P1hC2LfFmuGA_</string>
 
     <!-- A sample Brightcove Playlist Reference ID -->
-    <string name="playlistRefId">cast_playlist_non_drm</string>
+    <string name="playlistReferenceId">android_sdk_demo_playlist</string>
 
-
-    <string name="media_title">Big Buck Bunny</string>
-    <string name="media_studio">Blender Foundation</string>
-    <string name="media_url">https://ia600408.us.archive.org/26/items/BigBuckBunny_328/BigBuckBunny_512kb.mp4</string>
-    <string name="media_thumbnail">https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images_480x270/BigBuckBunny.jpg</string>
-    <string name="media_image">https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images_780x1200/BigBuckBunny-780x1200.jpg</string>
+    <!-- A SSAI Ad Config -->
+    <string name="adConfigIdNonEmpty">ba5e4879-77f0-424b-8c98-706ae5ad7eec</string>
+    <string name="adConfigIdEmpty"></string>
 
     <string name="video_title">Video Title</string>
     <string name="video_thumbnail">Video Thumbnail</string>

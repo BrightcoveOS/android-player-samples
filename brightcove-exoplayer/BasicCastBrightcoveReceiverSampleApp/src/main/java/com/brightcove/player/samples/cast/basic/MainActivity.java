@@ -2,21 +2,28 @@ package com.brightcove.player.samples.cast.basic;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.core.util.Pair;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.Menu;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.brightcove.cast.DefaultSessionManagerListener;
 import com.brightcove.cast.GoogleCastComponent;
+import com.brightcove.cast.model.SplashScreen;
+import com.brightcove.cast.util.BrightcoveChannelUtil;
 import com.brightcove.player.edge.Catalog;
 import com.brightcove.player.edge.PlaylistListener;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventEmitterImpl;
 import com.brightcove.player.model.Playlist;
 import com.brightcove.player.model.Video;
+import com.google.android.gms.cast.framework.CastContext;
+import com.google.android.gms.cast.framework.CastSession;
+import com.google.android.gms.cast.framework.Session;
 
 public class MainActivity extends AppCompatActivity implements VideoListAdapter.ItemClickListener {
 
@@ -29,13 +36,29 @@ public class MainActivity extends AppCompatActivity implements VideoListAdapter.
         final VideoListAdapter videoListAdapter = new VideoListAdapter(this);
         videoListView.setAdapter(videoListAdapter);
         EventEmitter eventEmitter = new EventEmitterImpl();
-        Catalog catalog = new Catalog(eventEmitter, getString(R.string.account), getString(R.string.policy));
-        catalog.findPlaylistByReferenceID(getString(R.string.playlistRefId), new PlaylistListener() {
+        Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.accountId))
+                .setPolicy(getString(R.string.policyKey))
+                .build();
+        catalog.findPlaylistByReferenceID(getString(R.string.playlistReferenceId), new PlaylistListener() {
             @Override
             public void onPlaylist(Playlist playlist) {
                 videoListAdapter.setVideoList(playlist.getVideos());
             }
         });
+
+        CastContext castContext = CastContext.getSharedInstance();
+        if (castContext != null) {
+            castContext.getSessionManager().addSessionManagerListener(defaultSessionManagerListener);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        CastContext castContext = CastContext.getSharedInstance();
+        if (castContext != null) {
+            castContext.getSessionManager().removeSessionManagerListener(defaultSessionManagerListener);
+        }
     }
 
     @Override
@@ -57,4 +80,13 @@ public class MainActivity extends AppCompatActivity implements VideoListAdapter.
         GoogleCastComponent.setUpMediaRouteButton(this, menu);
         return true;
     }
+
+    private DefaultSessionManagerListener defaultSessionManagerListener = new DefaultSessionManagerListener() {
+        @Override
+        public void onSessionStarted(Session castSession, String s) {
+            super.onSessionStarted(castSession, s);
+            String src = "https://dev.acquia.com/sites/default/files/blog/brightcove-logo-horizontal-grey-new.png";
+            BrightcoveChannelUtil.castSplashScreen((CastSession) castSession, new SplashScreen(src));
+        }
+    };
 }
