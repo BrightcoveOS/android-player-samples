@@ -27,10 +27,9 @@ import com.brightcove.ssai.SSAIComponent;
 
 public class VideoPlayerActivity extends BrightcovePlayerActivity {
 
-    public static final String INTENT_EXTRA_VIDEO_ID = "com.brightcove.player.samples.cast.basic.VideoPlayerActivity.VIDEO_ID";
-    public static final String PROPERTY_APPLICATION_ID = "com.brightcove.player.samples.cast.basic";
-    public static final String PROPERTY_LONG_DESCRIPTION = "long_description";
-    public static final String PROPERTY_SHORT_DESCRIPTION = "description";
+    private static final String INTENT_EXTRA_VIDEO_ID = "com.brightcove.player.samples.cast.basic.VideoPlayerActivity.VIDEO_ID";
+    private static final String PROPERTY_APPLICATION_ID = "com.brightcove.player.samples.cast.basic";
+    private static final String PROPERTY_LONG_DESCRIPTION = "long_description";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
