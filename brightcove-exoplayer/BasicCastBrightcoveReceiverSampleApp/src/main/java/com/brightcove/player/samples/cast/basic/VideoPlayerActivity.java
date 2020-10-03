@@ -25,11 +25,13 @@ import com.brightcove.player.network.HttpRequestConfig;
 import com.brightcove.player.view.BrightcoveVideoView;
 import com.brightcove.ssai.SSAIComponent;
 
+import static com.brightcove.player.samples.cast.basic.Constants.INTENT_EXTRA_AD_CONFIG_ID;
+import static com.brightcove.player.samples.cast.basic.Constants.INTENT_EXTRA_VIDEO_ID;
+import static com.brightcove.player.samples.cast.basic.Constants.PROPERTY_LONG_DESCRIPTION;
+
 public class VideoPlayerActivity extends BrightcovePlayerActivity {
 
-    private static final String INTENT_EXTRA_VIDEO_ID = "com.brightcove.player.samples.cast.basic.VideoPlayerActivity.VIDEO_ID";
     private static final String PROPERTY_APPLICATION_ID = "com.brightcove.player.samples.cast.basic";
-    private static final String PROPERTY_LONG_DESCRIPTION = "long_description";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,20 +46,16 @@ public class VideoPlayerActivity extends BrightcovePlayerActivity {
 
         SSAIComponent ssaiComponent = new SSAIComponent(this, baseVideoView);
 
-        String videoId = getIntent().getStringExtra(VideoPlayerActivity.INTENT_EXTRA_VIDEO_ID);
+        String videoId = getIntent().getStringExtra(INTENT_EXTRA_VIDEO_ID);
+        String adConfigId = getIntent().getStringExtra(INTENT_EXTRA_AD_CONFIG_ID);
+
         Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.accountId))
                 .setPolicy(getString(R.string.policyKey))
                 .build();
 
-        // Note that SSAI is supported with the Brightcove Cast Receiver v2.0.0 and above
-        // To use this sample with SSAI, uncomment the following line:
-        // String adConfigId = getString(R.string.adConfigIdNonEmpty);
-
-        // Using an empty Ad Config ID will bypass SSAI processing in this sample app
-        String adConfigId = getString(R.string.adConfigIdEmpty);
-
         HttpRequestConfig.Builder httpRequestConfigBuilder = new HttpRequestConfig.Builder();
 
+        // Add the Ad Config ID to the HttpRequestConfig only if it is non-null and non-empty
         if (!TextUtils.isEmpty(adConfigId)) {
             httpRequestConfigBuilder.addQueryParameter(HttpRequestConfig.KEY_AD_CONFIG_ID, adConfigId);
         }
@@ -99,10 +97,11 @@ public class VideoPlayerActivity extends BrightcovePlayerActivity {
                 .setAccountId(getString(R.string.accountId))
                 // Set your account’s policy key
                 .setPolicyKey(getString(R.string.policyKey))
-                // Optional: Set your Playback Authorization JWT token here
+                // Optional: Set your Edge Playback Authorization (EPA) JWT token here
+                // Note that if you set the EPA token, you will not need to set the Policy Key
                 .setBrightcoveAuthorizationToken(null)
                 // Optional: For SSAI videos, set your adConfigId here
-                .setAdConfigId(null)
+                .setAdConfigId(adConfigId)
                 // Set your Analytics application ID here
                 .setApplicationId(PROPERTY_APPLICATION_ID)
                 .build();

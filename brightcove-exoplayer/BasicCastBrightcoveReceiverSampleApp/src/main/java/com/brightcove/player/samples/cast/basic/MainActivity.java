@@ -2,8 +2,10 @@ package com.brightcove.player.samples.cast.basic;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.CheckBox;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -25,12 +27,20 @@ import com.google.android.gms.cast.framework.CastContext;
 import com.google.android.gms.cast.framework.CastSession;
 import com.google.android.gms.cast.framework.Session;
 
+import static com.brightcove.player.samples.cast.basic.Constants.INTENT_EXTRA_AD_CONFIG_ID;
+import static com.brightcove.player.samples.cast.basic.Constants.INTENT_EXTRA_VIDEO_ID;
+
 public class MainActivity extends AppCompatActivity implements VideoListAdapter.ItemClickListener {
+
+    CheckBox chkBoxUseWithSsai;
+    String adConfigId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        chkBoxUseWithSsai = findViewById(R.id.chkBoxUseWithSsai);
 
         final RecyclerView videoListView = findViewById(R.id.video_list_view);
         final VideoListAdapter videoListAdapter = new VideoListAdapter(this);
@@ -50,6 +60,14 @@ public class MainActivity extends AppCompatActivity implements VideoListAdapter.
         if (castContext != null) {
             castContext.getSessionManager().addSessionManagerListener(defaultSessionManagerListener);
         }
+
+        chkBoxUseWithSsai.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                adConfigId = "ba5e4879-77f0-424b-8c98-706ae5ad7eec";
+            } else {
+                adConfigId = "";
+            }
+        });
     }
 
     @Override
@@ -64,7 +82,9 @@ public class MainActivity extends AppCompatActivity implements VideoListAdapter.
     @Override
     public void itemClicked(View view, Video video, int position) {
         Intent intent = new Intent(this, VideoPlayerActivity.class);
-        intent.putExtra(VideoPlayerActivity.INTENT_EXTRA_VIDEO_ID, video.getId());
+        intent.putExtra(INTENT_EXTRA_VIDEO_ID, video.getId());
+
+        intent.putExtra(INTENT_EXTRA_AD_CONFIG_ID, adConfigId);
 
         Pair<View, String> imagePair = Pair
                 .create(view, getString(R.string.transition_image));

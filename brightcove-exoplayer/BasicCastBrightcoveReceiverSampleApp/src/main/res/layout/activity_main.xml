@@ -26,6 +26,15 @@
         android:layout_margin="5dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
+    <CheckBox
+        android:id="@+id/chkBoxUseWithSsai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/video_list_view"
+        android:text="@string/use_with_ssai"
+        android:textColor="@android:color/tertiary_text_light"
+        android:checked="false" />
+
     <TextView
         android:id="@+id/empty_list_message"
         style="@android:style/TextAppearance.Holo.Medium"

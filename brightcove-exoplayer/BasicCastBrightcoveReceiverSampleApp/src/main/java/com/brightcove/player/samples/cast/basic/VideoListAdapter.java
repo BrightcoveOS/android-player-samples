@@ -21,7 +21,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static com.brightcove.player.samples.cast.basic.VideoPlayerActivity.PROPERTY_SHORT_DESCRIPTION;
+import static com.brightcove.player.samples.cast.basic.Constants.PROPERTY_SHORT_DESCRIPTION;
 
 public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.ViewHolder> {
 

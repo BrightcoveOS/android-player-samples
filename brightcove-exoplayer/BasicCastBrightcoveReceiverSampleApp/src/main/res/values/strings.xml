@@ -15,10 +15,6 @@
     <!-- A sample Brightcove Playlist Reference ID -->
     <string name="playlistReferenceId">android_sdk_demo_playlist</string>
 
-    <!-- A SSAI Ad Config -->
-    <string name="adConfigIdNonEmpty">ba5e4879-77f0-424b-8c98-706ae5ad7eec</string>
-    <string name="adConfigIdEmpty"></string>
-
     <string name="video_title">Video Title</string>
     <string name="video_thumbnail">Video Thumbnail</string>
     <string name="default_video_duration">00:00</string>
@@ -26,5 +22,7 @@
     <string name="video_long_description">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</string>
     <string name="default_video_list_text">Video List</string>
     <string name="transition_image">transition-image</string>
+
+    <string name="use_with_ssai">Play video with SSAI</string>
 
 </resources>
