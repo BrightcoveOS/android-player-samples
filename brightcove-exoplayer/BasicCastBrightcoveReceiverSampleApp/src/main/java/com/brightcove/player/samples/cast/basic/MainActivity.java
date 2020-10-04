@@ -2,7 +2,6 @@ package com.brightcove.player.samples.cast.basic;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
@@ -32,7 +31,7 @@ import static com.brightcove.player.samples.cast.basic.Constants.INTENT_EXTRA_VI
 
 public class MainActivity extends AppCompatActivity implements VideoListAdapter.ItemClickListener {
 
-    CheckBox chkBoxUseWithSsai;
+    CheckBox chkBoxPlayVideoWithSsai;
     String adConfigId;
 
     @Override
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements VideoListAdapter.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        chkBoxUseWithSsai = findViewById(R.id.chkBoxUseWithSsai);
+        chkBoxPlayVideoWithSsai = findViewById(R.id.chkBoxPlayVideoWithSsai);
 
         final RecyclerView videoListView = findViewById(R.id.video_list_view);
         final VideoListAdapter videoListAdapter = new VideoListAdapter(this);
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements VideoListAdapter.
             castContext.getSessionManager().addSessionManagerListener(defaultSessionManagerListener);
         }
 
-        chkBoxUseWithSsai.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        chkBoxPlayVideoWithSsai.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 adConfigId = "ba5e4879-77f0-424b-8c98-706ae5ad7eec";
             } else {

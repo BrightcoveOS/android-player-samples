@@ -23,6 +23,6 @@
     <string name="default_video_list_text">Video List</string>
     <string name="transition_image">transition-image</string>
 
-    <string name="use_with_ssai">Play video with SSAI</string>
+    <string name="use_with_ssai">Play Video With VideoCloud SSAI</string>
 
 </resources>
