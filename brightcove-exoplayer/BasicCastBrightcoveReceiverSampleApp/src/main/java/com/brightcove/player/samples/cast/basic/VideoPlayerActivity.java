@@ -108,7 +108,6 @@ public class VideoPlayerActivity extends BrightcovePlayerActivity {
 
         GoogleCastComponent googleCastComponent = new GoogleCastComponent.Builder(eventEmitter, this)
                 .setAutoPlay(true)
-                .setQueuingSupported(true)
                 .setEnableCustomData(true)
                 .setCustomData(customData)
                 .build();

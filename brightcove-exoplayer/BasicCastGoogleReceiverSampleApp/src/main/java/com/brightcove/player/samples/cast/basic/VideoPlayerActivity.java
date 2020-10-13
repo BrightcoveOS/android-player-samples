@@ -75,7 +75,6 @@ public class VideoPlayerActivity extends BrightcovePlayerActivity {
 
         GoogleCastComponent googleCastComponent = new GoogleCastComponent.Builder(eventEmitter, this)
                 .setAutoPlay(true)
-                .setQueuingSupported(true)
                 .build();
 
         //You can check if there is a session available
