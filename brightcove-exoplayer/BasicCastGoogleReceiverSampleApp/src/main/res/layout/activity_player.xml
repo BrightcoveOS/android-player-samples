@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".VideoPlayerActivity" >
+
+    <!-- The standard BrightcoveVideoView for media playback. -->
+    <com.brightcove.player.view.BrightcoveExoPlayerVideoView
+        android:id="@+id/brightcove_video_view"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:background="@android:color/black"
+        android:layout_gravity="center_horizontal|top"/>
+
+    <TextView
+        android:id="@+id/video_title_text"
+        style="@android:style/TextAppearance.Holo.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center_vertical"
+        android:maxLines="2"
+        android:minLines="1"
+        android:text="@string/video_title"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/video_description_text"
+        style="@android:style/TextAppearance.Holo.Small"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:textSize="14sp"
+        android:layout_weight="1"
+        android:text="@string/video_long_description"
+        android:textStyle="bold"/>
+
+    <!-- The minicontroller widget used to control playback on a cast device. -->
+    <fragment
+        android:id="@+id/castMiniController"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:visibility="gone"
+        class="com.google.android.gms.cast.framework.media.widget.MiniControllerFragment" />
+</LinearLayout>

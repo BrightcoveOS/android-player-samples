@@ -2,21 +2,21 @@ package com.brightcove.player.samples.cast.basic;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.core.view.ViewCompat;
-import androidx.appcompat.app.ActionBar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.core.view.ViewCompat;
 
 import com.brightcove.cast.GoogleCastComponent;
 import com.brightcove.cast.GoogleCastEventType;
 import com.brightcove.player.appcompat.BrightcovePlayerActivity;
 import com.brightcove.player.edge.Catalog;
 import com.brightcove.player.edge.VideoListener;
-import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
-import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventType;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcoveVideoView;
@@ -35,10 +35,14 @@ public class VideoPlayerActivity extends BrightcovePlayerActivity {
 
         // Perform the internal wiring to be able to make use of the BrightcovePlayerFragment.
         baseVideoView = (BrightcoveVideoView) findViewById(R.id.brightcove_video_view);
+        EventEmitter eventEmitter = baseVideoView.getEventEmitter();
         ViewCompat.setTransitionName(baseVideoView, getString(R.string.transition_image));
 
         String videoId = getIntent().getStringExtra(VideoPlayerActivity.INTENT_EXTRA_VIDEO_ID);
-        Catalog catalog = new Catalog(baseVideoView.getEventEmitter(), getString(R.string.account), getString(R.string.policy));
+        Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.account))
+                .setPolicy(getString(R.string.policy))
+                .build();
+
         catalog.findVideoByID(videoId, new VideoListener() {
             @Override
             public void onVideo(Video video) {
@@ -59,24 +63,19 @@ public class VideoPlayerActivity extends BrightcovePlayerActivity {
             }
         });
 
-        EventEmitter eventEmitter = baseVideoView.getEventEmitter();
-
         // Initialize the android_cast_plugin.
 
-        eventEmitter.on(GoogleCastEventType.CAST_SESSION_STARTED, new EventListener() {
-            @Override
-            public void processEvent(Event event) {
-                // Connection Started
-            }
-        });
-        eventEmitter.on(GoogleCastEventType.CAST_SESSION_ENDED, new EventListener() {
-            @Override
-            public void processEvent(Event event) {
-                // Connection Ended
-            }
+        eventEmitter.on(GoogleCastEventType.CAST_SESSION_STARTED, event -> {
+            // Connection Started
         });
 
-        GoogleCastComponent googleCastComponent = new GoogleCastComponent(eventEmitter, this);
+        eventEmitter.on(GoogleCastEventType.CAST_SESSION_ENDED, event -> {
+            // Connection Ended
+        });
+
+        GoogleCastComponent googleCastComponent = new GoogleCastComponent.Builder(eventEmitter, this)
+                .setAutoPlay(true)
+                .build();
 
         //You can check if there is a session available
         googleCastComponent.isSessionAvailable();
@@ -90,7 +89,7 @@ public class VideoPlayerActivity extends BrightcovePlayerActivity {
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         EventEmitter eventEmitter = baseVideoView.getEventEmitter();
         ActionBar actionBar = getSupportActionBar();

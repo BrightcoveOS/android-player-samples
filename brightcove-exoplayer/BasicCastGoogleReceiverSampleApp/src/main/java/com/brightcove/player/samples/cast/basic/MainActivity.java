@@ -2,13 +2,14 @@ package com.brightcove.player.samples.cast.basic;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.Menu;
-import android.view.View;
 
 import com.brightcove.cast.GoogleCastComponent;
 import com.brightcove.player.edge.Catalog;
@@ -29,7 +30,9 @@ public class MainActivity extends AppCompatActivity implements VideoListAdapter.
         final VideoListAdapter videoListAdapter = new VideoListAdapter(this);
         videoListView.setAdapter(videoListAdapter);
         EventEmitter eventEmitter = new EventEmitterImpl();
-        Catalog catalog = new Catalog(eventEmitter, getString(R.string.account), getString(R.string.policy));
+        Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.account))
+                .setPolicy(getString(R.string.policy))
+                .build();
         catalog.findPlaylistByReferenceID(getString(R.string.playlistRefId), new PlaylistListener() {
             @Override
             public void onPlaylist(Playlist playlist) {

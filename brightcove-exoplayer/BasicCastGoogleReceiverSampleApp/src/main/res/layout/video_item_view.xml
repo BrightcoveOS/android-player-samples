@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:background="@color/white_semi_trans"
+                android:paddingTop="10dp">
+
+    <TextView
+        android:id="@+id/video_title_text"
+        style="@android:style/TextAppearance.Holo.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="2dp"
+        android:gravity="center_vertical"
+        android:maxLines="2"
+        android:minLines="1"
+        android:text="@string/video_title"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/video_thumbnail_image"
+        android:layout_width="150dp"
+        android:layout_height="85dp"
+        android:layout_marginEnd="10dp"
+        android:layout_below="@+id/video_title_text"
+        android:layout_alignWithParentIfMissing="true"
+        android:contentDescription="@string/video_thumbnail"
+        android:saveEnabled="false"
+        android:scaleType="centerCrop"
+        android:src="@android:drawable/gallery_thumb" />
+
+    <TextView
+        android:id="@+id/video_duration_text"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/video_thumbnail_image"
+        android:layout_alignEnd="@+id/video_thumbnail_image"
+        android:layout_margin="5dp"
+        android:background="@android:color/black"
+        android:textColor="@android:color/white"
+        android:padding="2dp"
+        android:text="@string/default_video_duration" />
+
+    <TextView
+        android:id="@+id/video_description_text"
+        style="@android:style/TextAppearance.Holo.Small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/video_thumbnail_image"
+        android:layout_below="@+id/video_title_text"
+        android:layout_marginEnd="10dp"
+        android:ellipsize="marquee"
+        android:textSize="12sp"
+        android:text="@string/video_short_description"
+        android:textStyle="bold"/>
+
+
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/download_progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_below="@+id/video_thumbnail_image"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

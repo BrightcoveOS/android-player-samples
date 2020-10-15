@@ -1,14 +1,15 @@
 package com.brightcove.player.samples.cast.basic;
 
 import android.annotation.SuppressLint;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.brightcove.player.model.Video;
 import com.squareup.picasso.Picasso;
@@ -20,7 +21,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static com.brightcove.player.samples.cast.basic.VideoPlayerActivity.PROPS_SHORT_DESCRIPTION;
+import static com.brightcove.player.samples.cast.basic.Constants.PROPERTY_SHORT_DESCRIPTION;
 
 public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.ViewHolder> {
 
@@ -45,7 +46,8 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @NonNull
+    public ViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.video_item_view, parent, false);
 
         return new ViewHolder(view);
@@ -56,7 +58,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
         final Video video = videoList.get(position);
         holder.videoTitleText.setText(video.getName());
 
-        Object descriptionObj = video.getProperties().get(PROPS_SHORT_DESCRIPTION);
+        Object descriptionObj = video.getProperties().get(PROPERTY_SHORT_DESCRIPTION);
         if (descriptionObj instanceof String) {
             holder.videoDescriptionText.setText((String) descriptionObj);
         }
@@ -77,12 +79,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
             Picasso.get().load(imageUri.toASCIIString()).into(holder.videoThumbnailImage);
         }
 
-        holder.videoThumbnailImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clickListener.itemClicked(view, video, position);
-            }
-        });
+        holder.videoThumbnailImage.setOnClickListener(view -> clickListener.itemClicked(view, video, position));
     }
 
     @Override
