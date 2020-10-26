@@ -154,7 +154,7 @@ public class MainActivity extends BrightcovePlayer {
             // Create a container object for the ads to be presented.
             AdDisplayContainer container = googleIMAComponent.getAdDisplayContainer();
 
-            if (container != null) {
+            if (container != null && !brightcoveVideoView.getBrightcoveMediaController().isTvMode) {
                 // Populate the container with the companion ad slots.
                 ArrayList<CompanionAdSlot> companionAdSlots = new ArrayList<>();
                 CompanionAdSlot companionAdSlot = sdkFactory.createCompanionAdSlot();
