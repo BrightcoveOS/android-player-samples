@@ -104,6 +104,9 @@ To stop the daemon after the build completes, run the following:
 1. To run a sample app on an Android 5.0 or later device, plug the device into the computer and ensure that USB debugging is enabled.
 1. Select a sample app from the *Run/Debug Configuration* selector and click on the run (green button) icon to start the sample.
 
+## Support
+If you have questions, need help or want to provide feedback, please use the [Support Portal](https://supportportal.brightcove.com/s/login/) or contact your Account Manager.  To receive notification of new SDK software releases, subscribe to the Brightcove Native Player SDKs [Google Group](https://groups.google.com/g/brightcove-native-player-sdks).
+
 Enjoy!
 
 The Brightcove Player Android Team
