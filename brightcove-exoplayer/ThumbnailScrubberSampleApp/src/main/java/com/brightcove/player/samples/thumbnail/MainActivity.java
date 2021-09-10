@@ -19,9 +19,9 @@ public class MainActivity extends BrightcovePlayer {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    // Note that Edge API v2 is required for the Thumbnail Scrubbing feature.
-    @SuppressWarnings("FieldCanBeLocal")
-    private static final String EDGE_API_BASE_URL_OVERRIDE = "https://playback.brightcovecdn.com/playback/v1";
+//    // Note that Edge API v2 is required for the Thumbnail Scrubbing feature.
+//    @SuppressWarnings("FieldCanBeLocal")
+//    private static final String EDGE_API_BASE_URL_OVERRIDE = "https://playback.brightcovecdn.com/playback/v1";
 
 
     @Override
@@ -41,7 +41,7 @@ public class MainActivity extends BrightcovePlayer {
         // Create a Catalog object to fetch a video from the Brightcove Edge service.
         // Apply the Edge API override here to point the Catalog to Edge API v2
         Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.account))
-                            .setBaseURL(EDGE_API_BASE_URL_OVERRIDE)
+//                            .setBaseURL(EDGE_API_BASE_URL_OVERRIDE)
                             .setPolicy(getString(R.string.policy))
                             .build();
 
