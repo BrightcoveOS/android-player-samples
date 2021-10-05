@@ -58,6 +58,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     defaultConfig {
       minSdkVersion ANDROID_MIN_SDK_VERSION
       targetSdkVersion ANDROID_TARGET_SDK_VERSION
+      multiDexEnabled true
     }
 
     compileOptions {
@@ -95,6 +96,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
 
   dependencies {
     implementation "com.brightcove.player:android-sdk:${anpVersion}"
+    implementation "com.android.support:multidex:${MULTIDEX_VERSION}"
   }
 
   if (project.name.contains('IMA')) {

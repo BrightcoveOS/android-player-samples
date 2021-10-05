@@ -18,7 +18,7 @@ public class MainActivity extends BrightcovePlayerActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Video video = Video.createVideo("http://media.w3.org/2010/05/sintel/trailer.mp4", DeliveryType.MP4);
+        Video video = Video.createVideo("https://media.w3.org/2010/05/sintel/trailer.mp4", DeliveryType.MP4);
         baseVideoView.add(video);
         baseVideoView.getAnalytics().setAccount("1760897681001");
         baseVideoView.start();
