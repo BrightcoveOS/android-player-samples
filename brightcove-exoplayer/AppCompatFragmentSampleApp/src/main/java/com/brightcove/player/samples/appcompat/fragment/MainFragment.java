@@ -19,7 +19,7 @@ public class MainFragment extends BrightcovePlayerFragment {
         baseVideoView = (BaseVideoView) result.findViewById(R.id.brightcove_video_view);
         super.onCreateView(inflater, container, savedInstanceState);
 
-        Video video = Video.createVideo("http://media.w3.org/2010/05/sintel/trailer.mp4", DeliveryType.MP4);
+        Video video = Video.createVideo("https://media.w3.org/2010/05/sintel/trailer.mp4", DeliveryType.MP4);
         baseVideoView.add(video);
         baseVideoView.getAnalytics().setAccount("1760897681001");
         baseVideoView.start();
