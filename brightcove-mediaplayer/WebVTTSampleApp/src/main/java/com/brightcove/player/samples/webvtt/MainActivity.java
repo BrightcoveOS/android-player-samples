@@ -5,7 +5,6 @@ import android.os.Bundle;
 import com.brightcove.player.captioning.BrightcoveCaptionFormat;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
-import com.brightcove.player.controller.BrightcoveClosedCaptioningController;
 import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventType;

@@ -12,8 +12,6 @@ import com.brightcove.player.view.BrightcovePlayer;
 import com.google.android.exoplayer2.metadata.Metadata;
 import com.google.android.exoplayer2.metadata.id3.Id3Frame;
 
-import java.util.List;
-
 /**
  * This app illustrates how to use ID3 tags with the Brightcove
  * ExoPlayer player for Android.
