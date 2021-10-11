@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
         adapterView = new AdapterView();
         videoListView.setAdapter(adapterView);
-
-        catalog = new Catalog(eventEmitter, ACCOUNT_ID, POLICY_KEY);
+        catalog = new Catalog.Builder(eventEmitter, ACCOUNT_ID)
+                .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL).setPolicy(POLICY_KEY).build();
         catalog.findPlaylistByReferenceID(PLAYLIST_REF, new PlaylistListener() {
             @Override
             public void onPlaylist(Playlist playlist) {

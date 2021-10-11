@@ -14,6 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.brightcove.player.edge.Catalog;
+import com.brightcove.player.edge.CatalogError;
 import com.brightcove.player.edge.OfflineCallback;
 import com.brightcove.player.edge.OfflineCatalog;
 import com.brightcove.player.edge.PlaylistListener;
@@ -143,8 +145,10 @@ public class MainActivity extends BrightcovePlayer {
         emptyListMessage = ViewUtil.findView(this, R.id.empty_list_message);
 
         brightcoveVideoView = ViewUtil.findView(this, R.id.brightcove_video_view);
+
         EventEmitter eventEmitter = brightcoveVideoView.getEventEmitter();
-        catalog = new OfflineCatalog(this, eventEmitter, ACCOUNT_ID, POLICY_KEY);
+        catalog = new OfflineCatalog.Builder(this,eventEmitter, ACCOUNT_ID)
+                .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL).setPolicy(POLICY_KEY).build();
 
         //Configure downloads through the catalog.
         catalog.setMobileDownloadAllowed(true);
@@ -185,10 +189,8 @@ public class MainActivity extends BrightcovePlayer {
                 }
 
                 @Override
-                public void onError(String error) {
-                    String message = showToast("Failed to find playlist[%s]: %s", playlist.displayName, error);
-                    Log.w(TAG, message);
-                    onVideoListUpdated(true);
+                public void onError(List<CatalogError> errors) {
+                    super.onError(errors);
                 }
             });
         } else {
@@ -573,10 +575,8 @@ public class MainActivity extends BrightcovePlayer {
         }
 
         @Override
-        public void onError(String error) {
-            String message = showToast(
-                    "Cannot find '%s' video: %s", video.getName(), error);
-            Log.e(TAG, message);
+        public void onError(List<CatalogError> errors) {
+            super.onError(errors);
         }
     }
 
