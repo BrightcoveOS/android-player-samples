@@ -29,9 +29,13 @@ public class MainActivity extends BrightcovePlayer {
         eventEmitter = brightcoveVideoView.getEventEmitter();
 
         super.onCreate(savedInstanceState);
+
         // Add a test video to the BrightcoveVideoView.
         Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.account_id))
-                .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL).setPolicy(getString(R.string.policy_key)).build();
+                .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
+                .setPolicy(getString(R.string.policy_key))
+                .build();
+
         catalog.findVideoByID("4866305819001", new VideoListener() {
             public void onVideo(Video video) {
                 brightcoveVideoView.add(video);
