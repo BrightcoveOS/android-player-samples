@@ -39,6 +39,7 @@ public class VideoPlayerActivity extends BrightcovePlayerActivity {
         ViewCompat.setTransitionName(baseVideoView, getString(R.string.transition_image));
 
         String videoId = getIntent().getStringExtra(VideoPlayerActivity.INTENT_EXTRA_VIDEO_ID);
+
         Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.account))
                 .setPolicy(getString(R.string.policy))
                 .build();

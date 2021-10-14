@@ -147,8 +147,11 @@ public class MainActivity extends BrightcovePlayer {
         brightcoveVideoView = ViewUtil.findView(this, R.id.brightcove_video_view);
 
         EventEmitter eventEmitter = brightcoveVideoView.getEventEmitter();
+
         catalog = new OfflineCatalog.Builder(this,eventEmitter, ACCOUNT_ID)
-                .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL).setPolicy(POLICY_KEY).build();
+                .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
+                .setPolicy(POLICY_KEY)
+                .build();
 
         //Configure downloads through the catalog.
         catalog.setMobileDownloadAllowed(true);

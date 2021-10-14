@@ -45,9 +45,11 @@ public class MainActivity extends AppCompatActivity implements VideoListAdapter.
         final VideoListAdapter videoListAdapter = new VideoListAdapter(this);
         videoListView.setAdapter(videoListAdapter);
         EventEmitter eventEmitter = new EventEmitterImpl();
+
         Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.accountId))
                 .setPolicy(getString(R.string.policyKey))
                 .build();
+
         catalog.findPlaylistByReferenceID(getString(R.string.playlistReferenceId), new PlaylistListener() {
             @Override
             public void onPlaylist(Playlist playlist) {

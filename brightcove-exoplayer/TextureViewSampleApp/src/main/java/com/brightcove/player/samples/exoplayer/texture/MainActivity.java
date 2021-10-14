@@ -32,8 +32,11 @@ public class MainActivity extends BrightcovePlayer {
         // Brightcove Edge service, given a video id, an account id and a policy key.
         EventEmitter eventEmitter = brightcoveVideoView.getEventEmitter();
         String account = getString(R.string.account);
+
         Catalog catalog = new Catalog.Builder(eventEmitter, account)
-                .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL).setPolicy(getString(R.string.policy)).build();
+                .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
+                .setPolicy(getString(R.string.policy))
+                .build();
 
         catalog.findVideoByID(getString(R.string.videoId), new VideoListener() {
 

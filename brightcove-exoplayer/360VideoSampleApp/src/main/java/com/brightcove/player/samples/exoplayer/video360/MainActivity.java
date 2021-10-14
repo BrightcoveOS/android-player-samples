@@ -25,8 +25,11 @@ public class MainActivity extends BrightcovePlayer {
 
         EventEmitter eventEmitter = brightcoveVideoView.getEventEmitter();
         String account = getString(R.string.account);
+
         Catalog catalog = new Catalog.Builder(eventEmitter, account)
-                .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL).setPolicy(getString(R.string.policy)).build();
+                .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
+                .setPolicy(getString(R.string.policy))
+                .build();
 
         catalog.findVideoByID(getString(R.string.videoId), new VideoListener() {
             @Override

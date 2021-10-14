@@ -30,8 +30,12 @@ public class MainActivity extends BrightcovePlayer {
         super.onCreate(savedInstanceState);
         String account = "3303963094001";
         String policy = "BCpkADawqM3zXLtsEM0nAyA_3o3TmZnG6bZTXFmjZ8X_rmFMqlpB78l0aiRELs7MWACf4mYN92qMOLMxfZN6Xr3cQ_0R3G2qBiho3X3Nc2yTv7DH4APQ";
+
         Catalog catalog = new Catalog.Builder(brightcoveVideoView.getEventEmitter(), account)
-                .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL).setPolicy(policy).build();
+                .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
+                .setPolicy(policy)
+                .build();
+
         catalog.findVideoByID("4283173439001", new VideoListener() {
             @Override
             public void onVideo(Video video) {
