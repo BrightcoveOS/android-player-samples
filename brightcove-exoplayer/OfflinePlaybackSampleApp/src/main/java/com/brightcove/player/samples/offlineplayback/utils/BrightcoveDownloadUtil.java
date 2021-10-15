@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.brightcove.player.model.MediaFormat;
-import com.brightcove.player.model.Video;
 import com.brightcove.player.offline.MediaDownloadable;
 
 import java.util.ArrayList;

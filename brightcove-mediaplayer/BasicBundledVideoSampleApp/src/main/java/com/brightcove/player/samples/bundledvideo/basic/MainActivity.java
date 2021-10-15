@@ -2,8 +2,7 @@ package com.brightcove.player.samples.bundledvideo.basic;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.widget.MediaController;
-import com.brightcove.player.event.EventEmitter;
+
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;

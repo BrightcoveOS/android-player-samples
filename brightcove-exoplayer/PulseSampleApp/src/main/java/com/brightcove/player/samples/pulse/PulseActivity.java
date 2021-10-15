@@ -36,6 +36,7 @@ public class PulseActivity extends BrightcovePlayer {
         // Get the event emitter from the SDK and create a catalog request to fetch a video from the
         // Brightcove Edge service, given a video id, an account id and a policy key.
         EventEmitter eventEmitter = brightcoveVideoView.getEventEmitter();
+
         Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.account))
                 .setPolicy(getString(R.string.policy))
                 .build();
