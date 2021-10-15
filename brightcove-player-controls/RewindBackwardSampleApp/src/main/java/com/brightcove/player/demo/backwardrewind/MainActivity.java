@@ -7,7 +7,6 @@ import com.brightcove.player.view.BrightcoveVideoView;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 
 /**
  * This app illustrates customizing the rewind button glyph using the Brightcove media controller.  The code for the

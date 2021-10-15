@@ -36,9 +36,11 @@ public class MainActivity extends BrightcovePlayer {
         super.onCreate(savedInstanceState);
 
         final EventEmitter eventEmitter = brightcoveVideoView.getEventEmitter();
-        Catalog catalog = new Catalog(eventEmitter,
-                getString(R.string.sdk_demo_account),
-                getString(R.string.sdk_demo_policy_key));
+
+        Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.sdk_demo_account))
+                .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
+                .setPolicy(getString(R.string.sdk_demo_policy_key))
+                .build();
 
         // Setup the error event handler for the SSAI plugin.
         registerErrorEventHandler();

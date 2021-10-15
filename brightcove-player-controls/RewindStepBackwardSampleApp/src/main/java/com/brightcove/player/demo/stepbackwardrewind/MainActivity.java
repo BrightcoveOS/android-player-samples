@@ -1,16 +1,12 @@
 package com.brightcove.player.demo.stepbackwardrewind;
 
 import com.brightcove.player.model.DeliveryType;
-import com.brightcove.player.mediacontroller.BrightcoveMediaController;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.player.view.BrightcoveVideoView;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-
-import static android.provider.ContactsContract.Directory.PACKAGE_NAME;
 
 /**
  * This app illustrates customizing the rewind button glyph using the Brightcove media controller.  The code for the

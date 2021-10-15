@@ -26,7 +26,11 @@ public class MainActivity extends BrightcovePlayer {
         // Get the event emitter from the SDK and create a catalog request to fetch a video from the
         // Brightcove Edge service, given a video id, an account id and a policy key.
         EventEmitter eventEmitter = brightcoveVideoView.getEventEmitter();
-        Catalog catalog = new Catalog(eventEmitter, getString(R.string.account), getString(R.string.policy));
+
+        Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.account))
+                .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
+                .setPolicy(getString(R.string.policy))
+                .build();
 
         catalog.findVideoByID(getString(R.string.videoId), new VideoListener() {
 
