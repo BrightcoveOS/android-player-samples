@@ -1,9 +1,3 @@
-include ':brightcove-mediaplayer:AdRulesIMASampleApp'
-include ':brightcove-mediaplayer:BasicBundledVideoSampleApp'
-include ':brightcove-mediaplayer:BasicIMASampleApp'
-include ':brightcove-mediaplayer:BasicTextureViewSampleApp'
-include ':brightcove-mediaplayer:WebVTTSampleApp'
-
 // For building exoplayer-specific sample apps, which are located under the 'brightcove-exoplayer' directory.
 include ':brightcove-exoplayer:360VideoSampleApp'
 include ':brightcove-exoplayer:BasicCastGoogleReceiverSampleApp'
@@ -40,23 +34,12 @@ if (freewheelDependenciesAreSatisfied()) {
     include ':brightcove-exoplayer:FreeWheelWidevineModularSampleApp'
 }
 
-// Omniture samples require adobe-adms.jar to be added to the libs
-// folder.  This jar can be acquired from Adobe.
-if (omnitureDependenciesAreSatisfied()) {
-    include ':brightcove-mediaplayer:BasicOmnitureSampleApp'
-}
-
 if (pulseDependenciesAreSatisfied()) {
     include ':brightcove-exoplayer:PulseSampleApp'
 }
 
 boolean freewheelDependenciesAreSatisfied() {
     File dep = file("${System.getProperty("user.home")}/libs/AdManager.aar")
-    return dep.exists()
-}
-
-boolean omnitureDependenciesAreSatisfied() {
-    File dep = file("${System.getProperty("user.home")}/libs/adobeMobileLibrary.jar")
     return dep.exists()
 }
 
