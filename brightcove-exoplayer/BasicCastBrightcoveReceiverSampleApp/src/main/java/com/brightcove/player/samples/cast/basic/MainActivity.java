@@ -84,14 +84,10 @@ public class MainActivity extends AppCompatActivity implements VideoListAdapter.
     public void itemClicked(View view, Video video, int position) {
         Intent intent = new Intent(this, VideoPlayerActivity.class);
         intent.putExtra(INTENT_EXTRA_VIDEO_ID, video.getId());
-
         intent.putExtra(INTENT_EXTRA_AD_CONFIG_ID, adConfigId);
-
-        Pair<View, String> imagePair = Pair
-                .create(view, getString(R.string.transition_image));
+        Pair<View, String> imagePair = Pair.create(view, getString(R.string.transition_image));
         //noinspection unchecked
-        ActivityOptionsCompat options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(this, imagePair);
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, imagePair);
         ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 

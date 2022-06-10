@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.brightcove.player.model.Video;
+import static com.brightcove.player.util.NumberUtil.safeLongToInt;
 import com.squareup.picasso.Picasso;
 
 import java.net.URI;
@@ -63,7 +64,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
             holder.videoDescriptionText.setText((String) descriptionObj);
         }
 
-        int duration = video.getDuration();
+        int duration = safeLongToInt(video.getDurationLong());
         if (duration > 0) {
             holder.videoDurationText.setText(millisecondsToString(duration));
             holder.videoDurationText.setVisibility(View.VISIBLE);
