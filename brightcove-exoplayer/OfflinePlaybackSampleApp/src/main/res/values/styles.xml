@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
@@ -21,7 +21,7 @@
         <item name="android:background">@color/black_overlay</item>
     </style>
 
-    <style name="DialogWithTitle" parent="@style/Theme.AppCompat.DayNight.Dialog">
+    <style name="DialogWithTitle" parent="@style/Theme.AppCompat.Light.Dialog">
         <item name="android:windowNoTitle">false</item>
     </style>
 </resources>
