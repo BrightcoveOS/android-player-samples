@@ -6,10 +6,11 @@ import android.view.ViewGroup;
 
 import com.brightcove.freewheel.controller.FreeWheelController;
 import com.brightcove.freewheel.event.FreeWheelEventType;
+import com.brightcove.player.edge.Catalog;
+import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
-import com.brightcove.player.model.DeliveryType;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
@@ -46,9 +47,17 @@ public class MainActivity extends BrightcovePlayer {
 
         eventEmitter = brightcoveVideoView.getEventEmitter();
 
-        Video video = Video.createVideo("https://hlsak-a.akamaihd.net/3636334163001/3636334163001_5566790474001_5566768721001.m3u8?pubId=3636334163001&videoId=5566768721001", DeliveryType.HLS);
-        video.getProperties().put(Video.Fields.PUBLISHER_ID, "3636334163001");
-        brightcoveVideoView.add(video);
+        Catalog catalog = new Catalog.Builder(brightcoveVideoView.getEventEmitter(), getString(R.string.account))
+                .setPolicy(getString(R.string.policy))
+                .build();
+
+        catalog.findVideoByID(getString(R.string.videoId), new VideoListener() {
+            @Override
+            public void onVideo(Video video) {
+                brightcoveVideoView.add(video);
+                brightcoveVideoView.start();
+            }
+        });
 
         setupFreeWheel();
 
@@ -72,18 +81,17 @@ public class MainActivity extends BrightcovePlayer {
         //freeWheelController.setSiteSectionId("3pqa_section");
         freeWheelController.setSiteSectionId("3pqa_section_nocbp");
 
-        eventEmitter.on(FreeWheelEventType.SHOW_DISPLAY_ADS, new EventListener() {
-            @Override
-            public void processEvent(Event event) {
-                @SuppressWarnings("unchecked")
-                List<ISlot> slots = (List<ISlot>) event.properties.get(FreeWheelController.AD_SLOTS_KEY);
-                ViewGroup adView = findViewById(R.id.ad_frame);
+        eventEmitter.on(FreeWheelEventType.SHOW_DISPLAY_ADS, event -> {
+            @SuppressWarnings("unchecked")
+            List<ISlot> slots = (List<ISlot>) event.properties.get(FreeWheelController.AD_SLOTS_KEY);
+            ViewGroup adView = findViewById(R.id.ad_frame);
 
-                // Clean out any previous display ads
-                for (int i = 0; i < adView.getChildCount(); i++) {
-                    adView.removeViewAt(i);
-                }
+            // Clean out any previous display ads
+            for (int i = 0; i < adView.getChildCount(); i++) {
+                adView.removeViewAt(i);
+            }
 
+            if (slots != null) {
                 for (ISlot slot : slots) {
                     adView.addView(slot.getBase());
                     slot.play();
@@ -91,56 +99,53 @@ public class MainActivity extends BrightcovePlayer {
             }
         });
 
-        eventEmitter.on(FreeWheelEventType.WILL_SUBMIT_AD_REQUEST, new EventListener() {
-            @Override
-            public void processEvent(Event event) {
-                Video video = (Video) event.properties.get(Event.VIDEO);
-                IAdContext adContext = (IAdContext) event.properties.get(FreeWheelController.AD_CONTEXT_KEY);
-                IConstants adConstants = adContext.getConstants();
-                AdRequestConfiguration adRequestConfiguration =
-                        (AdRequestConfiguration) event.properties.get(FreeWheelController.AD_REQUEST_CONFIGURATION_KEY);
+        eventEmitter.on(FreeWheelEventType.WILL_SUBMIT_AD_REQUEST, event -> {
+            Video video = (Video) event.properties.get(Event.VIDEO);
+            IAdContext adContext = (IAdContext) event.properties.get(FreeWheelController.AD_CONTEXT_KEY);
+            IConstants adConstants = adContext.getConstants();
+            AdRequestConfiguration adRequestConfiguration =
+                    (AdRequestConfiguration) event.properties.get(FreeWheelController.AD_REQUEST_CONFIGURATION_KEY);
 
-                // This overrides what the plugin does by default for setVideoAsset() which is to pass in currentVideo.getId().
-                VideoAssetConfiguration fwVideoAssetConfiguration = new VideoAssetConfiguration(
-                        "3pqa_video",
-                        IConstants.IdType.CUSTOM,
-                        //FW uses their duration as seconds; Android is in milliseconds
-                        video.getDuration()/1000,
-                        IConstants.VideoAssetDurationType.EXACT,
-                        IConstants.VideoAssetAutoPlayType.ATTENDED);
-                adRequestConfiguration.setVideoAssetConfiguration(fwVideoAssetConfiguration);
+            // This overrides what the plugin does by default for setVideoAsset() which is to pass in currentVideo.getId().
+            VideoAssetConfiguration fwVideoAssetConfiguration = new VideoAssetConfiguration(
+                    "3pqa_video",
+                    IConstants.IdType.CUSTOM,
+                    //FW uses their duration as seconds; Android is in milliseconds
+                    video.getDurationLong()/1000,
+                    IConstants.VideoAssetDurationType.EXACT,
+                    IConstants.VideoAssetAutoPlayType.ATTENDED);
+            adRequestConfiguration.setVideoAssetConfiguration(fwVideoAssetConfiguration);
 
-                NonTemporalSlotConfiguration companionSlot = new NonTemporalSlotConfiguration("300x250slot", null, 300, 250);
-                companionSlot.setCompanionAcceptance(true);
-                adRequestConfiguration.addSlotConfiguration(companionSlot);
+            NonTemporalSlotConfiguration companionSlot = new NonTemporalSlotConfiguration("300x250slot", null, 300, 250);
+            companionSlot.setCompanionAcceptance(true);
+            adRequestConfiguration.addSlotConfiguration(companionSlot);
 
-                // Add preroll
-                Log.v(TAG, "Adding temporal slot for prerolls");
-                TemporalSlotConfiguration prerollSlot = new TemporalSlotConfiguration("larry", adConstants.ADUNIT_PREROLL(), 0);
-                adRequestConfiguration.addSlotConfiguration(prerollSlot);
+            // Add preroll
+            Log.v(TAG, "Adding temporal slot for prerolls");
+            TemporalSlotConfiguration prerollSlot = new TemporalSlotConfiguration("larry", adConstants.ADUNIT_PREROLL(), 0);
+            adRequestConfiguration.addSlotConfiguration(prerollSlot);
 
-                // Add midroll
-                Log.v(TAG, "Adding temporal slot for midrolls: duration = " + brightcoveVideoView.getDuration());
+            // Add midroll
+            Log.v(TAG, "Adding temporal slot for midrolls: duration = " + brightcoveVideoView.getDurationLong());
 
-                int midrollCount = 4;
-                int segmentLength = (brightcoveVideoView.getDuration() / 1000) / (midrollCount + 1);
+            int midrollCount = 1;
+            long segmentLength = (video.getDurationLong() / 1000) / (midrollCount + 1);
 
-                TemporalSlotConfiguration midrollSlot;
-                for (int i = 0; i < midrollCount; i++) {
-                    midrollSlot = new TemporalSlotConfiguration("moe" + i, adConstants.ADUNIT_MIDROLL(), segmentLength * (i + 1));
-                    adRequestConfiguration.addSlotConfiguration(midrollSlot);
-                }
-
-                // Add postroll
-                Log.v(TAG, "Adding temporal slot for postrolls");
-                TemporalSlotConfiguration postrollSlot = new TemporalSlotConfiguration("curly", adConstants.ADUNIT_POSTROLL(), video.getDuration() / 1000);
-                adRequestConfiguration.addSlotConfiguration(postrollSlot);
-
-                // Add overlay
-                Log.v(TAG, "Adding temporal slot for overlays");
-                TemporalSlotConfiguration overlaySlot = new TemporalSlotConfiguration("shemp", adConstants.ADUNIT_OVERLAY(), 8);
-                adRequestConfiguration.addSlotConfiguration(overlaySlot);
+            TemporalSlotConfiguration midrollSlot;
+            for (int i = 0; i < midrollCount; i++) {
+                midrollSlot = new TemporalSlotConfiguration("moe" + i, adConstants.ADUNIT_MIDROLL(), segmentLength * (i + 1));
+                adRequestConfiguration.addSlotConfiguration(midrollSlot);
             }
+
+            // Add postroll
+            Log.v(TAG, "Adding temporal slot for postrolls");
+            TemporalSlotConfiguration postrollSlot = new TemporalSlotConfiguration("curly", adConstants.ADUNIT_POSTROLL(), video.getDuration() / 1000);
+            adRequestConfiguration.addSlotConfiguration(postrollSlot);
+
+            // Add overlay
+            Log.v(TAG, "Adding temporal slot for overlays");
+            TemporalSlotConfiguration overlaySlot = new TemporalSlotConfiguration("shemp", adConstants.ADUNIT_OVERLAY(), 8);
+            adRequestConfiguration.addSlotConfiguration(overlaySlot);
         });
         freeWheelController.enable();
     }

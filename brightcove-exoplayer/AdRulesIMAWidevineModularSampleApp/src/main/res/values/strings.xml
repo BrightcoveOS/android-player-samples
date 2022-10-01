@@ -4,11 +4,11 @@
     <string name="app_name">Ad Rules IMA Widevine Modular Sample App</string>
 
     <!-- A sample Brightcove Edge Account ID -->
-    <string name="account">3303963094001</string>
+    <string name="account">3636334164001</string>
 
     <!-- A sample Brightcove Edge Policy Key -->
-    <string name="policy">BCpkADawqM3zXLtsEM0nAyA_3o3TmZnG6bZTXFmjZ8X_rmFMqlpB78l0aiRELs7MWACf4mYN92qMOLMxfZN6Xr3cQ_0R3G2qBiho3X3Nc2yTv7DH4APQ-EimMJQ3crX0zc0mJMy9CtSqkmli</string>
+    <string name="policy">BCpkADawqM04pilWqSIDfTmwPNiBscekcQB9wQ3IiTUZ4baBIx6LyLTrACuS0KJPOlpeEui10NOSgQ8zPTk8iSRPkQXSCGBrEqJD_4vJtX31zRvnk-4Wq8svz8j6abVYnqTijMliCf_1lIoa</string>
 
     <!-- A sample Brightcove Video ID -->
-    <string name="videoId">4283173439001</string>
+    <string name="videoId">5128799618001</string>
 </resources>
