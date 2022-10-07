@@ -3,4 +3,7 @@
 
     <string name="app_name">FreeWheel Widevine Modular Sample App</string>
 
+    <string name="account">3636334164001</string>
+    <string name="policy">BCpkADawqM04pilWqSIDfTmwPNiBscekcQB9wQ3IiTUZ4baBIx6LyLTrACuS0KJPOlpeEui10NOSgQ8zPTk8iSRPkQXSCGBrEqJD_4vJtX31zRvnk-4Wq8svz8j6abVYnqTijMliCf_1lIoa</string>
+    <string name="videoId">5379004626001</string>
 </resources>
