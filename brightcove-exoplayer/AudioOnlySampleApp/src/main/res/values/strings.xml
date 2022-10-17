@@ -1,0 +1,20 @@
+<resources>
+    <!-- Application name -->
+    <string name="app_name">AudioOnlySampleApp</string>
+
+    <!-- A sample Brightcove Edge Account ID -->
+    <string name="account">4800266849001</string>
+
+    <!-- A sample Brightcove Edge Policy Key -->
+    <string name="policy">BCpkADawqM3n0ImwKortQqSZCgJMcyVbb8lJVwt0z16UD0a_h8MpEYcHyKbM8CGOPxBRp0nfSVdfokXBrUu3Sso7Nujv3dnLo0JxC_lNXCl88O7NJ0PR0z2AprnJ_Lwnq7nTcy1GBUrQPr5e</string>
+
+    <!-- A sample Brightcove Track ID -->
+    <string name="trackId">1718605738664710078</string>
+
+    <!-- A sample Brightcove Track Playlist Reference -->
+    <string name="trackPlaylistReference">aod_all_audio</string>
+
+    <string name="trackArtist">Artist</string>
+    <string name="trackTitle">Title</string>
+
+</resources>                                                                                                                                                                   
