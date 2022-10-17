@@ -7,13 +7,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.net.Uri;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.brightcove.player.edge.OfflineCallback;
 import com.brightcove.player.logging.Log;
 import com.brightcove.player.model.Video;
+import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +26,12 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
 
     private final List<Video> trackList = new ArrayList<>();
     private final String TAG = this.getClass().getSimpleName();
+    private BrightcoveExoPlayerVideoView brightcoveVideoView;
+
+
+    public AdapterView (BrightcoveExoPlayerVideoView videoView) {
+        brightcoveVideoView = videoView;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -42,8 +51,25 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
             } catch (NullPointerException nullPointerException){
                 Log.v(TAG, "Couldn't load the poster for track:" + track.getId());
             }
-            holder.video = track;
+            holder.track = track;
         }
+
+        holder.trackThumbnailView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                try {
+                    brightcoveVideoView.stopPlayback();
+                    brightcoveVideoView.clear();
+                    brightcoveVideoView.add(holder.track);
+                    brightcoveVideoView.start();
+                    return true;
+                } catch (Exception e) {
+                    Log.v(TAG, "Couldn't load track:" + track.getId());
+                    return false;
+                }
+            }
+        });
+
     }
 
     @Override
@@ -82,7 +108,7 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
         public final Context context;
         public final ImageView trackThumbnailView;
         public final TextView trackTitleTextView;
-        public Video video;
+        public Video track;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -90,5 +116,6 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
             trackThumbnailView = (ImageView) itemView.findViewById(R.id.thumbnailImageView);
             trackTitleTextView = (TextView) itemView.findViewById(R.id.trackTitleTextView);
         }
+
     }
 }

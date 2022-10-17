@@ -53,9 +53,9 @@ public class MainActivity extends BrightcovePlayer {
         //Playlist implementation
         if (isPlaylist) {
             setContentView(R.layout.activity_main_playlist);
-
+            brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view_playlist);
             videoListView = (RecyclerView) findViewById(R.id.video_list_view);
-            adapterView = new AdapterView();
+            adapterView = new AdapterView(brightcoveVideoView);
             videoListView.setAdapter(adapterView);
 
             catalog = new Catalog.Builder(eventEmitter, accountId)
@@ -67,12 +67,10 @@ public class MainActivity extends BrightcovePlayer {
                 @Override
                 public void onPlaylist(Playlist playlist) {
                     adapterView.setVideoList(playlist.getVideos());
-                    video = playlist.getVideos().get(0);
+                    brightcoveVideoView.add(playlist.getVideos().get(0));
+                    brightcoveVideoView.start();
                 }
             });
-
-            brightcoveVideoView.add(video);
-
         }
         //Single track implementation
         else {

@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <com.brightcove.player.view.BrightcoveExoPlayerVideoView
-            android:id="@+id/brightcove_video_view"
+            android:id="@+id/brightcove_video_view_playlist"
             android:layout_width="match_parent"
             android:layout_height="280dp">
 
