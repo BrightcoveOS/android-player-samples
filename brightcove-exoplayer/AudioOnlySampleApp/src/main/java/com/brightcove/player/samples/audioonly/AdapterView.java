@@ -1,19 +1,18 @@
 package com.brightcove.player.samples.audioonly;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.net.Uri;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.brightcove.player.edge.OfflineCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.brightcove.player.logging.Log;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
@@ -24,9 +23,9 @@ import java.util.List;
 
 public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
 
-    private final List<Video> trackList = new ArrayList<>();
     private final String TAG = this.getClass().getSimpleName();
-    private BrightcoveExoPlayerVideoView brightcoveVideoView;
+    private final BrightcoveExoPlayerVideoView brightcoveVideoView;
+    private final List<Video> videoList = new ArrayList<>();
 
 
     public AdapterView (BrightcoveExoPlayerVideoView videoView) {
@@ -39,34 +38,31 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
         return new ViewHolder(view);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         //Get track information
-        Video track = trackList == null ? null : trackList.get(position);
+        Video video = videoList.get(position);
 
-        if (track != null) {
-            holder.trackTitleTextView.setText(track.getStringProperty(Video.Fields.NAME));
+        if (video != null) {
+            holder.videoTitleTextView.setText(video.getStringProperty(Video.Fields.NAME));
             try {
-                holder.trackThumbnailView.setImageURI(Uri.parse(track.getPosterImage().toString()));
+                holder.videoThumbnailView.setImageURI(Uri.parse(video.getPosterImage().toString()));
             } catch (NullPointerException nullPointerException){
-                Log.v(TAG, "Couldn't load the poster for track:" + track.getId());
+                Log.v(TAG, "Couldn't load the poster for track:" + video.getId());
             }
-            holder.track = track;
+            holder.video = video;
         }
 
-        holder.trackThumbnailView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                try {
-                    brightcoveVideoView.stopPlayback();
-                    brightcoveVideoView.clear();
-                    brightcoveVideoView.add(holder.track);
-                    brightcoveVideoView.start();
-                    return true;
-                } catch (Exception e) {
-                    Log.v(TAG, "Couldn't load track:" + track.getId());
-                    return false;
-                }
+        holder.videoThumbnailView.setOnTouchListener((v, event) -> {
+            try {
+                brightcoveVideoView.stopPlayback();
+                brightcoveVideoView.setCurrentIndex(position);
+                brightcoveVideoView.start();
+                return true;
+            } catch (Exception e) {
+                Log.v(TAG, "Couldn't load track:" + video.getId());
+                return false;
             }
         });
 
@@ -74,7 +70,7 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return trackList.size();
+        return videoList.size();
     }
 
     @Override
@@ -98,23 +94,23 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
     }
 
     public void setVideoList(@Nullable List<Video> trackList) {
-        this.trackList.clear();
-        this.trackList.addAll(trackList);
+        this.videoList.clear();
+        this.videoList.addAll(trackList);
         notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public final Context context;
-        public final ImageView trackThumbnailView;
-        public final TextView trackTitleTextView;
-        public Video track;
+        public final ImageView videoThumbnailView;
+        public final TextView videoTitleTextView;
+        public Video video;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             context = itemView.getContext();
-            trackThumbnailView = (ImageView) itemView.findViewById(R.id.thumbnailImageView);
-            trackTitleTextView = (TextView) itemView.findViewById(R.id.trackTitleTextView);
+            videoThumbnailView = (ImageView) itemView.findViewById(R.id.thumbnailImageView);
+            videoTitleTextView = (TextView) itemView.findViewById(R.id.titleTextView);
         }
 
     }
