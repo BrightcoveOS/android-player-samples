@@ -18,6 +18,7 @@ import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -57,7 +58,7 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
         holder.videoThumbnailView.setOnTouchListener((v, event) -> {
             try {
                 brightcoveVideoView.stopPlayback();
-                brightcoveVideoView.setCurrentIndex(position);
+                brightcoveVideoView.setCurrentIndex(holder.getAbsoluteAdapterPosition());
                 brightcoveVideoView.start();
                 return true;
             } catch (Exception e) {
@@ -99,6 +100,15 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
         notifyDataSetChanged();
     }
 
+    public void shuffleList(){
+        Collections.shuffle(videoList);
+        notifyDataSetChanged();
+    }
+
+    public void repeat(){
+
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public final Context context;
@@ -109,8 +119,8 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             context = itemView.getContext();
-            videoThumbnailView = (ImageView) itemView.findViewById(R.id.thumbnailImageView);
-            videoTitleTextView = (TextView) itemView.findViewById(R.id.titleTextView);
+            videoThumbnailView = itemView.findViewById(R.id.thumbnailImageView);
+            videoTitleTextView = itemView.findViewById(R.id.titleTextView);
         }
 
     }

@@ -1,7 +1,10 @@
 package com.brightcove.player.samples.audioonly;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
+import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.brightcove.player.edge.Catalog;
@@ -10,6 +13,8 @@ import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.logging.Log;
 import com.brightcove.player.model.Playlist;
 import com.brightcove.player.model.Video;
+import com.brightcove.player.playback.MediaPlayback;
+import com.brightcove.player.playback.PlaybackNotification;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
 
@@ -35,9 +40,20 @@ public class MainActivity extends BrightcovePlayer {
         videoId = getString(R.string.videoId);
         playListReference = getString(R.string.trackPlaylistReference);
 
-        // Uncomment whether you want to use a playlist or a single audio-only media
-        usePlaylist();
-        //useSingleVideo();
+        // Set this as true if you want to use a playlist
+        boolean usePlaylist = false;
+        // Set this as true if you want to use a customized notification
+        boolean useCustomNotification = false;
+
+        if (usePlaylist) {
+            usePlaylist();
+        } else {
+            useSingleVideo();
+        }
+
+        if (useCustomNotification) {
+            useCustomizedNotification();
+        }
     }
 
     /**
@@ -45,7 +61,7 @@ public class MainActivity extends BrightcovePlayer {
      */
     private void useSingleVideo() {
         setContentView(R.layout.activity_main);
-        brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
+        brightcoveVideoView = findViewById(R.id.brightcove_video_view);
         Catalog catalog = new Catalog.Builder(brightcoveVideoView.getEventEmitter(), accountId)
                 .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
                 .setPolicy(getString(R.string.policy))
@@ -66,8 +82,10 @@ public class MainActivity extends BrightcovePlayer {
      */
     private void usePlaylist() {
         setContentView(R.layout.activity_main_playlist);
+
         brightcoveVideoView = findViewById(R.id.brightcove_video_view_playlist);
-        videoListView = (RecyclerView) findViewById(R.id.video_list_view);
+        videoListView = findViewById(R.id.video_list_view);
+
         adapterView = new AdapterView(brightcoveVideoView);
         videoListView.setAdapter(adapterView);
 
@@ -84,6 +102,38 @@ public class MainActivity extends BrightcovePlayer {
                 adapterView.setVideoList(playlist.getVideos());
             }
         });
+    }
+
+    /**
+     * Displays a customized playback notification
+     */
+    private void useCustomizedNotification(){
+        brightcoveVideoView.getPlayback().getNotification().setConfig(
+                new PlaybackNotification.Config(this)
+                        //Change the small icon in the notifiaction.
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        //Active or dismiss the Stop Action
+                        .setUseStopAction(true)
+                        //Active or dismiss the Next Action
+                        .setUseNextAction(false)
+                        //Change the color
+                        .setColor(R.color.yellow)
+                        //Set the Priority
+                        .setPriority(NotificationCompat.PRIORITY_MAX)
+                        //Modify the adapter of the notification.
+                        .setAdapter(new PlaybackNotification.MediaDescriptionAdapter() {
+                            //Set a custom content title
+                            @Override
+                            public CharSequence getCurrentContentTitle(MediaPlayback<?> playback) {
+                                return "This is a custom title for the track";
+                            }
+                            //Set a custom icon for the adapter
+                            @Override
+                            public Bitmap getCurrentLargeIcon(MediaPlayback playback, BitmapCallback callback) {
+                                Bitmap customLargeIcon = BitmapFactory.decodeResource(null, R.mipmap.ic_launcher);
+                                return customLargeIcon;
+                            }
+                        }));
     }
 
     @Override

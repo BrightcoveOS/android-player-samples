@@ -32,18 +32,21 @@
                 android:text="Coming up next..." />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/button_shuffle"
                 android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:visibility="invisible"
                 android:text="Shuffle" />
 
-            <Button
-                android:id="@+id/button2"
+            <ToggleButton
+                android:id="@+id/toggle_button_repeat"
                 android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Repeat" />
+                android:textOff="Repeat Off"
+                android:visibility="invisible"
+                android:textOn="Repeat On" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView

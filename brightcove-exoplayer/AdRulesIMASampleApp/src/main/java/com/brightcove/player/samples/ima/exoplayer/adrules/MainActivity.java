@@ -139,7 +139,7 @@ public class MainActivity extends BrightcovePlayer {
                     Float cuepoint = cuepoints.get(i);
                     BrightcoveSeekBar brightcoveSeekBar = mediaController.getBrightcoveSeekBar();
                     // If cuepoint is negative it means it is a POST ROLL.
-                    int markerTime = cuepoint < 0 ? brightcoveSeekBar.getMax() : (int) (cuepoint * DateUtils.SECOND_IN_MILLIS);
+                    long markerTime = cuepoint < 0 ? brightcoveSeekBar.getMax() : (int) (cuepoint * DateUtils.SECOND_IN_MILLIS);
                     mediaController.getBrightcoveSeekBar().addMarker(markerTime);
 
                 }

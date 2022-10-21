@@ -63,6 +63,7 @@ public interface VideoListListener {
      * Delete button. The handler is expected to delete the specified video.
      *
      * @param video reference to the video.
+     * @param absoluteAdapterPosition
      */
-    void deleteVideo(@NonNull Video video);
+    void deleteVideo(@NonNull Video video, int absoluteAdapterPosition);
 }

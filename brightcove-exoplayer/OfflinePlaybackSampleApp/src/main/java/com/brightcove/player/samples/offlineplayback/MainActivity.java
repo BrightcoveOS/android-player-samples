@@ -104,6 +104,8 @@ public class MainActivity extends BrightcovePlayer {
 
     PlaylistModel playlist = PlaylistModel.byReferenceId("demo_odrm_widevine_dash", "Offline Playback List");
 
+    private Playlist mPlaylist = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -189,6 +191,7 @@ public class MainActivity extends BrightcovePlayer {
                     videoListAdapter.setVideoList(playlist.getVideos());
                     onVideoListUpdated(false);
                     brightcoveVideoView.addAll(playlist.getVideos());
+                    mPlaylist = playlist;
                 }
 
                 @Override
@@ -201,7 +204,7 @@ public class MainActivity extends BrightcovePlayer {
             videoListLabel.setText(R.string.offline_playlist);
             catalog.findAllVideoDownload(
                     DownloadStatus.STATUS_COMPLETE,
-                    new OfflineCallback<List<Video>>() {
+                    new OfflineCallback<>() {
                         @Override
                         public void onSuccess(List<Video> videos) {
                             videoListAdapter.setVideoList(videos);
@@ -399,7 +402,7 @@ public class MainActivity extends BrightcovePlayer {
         @Override
         public void pauseVideoDownload(@NonNull Video video) {
             Log.v(TAG,"Calling pauseVideoDownload.");
-            catalog.pauseVideoDownload(video, new OfflineCallback<Integer>() {
+            catalog.pauseVideoDownload(video, new OfflineCallback<>() {
                 @Override
                 public void onSuccess(Integer integer) {
                     // Video download was paused successfully
@@ -415,7 +418,7 @@ public class MainActivity extends BrightcovePlayer {
         @Override
         public void resumeVideoDownload(@NonNull Video video) {
             Log.v(TAG,"Calling resumeVideoDownload.");
-            catalog.resumeVideoDownload(video, new OfflineCallback<Integer>() {
+            catalog.resumeVideoDownload(video, new OfflineCallback<>() {
                 @Override
                 public void onSuccess(Integer integer) {
                     // Video download was resumed successfully
@@ -435,7 +438,7 @@ public class MainActivity extends BrightcovePlayer {
                 @Override
                 public void onResult(MediaDownloadable mediaDownloadable, Bundle bundle) {
                     BrightcoveDownloadUtil.selectMediaFormatTracksAvailable(mediaDownloadable, bundle);
-                    catalog.downloadVideo(video, new OfflineCallback<DownloadStatus>() {
+                    catalog.downloadVideo(video, new OfflineCallback<>() {
                         @Override
                         public void onSuccess(DownloadStatus downloadStatus) {
                             // Video download started successfully
@@ -452,11 +455,11 @@ public class MainActivity extends BrightcovePlayer {
         }
 
         @Override
-        public void deleteVideo(@NonNull Video video) {
-            catalog.deleteVideo(video, new OfflineCallback<Boolean>() {
+        public void deleteVideo(@NonNull Video video, int videoIndex) {
+            catalog.deleteVideo(video, new OfflineCallback<>() {
                 @Override
                 public void onSuccess(Boolean aBoolean) {
-
+                    brightcoveVideoView.remove(videoIndex);
                 }
 
                 @Override
@@ -475,8 +478,9 @@ public class MainActivity extends BrightcovePlayer {
      */
     private void playVideo(@NonNull Video video) {
         brightcoveVideoView.stopPlayback();
-        brightcoveVideoView.clear();
-        brightcoveVideoView.add(video);
+        //brightcoveVideoView.clear();
+        //brightcoveVideoView.add(video);
+        brightcoveVideoView.setCurrentIndex(mPlaylist.getVideos().indexOf(video));
         brightcoveVideoView.start();
     }
 
@@ -528,7 +532,7 @@ public class MainActivity extends BrightcovePlayer {
                         // Extend the playDuration value to the video duration plus an additional small amount to account for:
                         // - Loading the video into the player (which starts the playDuration clock)
                         // - Starting playback in a manual-start player
-                        long playDuration = video.getDuration() + PLAYDURATION_EXTENSION;
+                        long playDuration = video.getDurationLong() + PLAYDURATION_EXTENSION;
                         if (playDuration == 0) {
                             playDuration = DEFAULT_RENTAL_PLAY_DURATION;
                         }
