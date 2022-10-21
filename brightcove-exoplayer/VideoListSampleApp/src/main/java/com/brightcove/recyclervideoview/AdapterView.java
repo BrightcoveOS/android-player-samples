@@ -40,8 +40,9 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
         if (video != null) {
             holder.videoTitleText.setText(video.getStringProperty(Video.Fields.NAME));
             BrightcoveVideoView videoView = holder.videoView;
-            videoView.clear();
-            videoView.add(video);
+            //videoView.clear();
+            //videoView.add(video);
+            videoView.setCurrentIndex(holder.getAbsoluteAdapterPosition());
         }
     }
 

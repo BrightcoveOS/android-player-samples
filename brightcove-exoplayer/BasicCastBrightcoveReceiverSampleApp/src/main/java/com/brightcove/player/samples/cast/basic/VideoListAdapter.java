@@ -63,7 +63,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
             holder.videoDescriptionText.setText((String) descriptionObj);
         }
 
-        int duration = video.getDuration();
+        long duration = video.getDurationLong();
         if (duration > 0) {
             holder.videoDurationText.setText(millisecondsToString(duration));
             holder.videoDurationText.setVisibility(View.VISIBLE);
