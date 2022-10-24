@@ -61,7 +61,7 @@ public class MainActivity extends BrightcovePlayer {
         }
 
         if (useCustomNotification) {
-            useCustomNotification();
+            useCustomizedNotification();
         }
     }
 
@@ -116,12 +116,14 @@ public class MainActivity extends BrightcovePlayer {
     /**
      * Displays a customized playback notification
      */
-    private void useCustomNotification(){
+    private void useCustomizedNotification(){
         brightcoveVideoView.getPlayback().getNotification().setConfig(
                 new PlaybackNotification.Config(this)
+                        //
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setUseStopAction(true)
                         .setUseNextAction(false)
+                        .setColor(R.color.yellow)
                         .setPriority(NotificationCompat.PRIORITY_MAX)
                         .setAdapter(new PlaybackNotification.MediaDescriptionAdapter() {
                             @Override
