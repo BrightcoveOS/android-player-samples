@@ -8,6 +8,7 @@
     android:layout_marginBottom="@dimen/item_view_margin">
 
     <LinearLayout
+        android:id="@+id/linerarLayoutItem"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">

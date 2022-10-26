@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -53,20 +54,19 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
                 Log.v(TAG, "Couldn't load the poster for track:" + video.getId());
             }
             holder.video = video;
+
+            holder.itemLayout.setOnTouchListener((v, event) -> {
+                try {
+                    brightcoveVideoView.stopPlayback();
+                    brightcoveVideoView.setCurrentIndex(holder.getAbsoluteAdapterPosition());
+                    brightcoveVideoView.start();
+                    return true;
+                } catch (Exception e) {
+                    Log.v(TAG, "Couldn't load track:" + video.getId());
+                    return false;
+                }
+            });
         }
-
-        holder.videoThumbnailView.setOnTouchListener((v, event) -> {
-            try {
-                brightcoveVideoView.stopPlayback();
-                brightcoveVideoView.setCurrentIndex(holder.getAbsoluteAdapterPosition());
-                brightcoveVideoView.start();
-                return true;
-            } catch (Exception e) {
-                Log.v(TAG, "Couldn't load track:" + video.getId());
-                return false;
-            }
-        });
-
     }
 
     @Override
@@ -100,20 +100,12 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void shuffleList(){
-        Collections.shuffle(videoList);
-        notifyDataSetChanged();
-    }
-
-    public void repeat(){
-
-    }
-
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public final Context context;
         public final ImageView videoThumbnailView;
         public final TextView videoTitleTextView;
+        public LinearLayout itemLayout;
         public Video video;
 
         public ViewHolder(@NonNull View itemView) {
@@ -121,6 +113,7 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
             context = itemView.getContext();
             videoThumbnailView = itemView.findViewById(R.id.thumbnailImageView);
             videoTitleTextView = itemView.findViewById(R.id.titleTextView);
+            itemLayout = itemView.findViewById(R.id.linerarLayoutItem);
         }
 
     }

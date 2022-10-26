@@ -3,6 +3,11 @@ package com.brightcove.player.samples.audioonly;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,10 +18,12 @@ import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.logging.Log;
 import com.brightcove.player.model.Playlist;
 import com.brightcove.player.model.Video;
+import com.brightcove.player.playback.ExoMediaPlayback;
 import com.brightcove.player.playback.MediaPlayback;
 import com.brightcove.player.playback.PlaybackNotification;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
+import com.google.android.exoplayer2.Player;
 
 public class MainActivity extends BrightcovePlayer {
 
@@ -30,6 +37,16 @@ public class MainActivity extends BrightcovePlayer {
     private String policyKey;
     private String playListReference;
     private String videoId;
+    private Catalog catalog;
+
+    // Set this as true if you want to use a playlist
+    boolean usePlaylist = true;
+    // Set this as true if you want to use a customized notification
+    boolean useCustomNotification = false;
+    // Set this as true if you want to use the repeat options
+    boolean useRepeat = true;
+    // Set this as true if you want to use the shuffle list option
+    boolean useShuffle = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +57,6 @@ public class MainActivity extends BrightcovePlayer {
         videoId = getString(R.string.videoId);
         playListReference = getString(R.string.trackPlaylistReference);
 
-        // Set this as true if you want to use a playlist
-        boolean usePlaylist = false;
-        // Set this as true if you want to use a customized notification
-        boolean useCustomNotification = false;
-
         if (usePlaylist) {
             usePlaylist();
         } else {
@@ -54,6 +66,12 @@ public class MainActivity extends BrightcovePlayer {
         if (useCustomNotification) {
             useCustomizedNotification();
         }
+        if (useRepeat) {
+            useRepeat();
+        }
+        if (useShuffle) {
+            useShuffle();
+        }
     }
 
     /**
@@ -61,10 +79,12 @@ public class MainActivity extends BrightcovePlayer {
      */
     private void useSingleVideo() {
         setContentView(R.layout.activity_main);
+
         brightcoveVideoView = findViewById(R.id.brightcove_video_view);
-        Catalog catalog = new Catalog.Builder(brightcoveVideoView.getEventEmitter(), accountId)
+
+        catalog = new Catalog.Builder(brightcoveVideoView.getEventEmitter(), accountId)
                 .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
-                .setPolicy(getString(R.string.policy))
+                .setPolicy(policyKey)
                 .build();
 
         catalog.findVideoByID(videoId, new VideoListener() {
@@ -89,8 +109,7 @@ public class MainActivity extends BrightcovePlayer {
         adapterView = new AdapterView(brightcoveVideoView);
         videoListView.setAdapter(adapterView);
 
-
-        Catalog catalog = new Catalog.Builder(brightcoveVideoView.getEventEmitter(), accountId)
+        catalog = new Catalog.Builder(brightcoveVideoView.getEventEmitter(), accountId)
                 .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
                 .setPolicy(policyKey)
                 .build();
@@ -100,6 +119,7 @@ public class MainActivity extends BrightcovePlayer {
             public void onPlaylist(Playlist playlist) {
                 brightcoveVideoView.addAll(playlist.getVideos());
                 adapterView.setVideoList(playlist.getVideos());
+                brightcoveVideoView.start();
             }
         });
     }
@@ -110,7 +130,7 @@ public class MainActivity extends BrightcovePlayer {
     private void useCustomizedNotification(){
         brightcoveVideoView.getPlayback().getNotification().setConfig(
                 new PlaybackNotification.Config(this)
-                        //Change the small icon in the notifiaction.
+                        //Change the small icon in the notification.
                         .setSmallIcon(R.mipmap.ic_launcher)
                         //Active or dismiss the Stop Action
                         .setUseStopAction(true)
@@ -130,10 +150,48 @@ public class MainActivity extends BrightcovePlayer {
                             //Set a custom icon for the adapter
                             @Override
                             public Bitmap getCurrentLargeIcon(MediaPlayback playback, BitmapCallback callback) {
-                                Bitmap customLargeIcon = BitmapFactory.decodeResource(null, R.mipmap.ic_launcher);
-                                return customLargeIcon;
+                                return BitmapFactory.decodeResource(null, R.mipmap.ic_launcher);
                             }
                         }));
+    }
+
+    public void useRepeat(){
+        if (usePlaylist) {
+            LinearLayout linearLayoutRepeat = findViewById(R.id.linearLayoutRepeat);
+            linearLayoutRepeat.setVisibility(View.VISIBLE);
+            RadioGroup radioGroup = findViewById(R.id.radioGroupRepeat);
+            radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+                RadioButton radioButton = group.findViewById(checkedId);
+                ExoMediaPlayback exoMediaPlayback = (ExoMediaPlayback) brightcoveVideoView.getPlayback();
+                switch (radioButton.getId()) {
+                    case R.id.radioButtonRepeatOff:
+                        //Repeat mode deactivated
+                        exoMediaPlayback.getPlayer().setRepeatMode(Player.REPEAT_MODE_OFF);
+                        break;
+                    case R.id.radioButtonRepeatOne:
+                        //Repeat one mode activated
+                        exoMediaPlayback.getPlayer().setRepeatMode(Player.REPEAT_MODE_ONE);
+                        break;
+                    case R.id.radioButtonRepeatAll:
+                        //Repeat all mode activated
+                        exoMediaPlayback.getPlayer().setRepeatMode(Player.REPEAT_MODE_ALL);
+                        break;
+                    default:
+                        break;
+                }
+            });
+        }
+    }
+
+    public void useShuffle(){
+        if (usePlaylist) {
+            Button shuffleButton = findViewById(R.id.buttonShuffle);
+            shuffleButton.setVisibility(View.VISIBLE);
+            shuffleButton.setOnClickListener(v -> {
+                ExoMediaPlayback exoMediaPlayback = (ExoMediaPlayback) brightcoveVideoView.getPlayback();
+                exoMediaPlayback.getPlayer().setShuffleModeEnabled(true);
+            });
+        }
     }
 
     @Override
