@@ -5,13 +5,16 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ToggleButton;
 
 import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.brightcove.player.display.ExoPlayerVideoDisplayComponent;
 import com.brightcove.player.edge.Catalog;
 import com.brightcove.player.edge.PlaylistListener;
 import com.brightcove.player.edge.VideoListener;
@@ -46,7 +49,7 @@ public class MainActivity extends BrightcovePlayer {
     // Set this as true if you want to use the repeat options
     boolean useRepeat = true;
     // Set this as true if you want to use the shuffle list option
-    boolean useShuffle = false;
+    boolean useShuffle = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,19 +165,19 @@ public class MainActivity extends BrightcovePlayer {
             RadioGroup radioGroup = findViewById(R.id.radioGroupRepeat);
             radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
                 RadioButton radioButton = group.findViewById(checkedId);
-                ExoMediaPlayback exoMediaPlayback = (ExoMediaPlayback) brightcoveVideoView.getPlayback();
+                ExoPlayerVideoDisplayComponent exoVideoDisplayComponent = (ExoPlayerVideoDisplayComponent) brightcoveVideoView.getVideoDisplay();
                 switch (radioButton.getId()) {
                     case R.id.radioButtonRepeatOff:
                         //Repeat mode deactivated
-                        exoMediaPlayback.getPlayer().setRepeatMode(Player.REPEAT_MODE_OFF);
+                        exoVideoDisplayComponent.getExoPlayer().setRepeatMode(Player.REPEAT_MODE_OFF);
                         break;
                     case R.id.radioButtonRepeatOne:
-                        //Repeat one mode activated
-                        exoMediaPlayback.getPlayer().setRepeatMode(Player.REPEAT_MODE_ONE);
+                        //Repeat one mode activatedREPEAT_MODE_ONE
+                        exoVideoDisplayComponent.getExoPlayer().setRepeatMode(Player.REPEAT_MODE_ONE);
                         break;
                     case R.id.radioButtonRepeatAll:
                         //Repeat all mode activated
-                        exoMediaPlayback.getPlayer().setRepeatMode(Player.REPEAT_MODE_ALL);
+                        exoVideoDisplayComponent.getExoPlayer().setRepeatMode(Player.REPEAT_MODE_ALL);
                         break;
                     default:
                         break;
@@ -185,11 +188,11 @@ public class MainActivity extends BrightcovePlayer {
 
     public void useShuffle(){
         if (usePlaylist) {
-            Button shuffleButton = findViewById(R.id.buttonShuffle);
+            ToggleButton shuffleButton = findViewById(R.id.toggleButtonShuffle);
             shuffleButton.setVisibility(View.VISIBLE);
-            shuffleButton.setOnClickListener(v -> {
-                ExoMediaPlayback exoMediaPlayback = (ExoMediaPlayback) brightcoveVideoView.getPlayback();
-                exoMediaPlayback.getPlayer().setShuffleModeEnabled(true);
+            ExoPlayerVideoDisplayComponent exoVideoDisplayComponent = (ExoPlayerVideoDisplayComponent) brightcoveVideoView.getVideoDisplay();
+            shuffleButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                exoVideoDisplayComponent.getExoPlayer().setShuffleModeEnabled(isChecked);
             });
         }
     }

@@ -31,13 +31,13 @@
                 android:layout_weight="1"
                 android:text="Coming up next..." />
 
-            <Button
-                android:id="@+id/buttonShuffle"
+            <ToggleButton
+                android:id="@+id/toggleButtonShuffle"
                 android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Shuffle"
-                android:visibility="invisible" />
+                android:visibility="invisible"/>
 
             <LinearLayout
                 android:id="@+id/linearLayoutRepeat"
