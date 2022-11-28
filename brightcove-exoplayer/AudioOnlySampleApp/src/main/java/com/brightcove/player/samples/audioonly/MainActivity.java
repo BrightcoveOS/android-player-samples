@@ -1,5 +1,10 @@
 package com.brightcove.player.samples.audioonly;
 
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Build;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -12,6 +17,9 @@ import android.widget.RadioGroup;
 import android.widget.ToggleButton;
 
 import androidx.core.app.NotificationCompat;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.TaskStackBuilder;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.brightcove.player.display.ExoPlayerVideoDisplayComponent;
@@ -21,6 +29,8 @@ import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.logging.Log;
 import com.brightcove.player.model.Playlist;
 import com.brightcove.player.model.Video;
+import com.brightcove.player.playback.MediaPlayback;
+import com.brightcove.player.playback.PlaybackNotification;
 import com.brightcove.player.playback.ExoMediaPlayback;
 import com.brightcove.player.playback.MediaPlayback;
 import com.brightcove.player.playback.PlaybackNotification;
@@ -51,9 +61,13 @@ public class MainActivity extends BrightcovePlayer {
     // Set this as true if you want to use the shuffle list option
     boolean useShuffle = true;
 
+    private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        context = this;
 
         accountId = getString(R.string.account);
         policyKey = getString(R.string.policy);
@@ -195,6 +209,41 @@ public class MainActivity extends BrightcovePlayer {
                 exoVideoDisplayComponent.getExoPlayer().setShuffleModeEnabled(isChecked);
             });
         }
+    }
+
+    /**
+     * Displays a customized playback notification
+     */
+    private void useCustomizedNotification(){
+        brightcoveVideoView.getPlayback().getNotification().setConfig(
+                new PlaybackNotification.Config(this)
+                        //
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setUseStopAction(true)
+                        .setUseNextAction(false)
+                        .setColor(R.color.yellow)
+                        .setPriority(NotificationCompat.PRIORITY_MAX)
+                        .setAdapter(new PlaybackNotification.MediaDescriptionAdapter() {
+                            @Override
+                            public CharSequence getCurrentContentTitle(MediaPlayback<?> playback) {
+                                return "This is a custom title for the track";
+                            }
+                            @RequiresApi(api = Build.VERSION_CODES.S)
+                            @Override
+                            public PendingIntent createCurrentContentIntent(MediaPlayback<?> playback) {
+                                Intent resultIntent = new Intent(context, SecondActivity.class);
+                                TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+                                stackBuilder.addNextIntentWithParentStack(resultIntent);
+                                int pendingIntentFlag = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) ? PendingIntent.FLAG_IMMUTABLE : PendingIntent.FLAG_MUTABLE;
+                                return stackBuilder.getPendingIntent(0, pendingIntentFlag);
+                            }
+                            @Override
+                            public Bitmap getCurrentLargeIcon(MediaPlayback playback, BitmapCallback callback) {
+                                // TODO: return your bitmap
+                                return null;
+                            }
+                        }));
+
     }
 
     @Override

@@ -100,6 +100,15 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
         notifyDataSetChanged();
     }
 
+    public void shuffleList(){
+        Collections.shuffle(videoList);
+        notifyDataSetChanged();
+    }
+
+    public void repeat(){
+
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public final Context context;
