@@ -19,7 +19,6 @@ import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -49,7 +48,9 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
         if (video != null) {
             holder.videoTitleTextView.setText(video.getStringProperty(Video.Fields.NAME));
             try {
-                holder.videoThumbnailView.setImageURI(Uri.parse(video.getPosterImage().toString()));
+                Uri imgUri = Uri.parse(video.getThumbnail().toString());
+                holder.videoThumbnailView.setImageURI(null);
+                holder.videoThumbnailView.setImageURI(imgUri);
             } catch (NullPointerException nullPointerException){
                 Log.v(TAG, "Couldn't load the poster for track:" + video.getId());
             }
@@ -98,15 +99,6 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
         this.videoList.clear();
         this.videoList.addAll(trackList);
         notifyDataSetChanged();
-    }
-
-    public void shuffleList(){
-        Collections.shuffle(videoList);
-        notifyDataSetChanged();
-    }
-
-    public void repeat(){
-
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

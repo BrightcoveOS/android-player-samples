@@ -12,11 +12,12 @@
     <string name="videoId">1718605738664710078</string>
 
     <!-- A sample Brightcove Track Playlist Reference -->
-    <string name="trackPlaylistReference">android_test_audio_only</string>
+    <string name="trackPlaylistReference">royalty_free_mp3</string>
 
     <string name="trackArtist">Artist</string>
     <string name="trackTitle">Title</string>
     <string name="title_activity_second">SecondActivity</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -25,5 +26,10 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="coming_up_next">Coming up next...</string>
+    <string name="shuffle">Shuffle</string>
+    <string name="off">Off</string>
+    <string name="one">One</string>
+    <string name="all">All</string>
 
 </resources>                                                                                                                                                                   

@@ -29,14 +29,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Coming up next..." />
+                android:text="@string/coming_up_next" />
 
             <ToggleButton
                 android:id="@+id/toggleButtonShuffle"
                 android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Shuffle"
+                android:text="@string/shuffle"
                 android:visibility="invisible"/>
 
             <LinearLayout
@@ -86,7 +86,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Off"
+                        android:text="@string/off"
                         android:textAlignment="center" />
 
                     <TextView
@@ -94,7 +94,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="One"
+                        android:text="@string/one"
                         android:textAlignment="center" />
 
                     <TextView
@@ -102,7 +102,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="All"
+                        android:text="@string/all"
                         android:textAlignment="center" />
                 </LinearLayout>
             </LinearLayout>
@@ -111,7 +111,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/video_list_view"
             android:layout_width="match_parent"
-            android:layout_height="391dp"
+            android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </LinearLayout>
