@@ -1,21 +1,12 @@
 package com.brightcove.player.samples.audioonly;
 
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.Build;
-import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.ToggleButton;
+import android.widget.ImageButton;
 
-import androidx.core.app.NotificationCompat;
-import androidx.annotation.RequiresApi;
-import androidx.core.app.TaskStackBuilder;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.brightcove.player.display.ExoPlayerVideoDisplayComponent;
@@ -25,8 +16,6 @@ import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.logging.Log;
 import com.brightcove.player.model.Playlist;
 import com.brightcove.player.model.Video;
-import com.brightcove.player.playback.MediaPlayback;
-import com.brightcove.player.playback.PlaybackNotification;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.google.android.exoplayer2.Player;
@@ -47,14 +36,14 @@ public class MainActivity extends BrightcovePlayer {
 
     /* Set this as true if you want to use a playlist */
     boolean usePlaylist = true;
-    /* Set this as true if you want to use a customized notification */
-    boolean useCustomNotification = false;
     /* Set this as true if you want to use the repeat options */
     boolean useRepeat = true;
     /* Set this as true if you want to use the shuffle list option */
     boolean useShuffle = true;
 
     private Context context;
+
+    private int repeatState = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +57,6 @@ public class MainActivity extends BrightcovePlayer {
             usePlaylist();
         } else {
             useSingleVideo();
-        }
-        if (useCustomNotification) {
-            useCustomizedNotification();
         }
         if (useRepeat) {
             useRepeat();
@@ -121,72 +107,36 @@ public class MainActivity extends BrightcovePlayer {
                 brightcoveVideoView.start();
             }
         });
-    }
-
-    /**
-     * Displays a customized playback notification
-     */
-    private void useCustomizedNotification(){
-        brightcoveVideoView.getPlayback().getNotification().setConfig(
-                new PlaybackNotification.Config(this)
-                        /* Change the small icon in the notification */
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        /* Active or dismiss the Stop Action */
-                        .setUseStopAction(true)
-                        /* Active or dismiss the Next Action */
-                        .setUseNextAction(false)
-                        /* Change the color */
-                        .setColor(R.color.yellow)
-                        /* Set the Priority */
-                        .setPriority(NotificationCompat.PRIORITY_MAX)
-                        /* Modify the adapter of the notification */
-                        .setAdapter(new PlaybackNotification.MediaDescriptionAdapter() {
-                            /* Set a custom content title */
-                            @Override
-                            public CharSequence getCurrentContentTitle(MediaPlayback<?> playback) {
-                                return "This is a custom title for the track";
-                            }
-                            /* Set the intent for the notification */
-                            @RequiresApi(api = Build.VERSION_CODES.S)
-                            @Override
-                            public PendingIntent createCurrentContentIntent(MediaPlayback<?> playback) {
-                                Intent resultIntent = new Intent(context, SecondActivity.class);
-                                TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-                                stackBuilder.addNextIntentWithParentStack(resultIntent);
-                                int pendingIntentFlag = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) ? PendingIntent.FLAG_IMMUTABLE : PendingIntent.FLAG_MUTABLE;
-                                return stackBuilder.getPendingIntent(0, pendingIntentFlag);
-                            }
-                            /* Set a custom icon for the adapter */
-                            @Override
-                            public Bitmap getCurrentLargeIcon(MediaPlayback playback, BitmapCallback callback) {
-                                return BitmapFactory.decodeResource(null, R.mipmap.ic_launcher);
-                            }
-                        }));
+        ImageButton actionGitHubButton = findViewById(R.id.action_github);
+        actionGitHubButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.GITHUB_URL)));
+                startActivity(browserIntent);
+            }
+        });
     }
 
     public void useRepeat(){
         if (usePlaylist) {
-            LinearLayout linearLayoutRepeat = findViewById(R.id.linearLayoutRepeat);
-            linearLayoutRepeat.setVisibility(View.VISIBLE);
-            RadioGroup radioGroup = findViewById(R.id.radioGroupRepeat);
-            radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-                RadioButton radioButton = group.findViewById(checkedId);
-                ExoPlayerVideoDisplayComponent exoVideoDisplayComponent = (ExoPlayerVideoDisplayComponent) brightcoveVideoView.getVideoDisplay();
-                switch (radioButton.getId()) {
-                    case R.id.radioButtonRepeatOff:
-                        /* Repeat mode deactivated */
-                        exoVideoDisplayComponent.getExoPlayer().setRepeatMode(Player.REPEAT_MODE_OFF);
-                        break;
-                    case R.id.radioButtonRepeatOne:
-                        /* Repeat one mode activatedREPEAT_MODE_ONE */
-                        exoVideoDisplayComponent.getExoPlayer().setRepeatMode(Player.REPEAT_MODE_ONE);
-                        break;
-                    case R.id.radioButtonRepeatAll:
-                        /* Repeat all mode activated */
-                        exoVideoDisplayComponent.getExoPlayer().setRepeatMode(Player.REPEAT_MODE_ALL);
-                        break;
-                    default:
-                        break;
+            ImageButton actionRepeatButton = findViewById(R.id.action_repeat);
+            actionRepeatButton.setVisibility(View.VISIBLE);
+            ExoPlayerVideoDisplayComponent exoVideoDisplayComponent = (ExoPlayerVideoDisplayComponent) brightcoveVideoView.getVideoDisplay();
+            actionRepeatButton.setOnClickListener(v -> {
+                if (repeatState == 0){
+                    repeatState = 1;
+                    exoVideoDisplayComponent.getExoPlayer().setRepeatMode(Player.REPEAT_MODE_ONE);
+                    actionRepeatButton.setImageResource(R.drawable.exo_media_action_repeat_one);
+                }
+                else if (repeatState == 1){
+                    repeatState = 2;
+                    exoVideoDisplayComponent.getExoPlayer().setRepeatMode(Player.REPEAT_MODE_ALL);
+                    actionRepeatButton.setImageResource(R.drawable.exo_media_action_repeat_all);
+                }
+                else if (repeatState == 2){
+                    repeatState = 0;
+                    exoVideoDisplayComponent.getExoPlayer().setRepeatMode(Player.REPEAT_MODE_OFF);
+                    actionRepeatButton.setImageResource(R.drawable.exo_media_action_repeat_off);
                 }
             });
         }
@@ -194,10 +144,19 @@ public class MainActivity extends BrightcovePlayer {
 
     public void useShuffle(){
         if (usePlaylist) {
-            ToggleButton shuffleButton = findViewById(R.id.toggleButtonShuffle);
-            shuffleButton.setVisibility(View.VISIBLE);
+            ImageButton actionShuffleButton = findViewById(R.id.action_shuffle);
+            actionShuffleButton.setVisibility(View.VISIBLE);
             ExoPlayerVideoDisplayComponent exoVideoDisplayComponent = (ExoPlayerVideoDisplayComponent) brightcoveVideoView.getVideoDisplay();
-            shuffleButton.setOnCheckedChangeListener((buttonView, isChecked) -> exoVideoDisplayComponent.getExoPlayer().setShuffleModeEnabled(isChecked));
+            actionShuffleButton.setOnClickListener(v -> {
+                actionShuffleButton.setSelected(!actionShuffleButton.isSelected());
+                if (actionShuffleButton.isSelected()){
+                    actionShuffleButton.setImageResource(R.drawable.ic_shuffle_green_24dp);
+                    exoVideoDisplayComponent.getExoPlayer().setShuffleModeEnabled(true);
+                } else {
+                    actionShuffleButton.setImageResource(R.drawable.ic_shuffle_white_24dp);
+                    exoVideoDisplayComponent.getExoPlayer().setShuffleModeEnabled(false);
+                }
+            });
         }
     }
 

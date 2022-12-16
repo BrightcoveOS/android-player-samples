@@ -17,7 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.brightcove.player.logging.Log;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
+import com.squareup.picasso.Picasso;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,24 +49,24 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
 
         if (video != null) {
             holder.videoTitleTextView.setText(video.getStringProperty(Video.Fields.NAME));
-            try {
-                Uri imgUri = Uri.parse(video.getThumbnail().toString());
-                holder.videoThumbnailView.setImageURI(null);
-                holder.videoThumbnailView.setImageURI(imgUri);
-            } catch (NullPointerException nullPointerException){
-                Log.v(TAG, "Couldn't load the poster for track:" + video.getId());
-            }
-            holder.video = video;
+            holder.videoDescriptionTextView.setText(video.getStringProperty(Video.Fields.DESCRIPTION));
 
-            holder.itemLayout.setOnTouchListener((v, event) -> {
+            URI imageUri = video.getStillImageUri();
+            if (imageUri == null) {
+                holder.videoThumbnailView.setImageResource(R.drawable.cover_art_default);
+                Log.v(TAG, "Null thumbnail:" + video.getId());
+            } else {
+                Picasso.get().load(imageUri.toASCIIString()).into(holder.videoThumbnailView);
+            }
+
+            holder.video = video;
+            holder.itemLayout.setOnClickListener((v) -> {
                 try {
                     brightcoveVideoView.stopPlayback();
                     brightcoveVideoView.setCurrentIndex(holder.getAbsoluteAdapterPosition());
                     brightcoveVideoView.start();
-                    return true;
                 } catch (Exception e) {
-                    Log.v(TAG, "Couldn't load track:" + video.getId());
-                    return false;
+                    Log.v(TAG, "Error loading media:" + video.getId());
                 }
             });
         }
@@ -106,6 +108,7 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
         public final Context context;
         public final ImageView videoThumbnailView;
         public final TextView videoTitleTextView;
+        public final TextView videoDescriptionTextView;
         public LinearLayout itemLayout;
         public Video video;
 
@@ -114,6 +117,8 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
             context = itemView.getContext();
             videoThumbnailView = itemView.findViewById(R.id.thumbnailImageView);
             videoTitleTextView = itemView.findViewById(R.id.titleTextView);
+            videoDescriptionTextView = itemView.findViewById(R.id.descriptionTextView);
+
             itemLayout = itemView.findViewById(R.id.linerarLayoutItem);
         }
 
