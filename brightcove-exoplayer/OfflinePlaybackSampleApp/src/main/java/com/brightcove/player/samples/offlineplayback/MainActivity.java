@@ -459,7 +459,9 @@ public class MainActivity extends BrightcovePlayer {
             catalog.deleteVideo(video, new OfflineCallback<>() {
                 @Override
                 public void onSuccess(Boolean aBoolean) {
-                    brightcoveVideoView.remove(videoIndex);
+                    if (!connectivityMonitor.isConnected()) {
+                        brightcoveVideoView.remove(videoIndex);
+                    }
                 }
 
                 @Override
