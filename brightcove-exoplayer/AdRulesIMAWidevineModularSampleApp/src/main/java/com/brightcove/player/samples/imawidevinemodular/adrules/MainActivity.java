@@ -39,7 +39,6 @@ public class MainActivity extends BrightcovePlayer {
 
     @SuppressWarnings({"FieldCanBeLocal", "unused"})
     private GoogleIMAComponent googleIMAComponent;
-    private String adRulesURL = "http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=%2F15018773%2Feverything2&ciu_szs=300x250%2C468x60%2C728x90&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=dummy&correlator=[timestamp]&cmsid=133&vid=10XWSh7W4so&ad_rule=1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +98,7 @@ public class MainActivity extends BrightcovePlayer {
             // Build an ads request object and point it to the ad
             // display container created above.
             AdsRequest adsRequest = sdkFactory.createAdsRequest();
-            adsRequest.setAdTagUrl(adRulesURL);
+            adsRequest.setAdTagUrl(getString(R.string.adRulesUrl));
 
             ArrayList<AdsRequest> adsRequests = new ArrayList<>(1);
             adsRequests.add(adsRequest);

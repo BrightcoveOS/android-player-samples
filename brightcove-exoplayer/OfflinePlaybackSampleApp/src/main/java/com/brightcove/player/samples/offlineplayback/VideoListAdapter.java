@@ -500,7 +500,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
                     holder.getVideo(new OfflineCallback<>() {
                         @Override
                         public void onSuccess(Video video) {
-                            listener.playVideo(video);
+                            listener.playVideo(video, holder.getAbsoluteAdapterPosition());
                         }
 
                         @Override
@@ -563,7 +563,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     holder.videoStatusText.setText("Deleting video...");
-                    listener.deleteVideo(holder.video,holder.getAbsoluteAdapterPosition());
+                    listener.deleteVideo(holder.video, holder.getAbsoluteAdapterPosition());
                 }
                 return false;
             }

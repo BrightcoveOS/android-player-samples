@@ -46,12 +46,10 @@ public class MainActivity extends BrightcovePlayer {
 
         eventEmitter = brightcoveVideoView.getEventEmitter();
 
-        Video video = Video.createVideo("https://hlsak-a.akamaihd.net/3636334163001/3636334163001_5566790474001_5566768721001.m3u8?pubId=3636334163001&videoId=5566768721001", DeliveryType.HLS);
+        Video video = Video.createVideo(getString(R.string.sdk_demo_video_url), DeliveryType.MP4);
         video.getProperties().put(Video.Fields.PUBLISHER_ID, "3636334163001");
         brightcoveVideoView.add(video);
-
         setupFreeWheel();
-
         brightcoveVideoView.start();
     }
 

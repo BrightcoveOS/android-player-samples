@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <!-- Application name -->
     <string name="app_name">ExoPlayer FreeWheel Sample App</string>
+
+    <!-- A sample Video URL-->
+    <string name="sdk_demo_video_url">https://media.w3.org/2010/05/sintel/trailer.mp4 </string>
 
 </resources>

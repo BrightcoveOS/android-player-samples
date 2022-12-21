@@ -57,7 +57,7 @@ public class MainActivity extends BrightcovePlayer {
                 .addQueryParameter(AD_CONFIG_ID_QUERY_PARAM_KEY, AD_CONFIG_ID_QUERY_PARAM_VALUE)
                 .build();
 
-        catalog.findVideoByID(getString(R.string.video_id), httpRequestConfig, new VideoListener() {
+        catalog.findVideoByID(getString(R.string.sdk_demo_video_id), httpRequestConfig, new VideoListener() {
             @Override
             public void onVideo(Video video) {
                 // The Video Sources will have a VMAP url which will be processed by the SSAI plugin,

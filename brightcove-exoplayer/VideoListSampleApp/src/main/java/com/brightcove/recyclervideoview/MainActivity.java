@@ -13,11 +13,6 @@ import com.brightcove.player.model.Playlist;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String ACCOUNT_ID = "3636334163001";
-    private static final String POLICY_KEY = "BCpkADawqM1ZEczFURHXFgdyqvGPj4GWHEQka6QIs7hOwSFPffq-UI_ntgaa29FEMKY87rAd0jptOZHueqyDxjVBTGmfek97TLHSLPqJKWAmKx_YSiHdLdLp8uq9hhwTWs6qJIOkN9cA0qqp";
-    private static final String PLAYLIST_REF = "Play2017";
-
-
     private Catalog catalog;
     private RecyclerView videoListView;
     private AdapterView adapterView;
@@ -34,12 +29,12 @@ public class MainActivity extends AppCompatActivity {
         adapterView = new AdapterView();
         videoListView.setAdapter(adapterView);
 
-        catalog = new Catalog.Builder(eventEmitter, ACCOUNT_ID)
+        catalog = new Catalog.Builder(eventEmitter, getString(R.string.sdk_demo_account))
                 .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
-                .setPolicy(POLICY_KEY)
+                .setPolicy(getString(R.string.sdk_demo_policy_key))
                 .build();
 
-        catalog.findPlaylistByReferenceID(PLAYLIST_REF, new PlaylistListener() {
+        catalog.findPlaylistByReferenceID(getString(R.string.sdk_demo_playlist_reference), new PlaylistListener() {
             @Override
             public void onPlaylist(Playlist playlist) {
                 adapterView.setVideoList(playlist.getVideos());
