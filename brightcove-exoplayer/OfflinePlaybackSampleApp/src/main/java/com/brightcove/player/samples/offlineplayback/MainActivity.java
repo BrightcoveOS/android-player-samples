@@ -93,7 +93,7 @@ public class MainActivity extends BrightcovePlayer {
     private String pasToken = "YOUR_PAS_TOKEN";
     private static final int PLAYDURATION_EXTENSION = 10000;
 
-    PlaylistModel playlist = PlaylistModel.byReferenceId(getString(R.string.sdk_demo_playlist_reference), "Offline Playback List");
+    PlaylistModel playlist = PlaylistModel.byReferenceId("demo_odrm_widevine_dash", "Offline Playback List");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -197,6 +197,8 @@ public class MainActivity extends BrightcovePlayer {
                         public void onSuccess(List<Video> videos) {
                             videoListAdapter.setVideoList(videos);
                             onVideoListUpdated(false);
+                            brightcoveVideoView.clear();
+                            brightcoveVideoView.addAll(videos);
                         }
 
                         @Override
@@ -204,6 +206,7 @@ public class MainActivity extends BrightcovePlayer {
                             Log.e(TAG, "Error fetching all videos downloaded: ", throwable);
                         }
                     });
+
         }
     }
 
@@ -467,10 +470,9 @@ public class MainActivity extends BrightcovePlayer {
      * @param video the video to be played.
      */
     private void playVideo(@NonNull Video video, @NonNull int videoIndex) {
-        //brightcoveVideoView.stopPlayback();
-        brightcoveVideoView.replace(videoIndex, video);
+        brightcoveVideoView.stopPlayback();
         brightcoveVideoView.setCurrentIndex(videoIndex);
-        //brightcoveVideoView.start();
+        brightcoveVideoView.start();
     }
 
     private final EventListener licenseEventListener = new EventListener() {

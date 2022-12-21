@@ -15,7 +15,14 @@
     <FrameLayout
         android:id="@+id/video_frame"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/item_video_view_height"/>
+        android:layout_height="@dimen/item_video_view_height">
+
+        <com.brightcove.player.view.BrightcoveExoPlayerVideoView
+            android:id="@+id/brightcove_video_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/video_description"

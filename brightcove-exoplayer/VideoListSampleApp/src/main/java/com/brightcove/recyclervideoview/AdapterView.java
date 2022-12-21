@@ -100,8 +100,9 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
             context = itemView.getContext();
             videoFrame = (FrameLayout) itemView.findViewById(R.id.video_frame);
             videoTitleText = (TextView) itemView.findViewById(R.id.video_title_text);
-            videoView = new BrightcoveExoPlayerVideoView(context);
-            videoFrame.addView(videoView);
+//            videoView = new BrightcoveExoPlayerVideoView(context);
+//            videoFrame.addView(videoView);
+            videoView = (BrightcoveExoPlayerVideoView) itemView.findViewById(R.id.brightcove_video_view);
             videoView.finishInitialization();
 
             EventEmitter eventEmitter = videoView.getEventEmitter();
