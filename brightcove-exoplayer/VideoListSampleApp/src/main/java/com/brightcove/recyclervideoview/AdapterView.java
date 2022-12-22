@@ -22,7 +22,6 @@ import com.brightcove.player.view.BrightcoveVideoView;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
 
     private final List<Video> videoList = new ArrayList<>();
@@ -88,7 +87,6 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-
         public final Context context;
         public final TextView videoTitleText;
         public final FrameLayout videoFrame;
@@ -99,9 +97,8 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
             context = itemView.getContext();
             videoFrame = (FrameLayout) itemView.findViewById(R.id.video_frame);
             videoTitleText = (TextView) itemView.findViewById(R.id.video_title_text);
-//            videoView = new BrightcoveExoPlayerVideoView(context);
-//            videoFrame.addView(videoView);
-            videoView = (BrightcoveExoPlayerVideoView) itemView.findViewById(R.id.brightcove_video_view);
+            videoView = new BrightcoveExoPlayerVideoView(context);
+            videoFrame.addView(videoView);
             videoView.finishInitialization();
 
             EventEmitter eventEmitter = videoView.getEventEmitter();
