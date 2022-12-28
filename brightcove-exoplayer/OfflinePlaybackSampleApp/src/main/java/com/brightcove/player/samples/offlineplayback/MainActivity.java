@@ -471,6 +471,7 @@ public class MainActivity extends BrightcovePlayer {
      */
     private void playVideo(@NonNull Video video, @NonNull int videoIndex) {
         brightcoveVideoView.stopPlayback();
+        brightcoveVideoView.replace(videoIndex, video);
         brightcoveVideoView.setCurrentIndex(videoIndex);
         brightcoveVideoView.start();
     }
