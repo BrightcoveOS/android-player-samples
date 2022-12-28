@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">AudioOnly Sample</string>
+    <string name="action_github">GitHub</string>
+    <string name="action_shuffle">Shuffle</string>
+    <string name="action_repeat">Repeat</string>
+
+    <string name="account_id" translatable="false">1752604059001</string>
+    <string name="policy_id" translatable="false">BCpkADawqM3kB3bqHvE8_X0h_lrMiTXaQe_ZUqI3RAYrtJBxzBTITabUcArd4uRVOo1usGJOw65qRqPflytxOyMTxfbD4uQvqpa5sTJxHStKgDdCOD7FySh5wXhVU4wHKad_4OHQ4Fcsd_HD</string>
+    <string name="reference_id" translatable="false">audio_only_sample</string>
+
+<!--    <string name="account_id" translatable="false">4800266849001</string>-->
+<!--    <string name="policy_id" translatable="false">BCpkADawqM3n0ImwKortQqSZCgJMcyVbb8lJVwt0z16UD0a_h8MpEYcHyKbM8CGOPxBRp0nfSVdfokXBrUu3Sso7Nujv3dnLo0JxC_lNXCl88O7NJ0PR0z2AprnJ_Lwnq7nTcy1GBUrQPr5e</string>-->
+<!--    <string name="reference_id" translatable="false">mixed_aod_vod_vod_first</string>-->
+
+    <string name="cd_album_art">Album Art</string>
+</resources>

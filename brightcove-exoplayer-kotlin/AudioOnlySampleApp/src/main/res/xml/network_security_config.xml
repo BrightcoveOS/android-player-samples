@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <debug-overrides>
+        <trust-anchors>
+            <!-- Trust system added CAs while debuggable only -->
+            <certificates src="@raw/charles_ssl_proxying_certificate" />
+            <certificates src="user" />
+        </trust-anchors>
+    </debug-overrides>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">c.brightcove.com</domain>
+        <domain includeSubdomains="true">f1.media.brightcove.com</domain>
+        <domain includeSubdomains="true">solutions.brightcove.com</domain>
+        <domain includeSubdomains="true">appsci.vidmark.local</domain>
+        <domain includeSubdomains="true">hls.cf.brightcove.com</domain>
+        <domain includeSubdomains="true">s1.fwmrm.net</domain>
+    </domain-config>
+</network-security-config>

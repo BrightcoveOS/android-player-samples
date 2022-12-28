@@ -1,0 +1,50 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.brightcove.audio.sample'
+    compileSdk ANDROID_COMPILE_SDK_VERSION
+
+    defaultConfig {
+        applicationId "com.brightcove.audio.sample"
+        minSdk ANDROID_MIN_SDK_VERSION
+        targetSdk ANDROID_TARGET_SDK_VERSION
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    implementation "com.brightcove.player:android-appcompat-plugin:${anpVersion}"
+    implementation "androidx.constraintlayout:constraintlayout:${ANDROIDX_CONSTRAINT_LAYOUT}"
+    implementation "androidx.appcompat:appcompat:${ANDROIDX_APPCOMPAT}"
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.airbnb.android:lottie:5.2.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+}
