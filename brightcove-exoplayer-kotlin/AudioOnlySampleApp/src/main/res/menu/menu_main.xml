@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.brightcove.audio.sample.AudioOnlyActivity">
+    <item
+        android:id="@+id/action_shuffle"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_shuffle_white_24dp"
+        android:title="@string/action_shuffle"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_repeat"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_repeat_white_24dp"
+        android:title="@string/action_repeat"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_github"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_github_white_24dp"
+        android:title="@string/action_github"
+        app:showAsAction="always" />
+</menu>

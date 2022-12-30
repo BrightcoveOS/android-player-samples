@@ -18,6 +18,8 @@ include ':brightcove-exoplayer:BasicIMAVASTSampleApp'
 include ':brightcove-exoplayer:ThumbnailScrubberSampleApp'
 include ':brightcove-exoplayer:AudioOnlySampleApp'
 
+include ':brightcove-exoplayer-kotlin:AudioOnlySampleApp'
+
 // For building Brightcove Player Controls specific sample apps, which are located under the 'brightcove-player-controls' directory.
 include ':brightcove-player-controls:CustomizedControlsSampleApp'
 include ':brightcove-player-controls:StyledControlsSampleApp'
