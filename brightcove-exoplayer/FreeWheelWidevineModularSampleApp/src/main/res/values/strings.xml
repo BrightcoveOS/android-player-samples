@@ -4,13 +4,12 @@
     <string name="app_name">FreeWheel Widevine Modular Sample App</string>
 
     <!-- A sample Brightcove Edge Account ID -->
-    <string name="sdk_demo_account">3303963094001</string>
+    <string name="sdk_demo_account">5420904993001</string>
 
     <!-- A sample Brightcove Edge Policy Key -->
-    <string name="sdk_demo_policy">BCpkADawqM3zXLtsEM0nAyA_3o3TmZnG6bZTXFmjZ8X_rmFMqlpB78l0aiRELs7MWACf4mYN92qMOLMxfZN6Xr3cQ_0R3G2qBiho3X3Nc2yTv7DH4APQ</string>
+    <string name="sdk_demo_policy">BCpkADawqM1RJu5c_I13hBUAi4c8QNWO5QN2yrd_OgDjTCVsbILeGDxbYy6xhZESTFi68MiSUHzMbQbuLV3q-gvZkJFpym1qYbEwogOqKCXK622KNLPF92tX8AY9a1cVVYCgxSPN12pPAuIM</string>
 
     <!-- A sample Brightcove Video ID -->
-    <string name="sdk_demo_videoId">4283173439001</string>
-
+    <string name="sdk_demo_videoId">5421543459001</string>
 
 </resources>
