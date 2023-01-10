@@ -31,7 +31,6 @@ public class PulseActivity extends BrightcovePlayer {
 
         setContentView(R.layout.activity_pulse);
         brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
-        super.onCreate(savedInstanceState);
 
         // Get the event emitter from the SDK and create a catalog request to fetch a video from the
         // Brightcove Edge service, given a video id, an account id and a policy key.
