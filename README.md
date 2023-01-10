@@ -13,7 +13,7 @@ This version of the sample apps supports the latest Brightcove SDK and plugins. 
 ### An important note about the ExoPlayer sample apps
 The ExoPlayer sample apps on the master branch only support Google ExoPlayer 2.10.8, which is the currently supported version of ExoPlayer with the Brightcove Native SDK for Android.
 
-### Brightcove sample apps using ExoPlayer
+### Brightcove Java sample apps using ExoPlayer
 
 * [360 Video Sample app](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/360VideoSampleApp/): This app shows how to use the Brightcove ExoPlayer to play 360 videos.
 
@@ -25,7 +25,7 @@ The ExoPlayer sample apps on the master branch only support Google ExoPlayer 2.1
 
 * [AppCompat Fragment Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/AppCompatFragmentSampleApp): This app shows how to setup the Brightcove ExoPlayer with the AppCompat plugin and a Fragment.
 
-* [Audio Only Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/AudioOnlySampleApp): This app shows how to setup the Brightcove ExoPlayer with audio-only assets and customize the notification.
+* [Audio Only Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/AudioOnlySampleApp): This app shows how to setup the Brightcove ExoPlayer with audio-only assets.
 
 * [Basic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicSampleApp): This app shows how to setup the Brightcove ExoPlayer to play.
 
@@ -53,6 +53,10 @@ Note that in order to enable the FreeWheel sample apps, you must independently o
 
 * [Picture In Picture Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/PictureInPictureSampleApp): This app demonstrates the Picture-in-Picture feature. Please note that Picture-in-Picture is supported only with Android 8.0 and above, and only on phone and tablet devices.
 
+### Brightcove Kotlin sample apps using ExoPlayer
+
+* [Audio Only Sample App](https://github.com/KEAMCRF/android-player-samples/tree/AudioOnlySample/brightcove-exoplayer-kotlin/AudioOnlySampleApp): This app shows how to setup the Brightcove ExoPlayer with audio-only assets.
+
 ## Installing the sample apps
 Currently, all of the sample app projects must be installed together as a bundle. Individual sample app projects also have specific dependencies. For those specific dependencies, see the individual project descriptions above for details.
 
@@ -79,7 +83,7 @@ Android Studio will now download, import and build all of the sample apps.  At t
 By default, the sample apps will build with the most recent Brightcove Android Native Player version at build time. To override this behavior with a specific version, create a file named **.gradle/gradle.properties** in your home directory and set the value of the property *anpVersion* to the desired version.  An invalid version will cause no sample app projects to be configured.
 
 ## Building with Gradle on the command line
-These sample apps now build with the latest released version of Gradle, 5.4.1. Please note that when building these apps from the command line, that the Gradle daemon is started, and will continue to run after the build completes.
+These sample apps now build with the latest released version of Gradle, 7.4.1. Please note that when building these apps from the command line, that the Gradle daemon is started, and will continue to run after the build completes.
 
 To stop the daemon after the build completes, run the following:
 `./gradlew --stop`
