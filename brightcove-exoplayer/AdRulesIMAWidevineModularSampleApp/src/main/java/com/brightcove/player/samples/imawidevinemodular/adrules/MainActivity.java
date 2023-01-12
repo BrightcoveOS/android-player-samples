@@ -70,7 +70,7 @@ public class MainActivity extends BrightcovePlayer {
 
             @Override
             public void onError(@NonNull List<CatalogError> errors) {
-                Log.e(TAG, "Could not load video: " + errors.toString());
+                Log.e(TAG, "Could not load video: " + errors);
             }
         });
     }
