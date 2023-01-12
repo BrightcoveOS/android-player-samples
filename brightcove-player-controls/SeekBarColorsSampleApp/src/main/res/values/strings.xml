@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SeekBar Colors Sample App</string>
+
+    <!-- A sample Brightcove Edge Account ID -->
+    <string name="sdk_demo_account">5420904993001</string>
+
+    <!-- A sample Brightcove Edge Policy Key -->
+    <string name="sdk_demo_policy">BCpkADawqM1RJu5c_I13hBUAi4c8QNWO5QN2yrd_OgDjTCVsbILeGDxbYy6xhZESTFi68MiSUHzMbQbuLV3q-gvZkJFpym1qYbEwogOqKCXK622KNLPF92tX8AY9a1cVVYCgxSPN12pPAuIM</string>
+
+    <!-- A sample Brightcove Video ID -->
+    <string name="sdk_demo_videoId">5421538222001</string>
+
 </resources>
