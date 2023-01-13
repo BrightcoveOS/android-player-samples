@@ -1,11 +1,10 @@
 package com.brightcove.player.demo.stepbackwardrewind;
 
-import com.brightcove.player.model.DeliveryType;
+import com.brightcove.player.edge.Catalog;
+import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
-import com.brightcove.player.view.BrightcoveVideoView;
 
-import android.net.Uri;
 import android.os.Bundle;
 
 /**
@@ -16,25 +15,29 @@ import android.os.Bundle;
  */
 public class MainActivity extends BrightcovePlayer {
 
-    // Private class constants
-
-    private final String TAG = this.getClass().getSimpleName();
-
     @Override protected void onCreate(Bundle savedInstanceState) {
         // When extending the BrightcovePlayer, we must assign the BrightcoveVideoView before
         // entering the superclass. This allows for some stock video player lifecycle
         // management.  Establish the video object and use it's event emitter to get important
         // notifications and to control logging.
         setContentView(R.layout.default_activity_main);
-        brightcoveVideoView = (BrightcoveVideoView) findViewById(R.id.brightcove_video_view);
+        brightcoveVideoView = findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
 
-        // Add a test video from the res/raw directory to the BrightcoveVideoView.
-        String PACKAGE_NAME = getApplicationContext().getPackageName();
-        Uri videoUri = Uri.parse("android.resource://" + PACKAGE_NAME + "/" + R.raw.shark);
-        Video video = Video.createVideo(videoUri.toString(), DeliveryType.MP4);
-        video.getProperties().put(Video.Fields.PUBLISHER_ID, "5420904993001");
-        brightcoveVideoView.add(video);
+        Catalog catalog = new Catalog.Builder(brightcoveVideoView.getEventEmitter(), getString(R.string.sdk_demo_account))
+                .setPolicy(getString(R.string.sdk_demo_policy))
+                .build();
+
+        catalog.findVideoByID(getString(R.string.sdk_demo_videoId), new VideoListener() {
+
+            // Add the video found to the queue with add().
+            // Start playback of the video with start().
+            @Override
+            public void onVideo(Video video) {
+                brightcoveVideoView.add(video);
+                brightcoveVideoView.start();
+            }
+        });
     }
 
 }

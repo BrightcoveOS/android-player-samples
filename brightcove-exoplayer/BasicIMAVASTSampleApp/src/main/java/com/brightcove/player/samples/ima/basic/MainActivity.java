@@ -107,7 +107,7 @@ public class MainActivity extends BrightcovePlayer {
 
         // midroll at 30 seconds.
         if (!source.getDeliveryType().equals(DeliveryType.HLS)) {
-            int cuepointTime = 30 * (int) DateUtils.SECOND_IN_MILLIS;
+            long cuepointTime = 30 * (int) DateUtils.SECOND_IN_MILLIS;
             cuePoint = new CuePoint(cuepointTime, cuePointType, properties);
             details.put(Event.CUE_POINT, cuePoint);
             eventEmitter.emit(EventType.SET_CUE_POINT, details);

@@ -49,12 +49,12 @@ public class MainActivity extends BrightcovePlayer {
 
         setupFreeWheel();
 
+        Catalog catalog = new Catalog(
+                brightcoveVideoView.getEventEmitter(),
+                getString(R.string.sdk_demo_account),
+                getString(R.string.sdk_demo_policy));
 
-        Catalog catalog = new Catalog.Builder(brightcoveVideoView.getEventEmitter(), getString(R.string.account))
-                .setPolicy(getString(R.string.policy))
-                .build();
-
-        catalog.findVideoByID(getString(R.string.videoId), new VideoListener() {
+        catalog.findVideoByID(getString(R.string.sdk_demo_videoId), new VideoListener() {
             @Override
             public void onVideo(Video video) {
                 brightcoveVideoView.add(video);

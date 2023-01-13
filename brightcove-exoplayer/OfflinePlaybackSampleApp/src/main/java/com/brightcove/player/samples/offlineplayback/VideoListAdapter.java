@@ -153,7 +153,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
             final Video result = video;
 
             if (video.isOfflinePlaybackAllowed()) {
-                catalog.findOfflineVideoById(video.getId(), new OfflineCallback<Video>() {
+                catalog.findOfflineVideoById(video.getId(), new OfflineCallback<>() {
                     @Override
                     public void onSuccess(Video offlineVideo) {
                         if (offlineVideo != null) {
@@ -280,7 +280,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
                             int position,
                             @Nullable final DownloadStatus downloadStatus) {
         holder.video = videoList.get(position);
-        holder.getVideo(new OfflineCallback<Video>() {
+        holder.getVideo(new OfflineCallback<>() {
             @Override
             public void onSuccess(Video video) {
                 handleViewState(holder, video, downloadStatus);
@@ -359,7 +359,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
                 holder.videoStatusText.setText(R.string.checking_download_status);
                 holder.videoStatusText.setVisibility(View.VISIBLE);
 
-                catalog.getVideoDownloadStatus(holder.video, new OfflineCallback<DownloadStatus>() {
+                catalog.getVideoDownloadStatus(holder.video, new OfflineCallback<>() {
                     @Override
                     public void onSuccess(DownloadStatus downloadStatus) {
                         updateDownloadStatus(holder, downloadStatus);
@@ -396,7 +396,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
             Picasso.get().load(imageUri.toASCIIString()).into(holder.videoThumbnailImage);
         }
 
-        int duration = video.getDuration();
+        long duration = video.getDurationLong();
         if (duration > 0) {
             holder.videoDurationText.setText(millisecondsToString(duration));
             holder.videoDurationText.setVisibility(View.VISIBLE);
@@ -497,10 +497,10 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
                     consumed = true;
                 }
                 if(event.getAction() == MotionEvent.ACTION_UP) {
-                    holder.getVideo(new OfflineCallback<Video>() {
+                    holder.getVideo(new OfflineCallback<>() {
                         @Override
                         public void onSuccess(Video video) {
-                            listener.playVideo(video);
+                            listener.playVideo(video, holder.getAbsoluteAdapterPosition());
                         }
 
                         @Override
@@ -563,7 +563,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     holder.videoStatusText.setText("Deleting video...");
-                    listener.deleteVideo(holder.video);
+                    listener.deleteVideo(holder.video, holder.getAbsoluteAdapterPosition());
                 }
                 return false;
             }

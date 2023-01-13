@@ -5,7 +5,6 @@ import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
-import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -27,18 +26,18 @@ public class MainActivity extends BrightcovePlayer {
         // management.  Establish the video object and use it's event emitter to get important
         // notifications and to control logging.
         setContentView(R.layout.default_activity_main);
-        brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
+        brightcoveVideoView = findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
 
         EventEmitter eventEmitter = brightcoveVideoView.getEventEmitter();
-        String account = getString(R.string.account);
+        String account = getString(R.string.sdk_demo_account);
 
         Catalog catalog = new Catalog.Builder(eventEmitter, account)
                 .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
-                .setPolicy(getString(R.string.policy))
+                .setPolicy(getString(R.string.sdk_demo_policy))
                 .build();
 
-        catalog.findVideoByID(getString(R.string.videoId), new VideoListener() {
+        catalog.findVideoByID(getString(R.string.sdk_demo_videoId), new VideoListener() {
 
             // Add the video found to the queue with add().
             // Start playback of the video with start().

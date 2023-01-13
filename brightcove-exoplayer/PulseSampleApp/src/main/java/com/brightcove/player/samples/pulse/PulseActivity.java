@@ -31,19 +31,18 @@ public class PulseActivity extends BrightcovePlayer {
 
         setContentView(R.layout.activity_pulse);
         brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
-        super.onCreate(savedInstanceState);
 
         // Get the event emitter from the SDK and create a catalog request to fetch a video from the
         // Brightcove Edge service, given a video id, an account id and a policy key.
         EventEmitter eventEmitter = brightcoveVideoView.getEventEmitter();
 
-        Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.account))
-                .setPolicy(getString(R.string.policy))
+        Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.sdk_demo_account))
+                .setPolicy(getString(R.string.sdk_demo_policy))
                 .build();
 
         // Pulse setup
         PulseComponent pulseComponent = new PulseComponent(
-                getString(R.string.pulse_host_url),
+                getString(R.string.sdk_demo_pulse_host_url),
                 eventEmitter,
                 brightcoveVideoView);
 
@@ -75,7 +74,7 @@ public class PulseActivity extends BrightcovePlayer {
             }
         });
 
-        catalog.findVideoByID(getString(R.string.videoId), new VideoListener() {
+        catalog.findVideoByID(getString(R.string.sdk_demo_videoId), new VideoListener() {
 
             // Add the video found to the queue with add().
             // Start playback of the video with start().

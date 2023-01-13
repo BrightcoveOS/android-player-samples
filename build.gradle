@@ -10,8 +10,9 @@ buildscript {
   }
 
   dependencies {
-    classpath 'com.android.tools.build:gradle:7.1.2'
+    classpath 'com.android.tools.build:gradle:7.1.3'
     classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.2.2'
+    classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.20'
   }
 }
 
@@ -135,8 +136,9 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     }
   }
 
-  if (project.parent.name.equals('brightcove-exoplayer') ||
-          project.parent.name.equals('brightcove-player-controls')) {
+  if (project.parent.name == 'brightcove-exoplayer' ||
+          project.parent.name == 'exoplayer-kotlin'||
+          project.parent.name == 'brightcove-player-controls') {
     dependencies {
       implementation "com.brightcove.player:exoplayer2:${anpVersion}"
       implementation "androidx.media:media:${ANDROIDX_MEDIA}"
@@ -174,6 +176,12 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     dependencies {
       implementation "com.brightcove.player:android-pulse-plugin:${anpVersion}"
       implementation files(libraryDirectory + "Pulse.aar")
+    }
+  }
+
+  if (project.name.contains('AudioOnly')) {
+    dependencies {
+      implementation "com.brightcove.player:exoplayer2:${anpVersion}"
     }
   }
 

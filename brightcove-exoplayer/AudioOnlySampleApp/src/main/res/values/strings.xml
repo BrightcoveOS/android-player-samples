@@ -1,0 +1,39 @@
+<resources>
+    <!-- Application name -->
+    <string name="app_name">AudioOnly Sample App</string>
+
+    <!-- A sample Brightcove Edge Account ID -->
+    <string name="account">4800266849001</string>
+
+    <!-- A sample Brightcove Edge Policy Key -->
+    <string name="policy">BCpkADawqM3n0ImwKortQqSZCgJMcyVbb8lJVwt0z16UD0a_h8MpEYcHyKbM8CGOPxBRp0nfSVdfokXBrUu3Sso7Nujv3dnLo0JxC_lNXCl88O7NJ0PR0z2AprnJ_Lwnq7nTcy1GBUrQPr5e</string>
+
+    <!-- A sample Brightcove Video ID -->
+    <string name="videoId">1718605738664710078</string>
+
+    <!-- A sample Brightcove Track Playlist Reference -->
+    <string name="trackPlaylistReference">royalty_free_mp3</string>
+
+    <string name="trackArtist">Artist</string>
+    <string name="trackTitle">Title</string>
+    <string name="title_activity_second">SecondActivity</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="action_github">GitHub</string>
+    <string name="action_shuffle">Shuffle</string>
+    <string name="action_repeat">Repeat</string>
+    <string name="cd_album_art">Album Art</string>
+
+    <string name="GITHUB_URL">https://github.com/BrightcoveOS/android-player-samples</string>
+    <string name="thumbnail">Thumbnail</string>
+
+
+</resources>                                                                                                                                                                   

@@ -15,8 +15,9 @@ public interface VideoListListener {
      * video thumbnail. The handler is expected to play the specified video.
      *
      * @param video reference to the video.
+     * @param absoluteAdapterPosition
      */
-    void playVideo(@NonNull Video video);
+    void playVideo(@NonNull Video video, int absoluteAdapterPosition);
 
     /**
      * This method will be called by the {@link VideoListAdapter} when the user touches the
@@ -63,6 +64,7 @@ public interface VideoListListener {
      * Delete button. The handler is expected to delete the specified video.
      *
      * @param video reference to the video.
+     * @param absoluteAdapterPosition
      */
-    void deleteVideo(@NonNull Video video);
+    void deleteVideo(@NonNull Video video, int absoluteAdapterPosition);
 }

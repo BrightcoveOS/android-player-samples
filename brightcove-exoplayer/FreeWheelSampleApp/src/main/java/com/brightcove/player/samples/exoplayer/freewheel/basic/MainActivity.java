@@ -47,20 +47,10 @@ public class MainActivity extends BrightcovePlayer {
 
         eventEmitter = brightcoveVideoView.getEventEmitter();
 
-        Catalog catalog = new Catalog.Builder(brightcoveVideoView.getEventEmitter(), getString(R.string.account))
-                .setPolicy(getString(R.string.policy))
-                .build();
-
-        catalog.findVideoByID(getString(R.string.videoId), new VideoListener() {
-            @Override
-            public void onVideo(Video video) {
-                brightcoveVideoView.add(video);
-                brightcoveVideoView.start();
-            }
-        });
-
+        Video video = Video.createVideo(getString(R.string.sdk_demo_video_url), DeliveryType.MP4);
+        video.getProperties().put(Video.Fields.PUBLISHER_ID, "3636334163001");
+        brightcoveVideoView.add(video);
         setupFreeWheel();
-
         brightcoveVideoView.start();
     }
 

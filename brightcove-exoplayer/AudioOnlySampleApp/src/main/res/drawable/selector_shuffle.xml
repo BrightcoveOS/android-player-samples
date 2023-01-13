@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <item android:drawable="@drawable/ic_shuffle_white_24dp"
+        android:state_pressed="false" />
+    <item android:drawable="@drawable/ic_shuffle_green_24dp"
+        android:state_pressed="true" />
+
+</selector>

@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <!-- Application name -->
     <string name="app_name">Ad Rules IMA Widevine Modular Sample App</string>
 
     <!-- A sample Brightcove Edge Account ID -->
-    <string name="account">3636334164001</string>
+    <string name="account">5420904993001</string>
 
     <!-- A sample Brightcove Edge Policy Key -->
-    <string name="policy">BCpkADawqM04pilWqSIDfTmwPNiBscekcQB9wQ3IiTUZ4baBIx6LyLTrACuS0KJPOlpeEui10NOSgQ8zPTk8iSRPkQXSCGBrEqJD_4vJtX31zRvnk-4Wq8svz8j6abVYnqTijMliCf_1lIoa</string>
+    <string name="policy">BCpkADawqM1RJu5c_I13hBUAi4c8QNWO5QN2yrd_OgDjTCVsbILeGDxbYy6xhZESTFi68MiSUHzMbQbuLV3q-gvZkJFpym1qYbEwogOqKCXK622KNLPF92tX8AY9a1cVVYCgxSPN12pPAuIM</string>
 
     <!-- A sample Brightcove Video ID -->
-    <string name="videoId">5128799618001</string>
+    <string name="videoId">5421543459001</string>
+
+    <!-- A sample Brightcove ad rules URL -->
+    <string name="adRulesUrl">http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&amp;iu=%2F15018773%2Feverything2&amp;ciu_szs=300x250%2C468x60%2C728x90&amp;impl=s&amp;gdfp_req=1&amp;env=vp&amp;output=xml_vast2&amp;unviewed_position_start=1&amp;url=dummy&amp;correlator=[timestamp]&amp;cmsid=133&amp;vid=10XWSh7W4so&amp;ad_rule=1</string>
+
 </resources>

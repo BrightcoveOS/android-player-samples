@@ -22,7 +22,6 @@ import com.brightcove.player.view.BrightcoveVideoView;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
 
     private final List<Video> videoList = new ArrayList<>();
@@ -87,7 +86,6 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
 
         public final Context context;
         public final TextView videoTitleText;
