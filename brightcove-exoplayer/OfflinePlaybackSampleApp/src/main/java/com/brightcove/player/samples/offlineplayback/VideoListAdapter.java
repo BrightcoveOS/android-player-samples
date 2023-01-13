@@ -28,6 +28,7 @@ import com.brightcove.player.samples.offlineplayback.utils.ViewUtil;
 import com.squareup.picasso.Picasso;
 
 import java.net.URI;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -296,12 +297,18 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
     private void handleViewState(final ViewHolder holder, Video video, DownloadStatus status) {
         if (video.isOfflinePlaybackAllowed()) {
             holder.estimatedSizeText.setVisibility(View.VISIBLE);
-            catalog.estimateSize(video, new MediaDownloadable.OnVideoSizeCallback() {
-                @Override
-                public void onVideoSizeEstimated(long bytes) {
-                    String sizeStr = String.valueOf(bytes / MEGABYTE_IN_BYTES).concat(" MB");
-                    holder.estimatedSizeText.setText(sizeStr);
+            catalog.estimateSize(holder.video, size -> {
+                String sizeStr = "";
+                double sizeMb = size / (double) MEGABYTE_IN_BYTES;
+                if (sizeMb >= 1) {
+                    sizeStr = String.valueOf((long)sizeMb).concat(" MB");
+                } else if (sizeMb > 0/* && sizeMb < 1*/) {
+                    DecimalFormat sizeFormat = new DecimalFormat("#.##");
+                    sizeStr = sizeFormat.format(sizeMb).concat(" MB");
+                } else {
+                    sizeStr = "Unknown size";
                 }
+                holder.estimatedSizeText.setText(sizeStr);
             });
 
             if (video.isClearContent()) {
