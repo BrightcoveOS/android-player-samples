@@ -104,7 +104,6 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     dependencies {
       implementation "com.brightcove.player:android-ima-plugin:${anpVersion}"
       implementation 'com.google.ads.interactivemedia.v3:interactivemedia:'+GOOGLE_IMA_SDK_VERSION
-      implementation 'com.google.android.gms:play-services-ads:'+PLAY_SERVICES_VERSION
       implementation "androidx.legacy:legacy-support-v4:${ANDROIDX_LEGACY_SUPPORT_V4}"
     }
   }
