@@ -21,6 +21,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation "com.brightcove.player:android-appcompat-plugin:${anpVersion}"
     implementation "androidx.appcompat:appcompat:${ANDROIDX_APPCOMPAT}"
 }

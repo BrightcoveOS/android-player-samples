@@ -5,26 +5,31 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.widget.SwitchCompat;
+
+import com.brightcove.player.Sdk;
+import com.brightcove.player.appcompat.BrightcovePlayerActivity;
 import com.brightcove.player.edge.Catalog;
 import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventType;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.network.HttpRequestConfig;
-import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
-import com.brightcove.player.view.BrightcovePlayer;
 import com.brightcove.ssai.SSAIComponent;
+import com.brightcove.ssai.omid.MediaEventType;
+import com.brightcove.ssai.omid.OpenMeasurementTracker;
+import com.iab.omid.library.brightcove.adsession.FriendlyObstructionPurpose;
 
-public class MainActivity extends BrightcovePlayer {
-    // Private class constants
-    private final String TAG = this.getClass().getSimpleName();
+public class MainActivity extends BrightcovePlayerActivity {
 
-    @SuppressWarnings("FieldCanBeLocal")
-    private final String AD_CONFIG_ID_QUERY_PARAM_KEY = "ad_config_id";
-    @SuppressWarnings("FieldCanBeLocal")
-    private final String AD_CONFIG_ID_QUERY_PARAM_VALUE = "ba5e4879-77f0-424b-8c98-706ae5ad7eec";
+    private static final String TAG = "MainActivity";
+    private static final String AD_CONFIG_ID_QUERY_PARAM_KEY = "ad_config_id";
+    private static final String AD_CONFIG_ID_QUERY_PARAM_VALUE = "ba5e4879-77f0-424b-8c98-706ae5ad7eec";
+    private static final String PARTNER_NAME = "dummyVendor";
+    private static final String PARTNER_VERSION = Sdk.getVersionName();
 
     private SSAIComponent plugin;
+    private OpenMeasurementTracker tracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,19 +37,21 @@ public class MainActivity extends BrightcovePlayer {
         // entering the superclass.  This allows for some stock video player lifecycle
         // management.
         setContentView(R.layout.ssai_activity_main);
-        brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
+        baseVideoView = findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
 
-        final EventEmitter eventEmitter = brightcoveVideoView.getEventEmitter();
+        final EventEmitter eventEmitter = baseVideoView.getEventEmitter();
 
         Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.sdk_demo_account))
                 .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
                 .setPolicy(getString(R.string.sdk_demo_policy_key))
                 .build();
 
+
         // Setup the error event handler for the SSAI plugin.
         registerErrorEventHandler();
-        plugin = new SSAIComponent(this, brightcoveVideoView);
+        setupOpenMeasurement();
+        plugin = new SSAIComponent(this, baseVideoView);
         View view = findViewById(R.id.ad_frame);
         if (view instanceof ViewGroup) {
             // Set the companion ad container,
@@ -68,9 +75,55 @@ public class MainActivity extends BrightcovePlayer {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (tracker != null && isFinishing()) {
+            tracker.stop();
+        }
+    }
+
+    private void setupOpenMeasurement() {
+        SwitchCompat toggleButton = findViewById(R.id.om_toggle);
+        toggleButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                tracker.start();
+            } else {
+                tracker.stop();
+            }
+        });
+        // Initialize the OpenMeasurementTracker
+        tracker = new OpenMeasurementTracker.Factory(
+                PARTNER_NAME, PARTNER_VERSION, baseVideoView
+        ).create();
+        tracker.addListener(new OpenMeasurementTracker.Listener() {
+            @Override
+            public void onMediaEvent(MediaEventType mediaEventType) {
+                Log.d(TAG, "onMediaEvent() called with: mediaEventType = [" + mediaEventType + "]");
+            }
+
+            @Override
+            public void onStartTracking() {
+                Log.d(TAG, "onStartTracking() called");
+            }
+
+            @Override
+            public void onStoppedTracking() {
+                Log.d(TAG, "onStoppedTracking() called");
+            }
+        });
+        // Example to register a view that should be considered as a friendly obstruction
+        View adFrame = findViewById(R.id.ad_frame);
+        tracker.addFriendlyObstruction(adFrame, FriendlyObstructionPurpose.OTHER, "Ad frame");
+        // Start the tracker, if enabled.
+        if (toggleButton.isChecked()) {
+            tracker.start();
+        }
+    }
+
     private void registerErrorEventHandler() {
         // Handle the case where the ad data URL has not been supplied to the plugin.
-        EventEmitter eventEmitter = brightcoveVideoView.getEventEmitter();
+        EventEmitter eventEmitter = baseVideoView.getEventEmitter();
         eventEmitter.on(EventType.ERROR, event -> Log.e(TAG, event.getType()));
     }
 }
