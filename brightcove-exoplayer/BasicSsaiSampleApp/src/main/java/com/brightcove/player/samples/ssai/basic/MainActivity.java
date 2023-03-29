@@ -16,7 +16,7 @@ import com.brightcove.player.event.EventType;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.network.HttpRequestConfig;
 import com.brightcove.ssai.SSAIComponent;
-import com.brightcove.ssai.omid.MediaEventType;
+import com.brightcove.ssai.omid.AdEventType;
 import com.brightcove.ssai.omid.OpenMeasurementTracker;
 import com.iab.omid.library.brightcove.adsession.FriendlyObstructionPurpose;
 
@@ -98,8 +98,8 @@ public class MainActivity extends BrightcovePlayerActivity {
         ).create();
         tracker.addListener(new OpenMeasurementTracker.Listener() {
             @Override
-            public void onMediaEvent(MediaEventType mediaEventType) {
-                Log.d(TAG, "onMediaEvent() called with: mediaEventType = [" + mediaEventType + "]");
+            public void onEvent(AdEventType adEventType) {
+                Log.d(TAG, "onEvent() called with: adEventType = [" + adEventType + "]");
             }
 
             @Override
