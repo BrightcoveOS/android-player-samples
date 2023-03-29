@@ -10,5 +10,6 @@
 
     <!-- A sample Brightcove Video ID -->
     <string name="sdk_demo_video_id">6031901107001</string>
+    <string name="toggle_open_measurement">Open Measurement</string>
 
 </resources>
