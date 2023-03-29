@@ -23,7 +23,6 @@ import com.iab.omid.library.brightcove.adsession.FriendlyObstructionPurpose;
 public class MainActivity extends BrightcovePlayerActivity {
 
     private static final String TAG = "MainActivity";
-    private static final String AD_CONFIG_ID_QUERY_PARAM_KEY = "ad_config_id";
     private static final String AD_CONFIG_ID_QUERY_PARAM_VALUE = "ba5e4879-77f0-424b-8c98-706ae5ad7eec";
     private static final String PARTNER_NAME = "dummyVendor";
     private static final String PARTNER_VERSION = Sdk.getVersionName();
@@ -61,7 +60,7 @@ public class MainActivity extends BrightcovePlayerActivity {
         // Set the HttpRequestConfig with the Ad Config Id configured in
         // your https://studio.brightcove.com account.
         HttpRequestConfig httpRequestConfig = new HttpRequestConfig.Builder()
-                .addQueryParameter(AD_CONFIG_ID_QUERY_PARAM_KEY, AD_CONFIG_ID_QUERY_PARAM_VALUE)
+                .addQueryParameter(HttpRequestConfig.KEY_AD_CONFIG_ID, AD_CONFIG_ID_QUERY_PARAM_VALUE)
                 .build();
 
         catalog.findVideoByID(getString(R.string.sdk_demo_video_id), httpRequestConfig, new VideoListener() {
@@ -96,6 +95,8 @@ public class MainActivity extends BrightcovePlayerActivity {
         tracker = new OpenMeasurementTracker.Factory(
                 PARTNER_NAME, PARTNER_VERSION, baseVideoView
         ).create();
+        // NOTE: The ad used in the sample does not have an `AdVerification` element and will not
+        //       send tracking events.  You may verify OpenMeasurement via the following listener:
         tracker.addListener(new OpenMeasurementTracker.Listener() {
             @Override
             public void onEvent(AdEventType adEventType) {
