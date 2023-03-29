@@ -1,0 +1,25 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion ANDROID_COMPILE_SDK_VERSION
+    defaultConfig {
+        applicationId "com.brightcove.recyclervideoview"
+        minSdkVersion 21
+        targetSdkVersion ANDROID_TARGET_SDK_VERSION
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "androidx.appcompat:appcompat:${ANDROIDX_APPCOMPAT}"
+    implementation "androidx.recyclerview:recyclerview:${ANDROIDX_RECYCLER_VIEW}"
+    testImplementation 'junit:junit:4.12'
+}

@@ -108,7 +108,6 @@ public class MainActivity extends BrightcovePlayer {
         super.onStart();
         ConnectivityMonitor.getInstance(this).addListener(connectivityListener);
         catalog.addDownloadEventListener(downloadEventListener);
-        updateVideoList();
     }
 
     @Override
@@ -470,7 +469,6 @@ public class MainActivity extends BrightcovePlayer {
      * @param video the video to be played.
      */
     private void playVideo(@NonNull Video video, @NonNull int videoIndex) {
-        brightcoveVideoView.stopPlayback();
         brightcoveVideoView.replace(videoIndex, video);
         brightcoveVideoView.setCurrentIndex(videoIndex);
         brightcoveVideoView.start();
