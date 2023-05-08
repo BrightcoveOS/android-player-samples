@@ -184,6 +184,13 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     }
   }
 
+  if (project.name.contains('KotlinComposeSampleApp')) {
+    dependencies {
+      implementation "com.brightcove.player:android-sdk:${anpVersion}"
+      implementation "com.brightcove.player:exoplayer2:${anpVersion}"
+    }
+  }
+
   println "Processing ${project.name}"
 }
 

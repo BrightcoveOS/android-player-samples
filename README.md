@@ -56,6 +56,7 @@ Note that in order to enable the FreeWheel sample apps, you must independently o
 ### Brightcove Kotlin sample apps using ExoPlayer
 
 * [Audio Only Sample App](https://github.com/KEAMCRF/android-player-samples/tree/AudioOnlySample/brightcove-exoplayer-kotlin/AudioOnlySampleApp): This app shows how to setup the Brightcove ExoPlayer with audio-only assets.
+* [Kotlin Compose Activity Sample App](https://github.com/fllaryora/android-player-samples/tree/master/brightcove-exoplayer-kotlin/KotlinComposeSampleApp): This app shows how to setup the Brightcove ExoPlayer with audio-only assets.
 
 ## Installing the sample apps
 Currently, all of the sample app projects must be installed together as a bundle. Individual sample app projects also have specific dependencies. For those specific dependencies, see the individual project descriptions above for details.
