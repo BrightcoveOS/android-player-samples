@@ -188,6 +188,8 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     dependencies {
       implementation "com.brightcove.player:android-sdk:${anpVersion}"
       implementation "com.brightcove.player:exoplayer2:${anpVersion}"
+      //implementation "androidx.media3:media3-exoplayer:1.0.1"
+      //implamentation "androidx.media3:media3-ui:1.0.1"
     }
   }
 
