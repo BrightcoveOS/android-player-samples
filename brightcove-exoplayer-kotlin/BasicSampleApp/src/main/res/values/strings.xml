@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Application name -->
+    <string name="app_name">ExoPlayer Sample App</string>
+
+    <!-- A sample Brightcove Edge Account ID -->
+    <string name="sdk_demo_account">5420904993001</string>
+
+    <!-- A sample Brightcove Edge Policy Key -->
+    <string name="sdk_demo_policy">BCpkADawqM3DwCTPGyMMiG0loem8lXox3utO1lFEP1i-_l1MpjRSVXMTSsa2ToslC129_W6YzwJpXbpbIVRFwf35qYM0pxo2HJK-_SotgmgrkmJTQ-024GkXIelVSY8LOHZzRBtcBU57M6Is</string>
+
+    <!-- A sample Brightcove Video ID -->
+    <string name="sdk_demo_videoId">5421538222001</string>
+
+</resources>

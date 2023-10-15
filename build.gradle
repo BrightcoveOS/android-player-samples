@@ -136,7 +136,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
   }
 
   if (project.parent.name == 'brightcove-exoplayer' ||
-          project.parent.name == 'exoplayer-kotlin'||
+          project.parent.name == 'brightcove-exoplayer-kotlin'||
           project.parent.name == 'brightcove-player-controls') {
     dependencies {
       implementation "com.brightcove.player:exoplayer2:${anpVersion}"
