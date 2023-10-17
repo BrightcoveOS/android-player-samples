@@ -23,6 +23,7 @@ include ':brightcove-exoplayer:AudioOnlySampleApp'
 include ':brightcove-exoplayer-kotlin:AudioOnlySampleApp'
 include ':brightcove-exoplayer-kotlin:BasicSampleApp'
 include ':brightcove-exoplayer-kotlin:VideoListSampleApp'
+include ':brightcove-exoplayer-kotlin:AdRulesIMASampleApp'
 
 
 // For building Brightcove Player Controls specific sample apps, which are located under the 'brightcove-player-controls' directory.
