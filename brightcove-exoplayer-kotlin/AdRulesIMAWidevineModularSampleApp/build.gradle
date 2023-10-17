@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk ANDROID_COMPILE_SDK_VERSION
 
     defaultConfig {
         applicationId "com.example.adrulesima.widevinemodular"

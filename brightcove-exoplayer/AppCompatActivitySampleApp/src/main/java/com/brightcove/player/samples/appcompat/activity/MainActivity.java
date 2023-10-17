@@ -10,7 +10,6 @@ import com.brightcove.player.model.Video;
  */
 public class MainActivity extends BrightcovePlayerActivity {
 
-    private final String TAG = this.getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
