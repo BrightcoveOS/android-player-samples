@@ -26,7 +26,7 @@ include ':brightcove-exoplayer-kotlin:VideoListSampleApp'
 include ':brightcove-exoplayer-kotlin:AdRulesIMASampleApp'
 include ':brightcove-exoplayer-kotlin:AdRulesIMAWidevineModularSampleApp'
 include ':brightcove-exoplayer-kotlin:AppCompatActivitySampleApp'
-
+include ':brightcove-exoplayer-kotlin:BasicSsaiSampleApp'
 
 // For building Brightcove Player Controls specific sample apps, which are located under the 'brightcove-player-controls' directory.
 include ':brightcove-player-controls:CustomizedControlsSampleApp'
