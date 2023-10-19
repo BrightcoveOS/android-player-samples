@@ -1,4 +1,4 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,10 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="280dp"
         android:layout_gravity="top|top"
-        android:background="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@android:color/black" />
 
     <FrameLayout
         android:id="@+id/ad_frame"
@@ -22,17 +19,16 @@
         android:layout_height="250dp"
         android:layout_gravity="center_horizontal|bottom"
         android:background="#80000000"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/om_toggle" />
+        android:visibility="invisible" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/om_toggle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="16dp"
         android:checked="true"
-        android:text="@string/toggle_open_measurement"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/brightcove_video_view" />
+        android:text="@string/toggle_open_measurement" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

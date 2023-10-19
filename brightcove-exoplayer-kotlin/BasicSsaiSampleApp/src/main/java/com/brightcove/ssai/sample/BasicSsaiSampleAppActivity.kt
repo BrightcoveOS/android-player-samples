@@ -13,7 +13,7 @@ import com.brightcove.player.network.HttpRequestConfig
 import com.brightcove.ssai.SSAIComponent
 import com.brightcove.ssai.omid.AdEventType
 import com.brightcove.ssai.omid.OpenMeasurementTracker
-import com.brightcove.ssai.sample.databinding.ActivityBasicSsaiSampleAppBinding
+import com.brightcove.ssai.sample.databinding.ActivityBasicSsaiSampleBinding
 import com.iab.omid.library.brightcove.adsession.FriendlyObstructionPurpose
 
 class BasicSsaiSampleAppActivity : BrightcovePlayerActivity() {
@@ -21,13 +21,13 @@ class BasicSsaiSampleAppActivity : BrightcovePlayerActivity() {
     private var plugin: SSAIComponent? = null
     private var tracker: OpenMeasurementTracker? = null
 
-    private lateinit var binding: ActivityBasicSsaiSampleAppBinding
+    private lateinit var binding: ActivityBasicSsaiSampleBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // When extending the BrightcovePlayer, we must assign brightcoveVideoView before
         // entering the superclass.  This allows for some stock video player lifecycle
         // management.
-        binding = ActivityBasicSsaiSampleAppBinding.inflate(layoutInflater)
+        binding = ActivityBasicSsaiSampleBinding.inflate(layoutInflater)
         setContentView(binding.root)
         baseVideoView = binding.brightcoveVideoView
         super.onCreate(savedInstanceState)
