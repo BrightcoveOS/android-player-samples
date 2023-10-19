@@ -7,12 +7,13 @@ android {
     compileSdk ANDROID_COMPILE_SDK_VERSION
 
     defaultConfig {
-        applicationId "com.example.adrulesima.widevinemodular"
+        applicationId "com.brightcove.appcompatfragment"
         minSdk ANDROID_MIN_SDK_VERSION
         targetSdk ANDROID_TARGET_SDK_VERSION
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -25,20 +26,18 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
-
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
-
     buildFeatures {
         viewBinding true
     }
 }
 
 dependencies {
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "com.brightcove.player:android-appcompat-plugin:${anpVersion}"
-    implementation "androidx.constraintlayout:constraintlayout:${ANDROIDX_CONSTRAINT_LAYOUT}"
     implementation "androidx.appcompat:appcompat:${ANDROIDX_APPCOMPAT}"
-    implementation "com.google.android.material:material:${ANDROID_MATERIAL}"
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation "com.brightcove.player:android-appcompat-plugin:${anpVersion}"
 }

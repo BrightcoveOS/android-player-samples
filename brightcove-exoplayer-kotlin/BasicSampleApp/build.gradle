@@ -37,5 +37,5 @@ dependencies {
     implementation "com.brightcove.player:android-appcompat-plugin:${anpVersion}"
     implementation "androidx.constraintlayout:constraintlayout:${ANDROIDX_CONSTRAINT_LAYOUT}"
     implementation "androidx.appcompat:appcompat:${ANDROIDX_APPCOMPAT}"
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation "com.google.android.material:material:${ANDROID_MATERIAL}"
 }
