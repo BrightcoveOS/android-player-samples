@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.brightcove.googlecastreceiver.databinding.ItemViewBinding
 import com.brightcove.player.model.Video
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -58,7 +59,14 @@ class VideoListAdapter(private val onVideoClick: OnVideoClick) : ListAdapter<Vid
                 } else {
                     Picasso.get()
                         .load(imageUri.toASCIIString())
-                        .into(videoThumbnailImage)
+                        .into(videoThumbnailImage, object: Callback {
+                            override fun onSuccess() {
+                                //set animations here
+                            }
+                            override fun onError(e: Exception?) {
+                                videoThumbnailImage.setImageResource(R.drawable.movie)
+                            }
+                        })
                 }
 
                 //Adding onCLick Listener to the view
