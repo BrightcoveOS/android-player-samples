@@ -17,14 +17,5 @@ class SettingsActivity : AppCompatActivity() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.pref_picture_in_picture_settings, rootKey)
         }
-
-        /*override fun onPreferenceTreeClick(preference: Preference?): Boolean {
-            val key = preference?.key
-            if (key == "key_for_your_preference") {
-                // Handle the click event for your preference
-                return true
-            }
-            return super.onPreferenceTreeClick(preference)
-        }*/
     }
 }
