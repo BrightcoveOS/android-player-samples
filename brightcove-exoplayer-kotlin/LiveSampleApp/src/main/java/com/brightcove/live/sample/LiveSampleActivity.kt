@@ -17,7 +17,7 @@ class LiveSampleActivity : BrightcovePlayer() {
         // notifications and to control logging.
         binding = ActivityLiveSampleBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        brightcoveVideoView = binding.brightcoveVideoView //findViewById<View>(R.id.brightcove_video_view) as BrightcoveExoPlayerVideoView
+        brightcoveVideoView = binding.brightcoveVideoView
         super.onCreate(savedInstanceState)
 
         val video = Video.createVideo("YOUR_LIVE_HLS_STREAM", DeliveryType.HLS)

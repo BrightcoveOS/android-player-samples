@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.BasicSsaiSample" parent="Theme.Material3.DayNight">
+    <style name="Base.Theme.BasicIMAVASTSampleApp" parent="Theme.Material3.DayNight">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>

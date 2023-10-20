@@ -1,0 +1,43 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.brightcove.sample.imavast'
+    compileSdk ANDROID_COMPILE_SDK_VERSION
+
+    defaultConfig {
+        applicationId "com.brightcove.sample.imavast"
+        minSdk ANDROID_MIN_SDK_VERSION
+        targetSdk ANDROID_TARGET_SDK_VERSION
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation "com.brightcove.player:android-appcompat-plugin:${anpVersion}"
+    implementation "androidx.constraintlayout:constraintlayout:${ANDROIDX_CONSTRAINT_LAYOUT}"
+    implementation "androidx.appcompat:appcompat:${ANDROIDX_APPCOMPAT}"
+    implementation "com.google.android.material:material:${ANDROID_MATERIAL}"
+}
