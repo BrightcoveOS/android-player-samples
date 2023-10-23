@@ -33,6 +33,7 @@ include ':brightcove-exoplayer-kotlin:BasicCastBrightcoveReceiverSampleApp'
 include ':brightcove-exoplayer-kotlin:BasicCastGoogleReceiverSampleApp'
 include ':brightcove-exoplayer-kotlin:BasicIMAVASTSampleApp'
 include ':brightcove-exoplayer-kotlin:PictureInPictureSampleApp'
+include ':brightcove-exoplayer-kotlin:TextureViewSampleApp'
 
 // For building Brightcove Player Controls specific sample apps, which are located under the 'brightcove-player-controls' directory.
 include ':brightcove-player-controls:CustomizedControlsSampleApp'
