@@ -66,3 +66,5 @@ boolean pulseDependenciesAreSatisfied() {
     File dep = file("${System.getProperty("user.home")}/libs/Pulse.aar")
     return dep.exists()
 }
+
+include ':brightcove-exoplayer:BasicDAISampleApp'
