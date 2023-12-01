@@ -1,5 +1,6 @@
 package com.brightcove.player.samples.exoplayer.dai.basic;
 
+
 import android.os.Bundle;
 import android.util.Log;
 
@@ -8,8 +9,6 @@ import com.brightcove.player.edge.Catalog;
 import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.model.Video;
-import com.brightcove.player.network.HttpRequestConfig;
-import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.google.ads.interactivemedia.v3.api.ImaSdkFactory;
 import com.google.ads.interactivemedia.v3.api.ImaSdkSettings;
@@ -31,26 +30,21 @@ public class MainActivity extends BrightcovePlayer {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
-        brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
+        brightcoveVideoView = findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
 
-
         eventEmitter = brightcoveVideoView.getEventEmitter();
-
         setupDAI();
-
         catalog = new Catalog.Builder(eventEmitter, getString(R.string.account))
                 .setPolicy(getString(R.string.policy))
                 .build();
+        requestVideo();
     }
 
-    public void setupDAI() {
+    private void setupDAI() {
         ImaSdkSettings imaSdkSettings = ImaSdkFactory.getInstance().createImaSdkSettings();
-//        imaSdkSettings.setLanguage(testOptions.getPlayerTestOptions().getTestPlayerLanguage());
-
         GoogleDAIComponent.Builder daiBuilder = new GoogleDAIComponent.Builder(brightcoveVideoView, eventEmitter)
                 .setImaSdkSettings(imaSdkSettings);
-//                .setAdTagParameters(testOptions.getAdTestOptions().getAdTagParameters());
         googleDAIComponent = daiBuilder.build();
     }
 
@@ -71,22 +65,12 @@ public class MainActivity extends BrightcovePlayer {
                     public void onContentComplete() {
                         Log.d(TAG, "onContentComplete");
                     }
-
-                    @Override
-                    public void onUserTextReceived(String userTest) {
-                        Log.d(TAG, "onUserTextReceived");
-                    }
-
-                    @Override
-                    public void onVolumeChanged(int percentage) {
-                        Log.d(TAG, "onVolumeChanged");
-                    }
                 });
 
-                // Request a live stream
+                // Uncomment the next line if you want to request a live stream
                 //googleDAIComponent.requestLiveStream(LIVE_BIG_BUCK_BUNNY_ASSET_KEY, null);
 
-                // Request a VOD
+                // Uncomment the next line if you want to request a VOD
                 googleDAIComponent.requestVOD(VOD_TEARS_OF_STEEL_CMS_ID, VOD_TEARS_OF_STEEL_VIDEO_ID, null);
 
             }

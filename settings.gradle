@@ -1,6 +1,7 @@
 // For building exoplayer-specific sample apps, which are located under the 'brightcove-exoplayer' directory.
 include ':brightcove-exoplayer:360VideoSampleApp'
 include ':brightcove-exoplayer:BasicCastBrightcoveReceiverSampleApp'
+include ':brightcove-exoplayer:BasicDAISampleApp'
 include ':brightcove-exoplayer:AdRulesIMASampleApp'
 include ':brightcove-exoplayer:AdRulesIMAWidevineModularSampleApp'
 include ':brightcove-exoplayer:AppCompatActivitySampleApp'
@@ -36,6 +37,7 @@ include ':brightcove-exoplayer-kotlin:PictureInPictureSampleApp'
 include ':brightcove-exoplayer-kotlin:TextureViewSampleApp'
 include ':brightcove-exoplayer-kotlin:BasicSsaiPALSampleApp'
 include ':brightcove-exoplayer-kotlin:BumperSampleApp'
+include ':brightcove-exoplayer-kotlin:BasicDAISampleApp'
 
 // For building Brightcove Player Controls specific sample apps, which are located under the 'brightcove-player-controls' directory.
 include ':brightcove-player-controls:CustomizedControlsSampleApp'
@@ -67,4 +69,4 @@ boolean pulseDependenciesAreSatisfied() {
     return dep.exists()
 }
 
-include ':brightcove-exoplayer:BasicDAISampleApp'
+
