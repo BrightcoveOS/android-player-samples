@@ -10,8 +10,8 @@ This version of the sample apps supports the latest Brightcove SDK and plugins. 
 
 ## Brightcove ExoPlayer sample apps:
 
-### An important note about the ExoPlayer sample apps
-The ExoPlayer sample apps on the master branch only support Google ExoPlayer 2.10.8, which is the currently supported version of ExoPlayer with the Brightcove Native SDK for Android.
+### An important note 
+Starting from the SDK v8.3.0, the sample apps require Java 17.
 
 ### Brightcove Java sample apps using ExoPlayer
 
