@@ -126,12 +126,19 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     dependencies {
       implementation "com.brightcove.player:android-ssai-plugin:${anpVersion}"
       implementation "com.brightcove.player:exoplayer2:${anpVersion}"
+      implementation "com.brightcove.player:android-thumbnail-plugin:${anpVersion}"
     }
   }
 
   if (project.name.contains('Thumbnail')) {
     dependencies {
       implementation "com.brightcove.player:android-thumbnail-plugin:${anpVersion}"
+    }
+  }
+
+  if (project.name.contains('AudioOnly')) {
+    dependencies {
+      implementation "com.brightcove.player:android-common-plugin:${anpVersion}"
     }
   }
 

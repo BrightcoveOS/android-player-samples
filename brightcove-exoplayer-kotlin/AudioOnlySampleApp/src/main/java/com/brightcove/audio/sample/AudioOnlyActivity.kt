@@ -7,6 +7,7 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -25,12 +26,14 @@ import com.brightcove.player.edge.Catalog
 import com.brightcove.player.edge.PlaylistListener
 import com.brightcove.player.model.Playlist
 import com.brightcove.player.playback.PlaybackNotification
+import com.brightcove.player.playback.PlaybackNotificationConfig
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
 import com.squareup.picasso.Picasso
 import com.brightcove.audio.sample.databinding.ActivityAudioOnlyBinding as ViewBinding
 import com.brightcove.player.model.Video as Media
+import com.brightcove.common.playback.BackgroundPlaybackNotification
 
 
 class AudioOnlyActivity : BrightcovePlayerActivity() {
@@ -111,11 +114,27 @@ class AudioOnlyActivity : BrightcovePlayerActivity() {
     }
 
     private fun setUpPlayer() {
-        player.playback.notification.setConfig(
-            PlaybackNotification.Config(this)
-                .setStreamTypes(*PlaybackNotification.StreamType.values())
-        )
+        player.playback.notification?.let {
+            player.playback.notification.setConfig(
+                PlaybackNotificationConfig(this)
+                    .setStreamTypes(*PlaybackNotification.StreamType.values())
+            )
+        }
+        val videoDisplayComponent = baseVideoView.videoDisplay as ExoPlayerVideoDisplayComponent?
+        videoDisplayComponent?.let {
+            if (videoDisplayComponent.playbackNotification == null) {
+                videoDisplayComponent.playbackNotification = createPlaybackNotification()
+            }
+        }
         catalog.findPlaylistByReferenceID(getString(R.string.reference_id), playlistListener)
+    }
+
+    private fun createPlaybackNotification() : PlaybackNotification? {
+        val videoDisplayComponent = baseVideoView.videoDisplay as ExoPlayerVideoDisplayComponent?
+        val notification = BackgroundPlaybackNotification.getInstance(this)
+        notification?.setConfig(PlaybackNotificationConfig(this))
+        notification?.playback = videoDisplayComponent?.playback
+        return notification
     }
 
     private fun setPlaylist(playlist: Playlist) = binding.run {
