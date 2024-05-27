@@ -97,7 +97,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
 
   dependencies {
     implementation "com.brightcove.player:android-sdk:${anpVersion}"
-    implementation "com.android.support:multidex:${MULTIDEX_VERSION}"
+    implementation "androidx.multidex:multidex:${MULTIDEX_VERSION}"
   }
 
   if (project.name.contains('IMA')) {
