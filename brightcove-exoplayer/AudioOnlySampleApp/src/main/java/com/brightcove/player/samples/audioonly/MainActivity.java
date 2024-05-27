@@ -9,7 +9,7 @@ import android.widget.ImageButton;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.brightcove.common.playback.BackgroundPlaybackNotification;
+import com.brightcove.playback.notification.BackgroundPlaybackNotification;
 import com.brightcove.player.display.ExoPlayerVideoDisplayComponent;
 import com.brightcove.player.edge.Catalog;
 import com.brightcove.player.edge.PlaylistListener;

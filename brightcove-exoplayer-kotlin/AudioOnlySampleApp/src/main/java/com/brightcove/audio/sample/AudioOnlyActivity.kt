@@ -33,7 +33,7 @@ import com.google.android.exoplayer2.Player
 import com.squareup.picasso.Picasso
 import com.brightcove.audio.sample.databinding.ActivityAudioOnlyBinding as ViewBinding
 import com.brightcove.player.model.Video as Media
-import com.brightcove.common.playback.BackgroundPlaybackNotification
+import com.brightcove.playback.notification.BackgroundPlaybackNotification
 
 
 class AudioOnlyActivity : BrightcovePlayerActivity() {
