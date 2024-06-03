@@ -13,6 +13,8 @@ This version of the sample apps supports the latest Brightcove SDK and plugins. 
 ### An important note 
 Starting from the SDK v8.3.0, the sample apps require Java 17.
 
+The Issues tab is now closed. To report any problem or provide feedback, please refer to the Support section below.  
+
 ### Brightcove Java sample apps using ExoPlayer
 
 * [360 Video Sample app](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/360VideoSampleApp/): This app shows how to use the Brightcove ExoPlayer to play 360 videos.
@@ -30,8 +32,6 @@ Starting from the SDK v8.3.0, the sample apps require Java 17.
 * [Basic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicSampleApp): This app shows how to setup the Brightcove ExoPlayer to play.
 
 * [Basic Cast Sample App with Brightcove Cast Receiver](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicCastBrightcoveReceiverSampleApp): This adds Google Chromecast support to the Brightcove Native Player SDK for Android, and demonstrates integration with the upated Brightcove Cast Receiver app v2.0. Please refer to the Release Notes in the v6.16.0 release of the Brightcove Native Player SDK for Android for more information.
-
-* [Basic Cast Sample App with Google Cast Receiver](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicCastGoogleReceiverSampleApp): This adds Google Chromecast support to the Brightcove Native Player SDK for Android, and demonstrates integration with Google's Demo Receiver app. Please refer to the Release Notes in the v6.16.0 release of the Brightcove Native Player SDK for Android for more information.
 
 * [FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/FreeWheelSampleApp): This app shows how to use the Brightcove ExoPlayer with FreeWheel ads.
 
