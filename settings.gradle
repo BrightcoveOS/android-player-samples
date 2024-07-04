@@ -17,6 +17,7 @@ include ':brightcove-exoplayer:VideoListAdRulesIMASampleApp'
 include ':brightcove-exoplayer:BasicIMAVASTSampleApp'
 include ':brightcove-exoplayer:ThumbnailScrubberSampleApp'
 include ':brightcove-exoplayer:AudioOnlySampleApp'
+include ':brightcove-exoplayer:BumperSampleApp'
 
 // Set of Kotlin apps
 include ':brightcove-exoplayer-kotlin:AudioOnlySampleApp'
