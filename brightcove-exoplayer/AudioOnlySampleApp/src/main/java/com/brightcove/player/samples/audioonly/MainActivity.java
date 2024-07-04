@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.brightcove.playback.notification.BackgroundPlaybackNotification;
 import com.brightcove.player.display.ExoPlayerVideoDisplayComponent;
 import com.brightcove.player.edge.Catalog;
 import com.brightcove.player.edge.PlaylistListener;
@@ -16,6 +17,8 @@ import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.logging.Log;
 import com.brightcove.player.model.Playlist;
 import com.brightcove.player.model.Video;
+import com.brightcove.player.playback.PlaybackNotification;
+import com.brightcove.player.playback.PlaybackNotificationConfig;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
 import com.google.android.exoplayer2.Player;
@@ -64,6 +67,20 @@ public class MainActivity extends BrightcovePlayer {
         if (useShuffle) {
             useShuffle();
         }
+        ExoPlayerVideoDisplayComponent videoDisplayComponent = (ExoPlayerVideoDisplayComponent) brightcoveVideoView.getVideoDisplay();
+        if (videoDisplayComponent != null ) {
+            if (videoDisplayComponent.getPlaybackNotification() == null) {
+                videoDisplayComponent.setPlaybackNotification(createPlaybackNotification());
+            }
+        }
+    }
+
+    private PlaybackNotification createPlaybackNotification() {
+        ExoPlayerVideoDisplayComponent displayComponent = ((ExoPlayerVideoDisplayComponent) brightcoveVideoView.getVideoDisplay());
+        PlaybackNotification notification = BackgroundPlaybackNotification.getInstance(this);
+        notification.setConfig(new PlaybackNotificationConfig(this));
+        notification.setPlayback(displayComponent.getPlayback());
+        return notification;
     }
 
     /**

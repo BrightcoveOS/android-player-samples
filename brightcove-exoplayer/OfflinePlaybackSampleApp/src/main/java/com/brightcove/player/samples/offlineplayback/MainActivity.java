@@ -14,10 +14,12 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.brightcove.player.display.ExoPlayerVideoDisplayComponent;
 import com.brightcove.player.edge.Catalog;
 import com.brightcove.player.edge.CatalogError;
 import com.brightcove.player.edge.OfflineCallback;
 import com.brightcove.player.edge.OfflineCatalog;
+import com.brightcove.player.edge.OfflineStoreManager;
 import com.brightcove.player.edge.PlaylistListener;
 import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.event.Event;
@@ -159,6 +161,11 @@ public class MainActivity extends BrightcovePlayer {
         ArrayAdapter<PlaylistModel> playlistAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item/*, playlistNames*/);
         playlistAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        ExoPlayerVideoDisplayComponent videoDisplayComponent = ((ExoPlayerVideoDisplayComponent) brightcoveVideoView.getVideoDisplay());
+        if (videoDisplayComponent != null) {
+            videoDisplayComponent.setMediaStore(OfflineStoreManager.getInstance(this));
+        }
     }
 
     private void updateVideoList() {
