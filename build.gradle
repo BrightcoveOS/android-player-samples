@@ -122,7 +122,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     }
   }
 
-  if (project.name.contains('Ssai')) {
+  if (project.name.contains('Ssai') || project.name.contains('SSAI')) {
     dependencies {
       implementation "com.brightcove.player:android-ssai-plugin:${anpVersion}"
       implementation "com.brightcove.player:exoplayer2:${anpVersion}"
