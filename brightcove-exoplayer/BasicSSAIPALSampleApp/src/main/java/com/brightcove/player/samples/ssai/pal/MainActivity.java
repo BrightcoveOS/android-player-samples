@@ -166,7 +166,7 @@ public class MainActivity extends BrightcovePlayerActivity {
         public void onSuccess(NonceManager manager) {
             nonceManager = manager;
             String nonceString = manager.getNonce();
-            ssaiPlugin.setNoncePAL(nonceString);
+            ssaiPlugin.setNonce(nonceString);
             Log.d("PALSample", "Generated nonce: " + nonceString);
             // Set the HttpRequestConfig with the Ad Config Id configured in
             // your https://studio.brightcove.com account.
