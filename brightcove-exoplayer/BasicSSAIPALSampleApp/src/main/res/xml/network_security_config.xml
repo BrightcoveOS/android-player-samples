@@ -1,0 +1,21 @@
+<network-security-config>
+    <debug-overrides>
+        <trust-anchors>
+<!--            <certificates src="@raw/charles_ssl_proxying_certificate" />-->
+            <certificates src="user" />
+        </trust-anchors>
+    </debug-overrides>
+
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">c.brightcove.com</domain>
+        <domain includeSubdomains="true">f1.media.brightcove.com</domain>
+        <domain includeSubdomains="true">solutions.brightcove.com</domain>
+        <domain includeSubdomains="true">appsci.vidmark.local</domain>
+        <domain includeSubdomains="true">devimages.apple.com.edgekey.net</domain>
+        <domain includeSubdomains="true">fwmrm.net</domain>
+        <domain includeSubdomains="true">edgedl.me.gvt1.com</domain>
+        <domain includeSubdomains="true">rdmedia.bbc.co.uk</domain>
+        <domain includeSubdomains="true">boltdns.net</domain>
+        <domain includeSubdomains="true">akamaihd.net</domain>
+    </domain-config>
+</network-security-config>

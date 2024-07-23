@@ -18,6 +18,7 @@ include ':brightcove-exoplayer:BasicIMAVASTSampleApp'
 include ':brightcove-exoplayer:ThumbnailScrubberSampleApp'
 include ':brightcove-exoplayer:AudioOnlySampleApp'
 include ':brightcove-exoplayer:BumperSampleApp'
+include ':brightcove-exoplayer:BasicSSAIPALSampleApp'
 
 // Set of Kotlin apps
 include ':brightcove-exoplayer-kotlin:AudioOnlySampleApp'
@@ -30,10 +31,11 @@ include ':brightcove-exoplayer-kotlin:AppCompatFragmentSampleApp'
 include ':brightcove-exoplayer-kotlin:BasicSsaiSampleApp'
 include ':brightcove-exoplayer-kotlin:LiveSampleApp'
 include ':brightcove-exoplayer-kotlin:BasicCastBrightcoveReceiverSampleApp'
-include ':brightcove-exoplayer-kotlin:BasicCastGoogleReceiverSampleApp'
 include ':brightcove-exoplayer-kotlin:BasicIMAVASTSampleApp'
 include ':brightcove-exoplayer-kotlin:PictureInPictureSampleApp'
 include ':brightcove-exoplayer-kotlin:TextureViewSampleApp'
+include ':brightcove-exoplayer-kotlin:BasicSsaiPALSampleApp'
+include ':brightcove-exoplayer-kotlin:BumperSampleApp'
 
 // For building Brightcove Player Controls specific sample apps, which are located under the 'brightcove-player-controls' directory.
 include ':brightcove-player-controls:CustomizedControlsSampleApp'

@@ -1,0 +1,27 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion ANDROID_COMPILE_SDK_VERSION
+
+    defaultConfig {
+        applicationId "com.brightcove.player.samples.ssai.basic"
+        targetSdkVersion ANDROID_TARGET_SDK_VERSION
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.brightcove.player:android-appcompat-plugin:${anpVersion}"
+    implementation "androidx.appcompat:appcompat:${ANDROIDX_APPCOMPAT}"
+    implementation "com.google.android.gms:play-services-pal:${GOOGLE_IMA_PAL_VERSION}"
+}
