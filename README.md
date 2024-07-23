@@ -33,6 +33,8 @@ The Issues tab is now closed. To report any problem or provide feedback, please 
 
 * [Basic Cast Sample App with Brightcove Cast Receiver](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicCastBrightcoveReceiverSampleApp): This adds Google Chromecast support to the Brightcove Native Player SDK for Android, and demonstrates integration with the upated Brightcove Cast Receiver app v2.0. Please refer to the Release Notes in the v6.16.0 release of the Brightcove Native Player SDK for Android for more information.
 
+* [Bumper Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BumperSampleApp): This app shows how to setup the Brightcove ExoPlayer to play using a bumper video.
+
 * [FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/FreeWheelSampleApp): This app shows how to use the Brightcove ExoPlayer with FreeWheel ads.
 
 * [FreeWheel Widevine Modular Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/FreeWheelWidevineModularSampleApp): This app shows how to use the Brightcove ExoPlayer with FreeWheel ads and Widevine Modular content.
@@ -40,6 +42,8 @@ The Issues tab is now closed. To report any problem or provide feedback, please 
 Note that in order to enable the FreeWheel sample apps, you must independently obtain the non-free FreeWheel **AdManager.aar** library archive and install it into the directory **libs/** which is typically located at the root of your /home/ directory. The Brightcove Native SDK for Android and the FreeWheel sample apps require the FreeWheel AdManager library version 6.28.0. Please note that Brightcove does not distribute the FreeWheel libraries. Contact [FreeWheel](http://freewheel.tv/about/#contact-us) directly for more information on how to obtain their products.
 
 * [Basic SSAI Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicSsaiSampleApp): This app shows how to configure an app to use the Brightcove Native Player for Android SSAI Plugin to play a video.
+
+* [Basic SSAI PAL Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicSSAIPALSampleApp): This app shows how to configure an app to use the Brightcove Native Player for Android SSAI Plugin to play a video and the PAL SDK from Google for Ad tracking.
 
 * [ID3 Tags Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/ID3SampleApp): This app shows how to use the Brightcove ExoPlayer with ID3 tags.
 
@@ -56,6 +60,11 @@ Note that in order to enable the FreeWheel sample apps, you must independently o
 ### Brightcove Kotlin sample apps using ExoPlayer
 
 * [Audio Only Sample App](https://github.com/KEAMCRF/android-player-samples/tree/AudioOnlySample/brightcove-exoplayer-kotlin/AudioOnlySampleApp): This app shows how to setup the Brightcove ExoPlayer with audio-only assets.
+
+* [Basic SSAI PAL Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/BasicSSAIPALSampleApp): This app shows how to configure an app to use the Brightcove Native Player for Android SSAI Plugin to play a video and the PAL SDK from Google for Ad tracking.
+
+* [Bumper Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/BumperSampleApp): This app shows how to setup the Brightcove ExoPlayer to play using a bumper video.
+
 
 ## Installing the sample apps
 Currently, all of the sample app projects must be installed together as a bundle. Individual sample app projects also have specific dependencies. For those specific dependencies, see the individual project descriptions above for details.
