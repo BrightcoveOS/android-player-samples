@@ -51,7 +51,6 @@ public class MainActivity extends BrightcovePlayerActivity {
     private ConsentSettings consentSettings;
 
     private Catalog catalog;
-    private boolean isPlayingAd = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,25 +97,12 @@ public class MainActivity extends BrightcovePlayerActivity {
             ssaiPlugin.addCompanionContainer((ViewGroup) view);
         }
 
-        baseVideoView.getEventEmitter().on(EventType.AD_BREAK_STARTED, event ->
-                isPlayingAd = true
-        );
-
-        baseVideoView.getEventEmitter().on(EventType.AD_BREAK_COMPLETED, event ->
-                isPlayingAd = false
-        );
-
         baseVideoView.getEventEmitter().on(EventType.PLAY, event -> sendPlaybackStart());
 
         baseVideoView.getEventEmitter().on(EventType.COMPLETED, event -> sendPlaybackEnd());
 
         baseVideoView.getEventEmitter().on(SSAIEventType.AD_CLICKED, event -> sendAdClick());
 
-        baseVideoView.setOnClickListener(view12 -> {
-            if (isPlayingAd){
-                sendAdClick();
-           }
-        });
     }
 
     @Override
