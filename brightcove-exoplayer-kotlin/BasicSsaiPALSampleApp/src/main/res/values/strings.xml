@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">BasicSsaiSampleApp</string>
+
+    <!-- A sample Brightcove Edge Account ID -->
+    <string name="sdk_demo_account">5420904993001</string>
+
+    <!-- A sample Brightcove Edge Policy Key -->
+    <string name="sdk_demo_policy_key">BCpkADawqM3DwCTPGyMMiG0loem8lXox3utO1lFEP1i-_l1MpjRSVXMTSsa2ToslC129_W6YzwJpXbpbIVRFwf35qYM0pxo2HJK-_SotgmgrkmJTQ-024GkXIelVSY8LOHZzRBtcBU57M6Is</string>
+
+    <!-- A sample Brightcove Video ID -->
+    <string name="sdk_demo_video_id">6031901107001</string>
+    <string name="toggle_open_measurement">Open Measurement</string>
+</resources>
