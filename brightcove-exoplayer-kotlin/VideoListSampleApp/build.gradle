@@ -1,0 +1,42 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdk ANDROID_COMPILE_SDK_VERSION
+
+    defaultConfig {
+        applicationId "com.brightcove.videolist"
+        minSdk ANDROID_MIN_SDK_VERSION
+        targetSdk ANDROID_TARGET_SDK_VERSION
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "androidx.appcompat:appcompat:${ANDROIDX_APPCOMPAT}"
+    implementation "androidx.recyclerview:recyclerview:${ANDROIDX_RECYCLER_VIEW}"
+    implementation "com.google.android.material:material:${ANDROID_MATERIAL}"
+}

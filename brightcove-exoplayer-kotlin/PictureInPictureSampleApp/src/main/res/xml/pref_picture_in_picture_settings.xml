@@ -1,0 +1,34 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/pref_picture_in_picture_title">
+
+    <PreferenceCategory
+        android:title="@string/pref_picture_in_picture_title">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="picture_in_picture_on_user_leave_enabled"
+            android:title="@string/pref_picture_in_picture_on_user_leave_enabled"
+            android:summary="@string/pref_picture_in_picture_on_user_leave_enabled_desc"/>
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="picture_in_picture_cc_enabled"
+            android:title="@string/pref_picture_in_picture_cc_enabled_title"
+            android:summary="@string/pref_picture_in_picture_cc_enabled_title_desc" />
+
+        <ListPreference
+            android:defaultValue="0.50f"
+            android:key="picture_in_picture_cc_scale_factor"
+            android:title="@string/pref_picture_in_picture_cc_scale_factor"
+            android:summary="@string/pref_picture_in_picture_cc_scale_factor_desc"
+            android:entries="@array/cc_scale"
+            android:entryValues="@array/cc_scale_data"/>
+
+        <ListPreference
+            android:defaultValue="16:9"
+            android:key="picture_in_picture_aspect_ratio"
+            android:title="@string/pref_picture_in_picture_spect_ratio_title"
+            android:summary="@string/pref_picture_in_picture_spect_ratio_title_desc"
+            android:entries="@array/aspect_ratio"
+            android:entryValues="@array/aspect_ratio"/>
+    </PreferenceCategory>
+</PreferenceScreen>
