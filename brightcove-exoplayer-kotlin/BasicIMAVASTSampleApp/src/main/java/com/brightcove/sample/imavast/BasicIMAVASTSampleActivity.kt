@@ -19,7 +19,6 @@ import com.brightcove.player.model.CuePoint.CuePointType
 import com.brightcove.player.model.DeliveryType
 import com.brightcove.player.model.Source
 import com.brightcove.player.model.Video
-import com.brightcove.player.view.BrightcovePlayer
 import com.brightcove.sample.imavast.databinding.ActivityBasicImaVastBinding
 import com.google.ads.interactivemedia.v3.api.AdsRequest
 import com.google.ads.interactivemedia.v3.api.CompanionAdSlot
@@ -145,7 +144,7 @@ class BasicIMAVASTSampleActivity : BrightcovePlayerActivity() {
                 companionAdSlot.container = binding.adFrame
                 companionAdSlot.setSize(COMPANION_SLOT_WIDTH, COMPANION_SLOT_HEIGHT)
                 companionAdSlots.add(companionAdSlot)
-                container.companionSlots = companionAdSlots
+                container.setCompanionSlots(companionAdSlots)
             }
 
             // Build the list of ads request objects, one per ad
