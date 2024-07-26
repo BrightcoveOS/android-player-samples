@@ -1,0 +1,7 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.BasicIMAVASTSampleApp" parent="Theme.Material3.DayNight">
+        <!-- Customize your light theme here. -->
+<!--        <item name="colorPrimary">@color/brightcove_black</item>-->
+    </style>
+</resources>
