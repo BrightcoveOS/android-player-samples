@@ -108,6 +108,13 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     }
   }
 
+  if (project.name.contains('DAI')) {
+    dependencies {
+      implementation "com.brightcove.player:android-dai-plugin:${anpVersion}"
+      implementation "androidx.legacy:legacy-support-v4:${ANDROIDX_LEGACY_SUPPORT_V4}"
+    }
+  }
+
   if (project.name.contains('Omniture')) {
     dependencies {
       implementation "com.brightcove.player:android-omniture-plugin:${anpVersion}"

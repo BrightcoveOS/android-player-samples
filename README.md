@@ -35,6 +35,8 @@ The Issues tab is now closed. To report any problem or provide feedback, please 
 
 * [BasicIMAVAST Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicIMAVASTSampleApp): This app shows how to use the Brightcove ExoPlayer with Google IMA ads.
 
+* [BasicDAI Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicDAISampleApp): This app shows how to use the Brightcove ExoPlayer with Google DAI ads.
+
 * [Bumper Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BumperSampleApp): This app shows how to setup the Brightcove ExoPlayer to play using a bumper video.
 
 * [FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/FreeWheelSampleApp): This app shows how to use the Brightcove ExoPlayer with FreeWheel ads.
@@ -82,6 +84,8 @@ Note that in order to enable the FreeWheel sample apps, you must independently o
 * [Basic Cast Sample App with Brightcove Cast Receiver](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/BasicCastBrightcoveReceiverSampleApp): This adds Google Chromecast support to the Brightcove Native Player SDK for Android, and demonstrates integration with the upated Brightcove Cast Receiver app v2.0. Please refer to the Release Notes in the v6.16.0 release of the Brightcove Native Player SDK for Android for more information.
 
 * [BasicIMAVAST Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/BasicIMAVASTSampleApp): This app shows how to use the Brightcove ExoPlayer with Google IMA ads.
+
+* [BasicDAI Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/BasicDAISampleApp): This app shows how to use the Brightcove ExoPlayer with Google DAI ads.
 
 * [Bumper Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/BumperSampleApp): This app shows how to setup the Brightcove ExoPlayer to play using a bumper video.
 
