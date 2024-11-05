@@ -7,7 +7,6 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -17,9 +16,12 @@ import android.view.animation.AccelerateInterpolator
 import android.view.animation.AlphaAnimation
 import android.view.animation.DecelerateInterpolator
 import androidx.core.view.MenuItemCompat
+import androidx.media3.common.Player
+import androidx.media3.exoplayer.ExoPlayer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.brightcove.audio.sample.databinding.ItemAudioBinding
+import com.brightcove.playback.notification.BackgroundPlaybackNotification
 import com.brightcove.player.appcompat.BrightcovePlayerActivity
 import com.brightcove.player.display.ExoPlayerVideoDisplayComponent
 import com.brightcove.player.edge.Catalog
@@ -28,12 +30,9 @@ import com.brightcove.player.model.Playlist
 import com.brightcove.player.playback.PlaybackNotification
 import com.brightcove.player.playback.PlaybackNotificationConfig
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.Player
 import com.squareup.picasso.Picasso
 import com.brightcove.audio.sample.databinding.ActivityAudioOnlyBinding as ViewBinding
 import com.brightcove.player.model.Video as Media
-import com.brightcove.playback.notification.BackgroundPlaybackNotification
 
 
 class AudioOnlyActivity : BrightcovePlayerActivity() {

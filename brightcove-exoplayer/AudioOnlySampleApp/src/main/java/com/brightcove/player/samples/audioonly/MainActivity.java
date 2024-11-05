@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import androidx.media3.common.Player;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.brightcove.playback.notification.BackgroundPlaybackNotification;
@@ -21,7 +22,6 @@ import com.brightcove.player.playback.PlaybackNotification;
 import com.brightcove.player.playback.PlaybackNotificationConfig;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
-import com.google.android.exoplayer2.Player;
 
 public class MainActivity extends BrightcovePlayer {
 
@@ -143,17 +143,17 @@ public class MainActivity extends BrightcovePlayer {
                 if (repeatState == 0){
                     repeatState = 1;
                     exoVideoDisplayComponent.getExoPlayer().setRepeatMode(Player.REPEAT_MODE_ONE);
-                    actionRepeatButton.setImageResource(R.drawable.exo_media_action_repeat_one);
+                    actionRepeatButton.setImageResource(R.drawable.ic_repeat_once_white_24dp);
                 }
                 else if (repeatState == 1){
                     repeatState = 2;
                     exoVideoDisplayComponent.getExoPlayer().setRepeatMode(Player.REPEAT_MODE_ALL);
-                    actionRepeatButton.setImageResource(R.drawable.exo_media_action_repeat_all);
+                    actionRepeatButton.setImageResource(R.drawable.ic_repeat_white_24dp);
                 }
                 else if (repeatState == 2){
                     repeatState = 0;
                     exoVideoDisplayComponent.getExoPlayer().setRepeatMode(Player.REPEAT_MODE_OFF);
-                    actionRepeatButton.setImageResource(R.drawable.exo_media_action_repeat_off);
+                    actionRepeatButton.setImageResource(R.drawable.ic_repeat_off_white_24dp);
                 }
             });
         }
