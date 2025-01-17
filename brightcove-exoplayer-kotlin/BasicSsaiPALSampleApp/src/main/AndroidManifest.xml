@@ -13,6 +13,7 @@
         android:theme="@style/Base.Theme.BasicSsaiSample">
         <activity
             android:name=".BasicSsaiPALSampleAppActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

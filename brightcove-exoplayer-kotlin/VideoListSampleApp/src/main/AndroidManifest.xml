@@ -14,6 +14,7 @@
         android:theme="@style/Theme.videoList">
         <activity
             android:name=".VideoListSampleActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
