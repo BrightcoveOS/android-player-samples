@@ -64,12 +64,10 @@ public class BrightcoveDownloadUtil {
         // (if more than one audio track is present)
         if (audio.size() > 1) {
             Log.v(TAG, "Alternate audio track download allowed for this video. Adding an \"alternate\" audio track");
-            if (indexMain == 0) {
-                //The first audio is also the main, so let's pick the second audio
-                newAudio.add(audio.get(1));
-            } else {
-                //We'll pick the first audio as the extra
-                newAudio.add(audio.get(0));
+            for (MediaFormat audioTrack : audio) {
+                if (indexMain != audio.indexOf(audioTrack)){
+                    newAudio.add(audioTrack);
+                }
             }
         } else {
             Log.v(TAG, "Alternate audio track download allowed, but there were no \"alternate\" audio tracks to select.");
