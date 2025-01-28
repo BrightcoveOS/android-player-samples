@@ -42,6 +42,7 @@ include ':brightcove-exoplayer-kotlin:ThumbnailScrubberSampleApp'
 include ':brightcove-exoplayer-kotlin:VideoListAdRulesIMASampleApp'
 include ':brightcove-exoplayer-kotlin:WidevineModularSampleApp'
 include ':brightcove-exoplayer-kotlin:OfflinePlaybackSampleApp'
+include ':brightcove-exoplayer-kotlin:FreeWheelSampleApp'
 
 // For building Brightcove Player Controls specific sample apps, which are located under the 'brightcove-player-controls' directory.
 include ':brightcove-player-controls:CustomizedControlsSampleApp'

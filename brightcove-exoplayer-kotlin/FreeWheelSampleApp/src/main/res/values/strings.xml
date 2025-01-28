@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">FreeWheelSampleApp</string>
+
+    <!-- A sample Video URL-->
+    <string name="sdk_demo_video_url">https://media.w3.org/2010/05/sintel/trailer.mp4</string>
+
+</resources>
