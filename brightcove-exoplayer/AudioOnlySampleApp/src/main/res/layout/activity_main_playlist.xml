@@ -43,7 +43,7 @@
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/exo_media_action_repeat_off"
+                android:src="@drawable/media3_icon_repeat_off"
                 android:title="@string/action_repeat"
                 android:visibility="invisible"/>
 
