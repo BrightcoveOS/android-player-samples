@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace 'com.example.freewheel.sample'
-    compileSdk 34
+    compileSdk ANDROID_COMPILE_SDK_VERSION
 
     defaultConfig {
         applicationId "com.example.freewheel.sample"
