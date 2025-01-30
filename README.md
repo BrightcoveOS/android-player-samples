@@ -55,7 +55,7 @@ Note that in order to enable the FreeWheel sample apps, you must independently o
 
 * [Picture In Picture Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/PictureInPictureSampleApp): This app demonstrates the Picture-in-Picture feature. Please note that Picture-in-Picture is supported only with Android 8.0 and above, and only on phone and tablet devices.
 
-* [Pulse Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/PulseSampleApp): This app shows hot to setup the Brightcove ExoPlayer with Pulse ads.
+* [Pulse Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/PulseSampleApp): This app shows how to setup the Brightcove ExoPlayer with Pulse ads.
 
 * [TextureView Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/TextureViewSampleApp): This app shows how to use the Brightcove ExoPlayer with TextureView.
 
@@ -89,17 +89,31 @@ Note that in order to enable the FreeWheel sample apps, you must independently o
 
 * [Bumper Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/BumperSampleApp): This app shows how to setup the Brightcove ExoPlayer to play using a bumper video.
 
+* [FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/FreeWheelSampleApp): This app shows how to use the Brightcove ExoPlayer with FreeWheel ads.
+
+* [FreeWheel Widevine Modular Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/FreeWheelWidevineModularSampleApp): This app shows how to use the Brightcove ExoPlayer with FreeWheel ads and Widevine Modular content.
+
+Note that in order to enable the FreeWheel sample apps, you must independently obtain the non-free FreeWheel **AdManager.aar** library archive and install it into the directory **libs/** which is typically located at the root of your /home/ directory. The Brightcove Native SDK for Android and the FreeWheel sample apps require the FreeWheel AdManager library version 6.28.0. Please note that Brightcove does not distribute the FreeWheel libraries. Contact [FreeWheel](http://freewheel.tv/about/#contact-us) directly for more information on how to obtain their products.
+
 * [Basic SSAI Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/BasicSsaiSampleApp): This app shows how to configure an app to use the Brightcove Native Player for Android SSAI Plugin to play a video.
 
 * [Basic SSAI PAL Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/BasicSSAIPALSampleApp): This app shows how to configure an app to use the Brightcove Native Player for Android SSAI Plugin to play a video and the PAL SDK from Google for Ad tracking.
 
 * [Live Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/LiveSampleApp): This app shows how to use the Brightcove ExoPlayer with HLS Live and Live DVR content. Please note that a Live/DVR URL is not supplied with this sample app, and must be supplied by the developer.
 
+* [Offline Playback Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/OfflinePlaybackSampleApp): This app demonstrates the Offline Playback feature.
+
 * [Picture In Picture Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/PictureInPictureSampleApp): This app demonstrates the Picture-in-Picture feature. Please note that Picture-in-Picture is supported only with Android 8.0 and above, and only on phone and tablet devices.
 
 * [TextureView Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/TextureViewSampleApp): This app shows how to use the Brightcove ExoPlayer with TextureView.
 
+* [ThumbnailScrubber Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/ThumbnailScrubberSampleApp): This app demonstrate how to use the Brightcove ExoPlayer with thumbnails.
+
+* [VideoListAdRulesIMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/VideoListAdRulsIMASampleApp): This app shows how to use multiple instances of the Brightcove SDK in one screen with Google IMA ads.
+
 * [VideoList Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/VideoListSampleApp): This app shows how to use multiple instances of the Brightcove SDK in one screen. 
+
+* [Widevine Modular Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/WidevineModularSampleApp): This app shows how to setup the Brightcove ExoPlayer with Widevine Modular content.
 
 
 ## Installing the sample apps
