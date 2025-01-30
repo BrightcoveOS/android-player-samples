@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.freewheel.widevine.modular'
+    namespace 'com.brightcove.freewheel.widevine.modular'
     compileSdk ANDROID_COMPILE_SDK_VERSION
 
     defaultConfig {
-        applicationId "com.example.freewheel.widevine.modular"
+        applicationId "com.brightcove.freewheel.widevine.modular"
         minSdk ANDROID_MIN_SDK_VERSION
         targetSdk ANDROID_TARGET_SDK_VERSION
         versionCode 1
