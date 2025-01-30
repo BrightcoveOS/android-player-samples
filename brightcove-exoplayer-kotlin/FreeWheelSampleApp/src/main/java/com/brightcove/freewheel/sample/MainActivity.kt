@@ -1,4 +1,4 @@
-package com.example.freewheel.sample
+package com.brightcove.freewheel.sample
 
 import android.os.Bundle
 import android.util.Log
