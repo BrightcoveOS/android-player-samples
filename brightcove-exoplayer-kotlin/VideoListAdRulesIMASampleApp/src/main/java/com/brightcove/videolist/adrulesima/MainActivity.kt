@@ -1,4 +1,4 @@
-package com.example.videolist.adrulesima
+package com.brightcove.videolist.adrulesima
 
 import android.os.Bundle
 import android.view.View
