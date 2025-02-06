@@ -38,6 +38,12 @@ include ':brightcove-exoplayer-kotlin:TextureViewSampleApp'
 include ':brightcove-exoplayer-kotlin:BasicSsaiPALSampleApp'
 include ':brightcove-exoplayer-kotlin:BumperSampleApp'
 include ':brightcove-exoplayer-kotlin:BasicDAISampleApp'
+include ':brightcove-exoplayer-kotlin:ThumbnailScrubberSampleApp'
+include ':brightcove-exoplayer-kotlin:VideoListAdRulesIMASampleApp'
+include ':brightcove-exoplayer-kotlin:WidevineModularSampleApp'
+include ':brightcove-exoplayer-kotlin:OfflinePlaybackSampleApp'
+include ':brightcove-exoplayer-kotlin:FreeWheelSampleApp'
+include ':brightcove-exoplayer-kotlin:FreeWheelWidevineModularSampleApp'
 
 // For building Brightcove Player Controls specific sample apps, which are located under the 'brightcove-player-controls' directory.
 include ':brightcove-player-controls:CustomizedControlsSampleApp'

@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">OfflinePlaybackSampleApp</string>
+
+    <!-- A sample Brightcove Edge Account ID -->
+    <string name="sdk_demo_account" translatable="false">5420904993001</string>
+
+    <!-- A sample Brightcove Edge Policy Key -->
+    <string name="sdk_demo_policy_key" translatable="false">BCpkADawqM1RJu5c_I13hBUAi4c8QNWO5QN2yrd_OgDjTCVsbILeGDxbYy6xhZESTFi68MiSUHzMbQbuLV3q-gvZkJFpym1qYbEwogOqKCXK622KNLPF92tX8AY9a1cVVYCgxSPN12pPAuIM</string>
+
+    <!-- Fetching playlist-->
+    <string name="fetching_playlist">Fetching Playlist&#8230;</string>
+
+    <!-- Offline playlist-->
+    <string name="offline_playlist">Offline Playlist&#8230;</string>
+
+    <!-- Fetch playlist error -->
+    <string name="fetching_playlist_error">Unable to fetch the playlist due an error. Please check your network connection and then try again.</string>
+
+    <!-- Fetching playlist-->
+    <string name="fetching_playlist_no_videos">There are no videos in this playlist. Please choose another playlist.</string>
+
+    <!-- Offline playlist-->
+    <string name="offline_playlist_no_videos">There are no saved videos on this device</string>
+
+    <!-- Press download to save video -->
+    <string name="press_to_save">Press download to save video</string>
+
+    <!-- Offline copy (for clear content) -->
+    <string name="video_download_clear_offline_copy">Offline copy</string>
+
+    <!-- Buy or rent for offline playback -->
+    <string name="video_download_purchase_or_rent">Buy or Rent for offline playback</string>
+
+    <!-- Owned -->
+    <string name="video_download_purchased">Download purchased</string>
+
+    <!-- Checking download status -->
+    <string name="checking_download_status">Checking download status&#8230;</string>
+
+    <!-- Online only -->
+    <string name="online_only">Online only</string>
+
+    <!-- Queueing download -->
+    <string name="queueing_download">Queueing download</string>
+
+    <string name="video_estimated_size">Video estimated size goes here…</string>
+</resources>
