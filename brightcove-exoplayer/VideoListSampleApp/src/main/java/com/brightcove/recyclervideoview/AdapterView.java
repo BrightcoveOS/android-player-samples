@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import java.util.List;
 public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
 
     private final List<Video> videoList = new ArrayList<>();
+    private final SparseArray<Long> playheadPositions = new SparseArray<>(); // this is used to keep track of the playback position for each video; remove it and its associated logic to play from the start always
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -38,9 +40,7 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
         Video video = videoList == null ? null : videoList.get(position);
         if (video != null) {
             holder.videoTitleText.setText(video.getStringProperty(Video.Fields.NAME));
-            BrightcoveVideoView videoView = holder.videoView;
-            videoView.clear();
-            videoView.add(video);
+            holder.video = video;
         }
     }
 
@@ -57,13 +57,18 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
     @Override
     public void onViewAttachedToWindow(ViewHolder holder) {
         super.onViewAttachedToWindow(holder);
+        holder.videoView.add(holder.video);
+        holder.videoView.seekTo(playheadPositions.get(holder.getAbsoluteAdapterPosition(), 0L));
         holder.videoView.start();
     }
 
     @Override
     public void onViewDetachedFromWindow(ViewHolder holder) {
         super.onViewDetachedFromWindow(holder);
+        playheadPositions.put(holder.getAbsoluteAdapterPosition(), holder.videoView.getCurrentPositionLong());
         holder.videoView.stopPlayback();
+        holder.videoView.clear();
+        holder.videoView.getPlayback().destroyPlayer();
     }
 
     @Override
@@ -91,6 +96,7 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
         public final TextView videoTitleText;
         public final FrameLayout videoFrame;
         public final BrightcoveVideoView videoView;
+        public Video video;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
