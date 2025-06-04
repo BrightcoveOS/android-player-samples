@@ -460,13 +460,10 @@ class MainActivity : BrightcovePlayer() {
         DatePickerFragment().setTitle("Select Rental Expiry Date").setListener(
             object : DatePickerFragment.Listener {
                 override fun onDateSelected(expiryDate: Date) {
-                    // Extend the playDuration value to the video duration plus an additional small amount to account for:
-                    // - Loading the video into the player (which starts the playDuration clock)
-                    // - Starting playback in a manual-start player
-                    var playDuration: Long = video.durationLong + PLAYDURATION_EXTENSION
-                    if (playDuration == 0L) {
-                        playDuration = DEFAULT_RENTAL_PLAY_DURATION
-                    }
+                    // Use the default rental play duration for offline playback license.
+                    // This determines how long the content can be consumed after download,
+                    // not the actual video duration.
+                    val playDuration: Long = DEFAULT_RENTAL_PLAY_DURATION
 
                     val httpRequestConfigBuilder = HttpRequestConfig.Builder()
                     httpRequestConfigBuilder.setBrightcoveAuthorizationToken(pasToken)

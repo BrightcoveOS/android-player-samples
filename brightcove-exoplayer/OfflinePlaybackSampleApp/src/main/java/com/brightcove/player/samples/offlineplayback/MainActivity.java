@@ -526,13 +526,10 @@ public class MainActivity extends BrightcovePlayer {
                 .setListener(new DatePickerFragment.Listener() {
                     @Override
                     public void onDateSelected(@NonNull Date expiryDate) {
-                        // Extend the playDuration value to the video duration plus an additional small amount to account for:
-                        // - Loading the video into the player (which starts the playDuration clock)
-                        // - Starting playback in a manual-start player
-                        long playDuration = video.getDurationLong() + PLAYDURATION_EXTENSION;
-                        if (playDuration == 0) {
-                            playDuration = DEFAULT_RENTAL_PLAY_DURATION;
-                        }
+                        // Use the default rental play duration for offline playback license.
+                        // This determines how long the content can be consumed after download,
+                        // not the actual video duration.
+                        long playDuration = DEFAULT_RENTAL_PLAY_DURATION;
 
                         HttpRequestConfig.Builder httpRequestConfigBuilder = new HttpRequestConfig.Builder();
                         httpRequestConfigBuilder.setBrightcoveAuthorizationToken(pasToken);
