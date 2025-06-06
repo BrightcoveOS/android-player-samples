@@ -526,13 +526,9 @@ public class MainActivity extends BrightcovePlayer {
                 .setListener(new DatePickerFragment.Listener() {
                     @Override
                     public void onDateSelected(@NonNull Date expiryDate) {
-                        // Extend the playDuration value to the video duration plus an additional small amount to account for:
-                        // - Loading the video into the player (which starts the playDuration clock)
-                        // - Starting playback in a manual-start player
-                        long playDuration = video.getDurationLong() + PLAYDURATION_EXTENSION;
-                        if (playDuration == 0) {
-                            playDuration = DEFAULT_RENTAL_PLAY_DURATION;
-                        }
+                        // Set the playDuration so that it expires at the same time as the expiryDate.
+                        // This is because, for offline playback, Widevine cannot verify first playback time.
+                        long playDuration = expiryDate.getTime() - System.currentTimeMillis();
 
                         HttpRequestConfig.Builder httpRequestConfigBuilder = new HttpRequestConfig.Builder();
                         httpRequestConfigBuilder.setBrightcoveAuthorizationToken(pasToken);
