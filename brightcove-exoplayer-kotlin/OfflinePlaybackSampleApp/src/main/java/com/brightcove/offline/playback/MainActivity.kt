@@ -460,13 +460,9 @@ class MainActivity : BrightcovePlayer() {
         DatePickerFragment().setTitle("Select Rental Expiry Date").setListener(
             object : DatePickerFragment.Listener {
                 override fun onDateSelected(expiryDate: Date) {
-                    // Extend the playDuration value to the video duration plus an additional small amount to account for:
-                    // - Loading the video into the player (which starts the playDuration clock)
-                    // - Starting playback in a manual-start player
-                    var playDuration: Long = video.durationLong + PLAYDURATION_EXTENSION
-                    if (playDuration == 0L) {
-                        playDuration = DEFAULT_RENTAL_PLAY_DURATION
-                    }
+                    // Set the playDuration so that it expires at the same time as the expiryDate.
+                    // This is because, for offline playback, Widevine cannot verify first playback time.
+                    val playDuration: Long = expiryDate.time - System.currentTimeMillis()
 
                     val httpRequestConfigBuilder = HttpRequestConfig.Builder()
                     httpRequestConfigBuilder.setBrightcoveAuthorizationToken(pasToken)
