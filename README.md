@@ -61,7 +61,7 @@ Note that in order to enable the FreeWheel sample apps, you must independently o
 
 * [ThumbnailScrubber Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/ThumbnailScrubberSampleApp): This app demonstrate how to use the Brightcove ExoPlayer with thumbnails.
 
-* [VideoListAdRulesIMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/VideoListAdRulsIMASampleApp): This app shows how to use multiple instances of the Brightcove SDK in one screen with Google IMA ads.
+* [VideoListAdRulesIMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/VideoListAdRulesIMASampleApp): This app shows how to use multiple instances of the Brightcove SDK in one screen with Google IMA ads.
 
 * [VideoList Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/VideoListSampleApp): This app shows how to use multiple instances of the Brightcove SDK in one screen.
 
@@ -97,7 +97,7 @@ Note that in order to enable the FreeWheel sample apps, you must independently o
 
 * [Basic SSAI Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/BasicSsaiSampleApp): This app shows how to configure an app to use the Brightcove Native Player for Android SSAI Plugin to play a video.
 
-* [Basic SSAI PAL Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/BasicSSAIPALSampleApp): This app shows how to configure an app to use the Brightcove Native Player for Android SSAI Plugin to play a video and the PAL SDK from Google for Ad tracking.
+* [Basic SSAI PAL Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/BasicSsaiPALSampleApp): This app shows how to configure an app to use the Brightcove Native Player for Android SSAI Plugin to play a video and the PAL SDK from Google for Ad tracking.
 
 * [Live Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/LiveSampleApp): This app shows how to use the Brightcove ExoPlayer with HLS Live and Live DVR content. Please note that a Live/DVR URL is not supplied with this sample app, and must be supplied by the developer.
 
@@ -109,7 +109,7 @@ Note that in order to enable the FreeWheel sample apps, you must independently o
 
 * [ThumbnailScrubber Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/ThumbnailScrubberSampleApp): This app demonstrate how to use the Brightcove ExoPlayer with thumbnails.
 
-* [VideoListAdRulesIMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/VideoListAdRulsIMASampleApp): This app shows how to use multiple instances of the Brightcove SDK in one screen with Google IMA ads.
+* [VideoListAdRulesIMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/VideoListAdRulesIMASampleApp): This app shows how to use multiple instances of the Brightcove SDK in one screen with Google IMA ads.
 
 * [VideoList Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/VideoListSampleApp): This app shows how to use multiple instances of the Brightcove SDK in one screen. 
 
