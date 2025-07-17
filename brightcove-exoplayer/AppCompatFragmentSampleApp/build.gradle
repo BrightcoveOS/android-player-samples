@@ -1,3 +1,7 @@
+android {
+  namespace 'com.brightcove.player.samples.appcompat.fragment'
+}
+
 dependencies {
   implementation "com.brightcove.player:android-appcompat-plugin:${anpVersion}"
   implementation "androidx.appcompat:appcompat:${ANDROIDX_APPCOMPAT}"

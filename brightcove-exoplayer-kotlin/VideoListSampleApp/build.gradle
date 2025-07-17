@@ -5,6 +5,7 @@ plugins {
 
 android {
     compileSdk ANDROID_COMPILE_SDK_VERSION
+    namespace "com.brightcove.videolist"
 
     defaultConfig {
         applicationId "com.brightcove.videolist"

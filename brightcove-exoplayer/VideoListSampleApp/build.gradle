@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion ANDROID_COMPILE_SDK_VERSION
+    namespace "com.brightcove.recyclervideoview"
     defaultConfig {
         applicationId "com.brightcove.recyclervideoview"
         minSdkVersion 21

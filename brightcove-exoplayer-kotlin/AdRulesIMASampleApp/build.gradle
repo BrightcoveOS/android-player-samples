@@ -5,6 +5,7 @@ plugins {
 
 android {
     compileSdk ANDROID_COMPILE_SDK_VERSION
+    namespace "com.brightcove.adrulesima"
 
     defaultConfig {
         applicationId "com.brightcove.adrulesima"

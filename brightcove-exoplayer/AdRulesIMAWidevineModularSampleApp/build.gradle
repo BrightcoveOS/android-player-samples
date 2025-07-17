@@ -1,5 +1,6 @@
 android {
-  defaultConfig.applicationId = "com.brightcove.player.samples.exoplayer.imawidevine.adrules"
+  defaultConfig.applicationId = "com.brightcove.player.samples.imawidevinemodular.adrules"
+  namespace "com.brightcove.player.samples.imawidevinemodular.adrules"
 
     defaultConfig {
         minSdkVersion ANDROID_MIN_SDK_VERSION

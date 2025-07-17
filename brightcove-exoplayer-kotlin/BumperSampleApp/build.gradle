@@ -5,6 +5,7 @@ plugins {
 
 android {
     compileSdk ANDROID_COMPILE_SDK_VERSION
+    namespace "com.brightcove.bumper.sample"
 
     defaultConfig {
         applicationId "com.brightcove.bumper.sample"

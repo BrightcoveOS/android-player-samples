@@ -1,3 +1,7 @@
+android {
+    namespace 'com.brightcove.player.samples.pictureinpicture'
+}
+
 dependencies {
     implementation "androidx.appcompat:appcompat:${ANDROIDX_APPCOMPAT}"
     implementation "androidx.constraintlayout:constraintlayout:${ANDROIDX_CONSTRAINT_LAYOUT}"

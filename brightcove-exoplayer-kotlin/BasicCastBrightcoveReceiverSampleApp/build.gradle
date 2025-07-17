@@ -5,6 +5,7 @@ plugins {
 
 android {
     compileSdk ANDROID_COMPILE_SDK_VERSION
+    namespace "com.brightcove.castreceiver"
 
     defaultConfig {
         applicationId "com.brightcove.castreceiver"

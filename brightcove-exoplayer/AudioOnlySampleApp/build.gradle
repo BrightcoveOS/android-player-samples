@@ -4,6 +4,7 @@ plugins {
 
 android {
     compileSdkVersion ANDROID_COMPILE_SDK_VERSION
+    namespace "com.brightcove.player.samples.audioonly"
 
     defaultConfig {
         applicationId "com.brightcove.player.samples.audioonly"

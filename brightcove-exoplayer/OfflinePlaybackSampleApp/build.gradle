@@ -1,3 +1,7 @@
+android {
+    namespace 'com.brightcove.player.samples.offlineplayback'
+}
+
 dependencies {
     implementation "androidx.appcompat:appcompat:${ANDROIDX_APPCOMPAT}"
     implementation "androidx.recyclerview:recyclerview:${ANDROIDX_RECYCLER_VIEW}"

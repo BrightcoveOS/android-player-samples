@@ -1,0 +1,3 @@
+android {
+    namespace 'com.brightcove.player.samples.exoplayer.freewheel.basic'
+}

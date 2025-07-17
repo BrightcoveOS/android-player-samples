@@ -1,4 +1,5 @@
 android {
+    namespace "com.brightcove.player.samples.exoplayer.dai.basic"
     defaultConfig {
         minSdkVersion ANDROID_MIN_SDK_VERSION
         targetSdkVersion ANDROID_TARGET_SDK_VERSION
