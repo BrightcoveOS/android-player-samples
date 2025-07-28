@@ -1,7 +1,9 @@
 package com.brightcove.audio.sample
 
 import android.app.Activity
+import android.app.PendingIntent
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -15,9 +17,14 @@ import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.AlphaAnimation
 import android.view.animation.DecelerateInterpolator
+import androidx.annotation.OptIn
 import androidx.core.view.MenuItemCompat
 import androidx.media3.common.Player
+import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.session.CommandButton
+import androidx.media3.session.MediaSession
+import androidx.media3.session.SessionCommand
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.brightcove.audio.sample.databinding.ItemAudioBinding
@@ -27,6 +34,8 @@ import com.brightcove.player.display.ExoPlayerVideoDisplayComponent
 import com.brightcove.player.edge.Catalog
 import com.brightcove.player.edge.PlaylistListener
 import com.brightcove.player.model.Playlist
+import com.brightcove.player.playback.MediaNotificationActions
+import com.brightcove.player.playback.MediaPlayback
 import com.brightcove.player.playback.PlaybackNotification
 import com.brightcove.player.playback.PlaybackNotificationConfig
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView
@@ -113,16 +122,10 @@ class AudioOnlyActivity : BrightcovePlayerActivity() {
     }
 
     private fun setUpPlayer() {
-        player.playback.notification?.let {
-            player.playback.notification.setConfig(
-                PlaybackNotificationConfig(this)
-                    .setStreamTypes(*PlaybackNotification.StreamType.values())
-            )
-        }
         val videoDisplayComponent = baseVideoView.videoDisplay as ExoPlayerVideoDisplayComponent?
         videoDisplayComponent?.let {
-            if (videoDisplayComponent.playbackNotification == null) {
-                videoDisplayComponent.playbackNotification = createPlaybackNotification()
+            if (it.playbackNotification == null) {
+                it.playbackNotification = createPlaybackNotification()
             }
         }
         catalog.findPlaylistByReferenceID(getString(R.string.reference_id), playlistListener)
@@ -131,9 +134,119 @@ class AudioOnlyActivity : BrightcovePlayerActivity() {
     private fun createPlaybackNotification() : PlaybackNotification? {
         val videoDisplayComponent = baseVideoView.videoDisplay as ExoPlayerVideoDisplayComponent?
         val notification = BackgroundPlaybackNotification.getInstance(this)
-        notification?.setConfig(PlaybackNotificationConfig(this))
+        val config = PlaybackNotificationConfig(this)
+        // customizeNotification(config, this) // uncomment to play with the media notification customization
+        notification?.setConfig(config)
         notification?.playback = videoDisplayComponent?.playback
         return notification
+    }
+
+    @OptIn(UnstableApi::class)
+    private fun customizeNotification(
+        config: PlaybackNotificationConfig,
+        context: Context
+    ) {
+        config
+            .setStreamTypes(*PlaybackNotification.StreamType.entries.toTypedArray())
+            .setUseRewindAction(false)
+            .setUseRewindActionInCompactView(false)
+            .setUseNextAction(false)
+            .setUseNextActionInCompactView(false)
+            .setUsePreviousAction(false)
+            .setUsePreviousActionInCompactView(false)
+            .setUseFastForwardAction(false)
+            .setUseFastForwardActionInCompactView(false)
+            // customization of the text displayed on the media notification, as well as the behavior when clicking the notification
+            .setAdapter(object : PlaybackNotification.MediaDescriptionAdapter {
+                override fun getCurrentContentTitle(playback: MediaPlayback<*>?): CharSequence {
+                    return "Title blah" // Replace with actual title logic
+                }
+
+                override fun createCurrentContentIntent(playback: MediaPlayback<*>?): PendingIntent? {
+                    // Create an intent to launch your activity when the notification is clicked
+                    val intent = Intent(context, AudioOnlyActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP) // flag to pick up the existing activity, instead of always create a new one
+                    // You might want to add extras to the intent to pass data to your activity
+                    // intent.putExtra("key", "value")
+                    // Create a PendingIntent from the intent
+                    return PendingIntent.getActivity(
+                        context,
+                        0, // Request code (can be any unique integer)
+                        intent,
+                        PendingIntent.FLAG_IMMUTABLE // Flags to control how the PendingIntent is handled
+                    )
+                }
+
+                override fun getCurrentContentText(playback: MediaPlayback<*>?): CharSequence {
+                    return "Text" // Replace with actual text logic
+                }
+
+                override fun getCurrentSubText(playback: MediaPlayback<*>?): CharSequence {
+                    return "Subtext" // Replace with actual subtext logic
+                }
+
+            })
+            // customization of the actions/buttons displayed on the media notification - will be applied on Android 13+ only
+            // Note: when we set a MediaNotificationActions, the setUse[something]Action setters are ignored; we need to customize it here instead
+            .setMediaNotificationActions(
+                MediaNotificationActions(
+                customActionsProvider = { mediaSession ->
+                    val fastForwardCommandButton =
+                        CommandButton.Builder(CommandButton.ICON_FAST_FORWARD)
+                            .setSessionCommand(SessionCommand("CUSTOM_ACTION_FF", Bundle.EMPTY))
+                            .setEnabled(true)
+                            .setDisplayName("ff")
+                            .setSlots(CommandButton.SLOT_FORWARD)
+                            .build()
+
+                    val likeCommandButton = CommandButton.Builder(CommandButton.ICON_HEART_FILLED)
+                        .setSessionCommand(SessionCommand("CUSTOM_ACTION_LIKE", Bundle.EMPTY))
+                        .setEnabled(true)
+                        .setDisplayName("like")
+                        .setSlots(CommandButton.SLOT_BACK)
+                        .build()
+
+                    val sessionCommandsBuilder =
+                        MediaSession.ConnectionResult.DEFAULT_SESSION_COMMANDS.buildUpon()
+                    fastForwardCommandButton.sessionCommand?.let { sessionCommandsBuilder.add(it) }
+                    likeCommandButton.sessionCommand?.let { sessionCommandsBuilder.add(it) }
+                    val sessionCommands = sessionCommandsBuilder.build()
+                    val playerCommandsBuilder =
+                        MediaSession.ConnectionResult.DEFAULT_PLAYER_COMMANDS.buildUpon()
+                    playerCommandsBuilder.remove(Player.COMMAND_SEEK_TO_PREVIOUS)
+                    playerCommandsBuilder.remove(Player.COMMAND_SEEK_TO_PREVIOUS_MEDIA_ITEM)
+                    playerCommandsBuilder.remove(Player.COMMAND_SEEK_TO_NEXT)
+                    playerCommandsBuilder.remove(Player.COMMAND_SEEK_TO_NEXT_MEDIA_ITEM)
+
+                    val playerCommands = playerCommandsBuilder.build()
+
+                    // Custom button preferences and commands to configure the platform session.
+                    MediaSession.ConnectionResult.AcceptedResultBuilder(mediaSession)
+                        .setAvailablePlayerCommands(playerCommands)
+                        .setMediaButtonPreferences(
+                            mutableListOf(
+                                fastForwardCommandButton,
+                                likeCommandButton
+                            )
+                        )
+                        .setAvailableSessionCommands(sessionCommands)
+                },
+                customCommandHandler = { mediaSession, controllerInfo, customCommand, args ->
+                    when (customCommand?.customAction) {
+                        "CUSTOM_ACTION_FF" -> {
+                            player.seekTo(player.currentPositionLong + 15000)
+                            true
+                        }
+
+                        "CUSTOM_ACTION_LIKE" -> {
+                            // some action
+                            true
+                        }
+
+                        else -> false
+                    }
+                }
+            ))
     }
 
     private fun setPlaylist(playlist: Playlist) = binding.run {
