@@ -75,4 +75,52 @@ boolean pulseDependenciesAreSatisfied() {
     return dep.exists()
 }
 
+// Local SDK development support
+// Set anpVersion to:
+//   - Normal version: "10.2.2" (uses published artifacts)  
+//   - Local with default path: "LOCAL" (uses ../videocloud_android-native-player)
+//   - Local with custom path: "LOCAL:/path/to/sdk" (uses specified path)
+
+def localSdkPath = null
+def useLocalSdk = false
+
+if (anpVersion.startsWith('LOCAL')) {
+    useLocalSdk = true
+    if (anpVersion.contains(':')) {
+        // LOCAL:/path/to/sdk format
+        localSdkPath = anpVersion.substring(anpVersion.indexOf(':') + 1)
+    } else {
+        // Just "LOCAL" - use default path
+        localSdkPath = '../videocloud_android-native-player'
+    }
+}
+
+if (useLocalSdk) {
+    if (file(localSdkPath).exists()) {
+        println "Found local SDK at ${localSdkPath} - enabling composite build for seamless development"
+        
+        includeBuild(localSdkPath) {
+            dependencySubstitution {
+                substitute module('com.brightcove.player:android-sdk') using project(':sdk')
+                substitute module('com.brightcove.player:exoplayer2') using project(':players:exoplayer2')
+                substitute module('com.brightcove.player:android-ima-plugin') using project(':plugins:ima')
+                substitute module('com.brightcove.player:android-dai-plugin') using project(':plugins:ima-dai')
+                substitute module('com.brightcove.player:android-ssai-plugin') using project(':plugins:ssai')
+                substitute module('com.brightcove.player:android-cast-plugin') using project(':plugins:cast')
+                substitute module('com.brightcove.player:android-freewheel-plugin') using project(':plugins:freewheel')
+                substitute module('com.brightcove.player:android-pulse-plugin') using project(':plugins:pulse')
+                substitute module('com.brightcove.player:android-omniture-plugin') using project(':plugins:omniture')
+                substitute module('com.brightcove.player:android-appcompat-plugin') using project(':plugins:appcompat')
+                substitute module('com.brightcove.player:android-thumbnail-plugin') using project(':plugins:thumbnail')
+                substitute module('com.brightcove.player:offline-playback') using project(':plugins:offline-playback')
+                substitute module('com.brightcove.player:android-playback-notification-plugin') using project(':plugins:playback-notification')
+            }
+        }
+    } else {
+        throw new GradleException("Local SDK not found at ${localSdkPath}. Please check the path or use a published version instead.")
+    }
+} else {
+    println "Using published Maven artifacts version: ${anpVersion}"
+}
+
 
