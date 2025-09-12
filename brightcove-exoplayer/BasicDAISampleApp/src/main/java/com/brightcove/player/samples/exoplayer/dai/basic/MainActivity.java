@@ -18,7 +18,7 @@ public class MainActivity extends BrightcovePlayer {
     private final String TAG = this.getClass().getSimpleName();
 
     private static final String LIVE_BIG_BUCK_BUNNY_ASSET_KEY = "c-rArva4ShKVIAkNfy6HUQ";
-    private static final String VOD_TEARS_OF_STEEL_CMS_ID = "2528370";
+    private static final String VOD_TEARS_OF_STEEL_CMS_ID = "2548831";
     private static final String VOD_TEARS_OF_STEEL_VIDEO_ID = "tears-of-steel";
 
     private EventEmitter eventEmitter;

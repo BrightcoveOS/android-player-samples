@@ -62,7 +62,7 @@ class MainActivity : BrightcovePlayer() {
 
     companion object {
         private const val LIVE_BIG_BUCK_BUNNY_ASSET_KEY = "c-rArva4ShKVIAkNfy6HUQ"
-        private const val VOD_TEARS_OF_STEEL_CMS_ID = "2528370"
+        private const val VOD_TEARS_OF_STEEL_CMS_ID = "2548831"
         private const val VOD_TEARS_OF_STEEL_VIDEO_ID = "tears-of-steel"
     }
 }
