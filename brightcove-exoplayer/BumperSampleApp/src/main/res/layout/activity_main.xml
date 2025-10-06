@@ -9,6 +9,7 @@
         android:id="@+id/brightcove_video_view"
         android:layout_width="match_parent"
         android:layout_height="280dp"
+        android:background="@color/brightcove_black"
         android:layout_gravity="center_horizontal|top"/>
 
 </merge>
