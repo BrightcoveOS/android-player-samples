@@ -2,7 +2,6 @@ package com.brightcove.player.samples.audioonly;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.brightcove.player.logging.Log;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
-import com.squareup.picasso.Picasso;
 
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+
+import coil3.SingletonImageLoader;
+import coil3.request.ImageRequest;
+import coil3.target.ImageViewTarget;
 
 
 public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
@@ -56,7 +58,11 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
                 holder.videoThumbnailView.setImageResource(R.drawable.cover_art_default);
                 Log.v(TAG, "Null thumbnail:" + video.getId());
             } else {
-                Picasso.get().load(imageUri.toASCIIString()).into(holder.videoThumbnailView);
+                ImageRequest request = new ImageRequest.Builder(holder.context)
+                        .data(imageUri.toASCIIString())
+                        .target(new ImageViewTarget(holder.videoThumbnailView))
+                        .build();
+                SingletonImageLoader.get(holder.context).enqueue(request);
             }
 
             holder.video = video;

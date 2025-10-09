@@ -27,6 +27,9 @@ import androidx.media3.session.MediaSession
 import androidx.media3.session.SessionCommand
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import coil3.load
+import coil3.request.error
+import coil3.request.placeholder
 import com.brightcove.audio.sample.databinding.ItemAudioBinding
 import com.brightcove.playback.notification.BackgroundPlaybackNotification
 import com.brightcove.player.appcompat.BrightcovePlayerActivity
@@ -39,7 +42,6 @@ import com.brightcove.player.playback.MediaPlayback
 import com.brightcove.player.playback.PlaybackNotification
 import com.brightcove.player.playback.PlaybackNotificationConfig
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView
-import com.squareup.picasso.Picasso
 import com.brightcove.audio.sample.databinding.ActivityAudioOnlyBinding as ViewBinding
 import com.brightcove.player.model.Video as Media
 
@@ -283,10 +285,10 @@ class AudioOnlyActivity : BrightcovePlayerActivity() {
         }
 
         infix fun bind(media: Media) = binding.run {
-            Picasso.get().load(media.thumbnail.toString())
-                .placeholder(R.drawable.cover_art_default)
-                .error(R.drawable.cover_art_default)
-                .into(albumArt)
+            albumArt.load(media.thumbnail.toString()) {
+                placeholder(R.drawable.cover_art_default)
+                error(R.drawable.cover_art_default)
+            }
             title.text = media.name
             subtitle.text = media.description
             root.setOnClickListener {

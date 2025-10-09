@@ -23,9 +23,7 @@ import com.brightcove.player.edge.OfflineCallback;
 import com.brightcove.player.edge.OfflineCatalog;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.network.DownloadStatus;
-import com.brightcove.player.offline.MediaDownloadable;
 import com.brightcove.player.samples.offlineplayback.utils.ViewUtil;
-import com.squareup.picasso.Picasso;
 
 import java.net.URI;
 import java.text.DecimalFormat;
@@ -36,6 +34,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import coil3.SingletonImageLoader;
+import coil3.request.ImageRequest;
+import coil3.target.ImageViewTarget;
 
 /**
  * Video list adapter can be used to show a list of videos on a {@link androidx.recyclerview.widget.RecyclerView}.
@@ -400,7 +402,11 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
         if (imageUri == null) {
             holder.videoThumbnailImage.setImageResource(R.drawable.movie);
         } else {
-            Picasso.get().load(imageUri.toASCIIString()).into(holder.videoThumbnailImage);
+            ImageRequest request = new ImageRequest.Builder(holder.context)
+                    .data(imageUri.toASCIIString())
+                    .target(new ImageViewTarget(holder.videoThumbnailImage))
+                    .build();
+            SingletonImageLoader.get(holder.context).enqueue(request);
         }
 
         long duration = video.getDurationLong();

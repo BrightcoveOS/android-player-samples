@@ -46,5 +46,6 @@ dependencies {
     implementation "androidx.appcompat:appcompat:${ANDROIDX_APPCOMPAT}"
     implementation "com.google.android.material:material:${ANDROID_MATERIAL}"
     implementation 'com.airbnb.android:lottie:5.2.0'
-    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation "io.coil-kt.coil3:coil:${COIL_VERSION}"
+    implementation "io.coil-kt.coil3:coil-network-okhttp:${COIL_VERSION}"
 }

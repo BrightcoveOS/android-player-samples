@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil3.load
 import com.brightcove.castreceiver.databinding.ItemViewBinding
 import com.brightcove.player.model.Video
-import com.squareup.picasso.Picasso
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -56,9 +56,7 @@ class VideoListAdapter(private val onVideoClick: OnVideoClick) : ListAdapter<Vid
                 if (imageUri == null) {
                     videoThumbnailImage.setImageResource(R.drawable.movie)
                 } else {
-                    Picasso.get()
-                        .load(imageUri.toASCIIString())
-                        .into(videoThumbnailImage)
+                    videoThumbnailImage.load(imageUri.toASCIIString())
                 }
 
                 //Adding onCLick Listener to the view

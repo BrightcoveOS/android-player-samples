@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.brightcove.player.model.Video;
-import com.squareup.picasso.Picasso;
 
 import java.net.URI;
 import java.util.HashMap;
@@ -22,6 +21,10 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import static com.brightcove.player.samples.cast.basic.Constants.PROPERTY_SHORT_DESCRIPTION;
+
+import coil3.SingletonImageLoader;
+import coil3.request.ImageRequest;
+import coil3.target.ImageViewTarget;
 
 public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.ViewHolder> {
 
@@ -76,7 +79,11 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
         if (imageUri == null) {
             holder.videoThumbnailImage.setImageResource(R.drawable.movie);
         } else {
-            Picasso.get().load(imageUri.toASCIIString()).into(holder.videoThumbnailImage);
+            ImageRequest request = new ImageRequest.Builder(holder.videoThumbnailImage.getContext())
+                    .data(imageUri.toASCIIString())
+                    .target(new ImageViewTarget(holder.videoThumbnailImage))
+                    .build();
+            SingletonImageLoader.get(holder.videoThumbnailImage.getContext()).enqueue(request);
         }
 
         holder.videoThumbnailImage.setOnClickListener(view -> clickListener.itemClicked(view, video, position));

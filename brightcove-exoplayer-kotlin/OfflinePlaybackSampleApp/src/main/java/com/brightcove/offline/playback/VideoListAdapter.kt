@@ -14,12 +14,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.recyclerview.widget.RecyclerView
+import coil3.load
 import com.brightcove.offline.playback.utils.ViewUtil
 import com.brightcove.player.edge.OfflineCallback
 import com.brightcove.player.edge.OfflineCatalog
 import com.brightcove.player.model.Video
 import com.brightcove.player.network.DownloadStatus
-import com.squareup.picasso.Picasso
 import java.text.DecimalFormat
 import java.util.Locale
 import java.util.concurrent.TimeUnit
@@ -382,7 +382,7 @@ class VideoListAdapter
         if (imageUri == null) {
             holder.videoThumbnailImage.setImageResource(R.drawable.movie)
         } else {
-            Picasso.get().load(imageUri.toASCIIString()).into(holder.videoThumbnailImage)
+            holder.videoThumbnailImage.load(imageUri.toASCIIString())
         }
 
         val duration = video?.durationLong ?: -1
