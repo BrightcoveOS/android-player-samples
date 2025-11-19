@@ -10,7 +10,7 @@ buildscript {
   }
 
   dependencies {
-    classpath 'com.android.tools.build:gradle:8.6.1'
+    classpath 'com.android.tools.build:gradle:8.10.1'
     classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.2.2'
     classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.0'
   }
