@@ -1,0 +1,13 @@
+<resources>
+    <!-- Override AppBaseTheme for API 35+ to use light status/navigation bars -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- Use light status bar icons if your UI is light -->
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- Use light navigation bar icons (API 27+) -->
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+</resources>
