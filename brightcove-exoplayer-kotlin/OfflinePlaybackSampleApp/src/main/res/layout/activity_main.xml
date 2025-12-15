@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
+    android:fitsSystemWindows="true"
     tools:context="com.brightcove.offline.playback.MainActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view

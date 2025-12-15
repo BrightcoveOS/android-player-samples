@@ -1,0 +1,9 @@
+<resources>
+    <!-- Override Theme.Androidplayersamples for API 35+ to use light status/navigation bars -->
+    <style name="Theme.Androidplayersamples" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Use light status bar icons if your UI is light -->
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- Use light navigation bar icons (API 27+) -->
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+</resources>

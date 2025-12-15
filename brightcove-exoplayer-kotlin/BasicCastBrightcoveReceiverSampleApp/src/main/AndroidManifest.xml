@@ -24,7 +24,7 @@
             android:name=".BasicCastBrightcoveReceiverActivity"
             android:screenOrientation="unspecified"
             android:configChanges="orientation|screenSize"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:theme="@style/Theme.AppCastReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,7 +34,7 @@
         </activity>
         <activity android:name=".VideoPlayerActivity"
             android:configChanges="orientation|screenSize"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+            android:theme="@style/Theme.AppCastReceiver" />
 
         <meta-data
             android:name="com.google.android.gms.version"

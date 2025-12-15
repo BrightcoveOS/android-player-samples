@@ -1,0 +1,9 @@
+<resources>
+    <!-- Override Theme.videoList for API 35+ to use light status/navigation bars -->
+    <style name="Theme.videoList" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Use light status bar icons if your UI is light -->
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- Use light navigation bar icons (API 27+) -->
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+</resources>
