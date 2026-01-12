@@ -68,23 +68,6 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
       coreLibraryDesugaringEnabled true
     }
 
-    signingConfigs {
-      release {
-          storeFile file("${rootDir}/release.keystore")
-          storePassword "my_keystore_password"
-          keyAlias "my_key"
-          keyPassword "my_password"
-      }
-    }
-
-    buildTypes {
-      release {
-        signingConfig signingConfigs.release
-        minifyEnabled true
-        proguardFiles getDefaultProguardFile('proguard-android.txt'), "${rootDir}/proguard-project.txt"
-      }
-    }
-
     lintOptions {
       warning 'InvalidPackage'
     }
