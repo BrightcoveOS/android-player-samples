@@ -153,7 +153,7 @@ To stop the daemon after the build completes, run the following:
 
 ## Known Issues and Limitations
 
-* **NextGen Live SSAI (Cloud Playout 2.0) is not supported.** This plugin only supports Legacy Live SSAI streams (URLs containing `_ssaiM` or `_ssaiV` suffixes) - videos without these properties will fail source selection when processed through the SSAI plugin. NextGen Live streams use a different URL format (`ssai.live.brightcove.com`). This is a known limitation. To enable playback for NextGen Live streams, client apps should detect the JWT-style `livePlaybackToken` (starts with "eyJ") and bypass the SSAI plugin, using normal video playback, without SSAI features (no ad UI, beaconing, or clickthrough support).
+* **NextGen Live SSAI (Live 2.0)** is supported since Android SDK **10.4.10** with session-linked playback and ad countdown overlay. Remaining limitations: beacon firing and click-through are not yet supported for Live 2.0 streams.
 
 ## Support
 If you have questions, need help or want to provide feedback, please use the [Support Portal](https://supportportal.brightcove.com/s/login/) or contact your Account Manager.  To receive notification of new SDK software releases, subscribe to the Brightcove Native Player SDKs [Google Group](https://groups.google.com/g/brightcove-native-player-sdks).
