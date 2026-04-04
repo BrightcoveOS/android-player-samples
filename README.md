@@ -153,7 +153,7 @@ To stop the daemon after the build completes, run the following:
 
 ## Known Issues and Limitations
 
-* **NextGen Live SSAI (Live 2.0)** is supported since Android SDK **10.4.10** with session-linked playback and ad countdown overlay. Remaining limitations: beacon firing and click-through are not yet supported for Live 2.0 streams.
+* **NextGen Live SSAI (Live 2.0)** — Full SSAI support including ad countdown overlay, click-through, and tracking beacons since SDK **10.4.12**.
 
 ## Support
 If you have questions, need help or want to provide feedback, please use the [Support Portal](https://supportportal.brightcove.com/s/login/) or contact your Account Manager.  To receive notification of new SDK software releases, subscribe to the Brightcove Native Player SDKs [Google Group](https://groups.google.com/g/brightcove-native-player-sdks).
