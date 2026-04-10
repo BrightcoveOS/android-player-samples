@@ -153,7 +153,7 @@ To stop the daemon after the build completes, run the following:
 
 ## Known Issues and Limitations
 
-* **NextGen Live SSAI (Live 2.0)** — Full SSAI support including ad countdown overlay, click-through, and tracking beacons since SDK **10.4.19**.
+* **NextGen Live SSAI (Live 2.0)** — Full SSAI support including ad countdown overlay, click-through, and tracking beacons since SDK **10.4.20**.
 
 ## Support
 If you have questions, need help or want to provide feedback, please use the [Support Portal](https://supportportal.brightcove.com/s/login/) or contact your Account Manager.  To receive notification of new SDK software releases, subscribe to the Brightcove Native Player SDKs [Google Group](https://groups.google.com/g/brightcove-native-player-sdks).
