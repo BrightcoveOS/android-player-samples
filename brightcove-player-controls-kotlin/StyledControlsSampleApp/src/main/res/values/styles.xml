@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- This is used to style the buttons on the media controller -->
+    <style name="BrightcoveControlBar" parent="BrightcoveControlBarDefault">
+        <!-- You can override values as shown here. The commented variables have the default values
+             It's recommended to parent BrightcoveControlBarDefault -->
+        <item name="brightcove_full_screen">false</item>
+        <item name="brightcove_live">false</item>
+        <item name="brightcove_timeout">10000</item>
+        <!--<item name="brightcove_audio_tracks">true</item>-->
+        <!--<item name="brightcove_closed_captions">true</item>-->
+        <!--<item name="brightcove_play">true</item>-->
+        <!--<item name="brightcove_rewind">true</item>-->
+        <!--<item name="brightcove_fast_forward">false</item>-->
+        <!--<item name="brightcove_seekbar">true</item>-->
+        <!--<item name="brightcove_animation_style">fade</item>-->
+        <!--<item name="brightcove_vr_mode">false</item>-->
+        <!--<item name="brightcove_marker_color">@color/bmc_seekbar_marker</item>-->
+    </style>
+
+    <!-- This is used to style the seek bar on the media controller -->
+    <style name="BrightcoveSeekBar" parent="BrightcoveSeekBarDefault">
+        <!-- You can override any value found on android:Widget.Holo.Light.SeekBar
+             It's recommended to parent BrightcoveSeekBarDefault -->
+        <item name="android:thumb">@drawable/scrubber</item>
+    </style>
+
+    <!-- This is used to style the buttons on the media controller -->
+    <style name="BorderlessButton" parent="BorderlessButtonDefault">
+        <!-- You can override any value found on android:Widget.Button -->
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/bmc_button</item>
+    </style>
+
+    <!-- THE NEXT SECTION APPLIES ONLY FOR ANDROID TV-->
+
+    <style name="BrightcoveControlBar.TV">
+        <!-- This is used only on android TV. Notice that this style is extending from the
+             previous BrightcoveControlBar style -->
+        <item name="brightcove_fast_forward">true</item>
+        <item name="brightcove_full_screen">false</item>
+        <item name="brightcove_live">true</item>
+        <item name="brightcove_vr_mode">false</item>
+
+        <!-- You need to turn this true for Android TV, in order for player options (audio and audio tracks)
+             to appear when available (it's the gear icon) -->
+        <item name="brightcove_player_options">true</item>
+    </style>
+
+    <style name="BrightcoveSeekBar.TV">
+        <!-- This is used only on android TV. Notice that this style is extending from the
+             previous BrightcoveSeekBar style -->
+        <item name="android:thumb">@android:color/transparent</item>
+        <item name="android:thumbOffset">0dp</item>
+    </style>
+
+    <style name="BorderlessButton.TV">
+        <!-- This is used only on android TV. Notice that this style is extending from the
+             previous BorderlessButton style -->
+        <item name="android:background">@drawable/player_on_focused_selector</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">#ffc1d699</item>
+    </style>
+
+    <style name="BorderlessButton.TV.Live">
+        <!-- For android TV, the live button has it's own style -->
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <!-- The next THREE STYLES are used for the menu showing the AUDIO TRACKS and CAPTIONS on an Android TV -->
+    <!-- BrightcovePlayerOptions is used for general configuration for the layout containing the options -->
+    <style name="BrightcovePlayerOptions" parent="BrightcovePlayerOptionsDefault">
+        <item name="android:layout_width">250dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_gravity">end</item>
+        <item name="android:background">@android:color/darker_gray</item>
+    </style>
+
+    <!-- BrightcovePlayerOptionsTitle has general configuration for the menu titles (Audio & Captions) -->
+    <style name="BrightcovePlayerOptionsTitle" parent="BrightcovePlayerOptionsTitleDefault">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <!-- BrightcovePlayerOptionsButton is used for styling the radio button items.
+         You can override any value found on android:Widget.CompoundButton.RadioButton -->
+    <style name="BrightcovePlayerOptionsButton" parent="BrightcovePlayerOptionsButtonDefault">
+        <item name="android:textColor">@drawable/custom_player_option_item_text</item>
+    </style>
+</resources>

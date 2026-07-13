@@ -50,6 +50,12 @@ include ':brightcove-player-controls:StyledControlsSampleApp'
 include ':brightcove-player-controls:RewindSampleApp'
 include ':brightcove-player-controls:SeekBarColorsSampleApp'
 
+// Kotlin ports of the player-controls sample apps.
+include ':brightcove-player-controls-kotlin:CustomizedControlsSampleApp'
+include ':brightcove-player-controls-kotlin:StyledControlsSampleApp'
+include ':brightcove-player-controls-kotlin:RewindSampleApp'
+include ':brightcove-player-controls-kotlin:SeekBarColorsSampleApp'
+
 // FreeWheel samples require AdManager.aar v6.28.0 to be added to the libs
 // folder under your home directory.
 // This aar archive must be acquired from FreeWheel by you.

@@ -123,7 +123,8 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
 
   if (project.parent.name == 'brightcove-exoplayer' ||
           project.parent.name == 'brightcove-exoplayer-kotlin'||
-          project.parent.name == 'brightcove-player-controls') {
+          project.parent.name == 'brightcove-player-controls' ||
+          project.parent.name == 'brightcove-player-controls-kotlin') {
     dependencies {
       implementation "com.brightcove.player:exoplayer2:${anpVersion}"
       implementation "androidx.media:media:${ANDROIDX_MEDIA}"
