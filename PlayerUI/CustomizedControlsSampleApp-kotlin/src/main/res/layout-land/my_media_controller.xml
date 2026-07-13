@@ -113,7 +113,7 @@
 
     <!-- This button will only be visible when the video played has the projection format property
          as Video.ProjectionFormat.EQUIRECTANGULAR.
-         For more info, please check the sample brightcove-exoplayer/360VideoSampleApp. -->
+         For more info, please check the sample Player/360VideoSampleApp-kotlin. -->
     <Button
         style="@style/BorderlessButton"
         android:id="@id/vr_mode"
