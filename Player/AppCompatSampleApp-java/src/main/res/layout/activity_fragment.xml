@@ -5,9 +5,9 @@
     android:fitsSystemWindows="true"
     tools:context=".FragmentPlayerActivity" >
 
-    <fragment android:name="com.brightcove.player.samples.appcompat.PlayerFragment"
+    <fragment android:name="com.brightcove.player.samples.appcompat.java.PlayerFragment"
               android:id="@+id/brightcove_player_fragment"
-              android:tag="com.brightcove.player.samples.appcompat.PlayerFragment"
+              android:tag="com.brightcove.player.samples.appcompat.java.PlayerFragment"
               android:layout_width="match_parent"
               android:layout_height="match_parent" />
 </FrameLayout>

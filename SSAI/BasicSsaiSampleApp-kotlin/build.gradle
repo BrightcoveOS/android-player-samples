@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.brightcove.ssai.sample'
+    namespace 'com.brightcove.player.samples.basicssai.kotlin'
     compileSdk ANDROID_COMPILE_SDK_VERSION
 
     defaultConfig {

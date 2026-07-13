@@ -5,7 +5,7 @@ plugins {
 
 android {
     compileSdk ANDROID_COMPILE_SDK_VERSION
-    namespace "com.brightcove.controls.styled"
+    namespace "com.brightcove.player.samples.styledcontrols.kotlin"
 
     defaultConfig {
         applicationId "com.brightcove.player.samples.styledcontrols.kotlin"

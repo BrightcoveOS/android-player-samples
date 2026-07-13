@@ -1,5 +1,5 @@
 android {
-  namespace 'com.brightcove.player.samples.appcompat'
+  namespace 'com.brightcove.player.samples.appcompat.java'
 
   defaultConfig {
     applicationId "com.brightcove.player.samples.appcompat.java"

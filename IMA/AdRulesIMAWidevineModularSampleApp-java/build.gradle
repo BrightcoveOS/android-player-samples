@@ -1,5 +1,5 @@
 android {
-    namespace "com.brightcove.player.samples.imawidevinemodular.adrules"
+    namespace "com.brightcove.player.samples.adrulesimawidevinemodular.java"
 
     defaultConfig {
         applicationId "com.brightcove.player.samples.adrulesimawidevinemodular.java"

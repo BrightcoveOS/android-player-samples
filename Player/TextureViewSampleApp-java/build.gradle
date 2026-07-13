@@ -1,5 +1,5 @@
 android {
-    namespace 'com.brightcove.player.samples.exoplayer.texture'
+    namespace 'com.brightcove.player.samples.textureview.java'
 
     defaultConfig {
         applicationId "com.brightcove.player.samples.textureview.java"

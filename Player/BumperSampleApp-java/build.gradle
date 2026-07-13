@@ -1,5 +1,5 @@
 android {
-    namespace 'com.brightcove.player.samples.exoplayer.bumper'
+    namespace 'com.brightcove.player.samples.bumper.java'
 
     defaultConfig {
         applicationId "com.brightcove.player.samples.bumper.java"

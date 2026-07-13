@@ -5,7 +5,7 @@ plugins {
 
 android {
     compileSdk ANDROID_COMPILE_SDK_VERSION
-    namespace "com.brightcove.pulse.sample"
+    namespace "com.brightcove.player.samples.pulse.kotlin"
 
     defaultConfig {
         applicationId "com.brightcove.player.samples.pulse.kotlin"

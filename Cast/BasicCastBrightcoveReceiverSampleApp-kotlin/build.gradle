@@ -5,7 +5,7 @@ plugins {
 
 android {
     compileSdk ANDROID_COMPILE_SDK_VERSION
-    namespace "com.brightcove.castreceiver"
+    namespace "com.brightcove.player.samples.basiccastbrightcovereceiver.kotlin"
 
     defaultConfig {
         applicationId "com.brightcove.player.samples.basiccastbrightcovereceiver.kotlin"

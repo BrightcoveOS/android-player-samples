@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.brightcove.freewheel.sample'
+    namespace 'com.brightcove.player.samples.freewheel.kotlin'
     compileSdk ANDROID_COMPILE_SDK_VERSION
 
     defaultConfig {

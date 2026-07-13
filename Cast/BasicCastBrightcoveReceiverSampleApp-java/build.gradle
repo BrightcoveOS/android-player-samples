@@ -1,5 +1,5 @@
 android {
-    namespace "com.brightcove.player.samples.cast.basic"
+    namespace "com.brightcove.player.samples.basiccastbrightcovereceiver.java"
     defaultConfig {
         applicationId "com.brightcove.player.samples.basiccastbrightcovereceiver.java"
         minSdkVersion ANDROID_MIN_SDK_VERSION

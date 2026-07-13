@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace "com.brightcove.player.samples.exoplayer.dai.basic"
+    namespace "com.brightcove.player.samples.basicdai.kotlin"
     defaultConfig {
         applicationId "com.brightcove.player.samples.basicdai.kotlin"
         minSdkVersion ANDROID_MIN_SDK_VERSION

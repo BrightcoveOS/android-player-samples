@@ -1,5 +1,5 @@
 android {
-    namespace 'com.brightcove.player.samples.thumbnail'
+    namespace 'com.brightcove.player.samples.thumbnailscrubber.java'
 
     defaultConfig {
         applicationId "com.brightcove.player.samples.thumbnailscrubber.java"

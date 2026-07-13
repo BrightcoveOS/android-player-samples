@@ -1,5 +1,5 @@
 android {
-    namespace 'com.brightcove.player.samples.pulse'
+    namespace 'com.brightcove.player.samples.pulse.java'
 
     defaultConfig {
         applicationId "com.brightcove.player.samples.pulse.java"

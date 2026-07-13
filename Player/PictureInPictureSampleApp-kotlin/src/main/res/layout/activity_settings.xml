@@ -8,7 +8,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/list"
-        android:name="com.brightcove.sample.pip.SettingsActivity$PictureInPicturePreferenceFragment"
+        android:name="com.brightcove.player.samples.pictureinpicture.kotlin.SettingsActivity$PictureInPicturePreferenceFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1" />

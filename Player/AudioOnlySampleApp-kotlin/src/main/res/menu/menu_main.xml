@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.brightcove.audio.sample.AudioOnlyActivity">
+    tools:context="com.brightcove.player.samples.audioonly.kotlin.AudioOnlyActivity">
     <item
         android:id="@+id/action_shuffle"
         android:orderInCategory="100"

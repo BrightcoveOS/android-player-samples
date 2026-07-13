@@ -4,7 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:fitsSystemWindows="true">
-    <fragment android:name="com.brightcove.player.samples.pictureinpicture.SettingsActivity$PictureInPicturePreferenceFragment"
+    <fragment android:name="com.brightcove.player.samples.pictureinpicture.java.SettingsActivity$PictureInPicturePreferenceFragment"
               android:id="@+id/list"
               android:layout_weight="1"
               android:layout_width="0dp"

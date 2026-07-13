@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.brightcove.thumbnail.scrubber'
+    namespace 'com.brightcove.player.samples.thumbnailscrubber.kotlin'
     compileSdk ANDROID_COMPILE_SDK_VERSION
 
     defaultConfig {

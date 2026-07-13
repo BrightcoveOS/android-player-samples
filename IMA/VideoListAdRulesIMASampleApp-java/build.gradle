@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion ANDROID_COMPILE_SDK_VERSION
-    namespace "com.brightcove.recyclervideoview"
+    namespace "com.brightcove.player.samples.videolistadrulesima.java"
     defaultConfig {
         applicationId "com.brightcove.player.samples.videolistadrulesima.java"
         minSdkVersion 21

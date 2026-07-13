@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.brightcove.freewheel.widevine.modular'
+    namespace 'com.brightcove.player.samples.freewheelwidevinemodular.kotlin'
     compileSdk ANDROID_COMPILE_SDK_VERSION
 
     defaultConfig {

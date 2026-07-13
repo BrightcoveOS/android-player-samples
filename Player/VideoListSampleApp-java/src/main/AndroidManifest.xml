@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.brightcove.recyclervideoview">
+          package="com.brightcove.player.samples.videolist.java">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 

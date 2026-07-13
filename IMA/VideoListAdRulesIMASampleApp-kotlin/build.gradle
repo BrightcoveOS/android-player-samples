@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.brightcove.videolist.adrulesima'
+    namespace 'com.brightcove.player.samples.videolistadrulesima.kotlin'
     compileSdk ANDROID_COMPILE_SDK_VERSION
 
     defaultConfig {

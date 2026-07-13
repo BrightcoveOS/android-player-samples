@@ -5,7 +5,7 @@ plugins {
 
 android {
     compileSdk ANDROID_COMPILE_SDK_VERSION
-    namespace "com.brightcove.adrulesima.widevinemodular"
+    namespace "com.brightcove.player.samples.adrulesimawidevinemodular.kotlin"
 
     defaultConfig {
         applicationId "com.brightcove.player.samples.adrulesimawidevinemodular.kotlin"

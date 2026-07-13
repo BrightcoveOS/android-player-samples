@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion ANDROID_COMPILE_SDK_VERSION
-    namespace "com.brightcove.player.samples.ssai.basic"
+    namespace "com.brightcove.player.samples.basicssai.java"
 
     defaultConfig {
         applicationId "com.brightcove.player.samples.basicssai.java"

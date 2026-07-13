@@ -1,5 +1,5 @@
 android {
-    namespace "com.brightcove.player.samples.exoplayer.dai.basic"
+    namespace "com.brightcove.player.samples.basicdai.java"
     defaultConfig {
         applicationId "com.brightcove.player.samples.basicdai.java"
         minSdkVersion ANDROID_MIN_SDK_VERSION

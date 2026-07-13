@@ -5,7 +5,7 @@ plugins {
 
 android {
     compileSdk ANDROID_COMPILE_SDK_VERSION
-    namespace "com.brightcove.basic.sample"
+    namespace "com.brightcove.player.samples.basic.kotlin"
 
     defaultConfig {
         applicationId "com.brightcove.player.samples.basic.kotlin"

@@ -1,5 +1,5 @@
 android {
-    namespace 'com.brightcove.player.demo.customizedcontrol'
+    namespace 'com.brightcove.player.samples.customizedcontrols.java'
 
     defaultConfig {
         applicationId "com.brightcove.player.samples.customizedcontrols.java"

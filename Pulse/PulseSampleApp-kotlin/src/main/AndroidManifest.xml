@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.brightcove.pulse.sample">
+    package="com.brightcove.player.samples.pulse.kotlin">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
