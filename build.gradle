@@ -100,20 +100,6 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     }
   }
 
-  if (project.name.contains('Omniture')) {
-    dependencies {
-      implementation "com.brightcove.player:android-omniture-plugin:${anpVersion}"
-      implementation files(libraryDirectory + "adobeMobileLibrary.jar")
-    }
-  }
-
-  if (project.name.contains('OnceUx')) {
-    dependencies {
-      implementation "com.brightcove.player:android-onceux-plugin:${anpVersion}"
-      implementation "com.brightcove.player:exoplayer2:${anpVersion}"
-    }
-  }
-
   if (project.name.contains('Ssai') || project.name.contains('SSAI')) {
     dependencies {
       implementation "com.brightcove.player:android-ssai-plugin:${anpVersion}"
@@ -143,14 +129,6 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
       implementation "androidx.media:media:${ANDROIDX_MEDIA}"
     }
 
-    android {
-      defaultConfig {
-        minSdkVersion ANDROID_MIN_SDK_VERSION
-      }
-    }
-  }
-
-  if (project.name.contains('WebVTT')) {
     android {
       defaultConfig {
         minSdkVersion ANDROID_MIN_SDK_VERSION

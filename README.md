@@ -31,7 +31,7 @@ The Issues tab is now closed. To report any problem or provide feedback, please 
 
 * [Basic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicSampleApp): This app shows how to setup the Brightcove ExoPlayer to play.
 
-* [Basic Cast Sample App with Brightcove Cast Receiver](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicCastBrightcoveReceiverSampleApp): This adds Google Chromecast support to the Brightcove Native Player SDK for Android, and demonstrates integration with the upated Brightcove Cast Receiver app v2.0. Please refer to the Release Notes in the v6.16.0 release of the Brightcove Native Player SDK for Android for more information.
+* [Basic Cast Sample App with Brightcove Cast Receiver](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicCastBrightcoveReceiverSampleApp): This adds Google Chromecast support to the Brightcove Native Player SDK for Android, and demonstrates integration with the Brightcove Cast Receiver app.
 
 * [BasicIMAVAST Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/BasicIMAVASTSampleApp): This app shows how to use the Brightcove ExoPlayer with Google IMA ads.
 
@@ -59,7 +59,7 @@ Note that in order to enable the FreeWheel sample apps, you must independently o
 
 * [TextureView Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/TextureViewSampleApp): This app shows how to use the Brightcove ExoPlayer with TextureView.
 
-* [ThumbnailScrubber Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/ThumbnailScrubberSampleApp): This app demonstrate how to use the Brightcove ExoPlayer with thumbnails.
+* [ThumbnailScrubber Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/ThumbnailScrubberSampleApp): This app demonstrates how to use the Brightcove ExoPlayer with thumbnails.
 
 * [VideoListAdRulesIMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer/VideoListAdRulesIMASampleApp): This app shows how to use multiple instances of the Brightcove SDK in one screen with Google IMA ads.
 
@@ -77,11 +77,11 @@ Note that in order to enable the FreeWheel sample apps, you must independently o
 
 * [AppCompat Fragment Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/AppCompatFragmentSampleApp): This app shows how to setup the Brightcove ExoPlayer with the AppCompat plugin and a Fragment.
 
-* [Audio Only Sample App](https://github.com/KEAMCRF/android-player-samples/tree/AudioOnlySample/brightcove-exoplayer-kotlin/AudioOnlySampleApp): This app shows how to setup the Brightcove ExoPlayer with audio-only assets.
+* [Audio Only Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/AudioOnlySampleApp): This app shows how to setup the Brightcove ExoPlayer with audio-only assets.
 
 * [Basic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/BasicSampleApp): This app shows how to setup the Brightcove ExoPlayer to play.
 
-* [Basic Cast Sample App with Brightcove Cast Receiver](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/BasicCastBrightcoveReceiverSampleApp): This adds Google Chromecast support to the Brightcove Native Player SDK for Android, and demonstrates integration with the upated Brightcove Cast Receiver app v2.0. Please refer to the Release Notes in the v6.16.0 release of the Brightcove Native Player SDK for Android for more information.
+* [Basic Cast Sample App with Brightcove Cast Receiver](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/BasicCastBrightcoveReceiverSampleApp): This adds Google Chromecast support to the Brightcove Native Player SDK for Android, and demonstrates integration with the Brightcove Cast Receiver app.
 
 * [BasicIMAVAST Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/BasicIMAVASTSampleApp): This app shows how to use the Brightcove ExoPlayer with Google IMA ads.
 
@@ -107,7 +107,7 @@ Note that in order to enable the FreeWheel sample apps, you must independently o
 
 * [TextureView Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/TextureViewSampleApp): This app shows how to use the Brightcove ExoPlayer with TextureView.
 
-* [ThumbnailScrubber Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/ThumbnailScrubberSampleApp): This app demonstrate how to use the Brightcove ExoPlayer with thumbnails.
+* [ThumbnailScrubber Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/ThumbnailScrubberSampleApp): This app demonstrates how to use the Brightcove ExoPlayer with thumbnails.
 
 * [VideoListAdRulesIMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/VideoListAdRulesIMASampleApp): This app shows how to use multiple instances of the Brightcove SDK in one screen with Google IMA ads.
 
@@ -119,22 +119,19 @@ Note that in order to enable the FreeWheel sample apps, you must independently o
 ## Installing the sample apps
 Currently, all of the sample app projects must be installed together as a bundle. Individual sample app projects also have specific dependencies. For those specific dependencies, see the individual project descriptions above for details.
 
-To install the sample apps into Android Studio, please make sure you have the latest version. You can obtain and install the latest version from: [Android Studio](http://developer.android.com/sdk/installing/studio.html)
-After Android Studio is installed, please follow the following steps:
+To build the sample apps, install the latest [Android Studio](https://developer.android.com/studio). Then open the project one of these ways:
 
-From Android Studio using VCS installation:
+Clone directly from Android Studio:
 
-1. Select the *Checkout From Version Control* option in the new project dialog,
-1. Pick the GITHUB menu entry
-1. Use **https://github.com/BrightcoveOS/android-player-samples.git** for the URL
-1. Click on SUBMIT and use default values on subsequent screens.
+1. On the Welcome screen, choose **Get from VCS** (or **File > New > Project from Version Control…**).
+1. Select **Git** and enter the URL **https://github.com/BrightcoveOS/android-player-samples.git**.
+1. Click **Clone** and accept the defaults on the following screens.
 
-From Android Studio using Import
+Open a local clone:
 
-1. Clone this repo to your file system.
-1. In the File menu, select the *Import Project...* option in the new project dialog,
-1. Using the file selector dialog, select the top level **build.gradle** file from the cloned repo on your system,
-1. Click on OK and use default values on subsequent screens.
+1. Clone this repository to your file system.
+1. In Android Studio, choose **File > Open…** and select the cloned repository's root folder.
+1. Click **OK** and accept the defaults on the following screens.
 
 Android Studio will now download, import and build all of the sample apps.  At this point the samples will be in your instance of Android Studio where you can observe the snippets in action on a physical or virtual device, walk through the code using the Android Studio debugger, search on keywords or just browse Android source code.
 

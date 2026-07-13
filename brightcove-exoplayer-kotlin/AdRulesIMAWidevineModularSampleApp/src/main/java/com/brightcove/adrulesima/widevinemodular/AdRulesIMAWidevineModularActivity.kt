@@ -1,4 +1,4 @@
-package com.example.adrulesima.widevinemodular
+package com.brightcove.adrulesima.widevinemodular
 
 import android.os.Bundle
 import android.util.Log
@@ -12,7 +12,7 @@ import com.brightcove.player.event.EventEmitter
 import com.brightcove.player.event.EventType
 import com.brightcove.player.model.Video
 import com.brightcove.player.view.BrightcovePlayer
-import com.example.adrulesima.widevinemodular.databinding.ActivityAdrulesImawidevineModularBinding
+import com.brightcove.adrulesima.widevinemodular.databinding.ActivityAdrulesImawidevineModularBinding
 import com.google.ads.interactivemedia.v3.api.AdsRequest
 import com.google.ads.interactivemedia.v3.api.ImaSdkFactory
 

@@ -25,6 +25,10 @@ public class MainActivity extends BrightcovePlayer {
         brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
 
+        // A Live/DVR stream is not bundled with this sample: live streams are ephemeral, so
+        // Brightcove cannot ship a permanent one. Replace the two placeholders below with your
+        // own Video Cloud Live HLS stream URL and publisher ID. Until you do, the app builds and
+        // launches but has nothing to play.
         Video video = Video.createVideo("YOUR_LIVE_HLS_STREAM", DeliveryType.HLS);
         video.getProperties().put(Video.Fields.PUBLISHER_ID, "YOUR_VIDEOCLOUD_PUBLISHER_ID");
         brightcoveVideoView.add(video);

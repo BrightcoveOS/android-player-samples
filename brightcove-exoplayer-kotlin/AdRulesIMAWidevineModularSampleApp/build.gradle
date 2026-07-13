@@ -5,10 +5,10 @@ plugins {
 
 android {
     compileSdk ANDROID_COMPILE_SDK_VERSION
-    namespace "com.example.adrulesima.widevinemodular"
+    namespace "com.brightcove.adrulesima.widevinemodular"
 
     defaultConfig {
-        applicationId "com.example.adrulesima.widevinemodular"
+        applicationId "com.brightcove.adrulesima.widevinemodular"
         minSdk ANDROID_MIN_SDK_VERSION
         targetSdk ANDROID_TARGET_SDK_VERSION
         versionCode 1
