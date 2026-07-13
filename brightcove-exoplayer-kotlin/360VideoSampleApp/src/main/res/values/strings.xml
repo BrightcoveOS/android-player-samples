@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Application name -->
+    <string name="app_name">360 Video Demo</string>
+
+    <string name="account">3636334163001</string>
+    <string name="policy">BCpkADawqM1W-vUOMe6RSA3pA6Vw-VWUNn5rL0lzQabvrI63-VjS93gVUugDlmBpHIxP16X8TSe5LSKM415UHeMBmxl7pqcwVY_AZ4yKFwIpZPvXE34TpXEYYcmulxJQAOvHbv2dpfq-S_cm</string>
+    <string name="videoId">5240309173001</string>
+</resources>

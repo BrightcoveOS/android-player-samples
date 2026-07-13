@@ -69,6 +69,8 @@ Note that in order to enable the FreeWheel sample apps, you must independently o
 
 ### Brightcove Kotlin sample apps using ExoPlayer
 
+* [360 Video Sample app](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/360VideoSampleApp): This app shows how to use the Brightcove ExoPlayer to play 360 videos.
+
 * [Ad Rules Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/AdRulesIMASampleApp): This app shows how to use the Brightcove ExoPlayer with Google IMA ads.
 
 * [Ad Rules Widevine Modular Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/AdRulesIMAWidevineModularSampleApp): This app shows how to use the Brightcove ExoPlayer with Google IMA ads and Widevine Modular content.
@@ -104,6 +106,8 @@ Note that in order to enable the FreeWheel sample apps, you must independently o
 * [Offline Playback Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/OfflinePlaybackSampleApp): This app demonstrates the Offline Playback feature.
 
 * [Picture In Picture Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/PictureInPictureSampleApp): This app demonstrates the Picture-in-Picture feature. Please note that Picture-in-Picture is supported only with Android 8.0 and above, and only on phone and tablet devices.
+
+* [Pulse Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/PulseSampleApp): This app shows how to setup the Brightcove ExoPlayer with Pulse ads.
 
 * [TextureView Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/brightcove-exoplayer-kotlin/TextureViewSampleApp): This app shows how to use the Brightcove ExoPlayer with TextureView.
 
