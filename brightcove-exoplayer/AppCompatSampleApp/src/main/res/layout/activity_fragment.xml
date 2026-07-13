@@ -1,0 +1,13 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".FragmentPlayerActivity" >
+
+    <fragment android:name="com.brightcove.player.samples.appcompat.PlayerFragment"
+              android:id="@+id/brightcove_player_fragment"
+              android:tag="com.brightcove.player.samples.appcompat.PlayerFragment"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" />
+</FrameLayout>

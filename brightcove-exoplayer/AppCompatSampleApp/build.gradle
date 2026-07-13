@@ -1,0 +1,9 @@
+android {
+  namespace 'com.brightcove.player.samples.appcompat'
+}
+
+dependencies {
+  implementation "com.brightcove.player:android-appcompat-plugin:${anpVersion}"
+  implementation "androidx.appcompat:appcompat:${ANDROIDX_APPCOMPAT}"
+  implementation "androidx.legacy:legacy-support-v4:${ANDROIDX_LEGACY_SUPPORT_V4}"
+}

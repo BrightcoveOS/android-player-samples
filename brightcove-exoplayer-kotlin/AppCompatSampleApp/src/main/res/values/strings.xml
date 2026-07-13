@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AppCompat Sample App</string>
+    <string name="chooser_title">AppCompat plugin integration</string>
+    <string name="activity_example">Activity example</string>
+    <string name="fragment_example">Fragment example</string>
+
+</resources>
