@@ -1,5 +1,9 @@
 android {
     namespace 'com.brightcove.player.samples.offlineplayback'
+
+    defaultConfig {
+        applicationId "com.brightcove.player.samples.offlineplayback.java"
+    }
 }
 
 dependencies {

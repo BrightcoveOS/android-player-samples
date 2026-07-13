@@ -1,3 +1,7 @@
 android {
     namespace 'com.brightcove.player.demo.seekbarcolors'
+
+    defaultConfig {
+        applicationId "com.brightcove.player.samples.seekbarcolors.java"
+    }
 }

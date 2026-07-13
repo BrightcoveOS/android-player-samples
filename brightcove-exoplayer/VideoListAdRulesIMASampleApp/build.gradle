@@ -4,7 +4,7 @@ android {
     compileSdkVersion ANDROID_COMPILE_SDK_VERSION
     namespace "com.brightcove.recyclervideoview"
     defaultConfig {
-        applicationId "com.brightcove.recyclervideoview"
+        applicationId "com.brightcove.player.samples.videolistadrulesima.java"
         minSdkVersion 21
         targetSdkVersion ANDROID_TARGET_SDK_VERSION
         versionCode 1

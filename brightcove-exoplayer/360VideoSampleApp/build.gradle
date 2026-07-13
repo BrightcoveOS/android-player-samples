@@ -1,3 +1,7 @@
 android {
     namespace 'com.brightcove.player.samples.exoplayer.video360'
+
+    defaultConfig {
+        applicationId "com.brightcove.player.samples.video360.java"
+    }
 }

@@ -5,7 +5,7 @@ android {
     namespace "com.brightcove.player.samples.ssai.pal"
 
     defaultConfig {
-        applicationId "com.brightcove.player.samples.ssai.pal"
+        applicationId "com.brightcove.player.samples.basicssaipal.java"
         targetSdkVersion ANDROID_TARGET_SDK_VERSION
         versionCode 1
         versionName "1.0"

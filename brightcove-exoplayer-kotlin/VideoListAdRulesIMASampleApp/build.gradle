@@ -8,7 +8,7 @@ android {
     compileSdk ANDROID_COMPILE_SDK_VERSION
 
     defaultConfig {
-        applicationId "com.brightcove.videolist.adrulesima"
+        applicationId "com.brightcove.player.samples.videolistadrulesima.kotlin"
         minSdk ANDROID_MIN_SDK_VERSION
         targetSdk ANDROID_TARGET_SDK_VERSION
         versionCode 1

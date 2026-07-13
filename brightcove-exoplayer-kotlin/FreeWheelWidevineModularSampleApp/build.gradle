@@ -8,7 +8,7 @@ android {
     compileSdk ANDROID_COMPILE_SDK_VERSION
 
     defaultConfig {
-        applicationId "com.brightcove.freewheel.widevine.modular"
+        applicationId "com.brightcove.player.samples.freewheelwidevinemodular.kotlin"
         minSdk ANDROID_MIN_SDK_VERSION
         targetSdk ANDROID_TARGET_SDK_VERSION
         versionCode 1

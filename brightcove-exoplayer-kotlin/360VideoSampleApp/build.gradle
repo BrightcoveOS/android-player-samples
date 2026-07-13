@@ -8,7 +8,7 @@ android {
     namespace "com.brightcove.video360"
 
     defaultConfig {
-        applicationId "com.brightcove.video360"
+        applicationId "com.brightcove.player.samples.video360.kotlin"
         minSdk ANDROID_MIN_SDK_VERSION
         targetSdk ANDROID_TARGET_SDK_VERSION
         versionCode 1

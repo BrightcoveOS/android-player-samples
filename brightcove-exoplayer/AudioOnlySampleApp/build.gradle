@@ -7,7 +7,7 @@ android {
     namespace "com.brightcove.player.samples.audioonly"
 
     defaultConfig {
-        applicationId "com.brightcove.player.samples.audioonly"
+        applicationId "com.brightcove.player.samples.audioonly.java"
         targetSdk ANDROID_TARGET_SDK_VERSION
         versionCode 1
         versionName "1.0"

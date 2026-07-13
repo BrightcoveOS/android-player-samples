@@ -1,5 +1,9 @@
 android {
     namespace 'com.brightcove.player.samples.pictureinpicture'
+
+    defaultConfig {
+        applicationId "com.brightcove.player.samples.pictureinpicture.java"
+    }
 }
 
 dependencies {

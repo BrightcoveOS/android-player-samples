@@ -8,7 +8,7 @@ android {
     namespace "com.brightcove.controls.customized"
 
     defaultConfig {
-        applicationId "com.brightcove.controls.customized"
+        applicationId "com.brightcove.player.samples.customizedcontrols.kotlin"
         minSdk ANDROID_MIN_SDK_VERSION
         targetSdk ANDROID_TARGET_SDK_VERSION
         versionCode 1

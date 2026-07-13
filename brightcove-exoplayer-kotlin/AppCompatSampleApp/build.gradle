@@ -8,7 +8,7 @@ android {
     namespace "com.brightcove.appcompat"
 
     defaultConfig {
-        applicationId "com.brightcove.appcompat"
+        applicationId "com.brightcove.player.samples.appcompat.kotlin"
         minSdk ANDROID_MIN_SDK_VERSION
         targetSdk ANDROID_TARGET_SDK_VERSION
         versionCode 1

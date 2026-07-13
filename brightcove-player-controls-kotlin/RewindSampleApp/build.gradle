@@ -8,7 +8,7 @@ android {
     namespace "com.brightcove.controls.rewind"
 
     defaultConfig {
-        applicationId "com.brightcove.controls.rewind"
+        applicationId "com.brightcove.player.samples.rewind.kotlin"
         minSdk ANDROID_MIN_SDK_VERSION
         targetSdk ANDROID_TARGET_SDK_VERSION
         versionCode 1
