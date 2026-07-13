@@ -139,7 +139,7 @@ Android Studio will now download, import and build all of the sample apps.  At t
 By default, the sample apps will build with the most recent Brightcove Android Native Player version at build time. To override this behavior with a specific version, create a file named **.gradle/gradle.properties** in your home directory and set the value of the property *anpVersion* to the desired version.  An invalid version will cause no sample app projects to be configured.
 
 ## Building with Gradle on the command line
-These sample apps now build with the latest released version of Gradle, 7.4.1. Please note that when building these apps from the command line, that the Gradle daemon is started, and will continue to run after the build completes.
+These sample apps now build with the latest released version of Gradle, 8.13. Please note that when building these apps from the command line, that the Gradle daemon is started, and will continue to run after the build completes.
 
 To stop the daemon after the build completes, run the following:
 `./gradlew --stop`
