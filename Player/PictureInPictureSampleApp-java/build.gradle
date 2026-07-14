@@ -1,0 +1,12 @@
+android {
+    namespace 'com.brightcove.player.samples.pictureinpicture.java'
+
+    defaultConfig {
+        applicationId "com.brightcove.player.samples.pictureinpicture.java"
+    }
+}
+
+dependencies {
+    implementation "androidx.appcompat:appcompat:${ANDROIDX_APPCOMPAT}"
+    implementation "androidx.constraintlayout:constraintlayout:${ANDROIDX_CONSTRAINT_LAYOUT}"
+}

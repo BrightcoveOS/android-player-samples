@@ -24,7 +24,13 @@ project.ext {
   libraryDirectory = "${System.getProperty("user.home")}/libs/"
 }
 
-configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
+// Every sample module lives in a capability bucket and is suffixed -java or -kotlin;
+// the intermediate bucket projects (:Player, :IMA, ...) are not configured.
+def sampleModules = subprojects.findAll { it.name.endsWith('-java') || it.name.endsWith('-kotlin') }
+// All sample modules within a capability bucket, e.g. capabilityBucket(':IMA:').
+def capabilityBucket = { String prefix -> sampleModules.findAll { it.path.startsWith(prefix) } }
+
+configure(sampleModules) {
   apply plugin: 'com.android.application'
 
   repositories {
@@ -47,7 +53,7 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
 
     // This top level file repository will provide/contain third party
     // dependencies which are either downloaded directly (not using a
-    // Maven repo) or installed manually for something like VisualOn.
+    // Maven repo) or installed manually (e.g. the FreeWheel/Pulse AARs).
     flatDir {
       dirs libraryDirectory
     }
@@ -79,112 +85,80 @@ configure(subprojects.findAll {it.name.endsWith('SampleApp')}) {
     }
   }
 
+  // Shared by every sample: the core SDK plus the ExoPlayer/Media3 playback backend.
   dependencies {
     implementation "com.brightcove.player:android-sdk:${anpVersion}"
+    implementation "com.brightcove.player:exoplayer2:${anpVersion}"
+    implementation "androidx.media:media:${ANDROIDX_MEDIA}"
     implementation "androidx.multidex:multidex:${MULTIDEX_VERSION}"
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.3")
   }
+}
 
-  if (project.name.contains('IMA')) {
-    dependencies {
-      implementation "com.brightcove.player:android-ima-plugin:${anpVersion}"
-      implementation 'com.google.ads.interactivemedia.v3:interactivemedia:'+GOOGLE_IMA_SDK_VERSION
-      implementation "androidx.legacy:legacy-support-v4:${ANDROIDX_LEGACY_SUPPORT_V4}"
-    }
+// Per-capability plugin dependencies, keyed on the bucket a module lives in.
+// Adding a sample to a bucket automatically wires its plugin; renaming a sample does not.
+
+configure(capabilityBucket(':IMA:')) {
+  dependencies {
+    implementation "com.brightcove.player:android-ima-plugin:${anpVersion}"
+    implementation 'com.google.ads.interactivemedia.v3:interactivemedia:' + GOOGLE_IMA_SDK_VERSION
+    implementation "androidx.legacy:legacy-support-v4:${ANDROIDX_LEGACY_SUPPORT_V4}"
   }
+}
 
-  if (project.name.contains('DAI')) {
-    dependencies {
-      implementation "com.brightcove.player:android-dai-plugin:${anpVersion}"
-      implementation "androidx.legacy:legacy-support-v4:${ANDROIDX_LEGACY_SUPPORT_V4}"
-    }
+configure(capabilityBucket(':DAI:')) {
+  dependencies {
+    implementation "com.brightcove.player:android-dai-plugin:${anpVersion}"
+    implementation "androidx.legacy:legacy-support-v4:${ANDROIDX_LEGACY_SUPPORT_V4}"
   }
+}
 
-  if (project.name.contains('Omniture')) {
-    dependencies {
-      implementation "com.brightcove.player:android-omniture-plugin:${anpVersion}"
-      implementation files(libraryDirectory + "adobeMobileLibrary.jar")
-    }
+configure(capabilityBucket(':SSAI:')) {
+  dependencies {
+    implementation "com.brightcove.player:android-ssai-plugin:${anpVersion}"
+    implementation "com.brightcove.player:android-thumbnail-plugin:${anpVersion}"
   }
+}
 
-  if (project.name.contains('OnceUx')) {
-    dependencies {
-      implementation "com.brightcove.player:android-onceux-plugin:${anpVersion}"
-      implementation "com.brightcove.player:exoplayer2:${anpVersion}"
-    }
+configure(capabilityBucket(':Cast:')) {
+  dependencies {
+    implementation "com.brightcove.player:android-cast-plugin:${anpVersion}"
   }
+}
 
-  if (project.name.contains('Ssai') || project.name.contains('SSAI')) {
-    dependencies {
-      implementation "com.brightcove.player:android-ssai-plugin:${anpVersion}"
-      implementation "com.brightcove.player:exoplayer2:${anpVersion}"
-      implementation "com.brightcove.player:android-thumbnail-plugin:${anpVersion}"
-    }
+configure(capabilityBucket(':FreeWheel:')) {
+  dependencies {
+    implementation "com.brightcove.player:android-freewheel-plugin:${anpVersion}"
+    implementation files(libraryDirectory + "AdManager.aar")
   }
+}
 
-  if (project.name.contains('Thumbnail')) {
-    dependencies {
-      implementation "com.brightcove.player:android-thumbnail-plugin:${anpVersion}"
-    }
+configure(capabilityBucket(':Pulse:')) {
+  dependencies {
+    implementation "com.brightcove.player:android-pulse-plugin:${anpVersion}"
+    implementation files(libraryDirectory + "Pulse.aar")
   }
+}
 
-  if (project.name.contains('AudioOnly')) {
-    dependencies {
-      implementation "com.brightcove.player:exoplayer2:${anpVersion}"
-      implementation "com.brightcove.player:android-playback-notification-plugin:${anpVersion}"
-    }
+configure(capabilityBucket(':Offline:')) {
+  dependencies {
+    implementation "com.brightcove.player:offline-playback:${anpVersion}"
   }
+}
 
-  if (project.parent.name == 'brightcove-exoplayer' ||
-          project.parent.name == 'brightcove-exoplayer-kotlin'||
-          project.parent.name == 'brightcove-player-controls') {
-    dependencies {
-      implementation "com.brightcove.player:exoplayer2:${anpVersion}"
-      implementation "androidx.media:media:${ANDROIDX_MEDIA}"
-    }
-
-    android {
-      defaultConfig {
-        minSdkVersion ANDROID_MIN_SDK_VERSION
-      }
-    }
+// Two Player-bucket samples need an extra plugin; the rest of the bucket is plain playback.
+configure([project(':Player:ThumbnailScrubberSampleApp-java'),
+           project(':Player:ThumbnailScrubberSampleApp-kotlin')]) {
+  dependencies {
+    implementation "com.brightcove.player:android-thumbnail-plugin:${anpVersion}"
   }
+}
 
-  if (project.name.contains('WebVTT')) {
-    android {
-      defaultConfig {
-        minSdkVersion ANDROID_MIN_SDK_VERSION
-      }
-    }
+configure([project(':Player:AudioOnlySampleApp-java'),
+           project(':Player:AudioOnlySampleApp-kotlin')]) {
+  dependencies {
+    implementation "com.brightcove.player:android-playback-notification-plugin:${anpVersion}"
   }
-
-  if (project.name.contains('Cast')) {
-    dependencies {
-      implementation "com.brightcove.player:android-cast-plugin:${anpVersion}"
-    }
-  }
-
-  if (project.name.contains('FreeWheel')) {
-    dependencies {
-      implementation "com.brightcove.player:android-freewheel-plugin:${anpVersion}"
-      implementation files(libraryDirectory + "AdManager.aar")
-    }
-  }
-
-  if (project.name.contains('Pulse')) {
-    dependencies {
-      implementation "com.brightcove.player:android-pulse-plugin:${anpVersion}"
-      implementation files(libraryDirectory + "Pulse.aar")
-    }
-  }
-
-  if (project.name.contains('Offline')) {
-    dependencies {
-      implementation "com.brightcove.player:offline-playback:${anpVersion}"
-    }
-  }
-
-  println "Processing ${project.name}"
 }
 
 repositories {

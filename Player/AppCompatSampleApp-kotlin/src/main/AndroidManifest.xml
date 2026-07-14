@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.brightcove.player.samples.appcompat.kotlin">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- Required for Android TV -->
+    <uses-feature android:name="android.software.leanback" android:required="false" />
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:banner="@drawable/tv_banner"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:theme="@style/Theme.AppCompatSampleApp">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="unspecified"
+            android:configChanges="orientation|screenSize"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AppCompatPlayerActivity"
+            android:screenOrientation="unspecified"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+        <activity
+            android:name=".FragmentPlayerActivity"
+            android:screenOrientation="unspecified"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+    </application>
+
+</manifest>

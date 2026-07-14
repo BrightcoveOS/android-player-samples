@@ -1,68 +1,87 @@
-// For building exoplayer-specific sample apps, which are located under the 'brightcove-exoplayer' directory.
-include ':brightcove-exoplayer:360VideoSampleApp'
-include ':brightcove-exoplayer:BasicCastBrightcoveReceiverSampleApp'
-include ':brightcove-exoplayer:BasicDAISampleApp'
-include ':brightcove-exoplayer:AdRulesIMASampleApp'
-include ':brightcove-exoplayer:AdRulesIMAWidevineModularSampleApp'
-include ':brightcove-exoplayer:AppCompatActivitySampleApp'
-include ':brightcove-exoplayer:AppCompatFragmentSampleApp'
-include ':brightcove-exoplayer:BasicSsaiSampleApp'
-include ':brightcove-exoplayer:BasicSampleApp'
-include ':brightcove-exoplayer:LiveSampleApp'
-include ':brightcove-exoplayer:OfflinePlaybackSampleApp'
-include ':brightcove-exoplayer:PictureInPictureSampleApp'
-include ':brightcove-exoplayer:TextureViewSampleApp'
-include ':brightcove-exoplayer:WidevineModularSampleApp'
-include ':brightcove-exoplayer:VideoListSampleApp'
-include ':brightcove-exoplayer:VideoListAdRulesIMASampleApp'
-include ':brightcove-exoplayer:BasicIMAVASTSampleApp'
-include ':brightcove-exoplayer:ThumbnailScrubberSampleApp'
-include ':brightcove-exoplayer:AudioOnlySampleApp'
-include ':brightcove-exoplayer:BumperSampleApp'
-include ':brightcove-exoplayer:BasicSSAIPALSampleApp'
+// Brightcove Android Player Samples — capability-bucketed multi-module build.
+// Each top-level folder is a capability bucket; every sample ships a `-java` and a
+// `-kotlin` variant. A module's Gradle path mirrors its folder (e.g. the project
+// ':Player:BasicSampleApp-java' lives in Player/BasicSampleApp-java).
 
-// Set of Kotlin apps
-include ':brightcove-exoplayer-kotlin:AudioOnlySampleApp'
-include ':brightcove-exoplayer-kotlin:BasicSampleApp'
-include ':brightcove-exoplayer-kotlin:VideoListSampleApp'
-include ':brightcove-exoplayer-kotlin:AdRulesIMASampleApp'
-include ':brightcove-exoplayer-kotlin:AdRulesIMAWidevineModularSampleApp'
-include ':brightcove-exoplayer-kotlin:AppCompatActivitySampleApp'
-include ':brightcove-exoplayer-kotlin:AppCompatFragmentSampleApp'
-include ':brightcove-exoplayer-kotlin:BasicSsaiSampleApp'
-include ':brightcove-exoplayer-kotlin:LiveSampleApp'
-include ':brightcove-exoplayer-kotlin:BasicCastBrightcoveReceiverSampleApp'
-include ':brightcove-exoplayer-kotlin:BasicIMAVASTSampleApp'
-include ':brightcove-exoplayer-kotlin:PictureInPictureSampleApp'
-include ':brightcove-exoplayer-kotlin:TextureViewSampleApp'
-include ':brightcove-exoplayer-kotlin:BasicSsaiPALSampleApp'
-include ':brightcove-exoplayer-kotlin:BumperSampleApp'
-include ':brightcove-exoplayer-kotlin:BasicDAISampleApp'
-include ':brightcove-exoplayer-kotlin:ThumbnailScrubberSampleApp'
-include ':brightcove-exoplayer-kotlin:VideoListAdRulesIMASampleApp'
-include ':brightcove-exoplayer-kotlin:WidevineModularSampleApp'
-include ':brightcove-exoplayer-kotlin:OfflinePlaybackSampleApp'
-include ':brightcove-exoplayer-kotlin:FreeWheelSampleApp'
-include ':brightcove-exoplayer-kotlin:FreeWheelWidevineModularSampleApp'
+// Player — core playback
+include ':Player:BasicSampleApp-java'
+include ':Player:BasicSampleApp-kotlin'
+include ':Player:AppCompatSampleApp-java'
+include ':Player:AppCompatSampleApp-kotlin'
+include ':Player:VideoListSampleApp-java'
+include ':Player:VideoListSampleApp-kotlin'
+include ':Player:AudioOnlySampleApp-java'
+include ':Player:AudioOnlySampleApp-kotlin'
+include ':Player:LiveSampleApp-java'
+include ':Player:LiveSampleApp-kotlin'
+include ':Player:PictureInPictureSampleApp-java'
+include ':Player:PictureInPictureSampleApp-kotlin'
+include ':Player:ThumbnailScrubberSampleApp-java'
+include ':Player:ThumbnailScrubberSampleApp-kotlin'
+include ':Player:360VideoSampleApp-java'
+include ':Player:360VideoSampleApp-kotlin'
+include ':Player:TextureViewSampleApp-java'
+include ':Player:TextureViewSampleApp-kotlin'
+include ':Player:BumperSampleApp-java'
+include ':Player:BumperSampleApp-kotlin'
 
-// For building Brightcove Player Controls specific sample apps, which are located under the 'brightcove-player-controls' directory.
-include ':brightcove-player-controls:CustomizedControlsSampleApp'
-include ':brightcove-player-controls:StyledControlsSampleApp'
-include ':brightcove-player-controls:RewindArrowLeftSampleApp'
-include ':brightcove-player-controls:RewindBackwardSampleApp'
-include ':brightcove-player-controls:RewindStepBackwardSampleApp'
-include ':brightcove-player-controls:SeekBarColorsSampleApp'
+// PlayerUI — Brightcove player controls customization
+include ':PlayerUI:CustomizedControlsSampleApp-java'
+include ':PlayerUI:CustomizedControlsSampleApp-kotlin'
+include ':PlayerUI:StyledControlsSampleApp-java'
+include ':PlayerUI:StyledControlsSampleApp-kotlin'
+include ':PlayerUI:RewindSampleApp-java'
+include ':PlayerUI:RewindSampleApp-kotlin'
+include ':PlayerUI:SeekBarColorsSampleApp-java'
+include ':PlayerUI:SeekBarColorsSampleApp-kotlin'
 
-// FreeWheel samples require AdManager.aar v6.28.0 to be added to the libs
-// folder under your home directory.
-// This aar archive must be acquired from FreeWheel by you.
+// IMA — Google Interactive Media Ads (client-side)
+include ':IMA:AdRulesIMASampleApp-java'
+include ':IMA:AdRulesIMASampleApp-kotlin'
+include ':IMA:BasicIMAVASTSampleApp-java'
+include ':IMA:BasicIMAVASTSampleApp-kotlin'
+include ':IMA:VideoListAdRulesIMASampleApp-java'
+include ':IMA:VideoListAdRulesIMASampleApp-kotlin'
+include ':IMA:AdRulesIMAWidevineModularSampleApp-java'
+include ':IMA:AdRulesIMAWidevineModularSampleApp-kotlin'
+
+// DAI — Google Dynamic Ad Insertion
+include ':DAI:BasicDAISampleApp-java'
+include ':DAI:BasicDAISampleApp-kotlin'
+
+// SSAI — Brightcove Server-Side Ad Insertion (incl. PAL nonce)
+include ':SSAI:BasicSsaiSampleApp-java'
+include ':SSAI:BasicSsaiSampleApp-kotlin'
+include ':SSAI:BasicSsaiPALSampleApp-java'
+include ':SSAI:BasicSsaiPALSampleApp-kotlin'
+
+// DRM — Widevine Modular
+include ':DRM:WidevineModularSampleApp-java'
+include ':DRM:WidevineModularSampleApp-kotlin'
+
+// Cast — Google Cast (Brightcove receiver)
+include ':Cast:BasicCastBrightcoveReceiverSampleApp-java'
+include ':Cast:BasicCastBrightcoveReceiverSampleApp-kotlin'
+
+// Offline — downloaded playback
+include ':Offline:OfflinePlaybackSampleApp-java'
+include ':Offline:OfflinePlaybackSampleApp-kotlin'
+
+// FreeWheel — the Kotlin samples build unconditionally.
+include ':FreeWheel:FreeWheelSampleApp-kotlin'
+include ':FreeWheel:FreeWheelWidevineModularSampleApp-kotlin'
+
+// The FreeWheel Java samples require AdManager.aar v6.28.0 in the libs folder
+// under your home directory. This aar archive must be acquired from FreeWheel by you.
 if (freewheelDependenciesAreSatisfied()) {
-    include ':brightcove-exoplayer:FreeWheelSampleApp'
-    include ':brightcove-exoplayer:FreeWheelWidevineModularSampleApp'
+    include ':FreeWheel:FreeWheelSampleApp-java'
+    include ':FreeWheel:FreeWheelWidevineModularSampleApp-java'
 }
 
+// The Pulse samples require Pulse.aar in the libs folder under your home directory.
 if (pulseDependenciesAreSatisfied()) {
-    include ':brightcove-exoplayer:PulseSampleApp'
+    include ':Pulse:PulseSampleApp-java'
+    include ':Pulse:PulseSampleApp-kotlin'
 }
 
 boolean freewheelDependenciesAreSatisfied() {
@@ -77,7 +96,7 @@ boolean pulseDependenciesAreSatisfied() {
 
 // Local SDK development support
 // Set anpVersion to:
-//   - Normal version: "10.2.2" (uses published artifacts)  
+//   - Normal version: "10.2.2" (uses published artifacts)
 //   - Local with default path: "LOCAL" (uses ../videocloud_android-native-player)
 //   - Local with custom path: "LOCAL:/path/to/sdk" (uses specified path)
 
@@ -98,7 +117,7 @@ if (anpVersion.startsWith('LOCAL')) {
 if (useLocalSdk) {
     if (file(localSdkPath).exists()) {
         println "Found local SDK at ${localSdkPath} - enabling composite build for seamless development"
-        
+
         includeBuild(localSdkPath) {
             dependencySubstitution {
                 substitute module('com.brightcove.player:android-sdk') using project(':sdk')
@@ -122,5 +141,3 @@ if (useLocalSdk) {
 } else {
     println "Using published Maven artifacts version: ${anpVersion}"
 }
-
-
