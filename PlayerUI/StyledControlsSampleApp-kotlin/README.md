@@ -6,7 +6,7 @@ Restyles the default and Android TV media controllers by overriding the Brightco
 
 | File | Responsibility |
 |---|---|
-| `MainActivity.java` | Hosts the player and plays the demo video; the restyled controls are applied automatically from resources. |
+| `MainActivity.kt` | Hosts the player and plays the demo video; the restyled controls are applied automatically from resources. |
 | `res/layout/default_activity_main.xml` | Screen layout hosting the `BrightcoveExoPlayerVideoView`. |
 | `res/values/styles.xml` | Overrides the Brightcove control bar, seek bar, button, and Android TV player-options styles. |
 | `res/drawable-hdpi/scrubber.png` | Custom seek-bar thumb referenced by the seek bar style. |

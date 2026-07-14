@@ -1,160 +1,77 @@
-android-player-samples
-======================
-
-Provides sample apps for the Brightcove Player SDK and Plugins for Android.
-
-Learn more about the [Brightcove Native Player SDKs](https://support.brightcove.com/native-player-sdks).
-
-The Android sample app projects in this repository can be inserted directly into Android Studio and subsequently executed or simulated.
-This version of the sample apps supports the latest Brightcove SDK and plugins.  The following sample apps are included:
-
-## Brightcove ExoPlayer sample apps:
-
-### An important note 
-Starting from the SDK v8.3.0, the sample apps require Java 17.
-
-The Issues tab is now closed. To report any problem or provide feedback, please refer to the Support section below.  
-
-### Brightcove Java sample apps using ExoPlayer
-
-* [360 Video Sample app](https://github.com/BrightcoveOS/android-player-samples/tree/master/Player/360VideoSampleApp-java/): This app shows how to use the Brightcove ExoPlayer to play 360 videos.
-
-* [Ad Rules Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/IMA/AdRulesIMASampleApp-java): This app shows how to use the Brightcove ExoPlayer with Google IMA ads.
-
-* [Ad Rules Widevine Modular Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/IMA/AdRulesIMAWidevineModularSampleApp-java): This app shows how to use the Brightcove ExoPlayer with Google IMA ads and Widevine Modular content.
-
-* [AppCompat Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/Player/AppCompatSampleApp-java): This app shows how to use the Brightcove ExoPlayer with the AppCompat plugin, demonstrating both an Activity and a Fragment integration.
-
-* [Audio Only Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/Player/AudioOnlySampleApp-java): This app shows how to setup the Brightcove ExoPlayer with audio-only assets.
-
-* [Basic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/Player/BasicSampleApp-java): This app shows how to setup the Brightcove ExoPlayer to play.
-
-* [Basic Cast Sample App with Brightcove Cast Receiver](https://github.com/BrightcoveOS/android-player-samples/tree/master/Cast/BasicCastBrightcoveReceiverSampleApp-java): This adds Google Chromecast support to the Brightcove Native Player SDK for Android, and demonstrates integration with the Brightcove Cast Receiver app.
-
-* [BasicIMAVAST Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/IMA/BasicIMAVASTSampleApp-java): This app shows how to use the Brightcove ExoPlayer with Google IMA ads.
-
-* [BasicDAI Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/DAI/BasicDAISampleApp-java): This app shows how to use the Brightcove ExoPlayer with Google DAI ads.
-
-* [Bumper Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/Player/BumperSampleApp-java): This app shows how to setup the Brightcove ExoPlayer to play using a bumper video.
-
-* [FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/FreeWheel/FreeWheelSampleApp-java): This app shows how to use the Brightcove ExoPlayer with FreeWheel ads.
-
-* [FreeWheel Widevine Modular Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/FreeWheel/FreeWheelWidevineModularSampleApp-java): This app shows how to use the Brightcove ExoPlayer with FreeWheel ads and Widevine Modular content.
-
-Note that in order to enable the FreeWheel sample apps, you must independently obtain the non-free FreeWheel **AdManager.aar** library archive and install it into the directory **libs/** which is typically located at the root of your /home/ directory. The Brightcove Native SDK for Android and the FreeWheel sample apps require the FreeWheel AdManager library version 6.28.0. Please note that Brightcove does not distribute the FreeWheel libraries. Contact [FreeWheel](http://freewheel.tv/about/#contact-us) directly for more information on how to obtain their products.
-
-* [Basic SSAI Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/SSAI/BasicSsaiSampleApp-java): This app shows how to configure an app to use the Brightcove Native Player for Android SSAI Plugin to play a video.
-
-* [Basic SSAI PAL Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/SSAI/BasicSsaiPALSampleApp-java): This app shows how to configure an app to use the Brightcove Native Player for Android SSAI Plugin to play a video and the PAL SDK from Google for Ad tracking.
-
-* [Live Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/Player/LiveSampleApp-java): This app shows how to use the Brightcove ExoPlayer with HLS Live and Live DVR content. Please note that a Live/DVR URL is not supplied with this sample app, and must be supplied by the developer.
-
-* [Offline Playback Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/Offline/OfflinePlaybackSampleApp-java): This app demonstrates the Offline Playback feature.
-
-* [Picture In Picture Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/Player/PictureInPictureSampleApp-java): This app demonstrates the Picture-in-Picture feature. Please note that Picture-in-Picture is supported only with Android 8.0 and above, and only on phone and tablet devices.
-
-* [Pulse Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/Pulse/PulseSampleApp-java): This app shows how to setup the Brightcove ExoPlayer with Pulse ads.
-
-* [TextureView Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/Player/TextureViewSampleApp-java): This app shows how to use the Brightcove ExoPlayer with TextureView.
-
-* [ThumbnailScrubber Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/Player/ThumbnailScrubberSampleApp-java): This app demonstrates how to use the Brightcove ExoPlayer with thumbnails.
-
-* [VideoListAdRulesIMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/IMA/VideoListAdRulesIMASampleApp-java): This app shows how to use multiple instances of the Brightcove SDK in one screen with Google IMA ads.
-
-* [VideoList Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/Player/VideoListSampleApp-java): This app shows how to use multiple instances of the Brightcove SDK in one screen.
-
-* [Widevine Modular Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/DRM/WidevineModularSampleApp-java): This app shows how to setup the Brightcove ExoPlayer with Widevine Modular content.
-
-### Brightcove Kotlin sample apps using ExoPlayer
-
-* [360 Video Sample app](https://github.com/BrightcoveOS/android-player-samples/tree/master/Player/360VideoSampleApp-kotlin): This app shows how to use the Brightcove ExoPlayer to play 360 videos.
-
-* [Ad Rules Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/IMA/AdRulesIMASampleApp-kotlin): This app shows how to use the Brightcove ExoPlayer with Google IMA ads.
-
-* [Ad Rules Widevine Modular Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/IMA/AdRulesIMAWidevineModularSampleApp-kotlin): This app shows how to use the Brightcove ExoPlayer with Google IMA ads and Widevine Modular content.
-
-* [AppCompat Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/Player/AppCompatSampleApp-kotlin): This app shows how to use the Brightcove ExoPlayer with the AppCompat plugin, demonstrating both an Activity and a Fragment integration.
-
-* [Audio Only Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/Player/AudioOnlySampleApp-kotlin): This app shows how to setup the Brightcove ExoPlayer with audio-only assets.
-
-* [Basic Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/Player/BasicSampleApp-kotlin): This app shows how to setup the Brightcove ExoPlayer to play.
-
-* [Basic Cast Sample App with Brightcove Cast Receiver](https://github.com/BrightcoveOS/android-player-samples/tree/master/Cast/BasicCastBrightcoveReceiverSampleApp-kotlin): This adds Google Chromecast support to the Brightcove Native Player SDK for Android, and demonstrates integration with the Brightcove Cast Receiver app.
-
-* [BasicIMAVAST Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/IMA/BasicIMAVASTSampleApp-kotlin): This app shows how to use the Brightcove ExoPlayer with Google IMA ads.
-
-* [BasicDAI Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/DAI/BasicDAISampleApp-kotlin): This app shows how to use the Brightcove ExoPlayer with Google DAI ads.
-
-* [Bumper Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/Player/BumperSampleApp-kotlin): This app shows how to setup the Brightcove ExoPlayer to play using a bumper video.
-
-* [FreeWheel Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/FreeWheel/FreeWheelSampleApp-kotlin): This app shows how to use the Brightcove ExoPlayer with FreeWheel ads.
-
-* [FreeWheel Widevine Modular Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/FreeWheel/FreeWheelWidevineModularSampleApp-kotlin): This app shows how to use the Brightcove ExoPlayer with FreeWheel ads and Widevine Modular content.
-
-Note that in order to enable the FreeWheel sample apps, you must independently obtain the non-free FreeWheel **AdManager.aar** library archive and install it into the directory **libs/** which is typically located at the root of your /home/ directory. The Brightcove Native SDK for Android and the FreeWheel sample apps require the FreeWheel AdManager library version 6.28.0. Please note that Brightcove does not distribute the FreeWheel libraries. Contact [FreeWheel](http://freewheel.tv/about/#contact-us) directly for more information on how to obtain their products.
-
-* [Basic SSAI Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/SSAI/BasicSsaiSampleApp-kotlin): This app shows how to configure an app to use the Brightcove Native Player for Android SSAI Plugin to play a video.
-
-* [Basic SSAI PAL Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/SSAI/BasicSsaiPALSampleApp-kotlin): This app shows how to configure an app to use the Brightcove Native Player for Android SSAI Plugin to play a video and the PAL SDK from Google for Ad tracking.
-
-* [Live Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/Player/LiveSampleApp-kotlin): This app shows how to use the Brightcove ExoPlayer with HLS Live and Live DVR content. Please note that a Live/DVR URL is not supplied with this sample app, and must be supplied by the developer.
-
-* [Offline Playback Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/Offline/OfflinePlaybackSampleApp-kotlin): This app demonstrates the Offline Playback feature.
-
-* [Picture In Picture Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/Player/PictureInPictureSampleApp-kotlin): This app demonstrates the Picture-in-Picture feature. Please note that Picture-in-Picture is supported only with Android 8.0 and above, and only on phone and tablet devices.
-
-* [Pulse Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/Pulse/PulseSampleApp-kotlin): This app shows how to setup the Brightcove ExoPlayer with Pulse ads.
-
-* [TextureView Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/Player/TextureViewSampleApp-kotlin): This app shows how to use the Brightcove ExoPlayer with TextureView.
-
-* [ThumbnailScrubber Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/Player/ThumbnailScrubberSampleApp-kotlin): This app demonstrates how to use the Brightcove ExoPlayer with thumbnails.
-
-* [VideoListAdRulesIMA Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/IMA/VideoListAdRulesIMASampleApp-kotlin): This app shows how to use multiple instances of the Brightcove SDK in one screen with Google IMA ads.
-
-* [VideoList Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/Player/VideoListSampleApp-kotlin): This app shows how to use multiple instances of the Brightcove SDK in one screen. 
-
-* [Widevine Modular Sample App](https://github.com/BrightcoveOS/android-player-samples/tree/master/DRM/WidevineModularSampleApp-kotlin): This app shows how to setup the Brightcove ExoPlayer with Widevine Modular content.
-
-
-## Installing the sample apps
-Currently, all of the sample app projects must be installed together as a bundle. Individual sample app projects also have specific dependencies. For those specific dependencies, see the individual project descriptions above for details.
-
-To build the sample apps, install the latest [Android Studio](https://developer.android.com/studio). Then open the project one of these ways:
-
-Clone directly from Android Studio:
-
-1. On the Welcome screen, choose **Get from VCS** (or **File > New > Project from Version Control…**).
-1. Select **Git** and enter the URL **https://github.com/BrightcoveOS/android-player-samples.git**.
-1. Click **Clone** and accept the defaults on the following screens.
-
-Open a local clone:
-
-1. Clone this repository to your file system.
-1. In Android Studio, choose **File > Open…** and select the cloned repository's root folder.
-1. Click **OK** and accept the defaults on the following screens.
-
-Android Studio will now download, import and build all of the sample apps.  At this point the samples will be in your instance of Android Studio where you can observe the snippets in action on a physical or virtual device, walk through the code using the Android Studio debugger, search on keywords or just browse Android source code.
-
-## Overriding the default build behavior
-By default, the sample apps will build with the most recent Brightcove Android Native Player version at build time. To override this behavior with a specific version, create a file named **.gradle/gradle.properties** in your home directory and set the value of the property *anpVersion* to the desired version.  An invalid version will cause no sample app projects to be configured.
-
-## Building with Gradle on the command line
-These sample apps now build with the latest released version of Gradle, 8.13. Please note that when building these apps from the command line, that the Gradle daemon is started, and will continue to run after the build completes.
-
-To stop the daemon after the build completes, run the following:
-`./gradlew --stop`
-
-## Running a sample app
-1. To run a sample app on an Android 5.0 or later device, plug the device into the computer and ensure that USB debugging is enabled.
-1. Select a sample app from the *Run/Debug Configuration* selector and click on the run (green button) icon to start the sample.
-
-## Known Issues and Limitations
-
-* **NextGen Live SSAI (Live 2.0)** — Full SSAI support including ad countdown overlay, click-through, and tracking beacons since SDK **10.4.20**.
+# Brightcove Player SDK for Android Samples
+
+Sample apps for the [Brightcove Player SDK for Android](https://support.brightcove.com/native-player-sdks) and its plugins. This is the reference repository for building with the SDK: each capability is demonstrated by a small, focused app, and every capability ships a **Java** and a **Kotlin** variant kept at parity.
+
+## Prerequisites
+
+- The latest [Android Studio](https://developer.android.com/studio).
+- **JDK 17** (required since SDK 8.3.0).
+- Android **5.0 (API 21)** or later on the device/emulator; the apps compile and target **API 36**.
+- Builds with the bundled **Gradle 8.13** wrapper.
+- The SDK version is pinned by `anpVersion` in [`gradle.properties`](gradle.properties) (currently `10.4.25`). To build against a different version, set `anpVersion` in `~/.gradle/gradle.properties`. To develop against a local SDK checkout, set `anpVersion=LOCAL` (see [`settings.gradle`](settings.gradle)).
+- A few samples need artifacts Brightcove does not distribute — the FreeWheel `AdManager.aar` and the Pulse `Pulse.aar`. See the [FreeWheel](FreeWheel/) and [Pulse](Pulse/) READMEs.
+
+## Repository layout
+
+Samples are grouped by **capability**. Each top-level folder collects one capability's samples and has its own README covering shared setup; inside, each sample ships as `…SampleApp-java` and `…SampleApp-kotlin`.
+
+```
+Player/  PlayerUI/  IMA/  DAI/  SSAI/  FreeWheel/  Pulse/  DRM/  Cast/  Offline/
+```
+
+## Capabilities
+
+- **Playback** — [`Player/`](Player/): basic playback, video list / playlist, live / DVR, 360 video, audio-only playback, Picture-in-Picture, thumbnail scrubbing, plus the Android-specific TextureView, AppCompat entry points, and bumper samples.
+- **UI customization** — [`PlayerUI/`](PlayerUI/): custom controls — customized and styled controls, seek-bar colors, and a rewind button.
+- **Advertising** — [`IMA/`](IMA/) · [`DAI/`](DAI/) · [`SSAI/`](SSAI/) · [`FreeWheel/`](FreeWheel/) · [`Pulse/`](Pulse/): Google IMA (client-side), Google DAI, Brightcove server-side ad insertion (incl. PAL), FreeWheel, and Pulse.
+- **DRM & offline** — [`DRM/`](DRM/) · [`Offline/`](Offline/): Widevine Modular playback and offline (downloaded) playback.
+- **Casting** — [`Cast/`](Cast/): Google Cast with the Brightcove Cast Receiver.
+
+## Coverage matrix
+
+Tiers follow the cross-platform coverage model shared with the iOS samples: **Core** capabilities are the shared parity target, **Extended** capabilities may stay one-sided, and **Exclusive** capabilities are inherently platform-specific. Every capability ships a Java and a Kotlin sample.
+
+| Capability | Tier | Sample(s) |
+|---|---|---|
+| Basic playback | Core | [`Player/BasicSampleApp-java`](Player/BasicSampleApp-java/) · [`Player/BasicSampleApp-kotlin`](Player/BasicSampleApp-kotlin/) |
+| Video list / playlist | Core | [`Player/VideoListSampleApp-java`](Player/VideoListSampleApp-java/) · [`Player/VideoListSampleApp-kotlin`](Player/VideoListSampleApp-kotlin/) |
+| Live / DVR | Core | [`Player/LiveSampleApp-java`](Player/LiveSampleApp-java/) · [`Player/LiveSampleApp-kotlin`](Player/LiveSampleApp-kotlin/) |
+| 360 video | Core | [`Player/360VideoSampleApp-java`](Player/360VideoSampleApp-java/) · [`Player/360VideoSampleApp-kotlin`](Player/360VideoSampleApp-kotlin/) |
+| Audio-only playback | Core | [`Player/AudioOnlySampleApp-java`](Player/AudioOnlySampleApp-java/) · [`Player/AudioOnlySampleApp-kotlin`](Player/AudioOnlySampleApp-kotlin/) |
+| Picture-in-Picture | Core | [`Player/PictureInPictureSampleApp-java`](Player/PictureInPictureSampleApp-java/) · [`Player/PictureInPictureSampleApp-kotlin`](Player/PictureInPictureSampleApp-kotlin/) |
+| Thumbnail scrubbing | Core | [`Player/ThumbnailScrubberSampleApp-java`](Player/ThumbnailScrubberSampleApp-java/) · [`Player/ThumbnailScrubberSampleApp-kotlin`](Player/ThumbnailScrubberSampleApp-kotlin/) |
+| Custom controls | Core | [`PlayerUI/`](PlayerUI/) — 4 samples |
+| IMA ads | Core | [`IMA/`](IMA/) — 4 samples |
+| DAI | Core | [`DAI/BasicDAISampleApp-java`](DAI/BasicDAISampleApp-java/) · [`DAI/BasicDAISampleApp-kotlin`](DAI/BasicDAISampleApp-kotlin/) |
+| SSAI | Core | [`SSAI/`](SSAI/) — 2 samples |
+| FreeWheel | Core | [`FreeWheel/`](FreeWheel/) — 2 samples |
+| Pulse | Core | [`Pulse/PulseSampleApp-java`](Pulse/PulseSampleApp-java/) · [`Pulse/PulseSampleApp-kotlin`](Pulse/PulseSampleApp-kotlin/) |
+| DRM (Widevine) | Core | [`DRM/WidevineModularSampleApp-java`](DRM/WidevineModularSampleApp-java/) · [`DRM/WidevineModularSampleApp-kotlin`](DRM/WidevineModularSampleApp-kotlin/) |
+| Casting | Core | [`Cast/BasicCastBrightcoveReceiverSampleApp-java`](Cast/BasicCastBrightcoveReceiverSampleApp-java/) · [`Cast/BasicCastBrightcoveReceiverSampleApp-kotlin`](Cast/BasicCastBrightcoveReceiverSampleApp-kotlin/) |
+| Offline playback | Core | [`Offline/OfflinePlaybackSampleApp-java`](Offline/OfflinePlaybackSampleApp-java/) · [`Offline/OfflinePlaybackSampleApp-kotlin`](Offline/OfflinePlaybackSampleApp-kotlin/) |
+| Bumper | Extended (Android-only) | [`Player/BumperSampleApp-java`](Player/BumperSampleApp-java/) · [`Player/BumperSampleApp-kotlin`](Player/BumperSampleApp-kotlin/) |
+| TextureView | Exclusive (Android) | [`Player/TextureViewSampleApp-java`](Player/TextureViewSampleApp-java/) · [`Player/TextureViewSampleApp-kotlin`](Player/TextureViewSampleApp-kotlin/) |
+| AppCompat entry points | Exclusive (Android) | [`Player/AppCompatSampleApp-java`](Player/AppCompatSampleApp-java/) · [`Player/AppCompatSampleApp-kotlin`](Player/AppCompatSampleApp-kotlin/) |
+
+## Building
+
+Open the project in Android Studio one of these ways:
+
+- **Get from VCS** (Welcome screen) or **File > New > Project from Version Control…**, select **Git**, and enter `https://github.com/BrightcoveOS/android-player-samples.git`; or
+- clone the repository and choose **File > Open…** on its root folder.
+
+Android Studio downloads dependencies and builds every sample. To build from the command line:
+
+```
+./gradlew assembleDebug                                  # all samples
+./gradlew :Player:BasicSampleApp-kotlin:assembleDebug    # one sample
+./gradlew --stop                                         # stop the Gradle daemon afterwards
+```
+
+## Running a sample
+
+Plug in an Android 5.0+ device with USB debugging enabled (or start an emulator), pick the sample from the **Run/Debug Configuration** selector, and run it.
 
 ## Support
-If you have questions, need help or want to provide feedback, please use the [Support Portal](https://supportportal.brightcove.com/s/login/) or contact your Account Manager.  To receive notification of new SDK software releases, subscribe to the Brightcove Native Player SDKs [Google Group](https://groups.google.com/g/brightcove-native-player-sdks).
 
-Enjoy!
-
-The Brightcove Player Android Team
+Use the [Support Portal](https://supportportal.brightcove.com/s/login/) or contact your Account Manager. To hear about new SDK releases, subscribe to the Brightcove Native Player SDKs [Google Group](https://groups.google.com/g/brightcove-native-player-sdks).

@@ -6,7 +6,7 @@ Replaces the default Brightcove media controller with a custom `BrightcoveContro
 
 | File | Responsibility |
 |---|---|
-| `MainActivity.java` | Hosts the player, selects the phone or Android TV controller layout, and wires the custom Font Awesome button. |
+| `MainActivity.kt` | Hosts the player, selects the phone or Android TV controller layout, and wires the custom Font Awesome button. |
 | `res/layout/default_activity_main.xml` | Screen layout hosting the `BrightcoveExoPlayerVideoView`. |
 | `res/layout/my_media_controller.xml` | Custom portrait control bar layout. |
 | `res/layout-land/my_media_controller.xml` | Custom landscape control bar layout. |

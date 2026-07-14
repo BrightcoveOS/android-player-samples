@@ -1,40 +1,23 @@
-Brightcove Player Controls for Android - Samples
-======================
+# UI Customization
 
-## Description
-
-A collection of sample applications using the Brightcove Player SDK with the Brightcove Player Controls integration.
-
-These sample applications are built to be modified and run from Android Studio and support the latest Brightcove SDK and plugins.
-
-## Features
-
-The Brightcove Player Controls integration currently supports the following:
-* Customizable Font-Awesome icons
-* Rewind, Captions and Full Screen by default
-* Mirrors the style of the new Brightcove Web Player
-* Fade and Slide animation styles for showing and hiding the Brightcove Player Controls
+These samples show how to customize the Brightcove Player Controls: swap Font Awesome icons, restyle the controller to mirror the Brightcove web player, recolor the seek bar, and add controls such as a rewind button.
 
 ## Requirements
 
-The Brightcove Player Controls integration works with [any of the Android versions supported by the Brightcove Android SDK](https://sdks.support.brightcove.com/android/basics/overview-brightcove-player-sdk-android.html).
+- **Platform:** Android phone and tablet.
+- **Minimum OS:** Android 5.0 (API 21).
+- **Toolchain:** Android Studio, JDK 17, Gradle 8.13.
+- **Extra SDKs:** none — the Brightcove Player Controls are part of the core SDK.
 
-The Brightcove Player Controls integration has been tested using:
-* Android Studio 3.5
+## Setup
 
-Eclipse is not officially supported.
+The samples play from the shared Brightcove demo account (`5420904993001`). Controls are defined in layout XML loaded by resource id, so these samples customize the `BrightcoveMediaController` through layouts and code rather than data binding.
 
-## Installation
+## Samples
 
-The Brightcove Player Controls are available with the Android Native Player version 4.3.6 and higher.  Simply ensure that a top level gradle.properties file is provided that references the latest released SDK version.  See the [gradle.properties file in this repo](https://github.com/BrightcoveOS/android-player-samples/blob/master/gradle.properties) for an example referencing the latest Brightcove Android Native SDK version.
-
-## Reporting Bugs
-
-To report any bugs or otherwise odd behavior found within the Brightcove Player Controls integration, please submit the following
-to the [Brightcove Native Player SDKs Google Group](https://groups.google.com/forum/#!forum/brightcove-native-player-sdks):
-
-1. Please preface your post with an [Brightcove Player Controls] tag.
-2. Include steps to reproduce the problem.
-3. Include the version of Android and manufacturer of the device(s) you are testing on.
-4. Include a full logcat of the execution of your sample application demonstrating the problem.
-5. Include any screenshots that help to demonstrate the problem.
+| Sample | Languages | What it demonstrates |
+|---|---|---|
+| `CustomizedControlsSampleApp` | [Java](CustomizedControlsSampleApp-java/) · [Kotlin](CustomizedControlsSampleApp-kotlin/) | Customizing the media controller layout and Font Awesome icons. |
+| `StyledControlsSampleApp` | [Java](StyledControlsSampleApp-java/) · [Kotlin](StyledControlsSampleApp-kotlin/) | Restyling the controls to mirror the Brightcove web player. |
+| `SeekBarColorsSampleApp` | [Java](SeekBarColorsSampleApp-java/) · [Kotlin](SeekBarColorsSampleApp-kotlin/) | Changing the seek-bar colors. |
+| `RewindSampleApp` | [Java](RewindSampleApp-java/) · [Kotlin](RewindSampleApp-kotlin/) | Adding a rewind button; the strings file documents the Font Awesome glyph options. |
