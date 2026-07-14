@@ -1,6 +1,6 @@
 # DRM
 
-These samples demonstrate playback of Widevine Modular DRM-protected content. Widevine support is built into the Brightcove SDK, so no additional plugin is required. (Android uses Widevine for DRM; the corresponding iOS sample uses FairPlay.)
+These samples demonstrate playback of Widevine Modular DRM-protected content. Widevine support is built into the Brightcove SDK, so no additional plugin is required.
 
 ## Requirements
 

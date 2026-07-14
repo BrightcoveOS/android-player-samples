@@ -29,29 +29,29 @@ Player/  PlayerUI/  IMA/  DAI/  SSAI/  FreeWheel/  Pulse/  DRM/  Cast/  Offline/
 
 ## Coverage matrix
 
-Tiers follow the cross-platform coverage model shared with the iOS samples: **Core** capabilities are the shared parity target, **Extended** capabilities may stay one-sided, and **Exclusive** capabilities are inherently platform-specific. Every capability ships a Java and a Kotlin sample.
+Every capability ships a Java and a Kotlin sample.
 
-| Capability | Tier | Sample(s) |
-|---|---|---|
-| Basic playback | Core | [`Player/BasicSampleApp-java`](Player/BasicSampleApp-java/) · [`Player/BasicSampleApp-kotlin`](Player/BasicSampleApp-kotlin/) |
-| Video list / playlist | Core | [`Player/VideoListSampleApp-java`](Player/VideoListSampleApp-java/) · [`Player/VideoListSampleApp-kotlin`](Player/VideoListSampleApp-kotlin/) |
-| Live / DVR | Core | [`Player/LiveSampleApp-java`](Player/LiveSampleApp-java/) · [`Player/LiveSampleApp-kotlin`](Player/LiveSampleApp-kotlin/) |
-| 360 video | Core | [`Player/360VideoSampleApp-java`](Player/360VideoSampleApp-java/) · [`Player/360VideoSampleApp-kotlin`](Player/360VideoSampleApp-kotlin/) |
-| Audio-only playback | Core | [`Player/AudioOnlySampleApp-java`](Player/AudioOnlySampleApp-java/) · [`Player/AudioOnlySampleApp-kotlin`](Player/AudioOnlySampleApp-kotlin/) |
-| Picture-in-Picture | Core | [`Player/PictureInPictureSampleApp-java`](Player/PictureInPictureSampleApp-java/) · [`Player/PictureInPictureSampleApp-kotlin`](Player/PictureInPictureSampleApp-kotlin/) |
-| Thumbnail scrubbing | Core | [`Player/ThumbnailScrubberSampleApp-java`](Player/ThumbnailScrubberSampleApp-java/) · [`Player/ThumbnailScrubberSampleApp-kotlin`](Player/ThumbnailScrubberSampleApp-kotlin/) |
-| Custom controls | Core | [`PlayerUI/`](PlayerUI/) — 4 samples |
-| IMA ads | Core | [`IMA/`](IMA/) — 4 samples |
-| DAI | Core | [`DAI/BasicDAISampleApp-java`](DAI/BasicDAISampleApp-java/) · [`DAI/BasicDAISampleApp-kotlin`](DAI/BasicDAISampleApp-kotlin/) |
-| SSAI | Core | [`SSAI/`](SSAI/) — 2 samples |
-| FreeWheel | Core | [`FreeWheel/`](FreeWheel/) — 2 samples |
-| Pulse | Core | [`Pulse/PulseSampleApp-java`](Pulse/PulseSampleApp-java/) · [`Pulse/PulseSampleApp-kotlin`](Pulse/PulseSampleApp-kotlin/) |
-| DRM (Widevine) | Core | [`DRM/WidevineModularSampleApp-java`](DRM/WidevineModularSampleApp-java/) · [`DRM/WidevineModularSampleApp-kotlin`](DRM/WidevineModularSampleApp-kotlin/) |
-| Casting | Core | [`Cast/BasicCastBrightcoveReceiverSampleApp-java`](Cast/BasicCastBrightcoveReceiverSampleApp-java/) · [`Cast/BasicCastBrightcoveReceiverSampleApp-kotlin`](Cast/BasicCastBrightcoveReceiverSampleApp-kotlin/) |
-| Offline playback | Core | [`Offline/OfflinePlaybackSampleApp-java`](Offline/OfflinePlaybackSampleApp-java/) · [`Offline/OfflinePlaybackSampleApp-kotlin`](Offline/OfflinePlaybackSampleApp-kotlin/) |
-| Bumper | Extended (Android-only) | [`Player/BumperSampleApp-java`](Player/BumperSampleApp-java/) · [`Player/BumperSampleApp-kotlin`](Player/BumperSampleApp-kotlin/) |
-| TextureView | Exclusive (Android) | [`Player/TextureViewSampleApp-java`](Player/TextureViewSampleApp-java/) · [`Player/TextureViewSampleApp-kotlin`](Player/TextureViewSampleApp-kotlin/) |
-| AppCompat entry points | Exclusive (Android) | [`Player/AppCompatSampleApp-java`](Player/AppCompatSampleApp-java/) · [`Player/AppCompatSampleApp-kotlin`](Player/AppCompatSampleApp-kotlin/) |
+| Capability | Sample(s) |
+|---|---|
+| Basic playback | [`Player/BasicSampleApp-java`](Player/BasicSampleApp-java/) · [`Player/BasicSampleApp-kotlin`](Player/BasicSampleApp-kotlin/) |
+| Video list / playlist | [`Player/VideoListSampleApp-java`](Player/VideoListSampleApp-java/) · [`Player/VideoListSampleApp-kotlin`](Player/VideoListSampleApp-kotlin/) |
+| Live / DVR | [`Player/LiveSampleApp-java`](Player/LiveSampleApp-java/) · [`Player/LiveSampleApp-kotlin`](Player/LiveSampleApp-kotlin/) |
+| 360 video | [`Player/360VideoSampleApp-java`](Player/360VideoSampleApp-java/) · [`Player/360VideoSampleApp-kotlin`](Player/360VideoSampleApp-kotlin/) |
+| Audio-only playback | [`Player/AudioOnlySampleApp-java`](Player/AudioOnlySampleApp-java/) · [`Player/AudioOnlySampleApp-kotlin`](Player/AudioOnlySampleApp-kotlin/) |
+| Picture-in-Picture | [`Player/PictureInPictureSampleApp-java`](Player/PictureInPictureSampleApp-java/) · [`Player/PictureInPictureSampleApp-kotlin`](Player/PictureInPictureSampleApp-kotlin/) |
+| Thumbnail scrubbing | [`Player/ThumbnailScrubberSampleApp-java`](Player/ThumbnailScrubberSampleApp-java/) · [`Player/ThumbnailScrubberSampleApp-kotlin`](Player/ThumbnailScrubberSampleApp-kotlin/) |
+| Custom controls | [`PlayerUI/`](PlayerUI/) — 4 samples |
+| IMA ads | [`IMA/`](IMA/) — 4 samples |
+| DAI | [`DAI/BasicDAISampleApp-java`](DAI/BasicDAISampleApp-java/) · [`DAI/BasicDAISampleApp-kotlin`](DAI/BasicDAISampleApp-kotlin/) |
+| SSAI | [`SSAI/`](SSAI/) — 2 samples |
+| FreeWheel | [`FreeWheel/`](FreeWheel/) — 2 samples |
+| Pulse | [`Pulse/PulseSampleApp-java`](Pulse/PulseSampleApp-java/) · [`Pulse/PulseSampleApp-kotlin`](Pulse/PulseSampleApp-kotlin/) |
+| DRM (Widevine) | [`DRM/WidevineModularSampleApp-java`](DRM/WidevineModularSampleApp-java/) · [`DRM/WidevineModularSampleApp-kotlin`](DRM/WidevineModularSampleApp-kotlin/) |
+| Casting | [`Cast/BasicCastBrightcoveReceiverSampleApp-java`](Cast/BasicCastBrightcoveReceiverSampleApp-java/) · [`Cast/BasicCastBrightcoveReceiverSampleApp-kotlin`](Cast/BasicCastBrightcoveReceiverSampleApp-kotlin/) |
+| Offline playback | [`Offline/OfflinePlaybackSampleApp-java`](Offline/OfflinePlaybackSampleApp-java/) · [`Offline/OfflinePlaybackSampleApp-kotlin`](Offline/OfflinePlaybackSampleApp-kotlin/) |
+| Bumper | [`Player/BumperSampleApp-java`](Player/BumperSampleApp-java/) · [`Player/BumperSampleApp-kotlin`](Player/BumperSampleApp-kotlin/) |
+| TextureView | [`Player/TextureViewSampleApp-java`](Player/TextureViewSampleApp-java/) · [`Player/TextureViewSampleApp-kotlin`](Player/TextureViewSampleApp-kotlin/) |
+| AppCompat entry points | [`Player/AppCompatSampleApp-java`](Player/AppCompatSampleApp-java/) · [`Player/AppCompatSampleApp-kotlin`](Player/AppCompatSampleApp-kotlin/) |
 
 ## Building
 
