@@ -9,8 +9,7 @@ Plays audio-only assets with a media-style background playback notification, so 
 
 | File | Responsibility |
 |---|---|
-| `MainActivity.java` | Loads a playlist (or single track) via `Catalog`, wires shuffle/repeat, and attaches the background playback notification. |
-| `AdapterView.java` | RecyclerView adapter listing tracks; a tap switches the playing track. |
-| `SecondActivity.java` | Empty placeholder secondary screen. |
+| `MainActivity.java` | Loads the playlist via `Catalog`, wires the shuffle and repeat controls, and attaches the background playback notification. |
+| `AdapterView.java` | RecyclerView adapter listing the tracks; a tap switches the playing track. |
 
 See the [Playback README](../) for shared setup and requirements.
