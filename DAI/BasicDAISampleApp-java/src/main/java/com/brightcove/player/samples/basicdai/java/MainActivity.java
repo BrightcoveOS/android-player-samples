@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.brightcove.dai.GoogleDAIComponent;
 import com.brightcove.player.edge.Catalog;
+import com.brightcove.player.edge.CatalogError;
 import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.model.Video;
@@ -13,9 +14,15 @@ import com.brightcove.player.view.BrightcovePlayer;
 import com.google.ads.interactivemedia.v3.api.ImaSdkFactory;
 import com.google.ads.interactivemedia.v3.api.ImaSdkSettings;
 
+import java.util.List;
+
+/**
+ * Plays a stream with Google Dynamic Ad Insertion (DAI), where ads are
+ * stitched into the stream server-side.
+ */
 public class MainActivity extends BrightcovePlayer {
 
-    private final String TAG = this.getClass().getSimpleName();
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final String LIVE_BIG_BUCK_BUNNY_ASSET_KEY = "c-rArva4ShKVIAkNfy6HUQ";
     private static final String VOD_TEARS_OF_STEEL_CMS_ID = "2548831";
@@ -28,15 +35,15 @@ public class MainActivity extends BrightcovePlayer {
     private Catalog catalog;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
         brightcoveVideoView = findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
 
         eventEmitter = brightcoveVideoView.getEventEmitter();
         setupDAI();
-        catalog = new Catalog.Builder(eventEmitter, getString(R.string.account))
-                .setPolicy(getString(R.string.policy))
+        catalog = new Catalog.Builder(eventEmitter, getString(R.string.sdk_demo_account))
+                .setPolicy(getString(R.string.sdk_demo_policy))
                 .build();
         requestVideo();
     }
@@ -49,9 +56,11 @@ public class MainActivity extends BrightcovePlayer {
     }
 
     private void requestVideo() {
-        catalog.findVideoByID(getString(R.string.videoId), new VideoListener() {
+        catalog.findVideoByID(getString(R.string.sdk_demo_video_id), new VideoListener() {
             @Override
             public void onVideo(Video video) {
+                // Provide a fallback video to play if the DAI stream cannot be retrieved,
+                // then register a callback that receives the ad-stitched stream once it is ready.
                 googleDAIComponent.setFallbackVideo(video);
                 googleDAIComponent.addCallback(new GoogleDAIComponent.Listener() {
                     @Override
@@ -67,12 +76,15 @@ public class MainActivity extends BrightcovePlayer {
                     }
                 });
 
-                // Uncomment the next line if you want to request a live stream
+                // This sample requests a VOD stream. To request a live stream instead,
+                // uncomment the line below and comment out the requestVOD call.
                 //googleDAIComponent.requestLiveStream(LIVE_BIG_BUCK_BUNNY_ASSET_KEY, null);
-
-                // Uncomment the next line if you want to request a VOD
                 googleDAIComponent.requestVOD(VOD_TEARS_OF_STEEL_CMS_ID, VOD_TEARS_OF_STEEL_VIDEO_ID, null);
+            }
 
+            @Override
+            public void onError(List<CatalogError> errors) {
+                Log.e(TAG, errors.toString());
             }
         });
     }
