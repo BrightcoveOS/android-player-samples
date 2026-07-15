@@ -1,24 +1,30 @@
 package com.brightcove.player.samples.rewind.java;
 
+import android.os.Bundle;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
 import com.brightcove.player.edge.Catalog;
+import com.brightcove.player.edge.CatalogError;
 import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 
-import android.os.Bundle;
+import java.util.List;
 
 /**
  * This app illustrates customizing the rewind button glyph using the Brightcove media controller.  The code for the
  * rewind button glyph is a customizable resource.  See res/values/strings.xml for the gory detail.
- *
- * @author Paul Michael Reilly
  */
 public class MainActivity extends BrightcovePlayer {
+
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         // When extending the BrightcovePlayer, we must assign the BrightcoveVideoView before
         // entering the superclass. This allows for some stock video player lifecycle
-        // management.  Establish the video object and use it's event emitter to get important
+        // management.  Establish the video object and use its event emitter to get important
         // notifications and to control logging.
         setContentView(R.layout.default_activity_main);
         brightcoveVideoView = findViewById(R.id.brightcove_video_view);
@@ -28,7 +34,7 @@ public class MainActivity extends BrightcovePlayer {
                 .setPolicy(getString(R.string.sdk_demo_policy))
                 .build();
 
-        catalog.findVideoByID(getString(R.string.sdk_demo_videoId), new VideoListener() {
+        catalog.findVideoByID(getString(R.string.sdk_demo_video_id), new VideoListener() {
 
             // Add the video found to the queue with add().
             // Start playback of the video with start().
@@ -36,6 +42,11 @@ public class MainActivity extends BrightcovePlayer {
             public void onVideo(Video video) {
                 brightcoveVideoView.add(video);
                 brightcoveVideoView.start();
+            }
+
+            @Override
+            public void onError(@NonNull List<CatalogError> errors) {
+                Log.e(TAG, errors.toString());
             }
         });
     }
