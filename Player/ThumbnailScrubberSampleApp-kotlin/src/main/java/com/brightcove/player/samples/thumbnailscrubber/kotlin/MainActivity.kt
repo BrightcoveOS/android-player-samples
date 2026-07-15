@@ -3,6 +3,7 @@ package com.brightcove.player.samples.thumbnailscrubber.kotlin
 import android.os.Bundle
 import android.util.Log
 import com.brightcove.player.edge.Catalog
+import com.brightcove.player.edge.CatalogError
 import com.brightcove.player.edge.VideoListener
 import com.brightcove.player.mediacontroller.ThumbnailComponent
 import com.brightcove.player.model.Video
@@ -10,7 +11,10 @@ import com.brightcove.player.view.BaseVideoView
 import com.brightcove.player.view.BrightcovePlayer
 import com.brightcove.player.samples.thumbnailscrubber.kotlin.databinding.ActivityThumbnailScrubbingMainBinding
 
-class ThumbnailScrubbingMainActivity : BrightcovePlayer() {
+/**
+ * This app demonstrates the Brightcove Thumbnail Plugin and Thumbnail Scrubbing.
+ */
+class MainActivity : BrightcovePlayer() {
 
     private lateinit var binding: ActivityThumbnailScrubbingMainBinding
 
@@ -31,19 +35,23 @@ class ThumbnailScrubbingMainActivity : BrightcovePlayer() {
         // Brightcove Edge service, given a video id, an account id and a policy key.
         val eventEmitter = brightcoveVideoView.eventEmitter
 
-        val catalog = Catalog.Builder(eventEmitter, getString(R.string.account))
-            .setPolicy(getString(R.string.policy))
+        val catalog = Catalog.Builder(eventEmitter, getString(R.string.sdk_demo_account))
+            .setPolicy(getString(R.string.sdk_demo_policy))
             .build()
 
 
         // Retrieve the video, given a video id, an account id and a policy key
-        catalog.findVideoByID(getString(R.string.videoId), object : VideoListener() {
+        catalog.findVideoByID(getString(R.string.sdk_demo_video_id), object : VideoListener() {
             // Add the video found to the queue with add().
             // Start playback of the video with start().
             override fun onVideo(video: Video) {
                 Log.v(TAG, "onVideo: video = $video")
                 brightcoveVideoView.add(video)
                 brightcoveVideoView.start()
+            }
+
+            override fun onError(errors: List<CatalogError>) {
+                Log.e(TAG, errors.toString())
             }
         })
     }
@@ -56,5 +64,9 @@ class ThumbnailScrubbingMainActivity : BrightcovePlayer() {
         Log.v(TAG,"Thumbnail Scrubbing is enabled, setting up the PreviewThumbnailController")
         val thumbnailComponent = ThumbnailComponent(brightcoveVideoView)
         thumbnailComponent.setupPreviewThumbnailController()
+    }
+
+    companion object {
+        private const val TAG = "MainActivity"
     }
 }
