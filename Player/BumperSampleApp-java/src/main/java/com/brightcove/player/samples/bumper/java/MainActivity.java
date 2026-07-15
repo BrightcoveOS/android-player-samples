@@ -5,11 +5,13 @@ import android.util.Log;
 
 import com.brightcove.player.bumper.BumperComponent;
 import com.brightcove.player.edge.Catalog;
+import com.brightcove.player.edge.CatalogError;
 import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcovePlayer;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,16 +20,18 @@ import java.util.Map;
  */
 public class MainActivity extends BrightcovePlayer {
 
-    private final String TAG = this.getClass().getSimpleName();
+    private static final String TAG = MainActivity.class.getSimpleName();
     private BumperComponent bumperComponent;
 
-    private Boolean useSetBumperID = true;
+    // Demo switch: when true the bumper id is set manually; flip to false to read it from the
+    // video's "bumper_id" custom field instead.
+    private boolean useSetBumperID = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // When extending the BrightcovePlayer, we must assign the brightcoveVideoView before
         // entering the superclass. This allows for some stock video player lifecycle
-        // management.  Establish the video object and use it's event emitter to get important
+        // management.  Establish the video object and use its event emitter to get important
         // notifications and to control logging.
         setContentView(R.layout.activity_main);
         brightcoveVideoView = findViewById(R.id.brightcove_video_view);
@@ -38,26 +42,25 @@ public class MainActivity extends BrightcovePlayer {
         EventEmitter eventEmitter = brightcoveVideoView.getEventEmitter();
 
         Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.sdk_demo_account))
-                .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
                 .setPolicy(getString(R.string.sdk_demo_policy))
                 .build();
 
-        //Building the instance of the bumper component, providing the existing videoView and catalog.
+        // Build the bumper component with the existing videoView and catalog.
         bumperComponent = new BumperComponent.Builder(brightcoveVideoView, catalog).build();
-        //Initializing the bumper.
+        // Initialize the bumper.
         bumperComponent.init();
 
-        catalog.findVideoByID(getString(R.string.sdk_demo_videoId), new VideoListener() {
+        catalog.findVideoByID(getString(R.string.sdk_demo_video_id), new VideoListener() {
             // Add the video found to the queue with add().
             @Override
             public void onVideo(Video video) {
                 // Showcasing both options to set the bumper id manually or obtaining it from the
                 // video object properties
                 if (useSetBumperID) {
-                    //Manually Setting our own bumper ID
+                    // Manually set our own bumper id.
                     bumperComponent.setVideoBumperID(getString(R.string.sdk_demo_bumper_videoId));
                 } else {
-                    //Obtaining the bumper id from the video custom fields
+                    // Obtain the bumper id from the video's custom fields.
                     Map<String, Object> customFields =
                             (Map<String, Object>) video.getProperties().get(Video.Fields.CUSTOM_FIELDS);
                     if ((customFields != null && !customFields.isEmpty()) &&
@@ -66,10 +69,13 @@ public class MainActivity extends BrightcovePlayer {
                     }
                 }
                 Log.v(TAG, "onVideo: video = " + video);
-                //Adding the video
                 brightcoveVideoView.add(video);
-                //Autostart Playback
                 brightcoveVideoView.start();
+            }
+
+            @Override
+            public void onError(List<CatalogError> errors) {
+                Log.e(TAG, errors.toString());
             }
         });
     }
