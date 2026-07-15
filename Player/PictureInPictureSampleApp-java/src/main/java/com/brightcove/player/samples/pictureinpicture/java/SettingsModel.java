@@ -6,9 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import androidx.annotation.NonNull;
+import android.util.Log;
 import android.util.Rational;
-
-import com.brightcove.player.logging.Log;
 
 public class SettingsModel {
 
@@ -69,7 +68,7 @@ public class SettingsModel {
                 String numbers[] = rationalString.split(":");
                 numerator = Integer.parseInt(numbers[0]);
                 denominator = Integer.parseInt(numbers[1]);
-                Log.w("PIP", String.format("RATIONAL N=%s, D=%s", numerator, denominator));
+                Log.w(TAG, String.format("RATIONAL N=%s, D=%s", numerator, denominator));
                 rational = new Rational(numerator, denominator);
             }
         } catch (NumberFormatException e) {

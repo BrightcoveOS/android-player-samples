@@ -8,6 +8,9 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.view.MenuItem;
 
+/**
+ * Hosts the Picture-in-Picture preferences screen for adjusting PiP behavior.
+ */
 public class SettingsActivity extends PreferenceActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {

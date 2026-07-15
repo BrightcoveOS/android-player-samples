@@ -6,7 +6,7 @@ Enters Android Picture-in-Picture mode so playback continues in a small floating
 
 | File | Responsibility |
 |---|---|
-| `PictureInPictureSampleActivity.kt` | Fetches a video and applies saved PiP settings on resume. |
+| `MainActivity.kt` | Fetches a video and applies saved PiP settings on resume. |
 | `SettingsActivity.kt` | Hosts the preference screen for editing PiP options. |
 | `SettingsModel.kt` | Reads PiP preferences (captions, scale factor, aspect ratio) from shared preferences. |
 

@@ -4,9 +4,9 @@ import android.annotation.TargetApi
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
+import android.util.Log
 import android.util.Rational
 import androidx.preference.PreferenceManager
-import com.brightcove.player.logging.Log
 
 class SettingsModel(context: Context) {
 
@@ -29,7 +29,7 @@ class SettingsModel(context: Context) {
         var scaleFactor = 0.5f
         val scaleFactorString = preferences.getString(PIP_CC_SCALE_FACTOR, scaleFactor.toString())
         try {
-            scaleFactor = scaleFactorString!!.toFloat()
+            scaleFactor = scaleFactorString?.toFloat() ?: scaleFactor
         } catch (e: NumberFormatException) {
             Log.e(TAG, "Error retrieving bitrate configuration.", e)
         }
@@ -47,7 +47,7 @@ class SettingsModel(context: Context) {
                 val numbers = rationalString.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
                 numerator = numbers[0].toInt()
                 denominator = numbers[1].toInt()
-                Log.w("PIP", String.format("RATIONAL N=%s, D=%s", numerator, denominator))
+                Log.w(TAG, "RATIONAL N=$numerator, D=$denominator")
                 rational = Rational(numerator, denominator)
             }
         } catch (e: NumberFormatException) {
@@ -77,6 +77,6 @@ class SettingsModel(context: Context) {
          */
         const val PIP_ASPECT_RATIO = "picture_in_picture_aspect_ratio"
 
-        private val TAG: String = SettingsModel::class.java.simpleName
+        private const val TAG = "SettingsModel"
     }
 }
