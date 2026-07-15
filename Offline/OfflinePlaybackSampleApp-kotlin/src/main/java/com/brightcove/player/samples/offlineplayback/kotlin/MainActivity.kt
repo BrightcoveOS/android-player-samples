@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.text.format.Formatter
 import android.util.Log
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +12,6 @@ import com.brightcove.player.samples.offlineplayback.kotlin.utils.BrightcoveDown
 import com.brightcove.player.samples.offlineplayback.kotlin.utils.ViewUtil
 import com.brightcove.player.display.ExoPlayerVideoDisplayComponent
 import com.brightcove.player.edge.Catalog
-import com.brightcove.player.edge.CatalogError
 import com.brightcove.player.edge.OfflineCallback
 import com.brightcove.player.edge.OfflineCatalog
 import com.brightcove.player.edge.OfflineStoreManager
@@ -33,6 +31,9 @@ import java.io.Serializable
 import java.util.Date
 import java.util.concurrent.TimeUnit
 
+/**
+ * An activity that displays a list of videos that can be downloaded.
+ */
 class MainActivity : BrightcovePlayer() {
     /**
      * Specifies how long the content can be consumed after the start of playback as total number
@@ -112,7 +113,7 @@ class MainActivity : BrightcovePlayer() {
 
         catalog = OfflineCatalog.Builder(this, eventEmitter, getString(R.string.sdk_demo_account))
             .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
-            .setPolicy(getString(R.string.sdk_demo_policy_key))
+            .setPolicy(getString(R.string.sdk_demo_policy))
             .build()
 
         //Configure downloads through the catalog.
@@ -125,12 +126,6 @@ class MainActivity : BrightcovePlayer() {
         // Connect the video list view to the adapter
         val videoListView: RecyclerView = ViewUtil.findView(this, R.id.video_list_view)
         videoListView.adapter = videoListAdapter
-
-        // Setup an adapter to render the playlist items in the spinner view Adapter that
-        // will be used to bind the playlist spinner to the underlying data source.
-        val playlistAdapter: ArrayAdapter<PlaylistModel> =
-            ArrayAdapter(this, android.R.layout.simple_spinner_item /*, playlistNames*/)
-        playlistAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         val videoDisplayComponent =
             brightcoveVideoView.videoDisplay as ExoPlayerVideoDisplayComponent
@@ -154,10 +149,6 @@ class MainActivity : BrightcovePlayer() {
                     videoListAdapter?.setVideoList(playlist.videos)
                     onVideoListUpdated(false)
                     brightcoveVideoView.addAll(playlist.videos)
-                }
-
-                override fun onError(errors: List<CatalogError>) {
-                    super.onError(errors)
                 }
             })
         } else {
@@ -435,7 +426,7 @@ class MainActivity : BrightcovePlayer() {
                 }
 
                 EventType.ODRM_PLAYBACK_NOT_ALLOWED, EventType.ODRM_SOURCE_NOT_FOUND -> {
-                    val message = "Failed to downloaded license for '${video?.name}' video: $type"
+                    val message = "Failed to download license for '${video?.name}' video: $type"
                     showToast(message)
                     Log.w(TAG, message)
                 }
@@ -502,9 +493,9 @@ class MainActivity : BrightcovePlayer() {
          */
         private val video: Video
     ) :
-        VideoListener() {
-        override fun onError(errors: List<CatalogError>) {
-            super.onError(errors)
-        }
+        VideoListener()
+
+    companion object {
+        private const val TAG = "MainActivity"
     }
 }
