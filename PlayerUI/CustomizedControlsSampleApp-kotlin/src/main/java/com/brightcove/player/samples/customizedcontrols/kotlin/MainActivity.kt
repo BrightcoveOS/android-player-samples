@@ -2,15 +2,16 @@ package com.brightcove.player.samples.customizedcontrols.kotlin
 
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import com.brightcove.player.edge.Catalog
+import com.brightcove.player.edge.CatalogError
 import com.brightcove.player.edge.VideoListener
 import com.brightcove.player.event.EventType
 import com.brightcove.player.mediacontroller.BrightcoveMediaController
 import com.brightcove.player.model.Video
 import com.brightcove.player.view.BaseVideoView
-import com.brightcove.player.view.BrightcoveExoPlayerVideoView
 import com.brightcove.player.view.BrightcovePlayer
 
 /**
@@ -24,19 +25,22 @@ class MainActivity : BrightcovePlayer() {
         // When extending the BrightcovePlayer, we must assign brightcoveVideoView before
         // entering the superclass. This allows for some stock video player lifecycle management.
         setContentView(R.layout.default_activity_main)
-        brightcoveVideoView = findViewById<BrightcoveExoPlayerVideoView>(R.id.brightcove_video_view)
+        brightcoveVideoView = findViewById(R.id.brightcove_video_view)
         initMediaController(brightcoveVideoView)
         super.onCreate(savedInstanceState)
 
         val catalog = Catalog.Builder(brightcoveVideoView.eventEmitter, getString(R.string.sdk_demo_account))
-            .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
             .setPolicy(getString(R.string.sdk_demo_policy))
             .build()
 
-        catalog.findVideoByID(getString(R.string.sdk_demo_videoId), object : VideoListener() {
+        catalog.findVideoByID(getString(R.string.sdk_demo_video_id), object : VideoListener() {
             override fun onVideo(video: Video) {
                 brightcoveVideoView.add(video)
                 brightcoveVideoView.start()
+            }
+
+            override fun onError(errors: List<CatalogError>) {
+                Log.e(TAG, errors.toString())
             }
         })
     }
@@ -68,5 +72,7 @@ class MainActivity : BrightcovePlayer() {
     companion object {
         // This TTF font is included in the Brightcove SDK.
         private const val FONT_AWESOME = "fontawesome-webfont.ttf"
+
+        private const val TAG = "MainActivity"
     }
 }

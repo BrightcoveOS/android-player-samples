@@ -20,7 +20,7 @@
         android:label="@string/app_name"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.brightcove.player.samples.customizedcontrols.java.MainActivity"
+            android:name=".MainActivity"
             android:screenOrientation="unspecified"
             android:configChanges="orientation|screenSize"
             android:label="@string/app_name"

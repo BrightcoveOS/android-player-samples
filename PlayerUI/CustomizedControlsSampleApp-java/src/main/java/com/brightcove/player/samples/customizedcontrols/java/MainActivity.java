@@ -1,39 +1,42 @@
 package com.brightcove.player.samples.customizedcontrols.java;
 
 import com.brightcove.player.edge.Catalog;
+import com.brightcove.player.edge.CatalogError;
 import com.brightcove.player.edge.VideoListener;
-import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
-import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventType;
 import com.brightcove.player.mediacontroller.BrightcoveMediaController;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BaseVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
-import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
+import java.util.List;
+
 /**
  * This app illustrates how to customize the Android default media controller.
- *
- * @author Sergio Martinez
  */
 public class MainActivity extends BrightcovePlayer {
-    //This TTF font is included in the Brightcove SDK.
+
+    private static final String TAG = MainActivity.class.getSimpleName();
+
+    // This TTF font is included in the Brightcove SDK.
     public static final String FONT_AWESOME = "fontawesome-webfont.ttf";
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         // When extending the BrightcovePlayer, we must assign the BrightcoveVideoView before
         // entering the superclass. This allows for some stock video player lifecycle
-        // management.  Establish the video object and use it's event emitter to get important
+        // management.  Establish the video object and use its event emitter to get important
         // notifications and to control logging.
         setContentView(R.layout.default_activity_main);
-        brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
+        brightcoveVideoView = findViewById(R.id.brightcove_video_view);
         initMediaController(brightcoveVideoView);
         super.onCreate(savedInstanceState);
 
@@ -41,11 +44,10 @@ public class MainActivity extends BrightcovePlayer {
         String account = getString(R.string.sdk_demo_account);
 
         Catalog catalog = new Catalog.Builder(eventEmitter, account)
-                .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
                 .setPolicy(getString(R.string.sdk_demo_policy))
                 .build();
 
-        catalog.findVideoByID(getString(R.string.sdk_demo_videoId), new VideoListener() {
+        catalog.findVideoByID(getString(R.string.sdk_demo_video_id), new VideoListener() {
 
             // Add the video found to the queue with add().
             // Start playback of the video with start().
@@ -53,6 +55,11 @@ public class MainActivity extends BrightcovePlayer {
             public void onVideo(Video video) {
                 brightcoveVideoView.add(video);
                 brightcoveVideoView.start();
+            }
+
+            @Override
+            public void onError(@NonNull List<CatalogError> errors) {
+                Log.e(TAG, errors.toString());
             }
         });
     }
@@ -67,27 +74,17 @@ public class MainActivity extends BrightcovePlayer {
         initButtons(brightcoveVideoView);
 
         // This event is sent by the BrightcovePlayer Activity when the onConfigurationChanged has been called.
-        brightcoveVideoView.getEventEmitter().on(EventType.CONFIGURATION_CHANGED, new EventListener() {
-            @Override
-            public void processEvent(Event event) {
-                initButtons(brightcoveVideoView);
-            }
-        });
+        brightcoveVideoView.getEventEmitter().on(EventType.CONFIGURATION_CHANGED, event -> initButtons(brightcoveVideoView));
     }
 
     private void initButtons(final BaseVideoView brightcoveVideoView) {
         Typeface font = Typeface.createFromAsset(this.getAssets(), FONT_AWESOME);
-        Button thumbsUp = (Button) brightcoveVideoView.findViewById(R.id.thumbs_up);
+        Button thumbsUp = brightcoveVideoView.findViewById(R.id.thumbs_up);
         if (thumbsUp != null) {
             // By setting this type face, we can use the symbols(icons) present in the font awesome file.
             thumbsUp.setTypeface(font);
+            thumbsUp.setOnClickListener(v -> Toast.makeText(MainActivity.this, "TEST", Toast.LENGTH_SHORT).show());
         }
-        thumbsUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "TEST", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
 }
