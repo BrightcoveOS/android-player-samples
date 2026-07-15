@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.LiveSampleApp">
         <activity
-            android:name=".LiveSampleActivity"
+            android:name=".MainActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true">
             <intent-filter>

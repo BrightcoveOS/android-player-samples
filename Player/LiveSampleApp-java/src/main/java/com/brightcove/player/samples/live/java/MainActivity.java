@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import com.brightcove.player.model.DeliveryType;
 import com.brightcove.player.model.Video;
-import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
 
 /**
@@ -13,16 +12,14 @@ import com.brightcove.player.view.BrightcovePlayer;
  */
 public class MainActivity extends BrightcovePlayer {
 
-    private final String TAG = this.getClass().getSimpleName();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // When extending the BrightcovePlayer, we must assign the brightcoveVideoView before
         // entering the superclass. This allows for some stock video player lifecycle
-        // management.  Establish the video object and use it's event emitter to get important
+        // management.  Establish the video object and use its event emitter to get important
         // notifications and to control logging.
         setContentView(R.layout.activity_main);
-        brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
+        brightcoveVideoView = findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
 
         // A Live/DVR stream is not bundled with this sample: live streams are ephemeral, so
