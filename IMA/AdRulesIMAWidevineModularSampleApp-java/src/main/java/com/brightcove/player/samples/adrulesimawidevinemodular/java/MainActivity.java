@@ -27,13 +27,10 @@ import java.util.List;
  * <p>
  * Note: Video cue points are not used with IMA Ad Rules. The AdCuePoints referenced
  * in the setupAdMarkers method below are Google IMA objects.
- *
- * @author Paul Matthew Reilly (original code)
- * @author Paul Michael Reilly (added explanatory comments)
  */
 public class MainActivity extends BrightcovePlayer {
 
-    private final String TAG = this.getClass().getSimpleName();
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     private EventEmitter eventEmitter;
 
@@ -54,11 +51,11 @@ public class MainActivity extends BrightcovePlayer {
         setupGoogleIMA();
 
         // Create the catalog object which will start and play the video.
-        Catalog catalog = new Catalog.Builder(brightcoveVideoView.getEventEmitter(), getString(R.string.account))
-                .setPolicy(getString(R.string.policy))
+        Catalog catalog = new Catalog.Builder(brightcoveVideoView.getEventEmitter(), getString(R.string.sdk_demo_account))
+                .setPolicy(getString(R.string.sdk_demo_policy))
                 .build();
 
-        catalog.findVideoByID(getString(R.string.videoId), new VideoListener() {
+        catalog.findVideoByID(getString(R.string.sdk_demo_video_id), new VideoListener() {
             @Override
             public void onVideo(Video video) {
                 brightcoveVideoView.add(video);
@@ -82,13 +79,13 @@ public class MainActivity extends BrightcovePlayer {
         // Establish the Google IMA SDK factory instance.
         final ImaSdkFactory sdkFactory = ImaSdkFactory.getInstance();
 
-        // Enable logging up ad start.
+        // Enable logging upon ad start.
         eventEmitter.on(EventType.AD_STARTED, event -> Log.v(TAG, event.getType()));
 
         // Enable logging any failed attempts to play an ad.
         eventEmitter.on(GoogleIMAEventType.DID_FAIL_TO_PLAY_AD, event -> Log.v(TAG, event.getType()));
 
-        // Enable Logging upon ad completion.
+        // Enable logging upon ad completion.
         eventEmitter.on(EventType.AD_COMPLETED, event -> Log.v(TAG, event.getType()));
 
         // Set up a listener for initializing AdsRequests. The Google
@@ -113,7 +110,5 @@ public class MainActivity extends BrightcovePlayer {
         googleIMAComponent = new GoogleIMAComponent.Builder(brightcoveVideoView, eventEmitter)
                 .setUseAdRules(true)
                 .build();
-
-        // Calling GoogleIMAComponent.initializeAdsRequests() is no longer necessary.
     }
 }

@@ -3,6 +3,7 @@ package com.brightcove.player.samples.basiccastbrightcovereceiver.java;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import com.brightcove.cast.model.BrightcoveCastCustomData;
 import com.brightcove.cast.model.CustomData;
 import com.brightcove.player.appcompat.BrightcovePlayerActivity;
 import com.brightcove.player.edge.Catalog;
+import com.brightcove.player.edge.CatalogError;
 import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventType;
@@ -25,12 +27,19 @@ import com.brightcove.player.network.HttpRequestConfig;
 import com.brightcove.player.view.BrightcoveVideoView;
 import com.brightcove.ssai.SSAIComponent;
 
+import java.util.List;
+
 import static com.brightcove.player.samples.basiccastbrightcovereceiver.java.Constants.INTENT_EXTRA_AD_CONFIG_ID;
 import static com.brightcove.player.samples.basiccastbrightcovereceiver.java.Constants.INTENT_EXTRA_VIDEO_ID;
 import static com.brightcove.player.samples.basiccastbrightcovereceiver.java.Constants.PROPERTY_LONG_DESCRIPTION;
 
+/**
+ * Plays the selected video locally or on a connected Cast device via {@link GoogleCastComponent},
+ * optionally inserting server-side ads when an ad-config id is supplied.
+ */
 public class VideoPlayerActivity extends BrightcovePlayerActivity {
 
+    private static final String TAG = VideoPlayerActivity.class.getSimpleName();
     private static final String PROPERTY_APPLICATION_ID = "com.brightcove.player.samples.basiccastbrightcovereceiver.java";
 
     @Override
@@ -49,8 +58,8 @@ public class VideoPlayerActivity extends BrightcovePlayerActivity {
         String videoId = getIntent().getStringExtra(INTENT_EXTRA_VIDEO_ID);
         String adConfigId = getIntent().getStringExtra(INTENT_EXTRA_AD_CONFIG_ID);
 
-        Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.accountId))
-                .setPolicy(getString(R.string.policyKey))
+        Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.sdk_demo_account))
+                .setPolicy(getString(R.string.sdk_demo_policy))
                 .build();
 
         HttpRequestConfig.Builder httpRequestConfigBuilder = new HttpRequestConfig.Builder();
@@ -83,6 +92,11 @@ public class VideoPlayerActivity extends BrightcovePlayerActivity {
                     baseVideoView.add(video);
                 }
             }
+
+            @Override
+            public void onError(@NonNull List<CatalogError> errors) {
+                Log.e(TAG, errors.toString());
+            }
         });
 
         eventEmitter.on(GoogleCastEventType.CAST_SESSION_STARTED, event -> {
@@ -94,9 +108,9 @@ public class VideoPlayerActivity extends BrightcovePlayerActivity {
         });
 
         CustomData customData = new BrightcoveCastCustomData.Builder(this)
-                .setAccountId(getString(R.string.accountId))
+                .setAccountId(getString(R.string.sdk_demo_account))
                 // Set your account’s policy key
-                .setPolicyKey(getString(R.string.policyKey))
+                .setPolicyKey(getString(R.string.sdk_demo_policy))
                 // Optional: Set your Edge Playback Authorization (EPA) JWT token here
                 // Note that if you set the EPA token, you will not need to set the Policy Key
                 .setBrightcoveAuthorizationToken(null)

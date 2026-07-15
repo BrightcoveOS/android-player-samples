@@ -6,14 +6,18 @@ import com.brightcove.player.model.DeliveryType
 import com.brightcove.player.model.Video
 import com.brightcove.player.view.BrightcovePlayer
 
-class LiveSampleActivity : BrightcovePlayer() {
+/**
+ * This app illustrates how to use the Brightcove Native Player SDK
+ * for Android to play an HLS Live stream.
+ */
+class MainActivity : BrightcovePlayer() {
 
     private lateinit var binding: ActivityLiveSampleBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // When extending the BrightcovePlayer, we must assign the brightcoveVideoView before
         // entering the superclass. This allows for some stock video player lifecycle
-        // management.  Establish the video object and use it's event emitter to get important
+        // management.  Establish the video object and use its event emitter to get important
         // notifications and to control logging.
         binding = ActivityLiveSampleBinding.inflate(layoutInflater)
         setContentView(binding.root)

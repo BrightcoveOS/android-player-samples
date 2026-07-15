@@ -23,7 +23,7 @@ object BrightcoveDownloadUtil {
      * @param bundle            - The app bundle
      */
     fun selectMediaFormatTracksAvailable(mediaDownloadable: MediaDownloadable, bundle: Bundle) {
-        var didListChange: Boolean
+        var didListChange = false
 
         val audio = bundle.getParcelableArrayList<MediaFormat>(MediaDownloadable.AUDIO_LANGUAGES)
         var indexMain = -1
@@ -51,24 +51,24 @@ object BrightcoveDownloadUtil {
 
             //Select main
             newAudio.add(audio[indexMain])
-        }
 
-        // Now select the "extra" audio track
-        // In an effort to avoid over-complication of the flow of this demonstration app, we make an assumption here
-        // that the end user has selected the first of the remaining audio tracks that is not the "main" audio track
-        // (if more than one audio track is present)
-        if (audio != null && audio.size > 1) {
-            Log.v(TAG, "Alternate audio track download allowed for this video. Adding an \"alternate\" audio track")
-            for (audioTrack in audio) {
-                if (indexMain != audio.indexOf(audioTrack)) {
-                    newAudio.add(audioTrack)
+            // Now select the "extra" audio track
+            // In an effort to avoid over-complication of the flow of this demonstration app, we make an assumption here
+            // that the end user has selected the first of the remaining audio tracks that is not the "main" audio track
+            // (if more than one audio track is present)
+            if (audio.size > 1) {
+                Log.v(TAG, "Alternate audio track download allowed for this video. Adding an \"alternate\" audio track")
+                for (audioTrack in audio) {
+                    if (indexMain != audio.indexOf(audioTrack)) {
+                        newAudio.add(audioTrack)
+                    }
                 }
+            } else {
+                Log.v(TAG, "Alternate audio track download allowed, but there were no \"alternate\" audio tracks to select.")
             }
-        } else {
-            Log.v(TAG, "Alternate audio track download allowed, but there were no \"alternate\" audio tracks to select.")
+            bundle.putParcelableArrayList(MediaDownloadable.AUDIO_LANGUAGES, newAudio)
+            didListChange = true
         }
-        bundle.putParcelableArrayList(MediaDownloadable.AUDIO_LANGUAGES, newAudio)
-        didListChange = true
 
         // All captions are considered "extra" tracks for download
         // As with the alternate audio track selection above, we make an assumption here that the end user has selected the

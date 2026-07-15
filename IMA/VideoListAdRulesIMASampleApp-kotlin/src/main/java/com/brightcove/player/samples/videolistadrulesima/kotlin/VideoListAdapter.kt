@@ -19,10 +19,12 @@ import com.brightcove.player.view.BrightcoveVideoView
 import com.google.ads.interactivemedia.v3.api.AdsRequest
 import com.google.ads.interactivemedia.v3.api.ImaSdkFactory
 
-class AdapterView : RecyclerView.Adapter<AdapterView.ViewHolder>() {
-    private val videoList: MutableList<Video> = ArrayList()
-    private val adRulesURL =
-        "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_ad_samples&sz=640x480&cust_params=sample_ct%3Dlinear&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator="
+/**
+ * RecyclerView adapter that gives each row its own BrightcoveExoPlayerVideoView
+ * and attaches the Google IMA ad-rules (VMAP) plugin per player.
+ */
+class VideoListAdapter : RecyclerView.Adapter<VideoListAdapter.ViewHolder>() {
+    private val videoList = mutableListOf<Video>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_view, parent, false)
@@ -30,7 +32,6 @@ class AdapterView : RecyclerView.Adapter<AdapterView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //Get Video information
         val video = videoList[position]
         holder.videoTitleText.text = video.getStringProperty(Video.Fields.NAME)
         val videoView = holder.videoView
@@ -72,10 +73,8 @@ class AdapterView : RecyclerView.Adapter<AdapterView.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val context: Context = itemView.context
-        val videoTitleText: TextView =
-            itemView.findViewById<View>(R.id.video_title_text) as TextView
-        private val videoFrame: FrameLayout =
-            itemView.findViewById<View>(R.id.video_frame) as FrameLayout
+        val videoTitleText: TextView = itemView.findViewById(R.id.video_title_text)
+        private val videoFrame: FrameLayout = itemView.findViewById(R.id.video_frame)
         val videoView: BrightcoveVideoView = BrightcoveExoPlayerVideoView(context)
 
         init {
@@ -84,7 +83,7 @@ class AdapterView : RecyclerView.Adapter<AdapterView.ViewHolder>() {
 
             val eventEmitter = videoView.eventEmitter
             eventEmitter.on(EventType.ENTER_FULL_SCREEN) {
-                //You can set listeners on each Video View
+                // You can set listeners on each video view here.
             }
         }
     }
@@ -96,11 +95,10 @@ class AdapterView : RecyclerView.Adapter<AdapterView.ViewHolder>() {
         eventEmitter: EventEmitter,
         brightcoveVideoView: BrightcoveVideoView
     ) {
-        val TAG = "setupGoogleIMA"
         // Establish the Google IMA SDK factory instance.
         val sdkFactory = ImaSdkFactory.getInstance()
 
-        // Enable logging up ad start.
+        // Enable logging upon ad start.
         eventEmitter.on(EventType.AD_STARTED) { event: Event ->
             Log.v(TAG, event.type)
         }
@@ -110,7 +108,7 @@ class AdapterView : RecyclerView.Adapter<AdapterView.ViewHolder>() {
             Log.v(TAG, event.type)
         }
 
-        // Enable Logging upon ad completion.
+        // Enable logging upon ad completion.
         eventEmitter.on(EventType.AD_COMPLETED) { event: Event ->
             Log.v(TAG, event.type)
         }
@@ -122,7 +120,7 @@ class AdapterView : RecyclerView.Adapter<AdapterView.ViewHolder>() {
             // Build an ads request object and point it to the ad
             // display container created above.
             val adsRequest = sdkFactory.createAdsRequest()
-            adsRequest.adTagUrl = adRulesURL
+            adsRequest.adTagUrl = brightcoveVideoView.context.getString(R.string.adRulesUrl)
 
             val adsRequests = ArrayList<AdsRequest>(1)
             adsRequests.add(adsRequest)
@@ -137,5 +135,9 @@ class AdapterView : RecyclerView.Adapter<AdapterView.ViewHolder>() {
         val googleIMAComponent = GoogleIMAComponent.Builder(brightcoveVideoView, eventEmitter)
             .setUseAdRules(true)
             .build()
+    }
+
+    companion object {
+        private const val TAG = "VideoListAdapter"
     }
 }

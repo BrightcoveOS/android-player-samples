@@ -6,10 +6,10 @@ Plays HLS Live and Live DVR content with the live control layout, which shows a 
 
 | File | Responsibility |
 |---|---|
-| `LiveSampleActivity.kt` | Builds an HLS Live video from placeholder values and starts playback. |
+| `MainActivity.kt` | Builds an HLS Live video from placeholder values and starts playback. |
 
 ## Supplying a stream
 
-This sample does not ship with a playable stream: live streams are ephemeral, so Brightcove cannot bundle a permanent one. In `LiveSampleActivity.kt`, replace the `YOUR_LIVE_HLS_STREAM` placeholder with your own Video Cloud Live/DVR HLS stream URL and the `YOUR_VIDEOCLOUD_PUBLISHER_ID` placeholder with your publisher id. Until you do, the app builds and launches but has nothing to play.
+This sample does not ship with a playable stream: live streams are ephemeral, so Brightcove cannot bundle a permanent one. In `MainActivity.kt`, replace the `YOUR_LIVE_HLS_STREAM` placeholder with your own Video Cloud Live/DVR HLS stream URL and the `YOUR_VIDEOCLOUD_PUBLISHER_ID` placeholder with your publisher id. Until you do, the app builds and launches but has nothing to play.
 
 See the [Playback README](../) for shared setup and requirements.

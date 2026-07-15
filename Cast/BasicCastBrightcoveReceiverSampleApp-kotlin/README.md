@@ -6,7 +6,7 @@ Adds Google Cast support to a Brightcove player and casts to the Brightcove Cast
 
 | File | Responsibility |
 |---|---|
-| `BasicCastBrightcoveReceiverActivity.kt` | Launcher activity; loads the demo playlist through the Catalog, shows it in a `RecyclerView`, adds the Cast media-route button, casts a splash screen when a session starts, and launches the player for the selected video. |
+| `MainActivity.kt` | Launcher activity; loads the demo playlist through the Catalog, shows it in a `RecyclerView`, adds the Cast media-route button, casts a splash screen when a session starts, and launches the player for the selected video. |
 | `VideoPlayerActivity.kt` | Plays the chosen video locally or on the Cast device; builds the Brightcove Cast custom data, wires up `GoogleCastComponent`, and optionally processes SSAI ads. |
 | `VideoListAdapter.kt` | `ListAdapter` (with `DiffUtil`) that renders each video's thumbnail, title, description, and duration and reports item clicks. |
 | `Constants.kt` | Intent-extra keys and video-property keys shared across the activities. |

@@ -2,7 +2,6 @@ package com.brightcove.player.samples.videolistadrulesima.java;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -14,9 +13,7 @@ import android.widget.TextView;
 
 import com.brightcove.ima.GoogleIMAComponent;
 import com.brightcove.ima.GoogleIMAEventType;
-import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
-import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventType;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
@@ -27,10 +24,15 @@ import com.google.ads.interactivemedia.v3.api.ImaSdkFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
+/**
+ * RecyclerView adapter that gives each row its own BrightcoveExoPlayerVideoView
+ * and attaches the Google IMA ad-rules (VMAP) plugin per player.
+ */
+public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.ViewHolder> {
+
+    private static final String TAG = VideoListAdapter.class.getSimpleName();
 
     private final List<Video> videoList = new ArrayList<>();
-    private String adRulesURL = "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_ad_samples&sz=640x480&cust_params=sample_ct%3Dlinear&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=";
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -40,7 +42,6 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        //Get Video information
         Video video = videoList.get(position);
         if (video != null) {
             holder.videoTitleText.setText(video.getStringProperty(Video.Fields.NAME));
@@ -53,11 +54,6 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
     @Override
     public int getItemCount() {
         return videoList.size();
-    }
-
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
     }
 
     @Override
@@ -86,7 +82,7 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
         }
     }
 
-    public void setVideoList(@Nullable List<Video> videoList) {
+    public void setVideoList(@NonNull List<Video> videoList) {
         this.videoList.clear();
         this.videoList.addAll(videoList);
         notifyDataSetChanged();
@@ -102,18 +98,15 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             context = itemView.getContext();
-            videoFrame = (FrameLayout) itemView.findViewById(R.id.video_frame);
-            videoTitleText = (TextView) itemView.findViewById(R.id.video_title_text);
+            videoFrame = itemView.findViewById(R.id.video_frame);
+            videoTitleText = itemView.findViewById(R.id.video_title_text);
             videoView = new BrightcoveExoPlayerVideoView(context);
             videoFrame.addView(videoView);
             videoView.finishInitialization();
 
             EventEmitter eventEmitter = videoView.getEventEmitter();
-            eventEmitter.on(EventType.ENTER_FULL_SCREEN, new EventListener() {
-                @Override
-                public void processEvent(Event event) {
-                    //You can set listeners on each Video View
-                }
+            eventEmitter.on(EventType.ENTER_FULL_SCREEN, event -> {
+                // You can set listeners on each video view here.
             });
         }
     }
@@ -122,17 +115,16 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
      * Setup the Brightcove IMA Plugin.
      */
     private void setupGoogleIMA(EventEmitter eventEmitter, BrightcoveVideoView brightcoveVideoView) {
-        String TAG = "setupGoogleIMA";
         // Establish the Google IMA SDK factory instance.
         final ImaSdkFactory sdkFactory = ImaSdkFactory.getInstance();
 
-        // Enable logging up ad start.
+        // Enable logging upon ad start.
         eventEmitter.on(EventType.AD_STARTED, event -> Log.v(TAG, event.getType()));
 
         // Enable logging any failed attempts to play an ad.
         eventEmitter.on(GoogleIMAEventType.DID_FAIL_TO_PLAY_AD, event -> Log.v(TAG, event.getType()));
 
-        // Enable Logging upon ad completion.
+        // Enable logging upon ad completion.
         eventEmitter.on(EventType.AD_COMPLETED, event -> Log.v(TAG, event.getType()));
 
         // Set up a listener for initializing AdsRequests. The Google
@@ -142,7 +134,7 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
             // Build an ads request object and point it to the ad
             // display container created above.
             AdsRequest adsRequest = sdkFactory.createAdsRequest();
-            adsRequest.setAdTagUrl(adRulesURL);
+            adsRequest.setAdTagUrl(brightcoveVideoView.getContext().getString(R.string.adRulesUrl));
 
             ArrayList<AdsRequest> adsRequests = new ArrayList<>(1);
             adsRequests.add(adsRequest);

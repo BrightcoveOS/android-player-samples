@@ -6,13 +6,11 @@ import android.view.View;
 
 /**
  * Provides utility methods to work with Android {@link android.view.View}.
- *
- * @author rsubramaniam (rsubramaniam@brightcove.com)
  */
 public final class ViewUtil {
 
     /**
-     * Prevents contruction of this utility class.
+     * Prevents construction of this utility class.
      */
     private ViewUtil() {
         // Nothing to do

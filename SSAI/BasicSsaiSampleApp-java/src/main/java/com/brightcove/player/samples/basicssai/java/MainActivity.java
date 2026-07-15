@@ -5,11 +5,13 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 
 import com.brightcove.player.Sdk;
 import com.brightcove.player.appcompat.BrightcovePlayerActivity;
 import com.brightcove.player.edge.Catalog;
+import com.brightcove.player.edge.CatalogError;
 import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventType;
@@ -20,10 +22,15 @@ import com.brightcove.ssai.omid.AdEventType;
 import com.brightcove.ssai.omid.OpenMeasurementTracker;
 import com.iab.omid.library.brightcove.adsession.FriendlyObstructionPurpose;
 
+import java.util.List;
+
+/**
+ * This app demonstrates server-side ad insertion (SSAI) using the SSAIComponent
+ * plugin, including an optional Open Measurement tracker toggle.
+ */
 public class MainActivity extends BrightcovePlayerActivity {
 
-    private static final String TAG = "MainActivity";
-    private static final String AD_CONFIG_ID_QUERY_PARAM_VALUE = "ba5e4879-77f0-424b-8c98-706ae5ad7eec";
+    private static final String TAG = MainActivity.class.getSimpleName();
     private static final String PARTNER_NAME = "dummyVendor";
     private static final String PARTNER_VERSION = Sdk.getVersionName();
 
@@ -42,10 +49,8 @@ public class MainActivity extends BrightcovePlayerActivity {
         final EventEmitter eventEmitter = baseVideoView.getEventEmitter();
 
         Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.sdk_demo_account))
-                .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
-                .setPolicy(getString(R.string.sdk_demo_policy_key))
+                .setPolicy(getString(R.string.sdk_demo_policy))
                 .build();
-
 
         // Setup the error event handler for the SSAI plugin.
         registerErrorEventHandler();
@@ -53,14 +58,13 @@ public class MainActivity extends BrightcovePlayerActivity {
         plugin = new SSAIComponent(this, baseVideoView);
         View view = findViewById(R.id.ad_frame);
         if (view instanceof ViewGroup) {
-            // Set the companion ad container,
             plugin.addCompanionContainer((ViewGroup) view);
         }
 
         // Set the HttpRequestConfig with the Ad Config Id configured in
         // your https://studio.brightcove.com account.
         HttpRequestConfig httpRequestConfig = new HttpRequestConfig.Builder()
-                .addQueryParameter(HttpRequestConfig.KEY_AD_CONFIG_ID, AD_CONFIG_ID_QUERY_PARAM_VALUE)
+                .addQueryParameter(HttpRequestConfig.KEY_AD_CONFIG_ID, getString(R.string.sdk_demo_ad_config_id))
                 .build();
 
         catalog.findVideoByID(getString(R.string.sdk_demo_video_id), httpRequestConfig, new VideoListener() {
@@ -70,6 +74,11 @@ public class MainActivity extends BrightcovePlayerActivity {
                 // If there is not a VMAP url, or if there are any requesting or parsing error,
                 // an EventType.ERROR event will be emitted.
                 plugin.processVideo(video);
+            }
+
+            @Override
+            public void onError(@NonNull List<CatalogError> errors) {
+                Log.e(TAG, errors.toString());
             }
         });
     }
@@ -91,7 +100,6 @@ public class MainActivity extends BrightcovePlayerActivity {
                 tracker.stop();
             }
         });
-        // Initialize the OpenMeasurementTracker
         tracker = new OpenMeasurementTracker.Factory(
                 PARTNER_NAME, PARTNER_VERSION, baseVideoView
         ).create();

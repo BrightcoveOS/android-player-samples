@@ -14,9 +14,9 @@ public class AppCompatPlayerActivity extends BrightcovePlayerActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
 
-        Video video = Video.createVideo("https://media.w3.org/2010/05/sintel/trailer.mp4", DeliveryType.MP4);
+        Video video = Video.createVideo(getString(R.string.sdk_demo_video_url), DeliveryType.MP4);
         baseVideoView.add(video);
-        baseVideoView.getAnalytics().setAccount("1760897681001");
+        baseVideoView.getAnalytics().setAccount(getString(R.string.sdk_demo_account));
         baseVideoView.start();
     }
 }

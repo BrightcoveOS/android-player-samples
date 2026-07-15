@@ -5,17 +5,23 @@ import android.util.Log
 import com.brightcove.player.samples.bumper.kotlin.databinding.ActivityBumperSampleAppBinding
 import com.brightcove.player.bumper.BumperComponent
 import com.brightcove.player.edge.Catalog
+import com.brightcove.player.edge.CatalogError
 import com.brightcove.player.edge.VideoListener
-import com.brightcove.player.event.EventEmitter
 import com.brightcove.player.model.Video
 import com.brightcove.player.view.BrightcovePlayer
 
-class BumperSampleActivity : BrightcovePlayer() {
+/**
+ * This app illustrates how to use the ExoPlayer and the BumperComponent with the Brightcove
+ * Native Player SDK for Android.
+ */
+class MainActivity : BrightcovePlayer() {
 
     private lateinit var binding: ActivityBumperSampleAppBinding
 
     private var bumperComponent: BumperComponent? = null
 
+    // Demo switch: when true the bumper id is set manually; flip to false to read it from the
+    // video's "bumper_id" custom field instead.
     private val useSetBumperID = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,34 +34,30 @@ class BumperSampleActivity : BrightcovePlayer() {
         brightcoveVideoView = binding.brightcoveVideoView
         super.onCreate(savedInstanceState)
 
-
         // Get the event emitter from the SDK and create a catalog request to fetch a video from the
         // Brightcove Edge service, given a video id, an account id and a policy key.
-        val eventEmitter: EventEmitter = brightcoveVideoView.eventEmitter
+        val eventEmitter = brightcoveVideoView.eventEmitter
         val account = getString(R.string.sdk_demo_account)
 
         val catalog = Catalog.Builder(eventEmitter, account)
-            .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
             .setPolicy(getString(R.string.sdk_demo_policy))
             .build()
 
-
-        //Building the instance of the bumper component, providing the existing videoView and catalog.
+        // Build the bumper component with the existing videoView and catalog.
         bumperComponent = BumperComponent.Builder(brightcoveVideoView, catalog).build()
-
-        //Initializing the bumper.
+        // Initialize the bumper.
         bumperComponent?.init()
 
-        catalog.findVideoByID(getString(R.string.sdk_demo_videoId), object : VideoListener() {
+        catalog.findVideoByID(getString(R.string.sdk_demo_video_id), object : VideoListener() {
             // Add the video found to the queue with add().
             override fun onVideo(video: Video) {
                 // Showcasing both options to set the bumper id manually or obtaining it from the
                 // video object properties
                 if (useSetBumperID) {
-                    //Manually Setting our own bumper ID
+                    // Manually set our own bumper id.
                     bumperComponent?.setVideoBumperID(getString(R.string.sdk_demo_bumper_videoId))
                 } else {
-                    //Obtaining the bumper id from the video custom fields
+                    // Obtain the bumper id from the video's custom fields.
                     val customFields =
                         video.properties[Video.Fields.CUSTOM_FIELDS] as Map<*, *>?
                     if ((customFields != null && customFields.isNotEmpty()) &&
@@ -65,12 +67,17 @@ class BumperSampleActivity : BrightcovePlayer() {
                     }
                 }
                 Log.v(TAG, "onVideo: video = $video")
-                //Adding the video
                 brightcoveVideoView.add(video)
-                //Autostart Playback
                 brightcoveVideoView.start()
             }
-        })
 
+            override fun onError(errors: List<CatalogError>) {
+                Log.e(TAG, errors.toString())
+            }
+        })
+    }
+
+    companion object {
+        private const val TAG = "MainActivity"
     }
 }

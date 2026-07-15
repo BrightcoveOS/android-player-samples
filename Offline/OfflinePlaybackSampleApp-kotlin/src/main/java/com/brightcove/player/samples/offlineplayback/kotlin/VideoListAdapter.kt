@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit
  */
 class VideoListAdapter
 /**
- * Constructors a new video list adapter.
+ * Constructs a new video list adapter.
  *
  * @param catalog  reference to the offline catalog.
  * @param listener reference to a listener

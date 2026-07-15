@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import com.brightcove.freewheel.controller.FreeWheelController
 import com.brightcove.freewheel.event.FreeWheelEventType
 import com.brightcove.player.edge.Catalog
+import com.brightcove.player.edge.CatalogError
 import com.brightcove.player.edge.VideoListener
 import com.brightcove.player.event.Event
 import com.brightcove.player.event.EventEmitter
 import com.brightcove.player.model.Video
-import com.brightcove.player.view.BrightcoveExoPlayerVideoView
 import com.brightcove.player.view.BrightcovePlayer
 import tv.freewheel.ad.interfaces.IAdContext
 import tv.freewheel.ad.interfaces.IConstants
@@ -20,41 +20,47 @@ import tv.freewheel.ad.request.config.NonTemporalSlotConfiguration
 import tv.freewheel.ad.request.config.TemporalSlotConfiguration
 import tv.freewheel.ad.request.config.VideoAssetConfiguration
 
+/**
+ * This app illustrates how to use the FreeWheel and Widevine plugins
+ * together with the Brightcove Player for Android.
+ */
 class MainActivity : BrightcovePlayer() {
     private var eventEmitter: EventEmitter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // When extending the BrightcovePlayer, we must assign the BrightcoveExoPlayerVideoView
+        // When extending the BrightcovePlayer, we must assign the brightcoveVideoView
         // before entering the superclass. This allows for some stock video player lifecycle
         // management.
         setContentView(R.layout.activity_main)
-        brightcoveVideoView = findViewById<BrightcoveExoPlayerVideoView>(R.id.brightcove_video_view)
+        brightcoveVideoView = findViewById(R.id.brightcove_video_view)
         super.onCreate(savedInstanceState)
 
         eventEmitter = brightcoveVideoView.eventEmitter
 
         setupFreeWheel()
 
-        val catalog = Catalog(
-            brightcoveVideoView.eventEmitter,
-            getString(R.string.sdk_demo_account),
-            getString(R.string.sdk_demo_policy)
-        )
+        val catalog =
+            Catalog.Builder(brightcoveVideoView.eventEmitter, getString(R.string.sdk_demo_account))
+                .setPolicy(getString(R.string.sdk_demo_policy))
+                .build()
 
-        catalog.findVideoByID(getString(R.string.sdk_demo_videoId), object : VideoListener() {
-            override fun onVideo(video: Video?) {
+        catalog.findVideoByID(getString(R.string.sdk_demo_video_id), object : VideoListener() {
+            override fun onVideo(video: Video) {
                 brightcoveVideoView.add(video)
                 brightcoveVideoView.start()
+            }
+
+            override fun onError(errors: List<CatalogError>) {
+                Log.e(TAG, errors.toString())
             }
         })
     }
 
     private fun setupFreeWheel() {
-        //change this to new FrameLayout based constructor.
 
         val freeWheelController = FreeWheelController(this, brightcoveVideoView, eventEmitter)
         //configure your own IAdManager or supply connection information
-        freeWheelController.setAdURL("http://demo.v.fwmrm.net/")
+        freeWheelController.setAdURL(getString(R.string.sdk_demo_ad_server_url))
         freeWheelController.setAdNetworkId(90750)
         freeWheelController.setProfile("3pqa_android")
 
@@ -63,7 +69,7 @@ class MainActivity : BrightcovePlayer() {
          * - 3pqa_section - uses FW server rules - always returns a preroll and a postroll.  It should return whatever midroll slots you request though.
          * - 3pqa_section_nocbp - returns the slots that you request.
          */
-        //freeWheelController.setSiteSectionId("3pqa_section");
+        //freeWheelController.setSiteSectionId("3pqa_section")
         freeWheelController.setSiteSectionId("3pqa_section_nocbp")
 
         eventEmitter?.on(FreeWheelEventType.SHOW_DISPLAY_ADS) { event: Event ->
@@ -71,9 +77,7 @@ class MainActivity : BrightcovePlayer() {
             val adView = findViewById<ViewGroup>(R.id.ad_frame)
 
             // Clean out any previous display ads
-            for (i in 0 until adView.childCount) {
-                adView.removeViewAt(i)
-            }
+            adView.removeAllViews()
             slots?.forEach { slot ->
                 adView.addView(slot.base)
                 slot.play()
@@ -137,5 +141,9 @@ class MainActivity : BrightcovePlayer() {
             adRequestConfiguration?.addSlotConfiguration(overlaySlot)
         }
         freeWheelController.enable()
+    }
+
+    companion object {
+        private const val TAG = "MainActivity"
     }
 }

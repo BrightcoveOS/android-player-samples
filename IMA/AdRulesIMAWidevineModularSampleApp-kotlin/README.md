@@ -6,6 +6,6 @@ Plays Widevine Modular DRM-protected Brightcove content with Google IMA ads sche
 
 | File | Responsibility |
 |---|---|
-| `AdRulesIMAWidevineModularActivity.kt` | Loads the Widevine-protected video from the `Catalog`, configures the Google IMA plugin with ad rules enabled, and answers the ad request with the configured VMAP ad tag URL. |
+| `MainActivity.kt` | Loads the Widevine-protected video from the `Catalog`, configures the Google IMA plugin with ad rules enabled, and answers the ad request with the configured VMAP ad tag URL. |
 
 See the [IMA ads README](../) for shared setup and requirements.

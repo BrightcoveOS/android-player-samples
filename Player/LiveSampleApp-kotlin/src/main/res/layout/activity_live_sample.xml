@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".LiveSampleActivity" >
+    tools:context=".MainActivity" >
 
     <com.brightcove.player.view.BrightcoveExoPlayerVideoView
         android:id="@+id/brightcove_video_view"

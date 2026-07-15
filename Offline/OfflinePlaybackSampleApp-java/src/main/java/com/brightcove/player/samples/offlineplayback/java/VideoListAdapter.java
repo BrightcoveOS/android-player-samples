@@ -188,7 +188,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
     private final VideoListListener listener;
 
     /**
-     * Constructors a new video list adapter.
+     * Constructs a new video list adapter.
      *
      * @param catalog  reference to the offline catalog.
      * @param listener reference to a listener

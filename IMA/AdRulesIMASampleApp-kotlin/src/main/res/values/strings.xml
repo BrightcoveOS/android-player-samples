@@ -4,12 +4,15 @@
     <string name="app_name">Ad Rules IMA Sample App</string>
 
     <!-- A sample Brightcove Edge Account ID -->
-    <string name="account">5420904993001</string>
+    <string name="sdk_demo_account">5420904993001</string>
 
     <!-- A sample Brightcove Edge Policy Key -->
-    <string name="policy">BCpkADawqM1RJu5c_I13hBUAi4c8QNWO5QN2yrd_OgDjTCVsbILeGDxbYy6xhZESTFi68MiSUHzMbQbuLV3q-gvZkJFpym1qYbEwogOqKCXK622KNLPF92tX8AY9a1cVVYCgxSPN12pPAuIM</string>
+    <string name="sdk_demo_policy">BCpkADawqM1RJu5c_I13hBUAi4c8QNWO5QN2yrd_OgDjTCVsbILeGDxbYy6xhZESTFi68MiSUHzMbQbuLV3q-gvZkJFpym1qYbEwogOqKCXK622KNLPF92tX8AY9a1cVVYCgxSPN12pPAuIM</string>
 
     <!-- A sample Brightcove Video ID -->
-    <string name="videoId">5421538222001</string>
+    <string name="sdk_demo_video_id">5421538222001</string>
+
+    <!-- A sample Brightcove ad rules URL -->
+    <string name="adRulesUrl">https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&amp;iu=/124319096/external/single_ad_samples&amp;ciu_szs=300x250&amp;impl=s&amp;gdfp_req=1&amp;env=vp&amp;output=vast&amp;unviewed_position_start=1&amp;cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&amp;correlator=</string>
 
 </resources>

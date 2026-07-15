@@ -5,6 +5,7 @@ import android.util.Log
 import com.brightcove.player.Sdk
 import com.brightcove.player.appcompat.BrightcovePlayerActivity
 import com.brightcove.player.edge.Catalog
+import com.brightcove.player.edge.CatalogError
 import com.brightcove.player.edge.VideoListener
 import com.brightcove.player.event.Event
 import com.brightcove.player.event.EventType
@@ -21,8 +22,11 @@ import com.google.ads.interactivemedia.pal.NonceManager
 import com.google.ads.interactivemedia.pal.NonceRequest
 import com.iab.omid.library.brightcove.adsession.FriendlyObstructionPurpose
 
-
-class BasicSsaiPALSampleAppActivity : BrightcovePlayerActivity() {
+/**
+ * This app demonstrates server-side ad insertion (SSAI) combined with the Google PAL
+ * (Programmatic Access Library) nonce for ad tracking.
+ */
+class MainActivity : BrightcovePlayerActivity() {
 
     private var plugin: SSAIComponent? = null
     private var tracker: OpenMeasurementTracker? = null
@@ -45,21 +49,19 @@ class BasicSsaiPALSampleAppActivity : BrightcovePlayerActivity() {
 
         val eventEmitter = baseVideoView.eventEmitter
 
-        //PAL
         // The default value for allowStorage() is false, but can be
         // changed once the appropriate consent has been gathered. The
         // getConsentToStorage() method is a placeholder for the publisher's own
         // method of obtaining user consent, either by integrating with a CMP or
         // based on other methods the publisher chooses to handle storage consent.
-        //boolean isConsentToStorage = getConsentToStorage();
-        consentSettings = ConsentSettings.builder().allowStorage(false).build()
+        val settings = ConsentSettings.builder().allowStorage(false).build()
+        consentSettings = settings
 
         // It is important to instantiate the NonceLoader as early as possible to
         // allow it to initialize and preload data for a faster experience when
         // loading the NonceManager. A new NonceLoader will need to be instantiated
-        //if the ConsentSettings change for the user.
-
-        nonceLoader = NonceLoader( this, consentSettings!!)
+        // if the ConsentSettings change for the user.
+        nonceLoader = NonceLoader(this, settings)
 
         generateNonceForAdRequest()
 
@@ -70,8 +72,7 @@ class BasicSsaiPALSampleAppActivity : BrightcovePlayerActivity() {
         eventEmitter.on(SSAIEventType.AD_CLICKED) { sendAdClick() }
 
         catalog = Catalog.Builder(eventEmitter, getString(R.string.sdk_demo_account))
-            .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
-            .setPolicy(getString(R.string.sdk_demo_policy_key))
+            .setPolicy(getString(R.string.sdk_demo_policy))
             .build()
 
         // Setup the error event handler for the SSAI plugin.
@@ -84,12 +85,9 @@ class BasicSsaiPALSampleAppActivity : BrightcovePlayerActivity() {
     }
 
     private fun generateNonceForAdRequest() {
-        val supportedApiFrameWorksSet: MutableSet<Int> = HashSet()
         // The values 2, 7, and 9 correspond to player support for
         // VPAID 2.0, OMID 1.0, and SIMID 1.1.
-        supportedApiFrameWorksSet.add(2)
-        supportedApiFrameWorksSet.add(7)
-        supportedApiFrameWorksSet.add(9)
+        val supportedApiFrameWorksSet = mutableSetOf(2, 7, 9)
 
         val nonceRequest = NonceRequest.builder()
             .descriptionURL("https://example.com/content1")
@@ -111,13 +109,13 @@ class BasicSsaiPALSampleAppActivity : BrightcovePlayerActivity() {
             nonceManager = manager
             val nonceString = manager?.nonce
             plugin?.setNonce(nonceString)
-            Log.d("PALSample", "Generated nonce: $nonceString")
+            Log.d(TAG, "Generated nonce: $nonceString")
             // Set the HttpRequestConfig with the Ad Config Id configured in
             // your https://studio.brightcove.com account.
             val httpRequestConfig = HttpRequestConfig.Builder()
                 .addQueryParameter(
                     HttpRequestConfig.KEY_AD_CONFIG_ID,
-                    AD_CONFIG_ID_QUERY_PARAM_VALUE
+                    getString(R.string.sdk_demo_ad_config_id)
                 )
                 .build()
 
@@ -131,33 +129,34 @@ class BasicSsaiPALSampleAppActivity : BrightcovePlayerActivity() {
                         // an EventType.ERROR event will be emitted.
                         plugin?.processVideo(video)
                     }
+
+                    override fun onError(errors: List<CatalogError>) {
+                        Log.e(TAG, errors.toString())
+                    }
                 })
         }?.addOnFailureListener { error ->
-            Log.e("PALSample", "Nonce generation failed: " + error.message)
+            Log.e(TAG, "Nonce generation failed: ${error.message}")
         }
     }
 
     private fun sendAdClick() {
-        if (nonceManager != null) {
-            nonceManager?.sendAdClick()
-            Log.d(TAG,"PAL sendAdClick() called"
-            )
+        nonceManager?.let {
+            it.sendAdClick()
+            Log.d(TAG, "PAL sendAdClick() called")
         }
     }
 
     private fun sendPlaybackStart() {
-        if (nonceManager != null) {
-            nonceManager?.sendPlaybackStart()
-            Log.d(TAG,"PAL sendPlaybackStart() called"
-            )
+        nonceManager?.let {
+            it.sendPlaybackStart()
+            Log.d(TAG, "PAL sendPlaybackStart() called")
         }
     }
 
     private fun sendPlaybackEnd() {
-        if (nonceManager != null) {
-            nonceManager?.sendPlaybackEnd()
-            Log.d(TAG,"PAL sendPlaybackEnd() called"
-            )
+        nonceManager?.let {
+            it.sendPlaybackEnd()
+            Log.d(TAG, "PAL sendPlaybackEnd() called")
         }
     }
 
@@ -166,9 +165,7 @@ class BasicSsaiPALSampleAppActivity : BrightcovePlayerActivity() {
         if (tracker != null && isFinishing) {
             tracker?.stop()
         }
-        if (nonceLoader != null) {
-            nonceLoader!!.release()
-        }
+        nonceLoader?.release()
     }
 
     private fun setupOpenMeasurement() {
@@ -218,7 +215,6 @@ class BasicSsaiPALSampleAppActivity : BrightcovePlayerActivity() {
 
     companion object {
         private const val TAG = "MainActivity"
-        private const val AD_CONFIG_ID_QUERY_PARAM_VALUE = "ba5e4879-77f0-424b-8c98-706ae5ad7eec"
         private const val PARTNER_NAME = "dummyVendor"
         private val PARTNER_VERSION = Sdk.getVersionName()
     }

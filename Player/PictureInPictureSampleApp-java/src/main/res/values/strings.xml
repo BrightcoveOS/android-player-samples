@@ -2,13 +2,13 @@
     <string name="app_name">PictureInPictureSampleApp</string>
 
     <!-- A sample Brightcove Edge Account ID -->
-    <string name="account">5420904993001</string>
+    <string name="sdk_demo_account">5420904993001</string>
 
     <!-- A sample Brightcove Edge Policy Key -->
-    <string name="policy">BCpkADawqM1RJu5c_I13hBUAi4c8QNWO5QN2yrd_OgDjTCVsbILeGDxbYy6xhZESTFi68MiSUHzMbQbuLV3q-gvZkJFpym1qYbEwogOqKCXK622KNLPF92tX8AY9a1cVVYCgxSPN12pPAuIM</string>
+    <string name="sdk_demo_policy">BCpkADawqM1RJu5c_I13hBUAi4c8QNWO5QN2yrd_OgDjTCVsbILeGDxbYy6xhZESTFi68MiSUHzMbQbuLV3q-gvZkJFpym1qYbEwogOqKCXK622KNLPF92tX8AY9a1cVVYCgxSPN12pPAuIM</string>
 
     <!-- A sample Brightcove Video ID -->
-    <string name="videoId">5733185764001</string>
+    <string name="sdk_demo_video_id">5733185764001</string>
 
     <string name="enter_picture_in_picture">ENTER PICTURE IN PICTURE MODE</string>
     <string name="configure_picture_in_picture">CONFIGURE PICTURE IN PICTURE</string>

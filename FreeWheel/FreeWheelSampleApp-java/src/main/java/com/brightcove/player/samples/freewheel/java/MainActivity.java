@@ -6,14 +6,10 @@ import android.view.ViewGroup;
 
 import com.brightcove.freewheel.controller.FreeWheelController;
 import com.brightcove.freewheel.event.FreeWheelEventType;
-import com.brightcove.player.edge.Catalog;
-import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
-import com.brightcove.player.event.EventListener;
 import com.brightcove.player.model.DeliveryType;
 import com.brightcove.player.model.Video;
-import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
 
 import java.util.List;
@@ -28,12 +24,10 @@ import tv.freewheel.ad.request.config.VideoAssetConfiguration;
 
 /**
  * This app illustrates how to use the FreeWheel plugin with the Brightcove Player for Android.
- *
- * @author Billy Hnath
  */
 public class MainActivity extends BrightcovePlayer {
 
-    private final String TAG = this.getClass().getSimpleName();
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     private EventEmitter eventEmitter;
 
@@ -43,7 +37,7 @@ public class MainActivity extends BrightcovePlayer {
         // before entering the superclass. This allows for some stock video player lifecycle
         // management.
         setContentView(R.layout.freewheel_activity_main);
-        brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
+        brightcoveVideoView = findViewById(R.id.brightcove_video_view);
         super.onCreate(savedInstanceState);
 
         eventEmitter = brightcoveVideoView.getEventEmitter();
@@ -57,10 +51,9 @@ public class MainActivity extends BrightcovePlayer {
 
     private void setupFreeWheel() {
 
-        //change this to new FrameLayout based constructor.
         FreeWheelController freeWheelController = new FreeWheelController(this, brightcoveVideoView, eventEmitter);
         //configure your own IAdManager or supply connection information
-        freeWheelController.setAdURL("http://demo.v.fwmrm.net/");
+        freeWheelController.setAdURL(getString(R.string.sdk_demo_ad_server_url));
         freeWheelController.setAdNetworkId(90750);
         freeWheelController.setProfile("3pqa_android");
 
@@ -78,9 +71,7 @@ public class MainActivity extends BrightcovePlayer {
             ViewGroup adView = findViewById(R.id.ad_frame);
 
             // Clean out any previous display ads
-            for (int i = 0; i < adView.getChildCount(); i++) {
-                adView.removeViewAt(i);
-            }
+            adView.removeAllViews();
 
             if (slots != null) {
                 for (ISlot slot : slots) {

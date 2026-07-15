@@ -12,7 +12,7 @@
             android:name=".SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".PictureInPictureSampleActivity"
+            android:name=".MainActivity"
             android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize"
             android:exported="true"
             android:launchMode="singleTask"

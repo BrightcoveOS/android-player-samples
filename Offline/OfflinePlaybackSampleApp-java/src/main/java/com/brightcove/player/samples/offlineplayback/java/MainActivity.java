@@ -1,7 +1,6 @@
 package com.brightcove.player.samples.offlineplayback.java;
 
 import android.content.res.Configuration;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,13 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.brightcove.player.display.ExoPlayerVideoDisplayComponent;
 import com.brightcove.player.edge.Catalog;
-import com.brightcove.player.edge.CatalogError;
 import com.brightcove.player.edge.OfflineCallback;
 import com.brightcove.player.edge.OfflineCatalog;
 import com.brightcove.player.edge.OfflineStoreManager;
@@ -88,9 +85,6 @@ public class MainActivity extends BrightcovePlayer {
      */
     private ConnectivityMonitor connectivityMonitor;
 
-    /**
-     *
-     */
     private HttpRequestConfig httpRequestConfig;
     private String pasToken = "YOUR_PAS_TOKEN";
     private static final int PLAYDURATION_EXTENSION = 10000;
@@ -110,11 +104,6 @@ public class MainActivity extends BrightcovePlayer {
         super.onStart();
         ConnectivityMonitor.getInstance(this).addListener(connectivityListener);
         catalog.addDownloadEventListener(downloadEventListener);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 
     @Override
@@ -142,7 +131,7 @@ public class MainActivity extends BrightcovePlayer {
 
         catalog = new OfflineCatalog.Builder(this,eventEmitter, getString(R.string.sdk_demo_account))
                 .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
-                .setPolicy(getString(R.string.sdk_demo_policy_key))
+                .setPolicy(getString(R.string.sdk_demo_policy))
                 .build();
 
         //Configure downloads through the catalog.
@@ -155,12 +144,6 @@ public class MainActivity extends BrightcovePlayer {
         // Connect the video list view to the adapter
         RecyclerView videoListView = ViewUtil.findView(this, R.id.video_list_view);
         videoListView.setAdapter(videoListAdapter);
-
-        // Setup an adapter to render the playlist items in the spinner view Adapter that
-        // will be used to bind the playlist spinner to the underlying data source.
-        ArrayAdapter<PlaylistModel> playlistAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item/*, playlistNames*/);
-        playlistAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         ExoPlayerVideoDisplayComponent videoDisplayComponent = ((ExoPlayerVideoDisplayComponent) brightcoveVideoView.getVideoDisplay());
         if (videoDisplayComponent != null) {
@@ -186,11 +169,6 @@ public class MainActivity extends BrightcovePlayer {
                     videoListAdapter.setVideoList(playlist.getVideos());
                     onVideoListUpdated(false);
                     brightcoveVideoView.addAll(playlist.getVideos());
-                }
-
-                @Override
-                public void onError(List<CatalogError> errors) {
-                    super.onError(errors);
                 }
             });
         } else {
@@ -354,11 +332,8 @@ public class MainActivity extends BrightcovePlayer {
      * Implements a {@link com.brightcove.player.network.ConnectivityMonitor.Listener} that will
      * update the current video list based on network connectivity state.
      */
-    private final ConnectivityMonitor.Listener connectivityListener = new ConnectivityMonitor.Listener() {
-        public void onConnectivityChanged(boolean connected, @Nullable NetworkInfo networkInfo) {
-            updateVideoList();
-        }
-    };
+    private final ConnectivityMonitor.Listener connectivityListener =
+            (connected, networkInfo) -> updateVideoList();
 
     /**
      * Implements a {@link VideoListListener} that responds to user interaction on the video list.
@@ -475,7 +450,7 @@ public class MainActivity extends BrightcovePlayer {
      *
      * @param video the video to be played.
      */
-    private void playVideo(@NonNull Video video, @NonNull int videoIndex) {
+    private void playVideo(@NonNull Video video, int videoIndex) {
         brightcoveVideoView.replace(videoIndex, video);
         brightcoveVideoView.setCurrentIndex(videoIndex);
         brightcoveVideoView.start();
@@ -499,7 +474,7 @@ public class MainActivity extends BrightcovePlayer {
                 case EventType.ODRM_PLAYBACK_NOT_ALLOWED:
                 case EventType.ODRM_SOURCE_NOT_FOUND: {
                     String message = showToast(
-                            "Failed to downloaded license for '%s' video: %s", video.getName(), type);
+                            "Failed to download license for '%s' video: %s", video.getName(), type);
                     Log.w(TAG, message);
                     break;
                 }
@@ -572,11 +547,6 @@ public class MainActivity extends BrightcovePlayer {
          */
         FindVideoListener(Video video) {
             this.video = video;
-        }
-
-        @Override
-        public void onError(List<CatalogError> errors) {
-            super.onError(errors);
         }
     }
 

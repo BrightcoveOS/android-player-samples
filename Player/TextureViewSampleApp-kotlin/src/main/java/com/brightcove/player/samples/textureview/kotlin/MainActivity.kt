@@ -2,26 +2,29 @@ package com.brightcove.player.samples.textureview.kotlin
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import com.brightcove.player.edge.Catalog
+import com.brightcove.player.edge.CatalogError
 import com.brightcove.player.edge.VideoListener
 import com.brightcove.player.model.Video
-import com.brightcove.player.view.BrightcoveExoPlayerTextureVideoView
 import com.brightcove.player.view.BrightcovePlayer
 import com.brightcove.player.samples.textureview.kotlin.databinding.ActivityTextureViewSampleBinding
 
-class TextureViewSampleActivity : BrightcovePlayer() {
+/**
+ * This app illustrates how to use the ExoPlayer and a TextureView
+ * with the Brightcove Native Player SDK for Android.
+ */
+class MainActivity : BrightcovePlayer() {
 
     private lateinit var binding: ActivityTextureViewSampleBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // When extending the BrightcovePlayer, we must assign the brightcoveVideoView before
         // entering the superclass. This allows for some stock video player lifecycle
-        // management.  Establish the video object and use it's event emitter to get important
+        // management.  Establish the video object and use its event emitter to get important
         // notifications and to control logging.
         binding = ActivityTextureViewSampleBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        brightcoveVideoView = findViewById<View>(R.id.brightcove_video_view) as BrightcoveExoPlayerTextureVideoView
+        brightcoveVideoView = findViewById(R.id.brightcove_video_view)
         super.onCreate(savedInstanceState)
 
         // Get the event emitter from the SDK and create a catalog request to fetch a video from the
@@ -29,11 +32,10 @@ class TextureViewSampleActivity : BrightcovePlayer() {
         val eventEmitter = brightcoveVideoView.eventEmitter
         val account = getString(R.string.sdk_demo_account)
         val catalog = Catalog.Builder(eventEmitter, account)
-            .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
             .setPolicy(getString(R.string.sdk_demo_policy))
             .build()
 
-        catalog.findVideoByID(getString(R.string.sdk_demo_videoId), object : VideoListener() {
+        catalog.findVideoByID(getString(R.string.sdk_demo_video_id), object : VideoListener() {
             // Add the video found to the queue with add().
             // Start playback of the video with start().
             override fun onVideo(video: Video) {
@@ -41,10 +43,14 @@ class TextureViewSampleActivity : BrightcovePlayer() {
                 brightcoveVideoView.add(video)
                 brightcoveVideoView.start()
             }
+
+            override fun onError(errors: List<CatalogError>) {
+                Log.e(TAG, errors.toString())
+            }
         })
     }
 
     companion object {
-        private val TAG = TextureViewSampleActivity::class.java.simpleName
+        private const val TAG = "MainActivity"
     }
 }

@@ -19,22 +19,17 @@ import com.google.ads.interactivemedia.v3.api.ImaSdkFactory
 /**
  * This app illustrates how to use "Ad Rules" with the Google IMA
  * plugin, the Widevine plugin, and the Brightcove Player for Android.
- * <p>
+ *
  * Note: Video cue points are not used with IMA Ad Rules. The AdCuePoints referenced
  * in the setupAdMarkers method below are Google IMA objects.
- * */
-
-class AdRulesIMAWidevineModularActivity : BrightcovePlayer() {
+ */
+class MainActivity : BrightcovePlayer() {
 
     private lateinit var binding: ActivityAdrulesImawidevineModularBinding
     private lateinit var eventEmitter: EventEmitter
     private lateinit var googleIMAComponent: GoogleIMAComponent
 
-    val TAG = this.javaClass.simpleName
-
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        //Bind the views
         binding = ActivityAdrulesImawidevineModularBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -51,13 +46,11 @@ class AdRulesIMAWidevineModularActivity : BrightcovePlayer() {
         setupGoogleIMA()
 
         // Create the catalog object which will start and play the video.
-
-        // Create the catalog object which will start and play the video.
-        val catalog = Catalog.Builder(brightcoveVideoView.eventEmitter, getString(R.string.account))
-            .setPolicy(getString(R.string.policy))
+        val catalog = Catalog.Builder(brightcoveVideoView.eventEmitter, getString(R.string.sdk_demo_account))
+            .setPolicy(getString(R.string.sdk_demo_policy))
             .build()
 
-        catalog.findVideoByID(getString(R.string.videoId), object : VideoListener() {
+        catalog.findVideoByID(getString(R.string.sdk_demo_video_id), object : VideoListener() {
             override fun onVideo(video: Video) {
                 brightcoveVideoView.add(video)
 
@@ -80,8 +73,7 @@ class AdRulesIMAWidevineModularActivity : BrightcovePlayer() {
         // Establish the Google IMA SDK factory instance.
         val sdkFactory = ImaSdkFactory.getInstance()
 
-
-        // Enable logging up ad start.
+        // Enable logging upon ad start.
         eventEmitter.on(EventType.AD_STARTED) { event: Event ->
             Log.v(TAG, event.type)
         }
@@ -91,7 +83,7 @@ class AdRulesIMAWidevineModularActivity : BrightcovePlayer() {
             Log.v(TAG, event.type)
         }
 
-        // Enable Logging upon ad completion.
+        // Enable logging upon ad completion.
         eventEmitter.on(EventType.AD_COMPLETED) { event: Event ->
             Log.v(TAG, event.type)
         }
@@ -117,8 +109,9 @@ class AdRulesIMAWidevineModularActivity : BrightcovePlayer() {
         googleIMAComponent = GoogleIMAComponent.Builder(brightcoveVideoView, eventEmitter)
             .setUseAdRules(true)
             .build()
-
-        // Calling GoogleIMAComponent.initializeAdsRequests() is no longer necessary.
     }
 
+    companion object {
+        private const val TAG = "MainActivity"
+    }
 }

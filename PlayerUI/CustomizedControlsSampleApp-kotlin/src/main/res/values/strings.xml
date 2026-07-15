@@ -9,7 +9,7 @@
     <string name="sdk_demo_policy">BCpkADawqM1RJu5c_I13hBUAi4c8QNWO5QN2yrd_OgDjTCVsbILeGDxbYy6xhZESTFi68MiSUHzMbQbuLV3q-gvZkJFpym1qYbEwogOqKCXK622KNLPF92tX8AY9a1cVVYCgxSPN12pPAuIM</string>
 
     <!-- A sample Brightcove Video ID -->
-    <string name="sdk_demo_videoId">5421538222001</string>
+    <string name="sdk_demo_video_id">5421538222001</string>
 
     <!-- Below are hex strings taken from the fontawesome-webfont.ttf used in the Brightcove SDK -->
     <string name="brightcove_controls_rewind">&#xf04a;</string>

@@ -19,11 +19,14 @@ import com.brightcove.player.playback.PlaybackNotificationConfig;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcovePlayer;
 
+/**
+ * Demonstrates audio-only playback: a Brightcove playlist of audio tracks played with a
+ * media-style background playback notification, plus shuffle and repeat controls.
+ */
 public class MainActivity extends BrightcovePlayer {
 
-    private BrightcoveExoPlayerVideoView brightcoveVideoView;
     private RecyclerView videoListView;
-    private AdapterView adapterView;
+    private VideoListAdapter videoListAdapter;
 
     private String accountId;
     private String policyKey;
@@ -34,9 +37,14 @@ public class MainActivity extends BrightcovePlayer {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // When extending the BrightcovePlayer, we must assign the brightcoveVideoView before
+        // entering the superclass. This allows for some stock video player lifecycle management.
+        setContentView(R.layout.activity_main_playlist);
+        brightcoveVideoView = findViewById(R.id.brightcove_video_view_playlist);
         super.onCreate(savedInstanceState);
-        accountId = getString(R.string.account);
-        policyKey = getString(R.string.policy);
+
+        accountId = getString(R.string.sdk_demo_account);
+        policyKey = getString(R.string.sdk_demo_policy);
         playListReference = getString(R.string.trackPlaylistReference);
 
         usePlaylist();
@@ -63,30 +71,24 @@ public class MainActivity extends BrightcovePlayer {
      * Loads a playlist of audio tracks and shows them in a list beside the player.
      */
     private void usePlaylist() {
-        setContentView(R.layout.activity_main_playlist);
-        brightcoveVideoView = findViewById(R.id.brightcove_video_view_playlist);
         videoListView = findViewById(R.id.video_list_view);
-        adapterView = new AdapterView(brightcoveVideoView);
-        videoListView.setAdapter(adapterView);
+        videoListAdapter = new VideoListAdapter((BrightcoveExoPlayerVideoView) brightcoveVideoView);
+        videoListView.setAdapter(videoListAdapter);
         catalog = new Catalog.Builder(brightcoveVideoView.getEventEmitter(), accountId)
-                .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
                 .setPolicy(policyKey)
                 .build();
         catalog.findPlaylistByReferenceID(playListReference, new PlaylistListener() {
             @Override
             public void onPlaylist(Playlist playlist) {
                 brightcoveVideoView.addAll(playlist.getVideos());
-                adapterView.setVideoList(playlist.getVideos());
+                videoListAdapter.setVideoList(playlist.getVideos());
                 brightcoveVideoView.start();
             }
         });
         ImageButton actionGitHubButton = findViewById(R.id.action_github);
-        actionGitHubButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.GITHUB_URL)));
-                startActivity(browserIntent);
-            }
+        actionGitHubButton.setOnClickListener(v -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.GITHUB_URL)));
+            startActivity(browserIntent);
         });
     }
 

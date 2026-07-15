@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="?android:selectableItemBackground"
     android:clickable="true"
-    tools:context=".AudioOnlyActivity">
+    tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/album_art"

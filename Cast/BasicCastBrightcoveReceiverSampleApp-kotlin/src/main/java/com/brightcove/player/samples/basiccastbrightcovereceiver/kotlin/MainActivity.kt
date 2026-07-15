@@ -26,7 +26,12 @@ import com.google.android.gms.cast.framework.CastContext
 import com.google.android.gms.cast.framework.CastSession
 import com.google.android.gms.cast.framework.Session
 
-class BasicCastBrightcoveReceiverActivity : AppCompatActivity() {
+/**
+ * Launcher screen for the Cast sample: loads a Video Cloud playlist, lists it in a
+ * RecyclerView, and hands the selected video to [VideoPlayerActivity] for local or
+ * Cast playback, optionally with server-side ad insertion.
+ */
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBasicCastBrightcoveReceiverBinding
     private lateinit var adapter: VideoListAdapter
@@ -43,7 +48,6 @@ class BasicCastBrightcoveReceiverActivity : AppCompatActivity() {
 
         videoListView.layoutManager =  LinearLayoutManager(this)
 
-        //manage the onClick Event
         adapter = VideoListAdapter{view, video ->
             itemClicked(view, video)
         }
@@ -51,8 +55,8 @@ class BasicCastBrightcoveReceiverActivity : AppCompatActivity() {
 
         val eventEmitter: EventEmitter = EventEmitterImpl()
 
-        val catalog = Catalog.Builder(eventEmitter, getString(R.string.accountId))
-            .setPolicy(getString(R.string.policyKey))
+        val catalog = Catalog.Builder(eventEmitter, getString(R.string.sdk_demo_account))
+            .setPolicy(getString(R.string.sdk_demo_policy))
             .build()
 
         catalog.findPlaylistByReferenceID(
@@ -68,7 +72,7 @@ class BasicCastBrightcoveReceiverActivity : AppCompatActivity() {
 
 
         checkPlayVideoWithSsai.setOnCheckedChangeListener{_, isChecked ->
-            adConfigId = if(isChecked) "ba5e4879-77f0-424b-8c98-706ae5ad7eec" else ""
+            adConfigId = if(isChecked) getString(R.string.sdk_demo_ad_config_id) else ""
         }
     }
 
@@ -87,7 +91,7 @@ class BasicCastBrightcoveReceiverActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
-        GoogleCastComponent.setUpMediaRouteButton(this, menu!!)
+        menu?.let { GoogleCastComponent.setUpMediaRouteButton(this, it) }
         return true
     }
 
@@ -101,7 +105,7 @@ class BasicCastBrightcoveReceiverActivity : AppCompatActivity() {
         object : DefaultSessionManagerListener() {
             override fun onSessionStarted(castSession: Session, s: String) {
                 super.onSessionStarted(castSession, s)
-                val src = "https://dev.acquia.com/sites/default/files/blog/brightcove-logo-horizontal-grey-new.png"
+                val src = getString(R.string.sdk_demo_splash_screen_url)
                 BrightcoveChannelUtil.castSplashScreen((castSession as CastSession),
                     SplashScreen(src)
                 )

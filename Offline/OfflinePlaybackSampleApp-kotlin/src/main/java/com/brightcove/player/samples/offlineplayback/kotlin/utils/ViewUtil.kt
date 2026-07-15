@@ -5,8 +5,6 @@ import android.view.View
 
 /**
  * Provides utility methods to work with Android [View].
- *
- * @author rsubramaniam (rsubramaniam@brightcove.com)
  */
 object ViewUtil {
     /**

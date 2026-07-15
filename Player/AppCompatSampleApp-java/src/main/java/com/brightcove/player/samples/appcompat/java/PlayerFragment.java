@@ -7,21 +7,21 @@ import android.view.ViewGroup;
 import com.brightcove.player.appcompat.BrightcovePlayerFragment;
 import com.brightcove.player.model.DeliveryType;
 import com.brightcove.player.model.Video;
-import com.brightcove.player.view.BaseVideoView;
 
+/**
+ * BrightcovePlayerFragment that loads and plays the sample video.
+ */
 public class PlayerFragment extends BrightcovePlayerFragment {
-
-    public static final String TAG = PlayerFragment.class.getSimpleName();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View result = inflater.inflate(R.layout.fragment_player, container, false);
-        baseVideoView = (BaseVideoView) result.findViewById(R.id.brightcove_video_view);
+        baseVideoView = result.findViewById(R.id.brightcove_video_view);
         super.onCreateView(inflater, container, savedInstanceState);
 
-        Video video = Video.createVideo("https://media.w3.org/2010/05/sintel/trailer.mp4", DeliveryType.MP4);
+        Video video = Video.createVideo(getString(R.string.sdk_demo_video_url), DeliveryType.MP4);
         baseVideoView.add(video);
-        baseVideoView.getAnalytics().setAccount("1760897681001");
+        baseVideoView.getAnalytics().setAccount(getString(R.string.sdk_demo_account));
         baseVideoView.start();
 
         return result;

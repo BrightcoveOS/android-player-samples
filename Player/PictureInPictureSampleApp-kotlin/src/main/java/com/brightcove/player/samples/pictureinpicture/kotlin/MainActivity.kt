@@ -6,13 +6,19 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.brightcove.player.edge.Catalog
+import com.brightcove.player.edge.CatalogError
 import com.brightcove.player.edge.VideoListener
 import com.brightcove.player.model.Video
 import com.brightcove.player.pictureinpicture.PictureInPictureManager
 import com.brightcove.player.view.BrightcovePlayer
 import com.brightcove.player.samples.pictureinpicture.kotlin.databinding.ActivityPictureInPictureSampleBinding
 
-class PictureInPictureSampleActivity : BrightcovePlayer() {
+/**
+ * Demonstrates Android Picture-in-Picture mode: playback continues in a floating
+ * window when the user leaves the app, with PiP behavior configurable via a
+ * companion settings screen.
+ */
+class MainActivity : BrightcovePlayer() {
 
     private lateinit var binding: ActivityPictureInPictureSampleBinding
 
@@ -25,18 +31,21 @@ class PictureInPictureSampleActivity : BrightcovePlayer() {
         // Get the event emitter from the SDK and create a catalog request to fetch a video from the
         // Brightcove Edge service, given a video id, an account id and a policy key.
         val eventEmitter = brightcoveVideoView.eventEmitter
-        val catalog = Catalog.Builder(eventEmitter, getString(R.string.account))
-            .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
-            .setPolicy(getString(R.string.policy))
+        val catalog = Catalog.Builder(eventEmitter, getString(R.string.sdk_demo_account))
+            .setPolicy(getString(R.string.sdk_demo_policy))
             .build()
 
-        catalog.findVideoByID(getString(R.string.videoId), object : VideoListener() {
+        catalog.findVideoByID(getString(R.string.sdk_demo_video_id), object : VideoListener() {
             // Add the video found to the queue with add().
             // Start playback of the video with start().
             override fun onVideo(video: Video) {
                 Log.v(TAG, "onVideo: video = $video")
                 brightcoveVideoView.add(video)
                 brightcoveVideoView.start()
+            }
+
+            override fun onError(errors: List<CatalogError>) {
+                Log.e(TAG, errors.toString())
             }
         })
 
@@ -68,5 +77,9 @@ class PictureInPictureSampleActivity : BrightcovePlayer() {
                 Toast.LENGTH_LONG
             ).show()
         }
+    }
+
+    companion object {
+        private const val TAG = "MainActivity"
     }
 }
