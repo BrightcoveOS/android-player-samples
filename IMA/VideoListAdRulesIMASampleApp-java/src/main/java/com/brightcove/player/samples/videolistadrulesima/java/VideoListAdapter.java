@@ -2,7 +2,6 @@ package com.brightcove.player.samples.videolistadrulesima.java;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -83,7 +82,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
         }
     }
 
-    public void setVideoList(@Nullable List<Video> videoList) {
+    public void setVideoList(@NonNull List<Video> videoList) {
         this.videoList.clear();
         this.videoList.addAll(videoList);
         notifyDataSetChanged();

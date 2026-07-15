@@ -31,7 +31,7 @@ public class BrightcoveDownloadUtil {
      * @param bundle            - The app bundle
      */
     public static void selectMediaFormatTracksAvailable(MediaDownloadable mediaDownloadable, Bundle bundle) {
-        boolean didListChange;
+        boolean didListChange = false;
 
         ArrayList<MediaFormat> audio = bundle.getParcelableArrayList(MediaDownloadable.AUDIO_LANGUAGES);
         int indexMain = -1;
@@ -42,10 +42,12 @@ public class BrightcoveDownloadUtil {
             Log.v(TAG, "Adding the \"main\" audio track.");
             //First let's find the index of the audio with role main
             ArrayList<String> roles = bundle.getStringArrayList(MediaDownloadable.AUDIO_LANGUAGE_ROLES);
-            for (int i = 0; i < roles.size(); i++) {
-                if ("main".equalsIgnoreCase(roles.get(i))) {
-                    indexMain = i;
-                    break;
+            if (roles != null) {
+                for (int i = 0; i < roles.size(); i++) {
+                    if ("main".equalsIgnoreCase(roles.get(i))) {
+                        indexMain = i;
+                        break;
+                    }
                 }
             }
 
@@ -56,31 +58,31 @@ public class BrightcoveDownloadUtil {
 
             //Select main
             newAudio.add(audio.get(indexMain));
-        }
 
-        // Now select the "extra" audio track
-        // In an effort to avoid over-complication of the flow of this demonstration app, we make an assumption here
-        // that the end user has selected the first of the remaining audio tracks that is not the "main" audio track
-        // (if more than one audio track is present)
-        if (audio.size() > 1) {
-            Log.v(TAG, "Alternate audio track download allowed for this video. Adding an \"alternate\" audio track");
-            for (MediaFormat audioTrack : audio) {
-                if (indexMain != audio.indexOf(audioTrack)){
-                    newAudio.add(audioTrack);
+            // Now select the "extra" audio track
+            // In an effort to avoid over-complication of the flow of this demonstration app, we make an assumption here
+            // that the end user has selected the first of the remaining audio tracks that is not the "main" audio track
+            // (if more than one audio track is present)
+            if (audio.size() > 1) {
+                Log.v(TAG, "Alternate audio track download allowed for this video. Adding an \"alternate\" audio track");
+                for (MediaFormat audioTrack : audio) {
+                    if (indexMain != audio.indexOf(audioTrack)){
+                        newAudio.add(audioTrack);
+                    }
                 }
+            } else {
+                Log.v(TAG, "Alternate audio track download allowed, but there were no \"alternate\" audio tracks to select.");
             }
-        } else {
-            Log.v(TAG, "Alternate audio track download allowed, but there were no \"alternate\" audio tracks to select.");
+            bundle.putParcelableArrayList(MediaDownloadable.AUDIO_LANGUAGES, newAudio);
+            didListChange = true;
         }
-        bundle.putParcelableArrayList(MediaDownloadable.AUDIO_LANGUAGES, newAudio);
-        didListChange = true;
 
         // All captions are considered "extra" tracks for download
         // As with the alternate audio track selection above, we make an assumption here that the end user has selected the
         // first caption track as the "default" caption language, and the second caption track as the "alternate" (if more than
         // one caption track is present)
         ArrayList<MediaFormat> captions = bundle.getParcelableArrayList(MediaDownloadable.CAPTIONS);
-        Log.v(TAG, "Captions array size: " + captions.size());
+        Log.v(TAG, "Captions array size: " + (captions != null ? captions.size() : 0));
         if (captions != null && captions.size() > 0) {
             ArrayList<MediaFormat> newCaptions = new ArrayList<>();
             Log.v(TAG, "Adding the first caption track as the \"default\" caption track.");

@@ -74,7 +74,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
                     brightcoveVideoView.setCurrentIndex(holder.getAbsoluteAdapterPosition());
                     brightcoveVideoView.start();
                 } catch (Exception e) {
-                    Log.v(TAG, "Error loading media:" + video.getId());
+                    Log.e(TAG, "Error loading media:" + video.getId(), e);
                 }
             });
         }

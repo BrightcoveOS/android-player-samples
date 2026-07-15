@@ -25,7 +25,6 @@ import com.brightcove.player.view.BrightcovePlayer;
  */
 public class MainActivity extends BrightcovePlayer {
 
-    private BrightcoveExoPlayerVideoView brightcoveVideoView;
     private RecyclerView videoListView;
     private VideoListAdapter videoListAdapter;
 
@@ -38,7 +37,12 @@ public class MainActivity extends BrightcovePlayer {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // When extending the BrightcovePlayer, we must assign the brightcoveVideoView before
+        // entering the superclass. This allows for some stock video player lifecycle management.
+        setContentView(R.layout.activity_main_playlist);
+        brightcoveVideoView = findViewById(R.id.brightcove_video_view_playlist);
         super.onCreate(savedInstanceState);
+
         accountId = getString(R.string.sdk_demo_account);
         policyKey = getString(R.string.sdk_demo_policy);
         playListReference = getString(R.string.trackPlaylistReference);
@@ -67,10 +71,8 @@ public class MainActivity extends BrightcovePlayer {
      * Loads a playlist of audio tracks and shows them in a list beside the player.
      */
     private void usePlaylist() {
-        setContentView(R.layout.activity_main_playlist);
-        brightcoveVideoView = findViewById(R.id.brightcove_video_view_playlist);
         videoListView = findViewById(R.id.video_list_view);
-        videoListAdapter = new VideoListAdapter(brightcoveVideoView);
+        videoListAdapter = new VideoListAdapter((BrightcoveExoPlayerVideoView) brightcoveVideoView);
         videoListView.setAdapter(videoListAdapter);
         catalog = new Catalog.Builder(brightcoveVideoView.getEventEmitter(), accountId)
                 .setPolicy(policyKey)

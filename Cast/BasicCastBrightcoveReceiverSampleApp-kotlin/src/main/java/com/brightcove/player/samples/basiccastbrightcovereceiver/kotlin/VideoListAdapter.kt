@@ -44,7 +44,7 @@ class VideoListAdapter(private val onVideoClick: OnVideoClick) : ListAdapter<Vid
                 val descriptionObj: String? = video.properties[Constants.PROPERTY_SHORT_DESCRIPTION]?.toString()
 
                 if(!descriptionObj.isNullOrBlank())
-                    videoDurationText.text = descriptionObj
+                    videoDescriptionText.text = descriptionObj
 
                 if (video.durationLong > 0) {
                     videoDurationText.text = millisecondsToString(video.durationLong)
