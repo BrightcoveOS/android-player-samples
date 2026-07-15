@@ -3,6 +3,7 @@ package com.brightcove.player.samples.basicdai.kotlin
 import android.os.Bundle
 import android.util.Log
 import com.brightcove.dai.GoogleDAIComponent
+import com.brightcove.player.samples.basicdai.kotlin.databinding.ActivityMainBinding
 import com.brightcove.player.edge.Catalog
 import com.brightcove.player.edge.CatalogError
 import com.brightcove.player.edge.VideoListener
@@ -16,13 +17,15 @@ import com.google.ads.interactivemedia.v3.api.ImaSdkFactory
  * stitched into the stream server-side.
  */
 class MainActivity : BrightcovePlayer() {
+    private lateinit var binding: ActivityMainBinding
     private lateinit var eventEmitter: EventEmitter
     private lateinit var catalog: Catalog
     private lateinit var googleDAIComponent: GoogleDAIComponent
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setContentView(R.layout.activity_main)
-        brightcoveVideoView = findViewById(R.id.brightcove_video_view)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        brightcoveVideoView = binding.brightcoveVideoView
         super.onCreate(savedInstanceState)
         eventEmitter = brightcoveVideoView.eventEmitter
         setupDAI()

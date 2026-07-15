@@ -24,7 +24,7 @@ class MainActivity : BrightcovePlayer() {
         // notifications and to control logging.
         binding = ActivityTextureViewSampleBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        brightcoveVideoView = findViewById(R.id.brightcove_video_view)
+        brightcoveVideoView = binding.brightcoveVideoView
         super.onCreate(savedInstanceState)
 
         // Get the event emitter from the SDK and create a catalog request to fetch a video from the

@@ -2,7 +2,6 @@ package com.brightcove.player.samples.freewheelwidevinemodular.kotlin
 
 import android.os.Bundle
 import android.util.Log
-import android.view.ViewGroup
 import com.brightcove.freewheel.controller.FreeWheelController
 import com.brightcove.freewheel.event.FreeWheelEventType
 import com.brightcove.player.edge.Catalog
@@ -11,6 +10,7 @@ import com.brightcove.player.edge.VideoListener
 import com.brightcove.player.event.Event
 import com.brightcove.player.event.EventEmitter
 import com.brightcove.player.model.Video
+import com.brightcove.player.samples.freewheelwidevinemodular.kotlin.databinding.ActivityMainBinding
 import com.brightcove.player.view.BrightcovePlayer
 import tv.freewheel.ad.interfaces.IAdContext
 import tv.freewheel.ad.interfaces.IConstants
@@ -27,12 +27,15 @@ import tv.freewheel.ad.request.config.VideoAssetConfiguration
 class MainActivity : BrightcovePlayer() {
     private var eventEmitter: EventEmitter? = null
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         // When extending the BrightcovePlayer, we must assign the brightcoveVideoView
         // before entering the superclass. This allows for some stock video player lifecycle
         // management.
-        setContentView(R.layout.activity_main)
-        brightcoveVideoView = findViewById(R.id.brightcove_video_view)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        brightcoveVideoView = binding.brightcoveVideoView
         super.onCreate(savedInstanceState)
 
         eventEmitter = brightcoveVideoView.eventEmitter
@@ -74,7 +77,7 @@ class MainActivity : BrightcovePlayer() {
 
         eventEmitter?.on(FreeWheelEventType.SHOW_DISPLAY_ADS) { event: Event ->
             val slots = event.properties[FreeWheelController.AD_SLOTS_KEY] as? List<ISlot>
-            val adView = findViewById<ViewGroup>(R.id.ad_frame)
+            val adView = binding.adFrame
 
             // Clean out any previous display ads
             adView.removeAllViews()

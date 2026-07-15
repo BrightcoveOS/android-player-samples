@@ -1,12 +1,8 @@
 package com.brightcove.player.samples.videolistadrulesima.kotlin
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.brightcove.ima.GoogleIMAComponent
 import com.brightcove.ima.GoogleIMAEventType
@@ -14,6 +10,7 @@ import com.brightcove.player.event.Event
 import com.brightcove.player.event.EventEmitter
 import com.brightcove.player.event.EventType
 import com.brightcove.player.model.Video
+import com.brightcove.player.samples.videolistadrulesima.kotlin.databinding.ItemViewBinding
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView
 import com.brightcove.player.view.BrightcoveVideoView
 import com.google.ads.interactivemedia.v3.api.AdsRequest
@@ -27,13 +24,13 @@ class VideoListAdapter : RecyclerView.Adapter<VideoListAdapter.ViewHolder>() {
     private val videoList = mutableListOf<Video>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_view, parent, false)
-        return ViewHolder(view)
+        val binding = ItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val video = videoList[position]
-        holder.videoTitleText.text = video.getStringProperty(Video.Fields.NAME)
+        holder.binding.videoTitleText.text = video.getStringProperty(Video.Fields.NAME)
         val videoView = holder.videoView
         videoView.clear()
         videoView.add(video)
@@ -71,14 +68,11 @@ class VideoListAdapter : RecyclerView.Adapter<VideoListAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val context: Context = itemView.context
-        val videoTitleText: TextView = itemView.findViewById(R.id.video_title_text)
-        private val videoFrame: FrameLayout = itemView.findViewById(R.id.video_frame)
-        val videoView: BrightcoveVideoView = BrightcoveExoPlayerVideoView(context)
+    inner class ViewHolder(val binding: ItemViewBinding) : RecyclerView.ViewHolder(binding.root) {
+        val videoView: BrightcoveVideoView = BrightcoveExoPlayerVideoView(itemView.context)
 
         init {
-            videoFrame.addView(videoView)
+            binding.videoFrame.addView(videoView)
             videoView.finishInitialization()
 
             val eventEmitter = videoView.eventEmitter

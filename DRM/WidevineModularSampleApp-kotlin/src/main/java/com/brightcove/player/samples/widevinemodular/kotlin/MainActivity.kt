@@ -2,6 +2,7 @@ package com.brightcove.player.samples.widevinemodular.kotlin
 
 import android.os.Bundle
 import android.util.Log
+import com.brightcove.player.samples.widevinemodular.kotlin.databinding.ActivityMainBinding
 import com.brightcove.player.edge.Catalog
 import com.brightcove.player.edge.CatalogError
 import com.brightcove.player.edge.VideoListener
@@ -13,13 +14,17 @@ import com.brightcove.player.view.BrightcovePlayer
  * with the Brightcove Native Player SDK for Android.
  */
 class MainActivity : BrightcovePlayer() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         // When extending the BrightcovePlayer, we must assign the brightcoveVideoView before
         // entering the superclass. This allows for some stock video player lifecycle
         // management.  Establish the video object and use its event emitter to get important
         // notifications and to control logging.
-        setContentView(R.layout.activity_main)
-        brightcoveVideoView = findViewById(R.id.brightcove_video_view)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        brightcoveVideoView = binding.brightcoveVideoView
         super.onCreate(savedInstanceState)
 
         val catalog =
