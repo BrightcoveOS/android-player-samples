@@ -1,26 +1,22 @@
 package com.brightcove.player.samples.basicssaipal.java;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 
 import com.brightcove.player.Sdk;
 import com.brightcove.player.appcompat.BrightcovePlayerActivity;
 import com.brightcove.player.edge.Catalog;
+import com.brightcove.player.edge.CatalogError;
 import com.brightcove.player.edge.VideoListener;
-import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
-import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventType;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.network.HttpRequestConfig;
-import com.brightcove.player.samples.basicssaipal.java.R;
 import com.brightcove.ssai.SSAIComponent;
 import com.brightcove.ssai.event.SSAIEventType;
 import com.brightcove.ssai.omid.AdEventType;
@@ -33,13 +29,16 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.iab.omid.library.brightcove.adsession.FriendlyObstructionPurpose;
 
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+/**
+ * This app demonstrates server-side ad insertion (SSAI) combined with the Google PAL
+ * (Programmatic Access Library) nonce for ad tracking.
+ */
 public class MainActivity extends BrightcovePlayerActivity {
 
-    private static final String TAG = "MainActivity";
-    private static final String AD_CONFIG_ID_QUERY_PARAM_VALUE = "ba5e4879-77f0-424b-8c98-706ae5ad7eec";
+    private static final String TAG = MainActivity.class.getSimpleName();
     private static final String PARTNER_NAME = "dummyVendor";
     private static final String PARTNER_VERSION = Sdk.getVersionName();
 
@@ -66,24 +65,21 @@ public class MainActivity extends BrightcovePlayerActivity {
         // getConsentToStorage() method is a placeholder for the publisher's own
         // method of obtaining user consent, either by integrating with a CMP or
         // based on other methods the publisher chooses to handle storage consent.
-        //boolean isConsentToStorage = getConsentToStorage();
         consentSettings = ConsentSettings.builder()
                 .allowStorage(false)
                 .build();
         // It is important to instantiate the NonceLoader as early as possible to
         // allow it to initialize and preload data for a faster experience when
         // loading the NonceManager. A new NonceLoader will need to be instantiated
-        //if the ConsentSettings change for the user.
+        // if the ConsentSettings change for the user.
         nonceLoader = new NonceLoader(this, consentSettings);
 
-        //PAL
         generateNonceForAdRequest();
 
         final EventEmitter eventEmitter = baseVideoView.getEventEmitter();
 
         catalog = new Catalog.Builder(eventEmitter, getString(R.string.sdk_demo_account))
-                .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
-                .setPolicy(getString(R.string.sdk_demo_policy_key))
+                .setPolicy(getString(R.string.sdk_demo_policy))
                 .build();
 
         // Setup the error event handler for the SSAI plugin.
@@ -93,7 +89,6 @@ public class MainActivity extends BrightcovePlayerActivity {
         ssaiPlugin = new SSAIComponent(this, baseVideoView);
         View view = findViewById(R.id.ad_frame);
         if (view instanceof ViewGroup) {
-            // Set the companion ad container,
             ssaiPlugin.addCompanionContainer((ViewGroup) view);
         }
 
@@ -116,14 +111,10 @@ public class MainActivity extends BrightcovePlayerActivity {
         }
     }
 
-
     public void generateNonceForAdRequest() {
-        Set supportedApiFrameWorksSet = new HashSet();
         // The values 2, 7, and 9 correspond to player support for VPAID 2.0,
         // OMID 1.0, and SIMID 1.1.
-        supportedApiFrameWorksSet.add(2);
-        supportedApiFrameWorksSet.add(7);
-        supportedApiFrameWorksSet.add(9);
+        Set<Integer> supportedApiFrameWorksSet = Set.of(2, 7, 9);
 
         NonceRequest nonceRequest = NonceRequest.builder()
                 .descriptionURL("https://example.com/content1")
@@ -153,11 +144,11 @@ public class MainActivity extends BrightcovePlayerActivity {
             nonceManager = manager;
             String nonceString = manager.getNonce();
             ssaiPlugin.setNonce(nonceString);
-            Log.d("PALSample", "Generated nonce: " + nonceString);
+            Log.d(TAG, "Generated nonce: " + nonceString);
             // Set the HttpRequestConfig with the Ad Config Id configured in
             // your https://studio.brightcove.com account.
             HttpRequestConfig httpRequestConfig = new HttpRequestConfig.Builder()
-                    .addQueryParameter(HttpRequestConfig.KEY_AD_CONFIG_ID, AD_CONFIG_ID_QUERY_PARAM_VALUE)
+                    .addQueryParameter(HttpRequestConfig.KEY_AD_CONFIG_ID, getString(R.string.sdk_demo_ad_config_id))
                     .build();
 
             catalog.findVideoByID(getString(R.string.sdk_demo_video_id), httpRequestConfig, new VideoListener() {
@@ -168,12 +159,17 @@ public class MainActivity extends BrightcovePlayerActivity {
                     // an EventType.ERROR event will be emitted.
                     ssaiPlugin.processVideo(video);
                 }
+
+                @Override
+                public void onError(@NonNull List<CatalogError> errors) {
+                    Log.e(TAG, errors.toString());
+                }
             });
         }
 
         @Override
         public void onFailure(Exception error) {
-            Log.e("PALSample", "Nonce generation failed: " + error.getMessage());
+            Log.e(TAG, "Nonce generation failed: " + error.getMessage());
         }
     }
 
