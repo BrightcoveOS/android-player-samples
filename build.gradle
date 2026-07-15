@@ -85,6 +85,16 @@ configure(sampleModules) {
     }
   }
 
+  // Kotlin samples: pin the Kotlin JVM target to match the Java 17 target above, so the build is
+  // consistent regardless of the JDK that runs Gradle (e.g. Android Studio's bundled JBR 21).
+  plugins.withId('org.jetbrains.kotlin.android') {
+    android {
+      kotlinOptions {
+        jvmTarget = '17'
+      }
+    }
+  }
+
   // Shared by every sample: the core SDK plus the ExoPlayer/Media3 playback backend.
   dependencies {
     implementation "com.brightcove.player:android-sdk:${anpVersion}"
