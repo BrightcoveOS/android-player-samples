@@ -9,12 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import coil3.load
 import com.brightcove.player.samples.basiccastbrightcovereceiver.kotlin.databinding.ItemViewBinding
 import com.brightcove.player.model.Video
-import java.util.*
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 
 typealias OnVideoClick = (View, Video) -> Unit
 
+/**
+ * ListAdapter that renders each video's thumbnail, title, description, and duration
+ * and reports item clicks.
+ */
 class VideoListAdapter(private val onVideoClick: OnVideoClick) : ListAdapter<Video, VideoListAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,7 +27,6 @@ class VideoListAdapter(private val onVideoClick: OnVideoClick) : ListAdapter<Vid
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //Get Video information
         holder.bind(getItem(position))
     }
 
@@ -36,7 +39,6 @@ class VideoListAdapter(private val onVideoClick: OnVideoClick) : ListAdapter<Vid
 
             binding.apply {
 
-                //Set Video info
                 videoTitleText.text = video.name
 
                 val descriptionObj: String? = video.properties[Constants.PROPERTY_SHORT_DESCRIPTION]?.toString()
@@ -59,7 +61,6 @@ class VideoListAdapter(private val onVideoClick: OnVideoClick) : ListAdapter<Vid
                     videoThumbnailImage.load(imageUri.toASCIIString())
                 }
 
-                //Adding onCLick Listener to the view
                 videoThumbnailImage.setOnClickListener{
                     onVideoClick(this.root,video)
                 }
@@ -101,7 +102,7 @@ class VideoListAdapter(private val onVideoClick: OnVideoClick) : ListAdapter<Vid
                 oldItem.id == newItem.id
 
             override fun areContentsTheSame(oldItem: Video, newItem: Video): Boolean =
-                oldItem.equals(newItem)
+                oldItem == newItem
         }
     }
 }

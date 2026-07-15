@@ -14,10 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.brightcove.player.model.Video;
 
 import java.net.URI;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import static com.brightcove.player.samples.basiccastbrightcovereceiver.java.Constants.PROPERTY_SHORT_DESCRIPTION;
@@ -26,18 +24,16 @@ import coil3.SingletonImageLoader;
 import coil3.request.ImageRequest;
 import coil3.target.ImageViewTarget;
 
+/**
+ * RecyclerView adapter that renders each video's thumbnail, title, description, and
+ * duration and reports item clicks.
+ */
 public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.ViewHolder> {
 
     /**
      * The current list of videos.
      */
     private List<Video> videoList;
-
-    /**
-     * A map of video identifiers and position of video in the list.
-     */
-    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
-    private Map<String, Integer> indexMap = new HashMap<>();
 
     private final ItemClickListener clickListener;
     public interface ItemClickListener {
@@ -130,20 +126,6 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
      */
     void setVideoList(@Nullable List<Video> videoList) {
         this.videoList = videoList;
-        buildIndexMap();
-    }
-
-    /**
-     * Build the index map.
-     */
-    private void buildIndexMap() {
-        indexMap.clear();
-        if (videoList != null) {
-            int index = 0;
-            for (Video video : videoList) {
-                indexMap.put(video.getId(), index++);
-            }
-        }
         notifyDataSetChanged();
     }
 

@@ -29,6 +29,11 @@ import com.google.android.gms.cast.framework.Session;
 import static com.brightcove.player.samples.basiccastbrightcovereceiver.java.Constants.INTENT_EXTRA_AD_CONFIG_ID;
 import static com.brightcove.player.samples.basiccastbrightcovereceiver.java.Constants.INTENT_EXTRA_VIDEO_ID;
 
+/**
+ * Launcher screen for the Cast sample: loads a Video Cloud playlist, lists it in a
+ * RecyclerView, and hands the selected video to {@link VideoPlayerActivity} for local
+ * or Cast playback, optionally with server-side ad insertion.
+ */
 public class MainActivity extends AppCompatActivity implements VideoListAdapter.ItemClickListener {
 
     CheckBox chkBoxPlayVideoWithSsai;
@@ -46,8 +51,8 @@ public class MainActivity extends AppCompatActivity implements VideoListAdapter.
         videoListView.setAdapter(videoListAdapter);
         EventEmitter eventEmitter = new EventEmitterImpl();
 
-        Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.accountId))
-                .setPolicy(getString(R.string.policyKey))
+        Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.sdk_demo_account))
+                .setPolicy(getString(R.string.sdk_demo_policy))
                 .build();
 
         catalog.findPlaylistByReferenceID(getString(R.string.playlistReferenceId), new PlaylistListener() {
@@ -64,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements VideoListAdapter.
 
         chkBoxPlayVideoWithSsai.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                adConfigId = "ba5e4879-77f0-424b-8c98-706ae5ad7eec";
+                adConfigId = getString(R.string.sdk_demo_ad_config_id);
             } else {
                 adConfigId = "";
             }
@@ -102,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements VideoListAdapter.
         @Override
         public void onSessionStarted(Session castSession, String s) {
             super.onSessionStarted(castSession, s);
-            String src = "https://dev.acquia.com/sites/default/files/blog/brightcove-logo-horizontal-grey-new.png";
+            String src = getString(R.string.sdk_demo_splash_screen_url);
             BrightcoveChannelUtil.castSplashScreen((CastSession) castSession, new SplashScreen(src));
         }
     };

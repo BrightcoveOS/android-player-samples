@@ -21,7 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".BasicCastBrightcoveReceiverActivity"
+            android:name=".MainActivity"
             android:screenOrientation="unspecified"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.AppCastReceiver"
@@ -49,7 +49,7 @@
             android:launchMode="singleTask"
             android:theme="@style/Theme.BrightcoveCast"
             android:screenOrientation="portrait"
-            android:parentActivityName=".BasicCastBrightcoveReceiverActivity"
+            android:parentActivityName=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

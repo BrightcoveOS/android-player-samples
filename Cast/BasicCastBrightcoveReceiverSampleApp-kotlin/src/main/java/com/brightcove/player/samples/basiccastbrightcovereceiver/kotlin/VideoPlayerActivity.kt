@@ -2,6 +2,7 @@ package com.brightcove.player.samples.basiccastbrightcovereceiver.kotlin
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import androidx.core.view.ViewCompat
 import com.brightcove.cast.GoogleCastComponent
@@ -11,6 +12,7 @@ import com.brightcove.cast.model.CustomData
 import com.brightcove.player.samples.basiccastbrightcovereceiver.kotlin.databinding.ActivityPlayerBinding
 import com.brightcove.player.appcompat.BrightcovePlayerActivity
 import com.brightcove.player.edge.Catalog
+import com.brightcove.player.edge.CatalogError
 import com.brightcove.player.edge.VideoListener
 import com.brightcove.player.event.Event
 import com.brightcove.player.event.EventType
@@ -19,6 +21,10 @@ import com.brightcove.player.network.HttpRequestConfig
 import com.brightcove.ssai.SSAIComponent
 
 
+/**
+ * Plays the selected video locally or on a connected Cast device via [GoogleCastComponent],
+ * optionally inserting server-side ads when an ad-config id is supplied.
+ */
 class VideoPlayerActivity: BrightcovePlayerActivity() {
 
     private val PROPERTY_APPLICATION_ID = "com.brightcove.player.samples.basiccastbrightcovereceiver.kotlin"
@@ -40,8 +46,8 @@ class VideoPlayerActivity: BrightcovePlayerActivity() {
         val videoId = intent.getStringExtra(Constants.INTENT_EXTRA_VIDEO_ID) ?: ""
         val adConfigId = intent.getStringExtra(Constants.INTENT_EXTRA_AD_CONFIG_ID) ?: ""
 
-        val catalog = Catalog.Builder(eventEmitter, getString(R.string.accountId))
-            .setPolicy(getString(R.string.policyKey))
+        val catalog = Catalog.Builder(eventEmitter, getString(R.string.sdk_demo_account))
+            .setPolicy(getString(R.string.sdk_demo_policy))
             .build()
 
         val httpRequestConfigBuilder = HttpRequestConfig.Builder()
@@ -67,6 +73,10 @@ class VideoPlayerActivity: BrightcovePlayerActivity() {
                         baseVideoView.add(video)
                     }
                 }
+
+                override fun onError(errors: List<CatalogError>) {
+                    Log.e(TAG, errors.toString())
+                }
             })
 
         eventEmitter.on(GoogleCastEventType.CAST_SESSION_STARTED) { event: Event? ->
@@ -77,9 +87,9 @@ class VideoPlayerActivity: BrightcovePlayerActivity() {
         }
 
         val customData: CustomData = BrightcoveCastCustomData.Builder(this)
-            .setAccountId(getString(R.string.accountId))
+            .setAccountId(getString(R.string.sdk_demo_account))
             // Set your account’s policy key
-            .setPolicyKey(getString(R.string.policyKey))
+            .setPolicyKey(getString(R.string.sdk_demo_policy))
             // Optional: Set your Edge Playback Authorization (EPA) JWT token here
             // Note that if you set the EPA token, you will not need to set the Policy Key
             .setBrightcoveAuthorizationToken(null)
@@ -116,5 +126,9 @@ class VideoPlayerActivity: BrightcovePlayerActivity() {
             eventEmitter.emit(EventType.ENTER_FULL_SCREEN)
             actionBar?.hide()
         }
+    }
+
+    companion object {
+        private const val TAG = "VideoPlayerActivity"
     }
 }
