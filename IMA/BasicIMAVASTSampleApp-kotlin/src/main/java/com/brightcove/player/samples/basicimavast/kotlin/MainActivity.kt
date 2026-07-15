@@ -3,7 +3,6 @@ package com.brightcove.player.samples.basicimavast.kotlin
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.util.Log
-import android.view.ViewGroup
 import com.brightcove.ima.GoogleIMAComponent
 import com.brightcove.ima.GoogleIMAEventType
 import com.brightcove.player.appcompat.BrightcovePlayerActivity
@@ -24,7 +23,11 @@ import com.google.ads.interactivemedia.v3.api.AdsRequest
 import com.google.ads.interactivemedia.v3.api.CompanionAdSlot
 import com.google.ads.interactivemedia.v3.api.ImaSdkFactory
 
-class BasicIMAVASTSampleActivity : BrightcovePlayerActivity() {
+/**
+ * This app illustrates how to use the Google IMA plugin with the
+ * Brightcove Player for Android.
+ */
+class MainActivity : BrightcovePlayerActivity() {
 
     private lateinit var binding: ActivityBasicImaVastBinding
     private lateinit var eventEmitter: EventEmitter
@@ -35,7 +38,7 @@ class BasicIMAVASTSampleActivity : BrightcovePlayerActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         // When extending the BrightcovePlayer, we must assign the BrightcoveExoPlayerVideoView before
         // entering the superclass. This allows for some stock video player lifecycle
-        // management.  Establish the video object and use it's event emitter to get important
+        // management.  Establish the video object and use its event emitter to get important
         // notifications and to control logging.
         binding = ActivityBasicImaVastBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -48,8 +51,8 @@ class BasicIMAVASTSampleActivity : BrightcovePlayerActivity() {
         // Use a procedural abstraction to setup the Google IMA SDK via the plugin and establish
         // a playlist listener object for our sample video: the Potter Puppet show.
         setupGoogleIMA()
-        val catalog = Catalog.Builder(eventEmitter, getString(R.string.account_id))
-            .setPolicy(getString(R.string.policy_key))
+        val catalog = Catalog.Builder(eventEmitter, getString(R.string.sdk_demo_account))
+            .setPolicy(getString(R.string.sdk_demo_policy))
             .build()
 
         catalog.findVideoByReferenceID(getString(R.string.video_reference_id), object : VideoListener() {
@@ -77,28 +80,24 @@ class BasicIMAVASTSampleActivity : BrightcovePlayerActivity() {
      */
     private fun setupCuePoints(source: Source) {
         val cuePointType = CuePointType.AD
-        val properties: Map<String, Any> = HashMap()
-        val details: MutableMap<String, Any> = HashMap()
+        val properties = emptyMap<String, Any>()
 
         // preroll
         var cuePoint = CuePoint(CuePoint.PositionType.BEFORE, cuePointType, properties)
-        details[Event.CUE_POINT] = cuePoint
-        eventEmitter.emit(EventType.SET_CUE_POINT, details)
+        eventEmitter.emit(EventType.SET_CUE_POINT, mapOf(Event.CUE_POINT to cuePoint))
 
         // midroll at 30 seconds.
         if (source.deliveryType != DeliveryType.HLS) {
             val cuePointTime = (30 * DateUtils.SECOND_IN_MILLIS.toInt()).toLong()
             cuePoint = CuePoint(cuePointTime, cuePointType, properties)
-            details[Event.CUE_POINT] = cuePoint
-            eventEmitter.emit(EventType.SET_CUE_POINT, details)
+            eventEmitter.emit(EventType.SET_CUE_POINT, mapOf(Event.CUE_POINT to cuePoint))
             // Add a marker where the ad will be.
             mediaController.brightcoveSeekBar.addMarker(cuePointTime)
         }
 
         // postroll
         cuePoint = CuePoint(CuePoint.PositionType.AFTER, cuePointType, properties)
-        details[Event.CUE_POINT] = cuePoint
-        eventEmitter.emit(EventType.SET_CUE_POINT, details)
+        eventEmitter.emit(EventType.SET_CUE_POINT, mapOf(Event.CUE_POINT to cuePoint))
     }
 
     /**
@@ -168,7 +167,7 @@ class BasicIMAVASTSampleActivity : BrightcovePlayerActivity() {
     }
 
     companion object {
-        private val TAG = this::class.java.simpleName
+        private const val TAG = "MainActivity"
         private const val COMPANION_SLOT_WIDTH = 300
         private const val COMPANION_SLOT_HEIGHT = 250
     }

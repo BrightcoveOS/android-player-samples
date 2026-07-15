@@ -35,12 +35,10 @@ import java.util.Map;
 /**
  * This app illustrates how to use the Google IMA plugin with the
  * Brightcove Player for Android.
- *
- * @author Jim Whisenant - ported from brightcove-mediaplayer samples
  */
 public class MainActivity extends BrightcovePlayer {
 
-    private final String TAG = this.getClass().getSimpleName();
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final int COMPANION_SLOT_WIDTH = 300;
     private static final int COMPANION_SLOT_HEIGHT = 250;
@@ -53,7 +51,7 @@ public class MainActivity extends BrightcovePlayer {
     protected void onCreate(Bundle savedInstanceState) {
         // When extending the BrightcovePlayer, we must assign the BrightcoveExoPlayerVideoView before
         // entering the superclass. This allows for some stock video player lifecycle
-        // management.  Establish the video object and use it's event emitter to get important
+        // management.  Establish the video object and use its event emitter to get important
         // notifications and to control logging.
         setContentView(R.layout.ima_activity_main);
         brightcoveVideoView = (BrightcoveExoPlayerVideoView) findViewById(R.id.brightcove_video_view);
@@ -66,8 +64,8 @@ public class MainActivity extends BrightcovePlayer {
         // a playlist listener object for our sample video: the Potter Puppet show.
         setupGoogleIMA();
 
-        Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.account_id))
-                .setPolicy(getString(R.string.policy_key))
+        Catalog catalog = new Catalog.Builder(eventEmitter, getString(R.string.sdk_demo_account))
+                .setPolicy(getString(R.string.sdk_demo_policy))
                 .build();
 
         catalog.findVideoByReferenceID(getString(R.string.video_reference_id), new VideoListener() {
@@ -93,7 +91,7 @@ public class MainActivity extends BrightcovePlayer {
 
     /**
      * Specify where the ad should interrupt the main video.  This code provides a procedural
-     * abastraction for the Google IMA Plugin setup code.
+     * abstraction for the Google IMA Plugin setup code.
      */
     private void setupCuePoints(Source source) {
         CuePoint.CuePointType cuePointType = CuePoint.CuePointType.AD;
