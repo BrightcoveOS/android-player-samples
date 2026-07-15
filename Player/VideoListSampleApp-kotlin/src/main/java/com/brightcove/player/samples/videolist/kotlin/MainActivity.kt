@@ -11,7 +11,11 @@ import com.brightcove.player.event.EventEmitterImpl
 import com.brightcove.player.model.Playlist
 import com.brightcove.player.samples.videolist.kotlin.databinding.ActivityVideoListSampleBinding
 
-class VideoListSampleActivity : AppCompatActivity() {
+/**
+ * Fetches a Brightcove playlist and displays each video in a scrolling
+ * RecyclerView, with a dedicated player for every row.
+ */
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityVideoListSampleBinding
     private lateinit var videoListView: RecyclerView
@@ -25,14 +29,13 @@ class VideoListSampleActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         videoListView = binding.videoListView
-        videoListView.layoutManager =  LinearLayoutManager(this)
+        videoListView.layoutManager = LinearLayoutManager(this)
         adapter = VideoListAdapter()
 
         videoListView.adapter = adapter
 
         val catalog = Catalog.Builder(eventEmitter, getString(R.string.sdk_demo_account))
-            .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
-            .setPolicy(getString(R.string.sdk_demo_policy_key))
+            .setPolicy(getString(R.string.sdk_demo_policy))
             .build()
 
         catalog.findPlaylistByReferenceID(

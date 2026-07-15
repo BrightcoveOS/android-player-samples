@@ -6,7 +6,7 @@ Shows multiple independent Brightcove player instances in a scrolling `RecyclerV
 
 | File | Responsibility |
 |---|---|
-| `VideoListSampleActivity.kt` | Fetches a playlist via `Catalog` and populates the RecyclerView. |
+| `MainActivity.kt` | Fetches a playlist via `Catalog` and populates the RecyclerView. |
 | `VideoListAdapter.kt` | `ListAdapter` with `DiffUtil`; builds a player per row and manages its playback lifecycle. |
 
 See the [Playback README](../) for shared setup and requirements.

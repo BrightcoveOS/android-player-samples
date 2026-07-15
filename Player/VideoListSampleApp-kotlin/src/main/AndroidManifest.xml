@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.videoList">
         <activity
-            android:name=".VideoListSampleActivity"
+            android:name=".MainActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true">
             <intent-filter>

@@ -22,7 +22,6 @@ class VideoListAdapter : ListAdapter<Video, VideoListAdapter.ViewHolder>(DIFF_CA
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //Get Video information
         val video = getItem(position)
         holder.video = video
         holder.binding.videoTitleText.text = video.getStringProperty(Video.Fields.NAME)
@@ -55,8 +54,7 @@ class VideoListAdapter : ListAdapter<Video, VideoListAdapter.ViewHolder>(DIFF_CA
         }
     }
 
-    class ViewHolder (val binding: ItemViewBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val binding: ItemViewBinding) : RecyclerView.ViewHolder(binding.root) {
 
         val videoView = BrightcoveExoPlayerVideoView(itemView.context)
         var video: Video? = null
@@ -67,7 +65,7 @@ class VideoListAdapter : ListAdapter<Video, VideoListAdapter.ViewHolder>(DIFF_CA
 
             val eventEmitter = videoView.eventEmitter
             eventEmitter.on(EventType.ENTER_FULL_SCREEN) {
-                //You can set listeners on each Video View
+                // You can set listeners on each video view here.
             }
         }
     }
@@ -78,7 +76,7 @@ class VideoListAdapter : ListAdapter<Video, VideoListAdapter.ViewHolder>(DIFF_CA
                 oldItem.id == newItem.id
 
             override fun areContentsTheSame(oldItem: Video, newItem: Video): Boolean =
-                oldItem.equals(newItem)
+                oldItem == newItem
         }
     }
 }
