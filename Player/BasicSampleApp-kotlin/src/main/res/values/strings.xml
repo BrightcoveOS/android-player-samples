@@ -10,6 +10,6 @@
     <string name="sdk_demo_policy">BCpkADawqM3DwCTPGyMMiG0loem8lXox3utO1lFEP1i-_l1MpjRSVXMTSsa2ToslC129_W6YzwJpXbpbIVRFwf35qYM0pxo2HJK-_SotgmgrkmJTQ-024GkXIelVSY8LOHZzRBtcBU57M6Is</string>
 
     <!-- A sample Brightcove Video ID -->
-    <string name="sdk_demo_videoId">5421538222001</string>
+    <string name="sdk_demo_video_id">5421538222001</string>
 
 </resources>
