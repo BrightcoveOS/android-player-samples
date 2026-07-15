@@ -2,30 +2,30 @@ package com.brightcove.player.samples.videolistadrulesima.kotlin
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
 import com.brightcove.player.edge.Catalog
 import com.brightcove.player.edge.PlaylistListener
 import com.brightcove.player.event.EventEmitter
 import com.brightcove.player.event.EventEmitterImpl
 import com.brightcove.player.model.Playlist
+import com.brightcove.player.samples.videolistadrulesima.kotlin.databinding.ActivityMainBinding
 
 /**
  * Fetches a Brightcove playlist and displays each video in a scrolling
  * RecyclerView, with a dedicated player for every row.
  */
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
     private var catalog: Catalog? = null
-    private var videoListView: RecyclerView? = null
     private var adapterView: VideoListAdapter? = null
     private var eventEmitter: EventEmitter = EventEmitterImpl()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        videoListView = findViewById(R.id.video_list_view)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         adapterView = VideoListAdapter()
-        videoListView?.setAdapter(adapterView)
+        binding.videoListView.adapter = adapterView
 
         catalog = Catalog.Builder(eventEmitter, getString(R.string.sdk_demo_account))
             .setPolicy(getString(R.string.sdk_demo_policy))
@@ -41,8 +41,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        videoListView?.adapter = null
-        videoListView?.removeAllViews()
+        binding.videoListView.adapter = null
+        binding.videoListView.removeAllViews()
         super.onDestroy()
     }
 }

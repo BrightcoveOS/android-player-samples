@@ -8,8 +8,8 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.brightcove.player.samples.offlineplayback.kotlin.databinding.ActivityMainBinding
 import com.brightcove.player.samples.offlineplayback.kotlin.utils.BrightcoveDownloadUtil
-import com.brightcove.player.samples.offlineplayback.kotlin.utils.ViewUtil
 import com.brightcove.player.display.ExoPlayerVideoDisplayComponent
 import com.brightcove.player.edge.Catalog
 import com.brightcove.player.edge.OfflineCallback
@@ -40,6 +40,8 @@ class MainActivity : BrightcovePlayer() {
      * of milliseconds. The default value is forty-eight hours.
      */
     val DEFAULT_RENTAL_PLAY_DURATION: Long = TimeUnit.HOURS.toMillis(48)
+
+    private lateinit var binding: ActivityMainBinding
 
     /**
      * Reference to the video cloud catalog client.
@@ -80,8 +82,14 @@ class MainActivity : BrightcovePlayer() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        // When extending the BrightcovePlayer, we must assign brightcoveVideoView before
+        // entering the superclass. This allows for some stock video player lifecycle
+        // management.
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        brightcoveVideoView = binding.brightcoveVideoView
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         onCreate()
     }
 
@@ -104,10 +112,9 @@ class MainActivity : BrightcovePlayer() {
      */
     private fun onCreate() {
         connectivityMonitor = ConnectivityMonitor.getInstance(this)
-        videoListLabel = ViewUtil.findView(this, R.id.video_list_label)
-        videoListView = ViewUtil.findView(this, R.id.video_list_view)
-        emptyListMessage = ViewUtil.findView(this, R.id.empty_list_message)
-        brightcoveVideoView = ViewUtil.findView(this, R.id.brightcove_video_view)
+        videoListLabel = binding.videoListLabel
+        videoListView = binding.videoListView
+        emptyListMessage = binding.emptyListMessage
 
         val eventEmitter = brightcoveVideoView.eventEmitter
 
@@ -124,8 +131,7 @@ class MainActivity : BrightcovePlayer() {
         videoListAdapter = VideoListAdapter(catalog, videoListListener)
 
         // Connect the video list view to the adapter
-        val videoListView: RecyclerView = ViewUtil.findView(this, R.id.video_list_view)
-        videoListView.adapter = videoListAdapter
+        binding.videoListView.adapter = videoListAdapter
 
         val videoDisplayComponent =
             brightcoveVideoView.videoDisplay as ExoPlayerVideoDisplayComponent

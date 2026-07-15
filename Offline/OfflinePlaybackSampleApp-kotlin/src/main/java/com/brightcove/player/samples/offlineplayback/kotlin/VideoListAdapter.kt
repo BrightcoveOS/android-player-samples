@@ -15,7 +15,7 @@ import android.widget.TextView
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.recyclerview.widget.RecyclerView
 import coil3.load
-import com.brightcove.player.samples.offlineplayback.kotlin.utils.ViewUtil
+import com.brightcove.player.samples.offlineplayback.kotlin.databinding.VideoItemViewBinding
 import com.brightcove.player.edge.OfflineCallback
 import com.brightcove.player.edge.OfflineCatalog
 import com.brightcove.player.model.Video
@@ -57,7 +57,7 @@ class VideoListAdapter
     /**
      * A view holder that hold references to the UI components in a list item.
      */
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(val binding: VideoItemViewBinding) : RecyclerView.ViewHolder(binding.root) {
         /**
          * Reference the item view context
          */
@@ -66,77 +66,67 @@ class VideoListAdapter
         /**
          * Reference to the thumbnail image view.
          */
-        val videoThumbnailImage: ImageView = ViewUtil.findView(itemView, R.id.video_thumbnail_image)
+        val videoThumbnailImage: ImageView = binding.videoThumbnailImage
 
         /**
          * Reference to the video title view.
          */
-        val videoTitleText: TextView =
-            ViewUtil.findView(itemView, R.id.video_title_text)
+        val videoTitleText: TextView = binding.videoTitleText
 
         /**
          * Reference to the video status information text view.
          */
-        val videoStatusText: TextView =
-            ViewUtil.findView(itemView, R.id.video_status_text)
+        val videoStatusText: TextView = binding.videoStatusText
 
         /**
          * Reference to the estimated size view.
          */
-        val estimatedSizeText: TextView =
-            ViewUtil.findView(itemView, R.id.estimated_size_text)
+        val estimatedSizeText: TextView = binding.estimatedSizeText
 
         /**
          * Reference to the video license information text view.
          */
-        val videoLicenseText: TextView =
-            ViewUtil.findView(itemView, R.id.video_license_text)
+        val videoLicenseText: TextView = binding.videoLicenseText
 
         /**
          * Reference to the video duration view.
          */
-        val videoDurationText: TextView =
-            ViewUtil.findView(itemView, R.id.video_duration_text)
+        val videoDurationText: TextView = binding.videoDurationText
 
         /**
          * Reference to the rent video button.
          */
-        val rentButton: Button = ViewUtil.findView(itemView, R.id.rent_button)
+        val rentButton: Button = binding.rentButton
 
         /**
          * Reference to the buy video button.
          */
-        val buyButton: Button = ViewUtil.findView(itemView, R.id.buy_button)
+        val buyButton: Button = binding.buyButton
 
         /**
          * Reference to the download video button.
          */
-        val downloadButton: ImageButton =
-            ViewUtil.findView(itemView, R.id.download_button)
+        val downloadButton: ImageButton = binding.downloadButton
 
         /**
          * Reference to the pause/resume download button.
          */
-        val pauseButton: ImageButton =
-            ViewUtil.findView(itemView, R.id.pause_button)
+        val pauseButton: ImageButton = binding.pauseButton
 
         /**
          * Reference to the pause/resume download button.
          */
-        val resumeButton: ImageButton =
-            ViewUtil.findView(itemView, R.id.reesume_button)
+        val resumeButton: ImageButton = binding.reesumeButton
 
         /**
          * Reference to the delete video button.
          */
-        val deleteButton: ImageButton =
-            ViewUtil.findView(itemView, R.id.delete_button)
+        val deleteButton: ImageButton = binding.deleteButton
 
         /**
          * Reference to the download progress bar.
          */
-        val downloadProgressBar: ContentLoadingProgressBar =
-            ViewUtil.findView(itemView, R.id.download_progress_bar)
+        val downloadProgressBar: ContentLoadingProgressBar = binding.downloadProgressBar
 
         /**
          * The currently linked video.
@@ -244,9 +234,9 @@ class VideoListAdapter
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.video_item_view, parent, false)
-        return ViewHolder(view)
+        val binding =
+            VideoItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     /**
