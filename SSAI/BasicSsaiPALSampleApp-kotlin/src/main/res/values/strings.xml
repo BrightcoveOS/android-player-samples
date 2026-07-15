@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BasicSsaiSampleApp</string>
+    <string name="app_name">BasicSsaiPALSampleApp</string>
 
     <!-- A sample Brightcove Edge Account ID -->
     <string name="sdk_demo_account">5420904993001</string>

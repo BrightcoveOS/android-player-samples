@@ -8,7 +8,7 @@
     <!-- A sample Brightcove Edge Policy Key -->
     <string name="sdk_demo_policy" translatable="false">BCpkADawqM1RJu5c_I13hBUAi4c8QNWO5QN2yrd_OgDjTCVsbILeGDxbYy6xhZESTFi68MiSUHzMbQbuLV3q-gvZkJFpym1qYbEwogOqKCXK622KNLPF92tX8AY9a1cVVYCgxSPN12pPAuIM</string>
 
-    <!-- A sample Brightcove Video ID -->
+    <!-- A sample Brightcove playlist reference ID -->
     <string name="sdk_demo_playlist_reference" translatable="false">demo_odrm_widevine_dash</string>
 
     <!-- Fetching playlist-->
