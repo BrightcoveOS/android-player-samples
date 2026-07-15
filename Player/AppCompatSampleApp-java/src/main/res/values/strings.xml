@@ -6,4 +6,10 @@
     <string name="activity_example">Activity example</string>
     <string name="fragment_example">Fragment example</string>
 
+    <!-- A sample Brightcove Edge Account ID -->
+    <string name="sdk_demo_account">1760897681001</string>
+
+    <!-- A sample video URL -->
+    <string name="sdk_demo_video_url">https://media.w3.org/2010/05/sintel/trailer.mp4</string>
+
 </resources>

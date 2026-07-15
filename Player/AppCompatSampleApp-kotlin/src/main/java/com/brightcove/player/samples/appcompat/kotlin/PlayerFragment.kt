@@ -9,6 +9,9 @@ import com.brightcove.player.model.DeliveryType
 import com.brightcove.player.model.Video
 import com.brightcove.player.view.BrightcovePlayerFragment
 
+/**
+ * BrightcovePlayerFragment that loads and plays the sample video.
+ */
 class PlayerFragment : BrightcovePlayerFragment() {
 
     private lateinit var binding: FragmentAppCompatBinding
@@ -19,9 +22,9 @@ class PlayerFragment : BrightcovePlayerFragment() {
         brightcoveVideoView = binding.brightcoveVideoView
 
         super.onCreateView(inflater, container, savedInstanceState)
-        val video = Video.createVideo("https://media.w3.org/2010/05/sintel/trailer.mp4", DeliveryType.MP4)
+        val video = Video.createVideo(getString(R.string.sdk_demo_video_url), DeliveryType.MP4)
         baseVideoView.add(video)
-        baseVideoView.analytics.account = "1760897681001"
+        baseVideoView.analytics.account = getString(R.string.sdk_demo_account)
         baseVideoView.start()
         return binding.root
     }

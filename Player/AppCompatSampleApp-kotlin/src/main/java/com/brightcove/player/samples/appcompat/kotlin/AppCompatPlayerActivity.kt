@@ -19,11 +19,11 @@ class AppCompatPlayerActivity : BrightcovePlayerActivity() {
         binding = ActivityPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val video = Video.createVideo("https://media.w3.org/2010/05/sintel/trailer.mp4", DeliveryType.MP4)
+        val video = Video.createVideo(getString(R.string.sdk_demo_video_url), DeliveryType.MP4)
 
         baseVideoView.apply {
             add(video)
-            analytics.account = "1760897681001"
+            analytics.account = getString(R.string.sdk_demo_account)
             start()
         }
     }
