@@ -5,6 +5,7 @@ import android.util.Log
 import com.brightcove.player.Sdk
 import com.brightcove.player.appcompat.BrightcovePlayerActivity
 import com.brightcove.player.edge.Catalog
+import com.brightcove.player.edge.CatalogError
 import com.brightcove.player.edge.VideoListener
 import com.brightcove.player.event.Event
 import com.brightcove.player.event.EventType
@@ -16,7 +17,11 @@ import com.brightcove.ssai.omid.OpenMeasurementTracker
 import com.brightcove.player.samples.basicssai.kotlin.databinding.ActivityBasicSsaiSampleBinding
 import com.iab.omid.library.brightcove.adsession.FriendlyObstructionPurpose
 
-class BasicSsaiSampleAppActivity : BrightcovePlayerActivity() {
+/**
+ * This app demonstrates server-side ad insertion (SSAI) using the SSAIComponent
+ * plugin, including an optional Open Measurement tracker toggle.
+ */
+class MainActivity : BrightcovePlayerActivity() {
 
     private var plugin: SSAIComponent? = null
     private var tracker: OpenMeasurementTracker? = null
@@ -34,22 +39,19 @@ class BasicSsaiSampleAppActivity : BrightcovePlayerActivity() {
 
         val eventEmitter = baseVideoView.eventEmitter
         val catalog = Catalog.Builder(eventEmitter, getString(R.string.sdk_demo_account))
-            .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
-            .setPolicy(getString(R.string.sdk_demo_policy_key))
+            .setPolicy(getString(R.string.sdk_demo_policy))
             .build()
 
         // Setup the error event handler for the SSAI plugin.
         registerErrorEventHandler()
         setupOpenMeasurement()
         plugin = SSAIComponent(this, baseVideoView)
-
-        // Set the companion ad container.
         plugin?.addCompanionContainer(binding.adFrame)
 
         // Set the HttpRequestConfig with the Ad Config Id configured in
         // your https://studio.brightcove.com account.
         val httpRequestConfig = HttpRequestConfig.Builder()
-            .addQueryParameter(HttpRequestConfig.KEY_AD_CONFIG_ID, AD_CONFIG_ID_QUERY_PARAM_VALUE)
+            .addQueryParameter(HttpRequestConfig.KEY_AD_CONFIG_ID, getString(R.string.sdk_demo_ad_config_id))
             .build()
 
         catalog.findVideoByID(getString(R.string.sdk_demo_video_id), httpRequestConfig, object : VideoListener() {
@@ -58,6 +60,10 @@ class BasicSsaiSampleAppActivity : BrightcovePlayerActivity() {
                 // If there is not a VMAP url, or if there are any requesting or parsing error,
                 // an EventType.ERROR event will be emitted.
                 plugin?.processVideo(video)
+            }
+
+            override fun onError(errors: List<CatalogError>) {
+                Log.e(TAG, errors.toString())
             }
         })
     }
@@ -78,7 +84,6 @@ class BasicSsaiSampleAppActivity : BrightcovePlayerActivity() {
             }
         }
 
-        // Initialize the OpenMeasurementTracker
         tracker = OpenMeasurementTracker.Factory(PARTNER_NAME, PARTNER_VERSION, baseVideoView).create()
 
         // NOTE: The ad used in the sample does not have an `AdVerification` element and will not
@@ -116,7 +121,6 @@ class BasicSsaiSampleAppActivity : BrightcovePlayerActivity() {
 
     companion object {
         private const val TAG = "MainActivity"
-        private const val AD_CONFIG_ID_QUERY_PARAM_VALUE = "ba5e4879-77f0-424b-8c98-706ae5ad7eec"
         private const val PARTNER_NAME = "dummyVendor"
         private val PARTNER_VERSION = Sdk.getVersionName()
     }
