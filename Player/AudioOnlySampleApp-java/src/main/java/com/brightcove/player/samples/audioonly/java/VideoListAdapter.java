@@ -2,6 +2,7 @@ package com.brightcove.player.samples.audioonly.java;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.brightcove.player.logging.Log;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 
@@ -26,14 +26,17 @@ import coil3.request.ImageRequest;
 import coil3.target.ImageViewTarget;
 
 
-public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
+/**
+ * RecyclerView adapter that lists the audio tracks in the playlist; tapping a row
+ * switches the {@link BrightcoveExoPlayerVideoView} to that track.
+ */
+public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.ViewHolder> {
 
-    private final String TAG = this.getClass().getSimpleName();
+    private static final String TAG = VideoListAdapter.class.getSimpleName();
     private final BrightcoveExoPlayerVideoView brightcoveVideoView;
     private final List<Video> videoList = new ArrayList<>();
 
-
-    public AdapterView (BrightcoveExoPlayerVideoView videoView) {
+    public VideoListAdapter(BrightcoveExoPlayerVideoView videoView) {
         brightcoveVideoView = videoView;
     }
 
@@ -46,7 +49,6 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        //Get track information
         Video video = videoList.get(position);
 
         if (video != null) {
@@ -81,26 +83,6 @@ public class AdapterView extends RecyclerView.Adapter<AdapterView.ViewHolder> {
     @Override
     public int getItemCount() {
         return videoList.size();
-    }
-
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-    }
-
-    @Override
-    public void onViewAttachedToWindow(ViewHolder holder) {
-        super.onViewAttachedToWindow(holder);
-    }
-
-    @Override
-    public void onViewDetachedFromWindow(ViewHolder holder) {
-        super.onViewDetachedFromWindow(holder);
-    }
-
-    @Override
-    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
-        super.onDetachedFromRecyclerView(recyclerView);
     }
 
     public void setVideoList(@Nullable List<Video> trackList) {

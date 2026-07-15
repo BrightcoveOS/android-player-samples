@@ -9,6 +9,6 @@ Plays audio-only assets with a media-style background playback notification, so 
 
 | File | Responsibility |
 |---|---|
-| `AudioOnlyActivity.kt` | Loads the playlist via `Catalog`, wires the shuffle and repeat controls, attaches the background playback notification, and renders the track list. |
+| `MainActivity.kt` | Loads the playlist via `Catalog`, wires the shuffle and repeat controls, attaches the background playback notification, and renders the track list. |
 
 See the [Playback README](../) for shared setup and requirements.

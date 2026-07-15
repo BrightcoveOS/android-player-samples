@@ -37,14 +37,17 @@ import com.brightcove.player.samples.audioonly.kotlin.databinding.ActivityAudioO
 import com.brightcove.player.model.Video as Media
 
 
-class AudioOnlyActivity : BrightcovePlayerActivity() {
+/**
+ * Demonstrates audio-only playback: a Brightcove playlist of audio tracks played with a
+ * media-style background playback notification, plus shuffle and repeat controls.
+ */
+class MainActivity : BrightcovePlayerActivity() {
 
     private lateinit var binding: ViewBinding
 
     private val catalog: Catalog by lazy {
-        Catalog.Builder(player.eventEmitter, getString(R.string.account_id))
-            .setBaseURL(Catalog.DEFAULT_EDGE_BASE_URL)
-            .setPolicy(getString(R.string.policy_id))
+        Catalog.Builder(player.eventEmitter, getString(R.string.sdk_demo_account))
+            .setPolicy(getString(R.string.sdk_demo_policy))
             .build()
     }
 
@@ -135,7 +138,7 @@ class AudioOnlyActivity : BrightcovePlayerActivity() {
 
     private fun setPlaylist(playlist: Playlist) = binding.run {
         player.addAll(playlist.videos)
-        list.layoutManager = LinearLayoutManager(this@AudioOnlyActivity)
+        list.layoutManager = LinearLayoutManager(this@MainActivity)
         list.adapter = PlaylistAdapter(playlist.videos, ::onClick)
         fadeOut(loading); fadeIn(list, player)
     }

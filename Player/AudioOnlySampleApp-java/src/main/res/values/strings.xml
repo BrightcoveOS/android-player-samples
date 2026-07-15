@@ -3,10 +3,10 @@
     <string name="app_name">AudioOnly Sample App</string>
 
     <!-- A sample Brightcove Edge Account ID -->
-    <string name="account">4800266849001</string>
+    <string name="sdk_demo_account">4800266849001</string>
 
     <!-- A sample Brightcove Edge Policy Key -->
-    <string name="policy">BCpkADawqM3n0ImwKortQqSZCgJMcyVbb8lJVwt0z16UD0a_h8MpEYcHyKbM8CGOPxBRp0nfSVdfokXBrUu3Sso7Nujv3dnLo0JxC_lNXCl88O7NJ0PR0z2AprnJ_Lwnq7nTcy1GBUrQPr5e</string>
+    <string name="sdk_demo_policy">BCpkADawqM3n0ImwKortQqSZCgJMcyVbb8lJVwt0z16UD0a_h8MpEYcHyKbM8CGOPxBRp0nfSVdfokXBrUu3Sso7Nujv3dnLo0JxC_lNXCl88O7NJ0PR0z2AprnJ_Lwnq7nTcy1GBUrQPr5e</string>
 
     <!-- A sample Brightcove Track Playlist Reference -->
     <string name="trackPlaylistReference">royalty_free_mp3</string>
