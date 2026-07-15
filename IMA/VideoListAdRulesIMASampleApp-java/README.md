@@ -7,6 +7,6 @@ Shows multiple independent Brightcove player instances in a scrolling list, wher
 | File | Responsibility |
 |---|---|
 | `MainActivity.java` | Hosts the `RecyclerView`, builds a `Catalog`, and loads a playlist by reference ID, handing its videos to the adapter. |
-| `AdapterView.java` | `RecyclerView.Adapter` that creates a `BrightcoveExoPlayerVideoView` per row, wires up the Google IMA ad-rules plugin with a VMAP ad tag, and starts/stops each player as rows attach and detach. |
+| `VideoListAdapter.java` | `RecyclerView.Adapter` that creates a `BrightcoveExoPlayerVideoView` per row, wires up the Google IMA ad-rules plugin with a VMAP ad tag, and starts/stops each player as rows attach and detach. |
 
 See the [IMA ads README](../) for shared setup and requirements.
