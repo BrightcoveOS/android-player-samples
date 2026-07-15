@@ -6,6 +6,6 @@ Plays a Brightcove video with Google IMA ads scheduled server-side through IMA a
 
 | File | Responsibility |
 |---|---|
-| `AdRulesIMASampleApp.kt` | Loads a video from the `Catalog`, configures the Google IMA plugin with ad rules enabled, answers the ad request with a VMAP ad tag URL, and adds ad markers to the seek bar. |
+| `MainActivity.kt` | Loads a video from the `Catalog`, configures the Google IMA plugin with ad rules enabled, answers the ad request with a VMAP ad tag URL, and adds ad markers to the seek bar. |
 
 See the [IMA ads README](../) for shared setup and requirements.

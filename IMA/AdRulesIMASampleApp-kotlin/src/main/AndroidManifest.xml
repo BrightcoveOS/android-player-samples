@@ -27,7 +27,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".AdRulesIMASampleApp"
+            android:name=".MainActivity"
             android:screenOrientation="unspecified"
             android:configChanges="orientation|screenSize"
             android:exported="true">

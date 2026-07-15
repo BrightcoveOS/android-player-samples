@@ -30,18 +30,11 @@ import com.google.ads.interactivemedia.v3.api.ImaSdkFactory
  * in the setupAdMarkers method below are Google IMA objects.
  */
 
-class AdRulesIMASampleApp : BrightcovePlayer() {
+class MainActivity : BrightcovePlayer() {
 
     private lateinit var binding: ActivityAdRulesImaSampleAppBinding
     private lateinit var eventEmitter: EventEmitter
     private lateinit var googleIMAComponent: GoogleIMAComponent
-
-    val TAG = this.javaClass.simpleName
-
-
-    private val adRulesURL =
-        "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator="
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -66,11 +59,11 @@ class AdRulesIMASampleApp : BrightcovePlayer() {
         // Use a procedural abstraction to setup the Google IMA SDK via the plugin.
         setupGoogleIMA()
 
-        val catalog = Catalog.Builder(eventEmitter, getString(R.string.account))
-            .setPolicy(getString(R.string.policy))
+        val catalog = Catalog.Builder(eventEmitter, getString(R.string.sdk_demo_account))
+            .setPolicy(getString(R.string.sdk_demo_policy))
             .build()
 
-        catalog.findVideoByID(getString(R.string.videoId), object : VideoListener() {
+        catalog.findVideoByID(getString(R.string.sdk_demo_video_id), object : VideoListener() {
             override fun onVideo(video: Video) {
                 brightcoveVideoView.add(video)
 
@@ -92,7 +85,7 @@ class AdRulesIMASampleApp : BrightcovePlayer() {
         // Establish the Google IMA SDK factory instance.
         val sdkFactory = ImaSdkFactory.getInstance()
 
-        // Enable logging up ad start.
+        // Enable logging upon ad start.
         eventEmitter.on(EventType.AD_STARTED) { event: Event ->
             Log.v(TAG, event.type)
         }
@@ -114,7 +107,7 @@ class AdRulesIMASampleApp : BrightcovePlayer() {
             // Build an ads request object and point it to the ad
             // display container created above.
             val adsRequest = sdkFactory.createAdsRequest()
-            adsRequest.adTagUrl = adRulesURL
+            adsRequest.adTagUrl = getString(R.string.adRulesUrl)
 
             val adsRequests = arrayListOf<AdsRequest>(adsRequest)
 
@@ -132,7 +125,7 @@ class AdRulesIMASampleApp : BrightcovePlayer() {
 
 
     /*
-      This methods show how to the the Google IMA AdsManager, get the cue points and add the markers
+      This method shows how to use the Google IMA AdsManager, get the cue points and add the markers
       to the Brightcove Seek Bar.
      */
     private fun setupAdMarkers(videoView: BaseVideoView) {
@@ -156,5 +149,9 @@ class AdRulesIMASampleApp : BrightcovePlayer() {
             }
         }
         videoView.setMediaController(mediaController)
+    }
+
+    companion object {
+        private const val TAG = "MainActivity"
     }
 }
