@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Application name -->
+    <string name="app_name">HDCP Fallback Sample App</string>
+
+    <!-- A Brightcove account configured for HDCP fallback: the SD, HD and UHD renditions of a
+         video carry a separate DRM key each, and the HD and UHD keys require a protected output. -->
+    <string name="sdk_demo_account">6415550737001</string>
+
+    <!-- The policy key of that account -->
+    <string name="sdk_demo_policy">BCpkADawqM2zeZBhrzXb49PxPhWQieB8_3YyJfnn5zBL2GYPaJQFwXOJGkXqdxmcDZ2o6XAYNGsEgvV3A-5gk8EUfCVgitEC2Q7MQtjMdA1bVdPAIiWPqaf5SgGLu_ku3xtNG6Kepm_cr7v_</string>
+
+    <!-- A video of that account, whose DASH manifest splits the rendition ladder over an SD and an
+         HD AdaptationSet -->
+    <string name="sdk_demo_video_id">6353278883112</string>
+</resources>

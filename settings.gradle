@@ -58,6 +58,8 @@ include ':SSAI:BasicSsaiPALSampleApp-kotlin'
 // DRM — Widevine Modular
 include ':DRM:WidevineModularSampleApp-java'
 include ':DRM:WidevineModularSampleApp-kotlin'
+include ':DRM:HdcpFallbackSampleApp-java'
+include ':DRM:HdcpFallbackSampleApp-kotlin'
 
 // Cast — Google Cast (Brightcove receiver)
 include ':Cast:BasicCastBrightcoveReceiverSampleApp-java'
