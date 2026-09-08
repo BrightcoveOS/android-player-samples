@@ -47,6 +47,7 @@ Every capability ships a Java and a Kotlin sample.
 | FreeWheel | [`FreeWheel/`](FreeWheel/) — 2 samples |
 | Pulse | [`Pulse/PulseSampleApp-java`](Pulse/PulseSampleApp-java/) · [`Pulse/PulseSampleApp-kotlin`](Pulse/PulseSampleApp-kotlin/) |
 | DRM (Widevine) | [`DRM/WidevineModularSampleApp-java`](DRM/WidevineModularSampleApp-java/) · [`DRM/WidevineModularSampleApp-kotlin`](DRM/WidevineModularSampleApp-kotlin/) |
+| Fallback HDCP | [`DRM/HdcpFallbackSampleApp-java`](DRM/HdcpFallbackSampleApp-java/) · [`DRM/HdcpFallbackSampleApp-kotlin`](DRM/HdcpFallbackSampleApp-kotlin/) |
 | Casting | [`Cast/BasicCastBrightcoveReceiverSampleApp-java`](Cast/BasicCastBrightcoveReceiverSampleApp-java/) · [`Cast/BasicCastBrightcoveReceiverSampleApp-kotlin`](Cast/BasicCastBrightcoveReceiverSampleApp-kotlin/) |
 | Offline playback | [`Offline/OfflinePlaybackSampleApp-java`](Offline/OfflinePlaybackSampleApp-java/) · [`Offline/OfflinePlaybackSampleApp-kotlin`](Offline/OfflinePlaybackSampleApp-kotlin/) |
 | Bumper | [`Player/BumperSampleApp-java`](Player/BumperSampleApp-java/) · [`Player/BumperSampleApp-kotlin`](Player/BumperSampleApp-kotlin/) |
