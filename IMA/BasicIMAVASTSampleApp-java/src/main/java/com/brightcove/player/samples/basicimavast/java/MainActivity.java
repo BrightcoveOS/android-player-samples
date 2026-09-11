@@ -26,10 +26,12 @@ import com.google.ads.interactivemedia.v3.api.AdDisplayContainer;
 import com.google.ads.interactivemedia.v3.api.AdsRequest;
 import com.google.ads.interactivemedia.v3.api.CompanionAdSlot;
 import com.google.ads.interactivemedia.v3.api.ImaSdkFactory;
+import com.google.ads.interactivemedia.v3.api.ImaSdkSettings;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -178,8 +180,14 @@ public class MainActivity extends BrightcovePlayer {
             eventEmitter.respond(event);
         });
 
+        // Localize the IMA ad UI (e.g. "Skip Ad", "Ad 1 of 3") to the device's language.
+        ImaSdkSettings imaSdkSettings = ImaSdkFactory.getInstance().createImaSdkSettings();
+        imaSdkSettings.setLanguage(Locale.getDefault().getLanguage());
+
         // Create the Brightcove IMA Plugin and register the event emitter so that the plugin
         // can deal with video events.
-        googleIMAComponent = new GoogleIMAComponent.Builder(brightcoveVideoView, eventEmitter).build();
+        googleIMAComponent = new GoogleIMAComponent.Builder(brightcoveVideoView, eventEmitter)
+                .setImaSdkSettings(imaSdkSettings)
+                .build();
     }
 }
