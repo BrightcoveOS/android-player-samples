@@ -22,6 +22,7 @@ import com.brightcove.player.samples.basicimavast.kotlin.databinding.ActivityBas
 import com.google.ads.interactivemedia.v3.api.AdsRequest
 import com.google.ads.interactivemedia.v3.api.CompanionAdSlot
 import com.google.ads.interactivemedia.v3.api.ImaSdkFactory
+import java.util.Locale
 
 /**
  * This app illustrates how to use the Google IMA plugin with the
@@ -161,9 +162,15 @@ class MainActivity : BrightcovePlayerActivity() {
             eventEmitter.respond(event)
         }
 
+        // Localize the IMA ad UI (e.g. "Skip Ad", "Ad 1 of 3") to the device's language.
+        val imaSdkSettings = ImaSdkFactory.getInstance().createImaSdkSettings()
+        imaSdkSettings.language = Locale.getDefault().language
+
         // Create the Brightcove IMA Plugin and register the event emitter so that the plugin
         // can deal with video events.
-        googleIMAComponent = GoogleIMAComponent.Builder(baseVideoView, eventEmitter).build()
+        googleIMAComponent = GoogleIMAComponent.Builder(baseVideoView, eventEmitter)
+            .setImaSdkSettings(imaSdkSettings)
+            .build()
     }
 
     companion object {
