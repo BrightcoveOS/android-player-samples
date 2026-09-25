@@ -21,7 +21,7 @@ Player/  PlayerUI/  IMA/  DAI/  SSAI/  FreeWheel/  Pulse/  DRM/  Cast/  Offline/
 
 ## Capabilities
 
-- **Playback** — [`Player/`](Player/): basic playback, video list / playlist, live / DVR, 360 video, audio-only playback, Picture-in-Picture, thumbnail scrubbing, plus the Android-specific TextureView, AppCompat entry points, and bumper samples.
+- **Playback** — [`Player/`](Player/): basic playback, video list / playlist, live / DVR, 360 video, audio-only playback, Picture-in-Picture, thumbnail scrubbing, vertical (TikTok-style) video, plus the Android-specific TextureView, AppCompat entry points, and bumper samples.
 - **UI customization** — [`PlayerUI/`](PlayerUI/): custom controls — customized and styled controls, seek-bar colors, and a rewind button.
 - **Advertising** — [`IMA/`](IMA/) · [`DAI/`](DAI/) · [`SSAI/`](SSAI/) · [`FreeWheel/`](FreeWheel/) · [`Pulse/`](Pulse/): Google IMA (client-side), Google DAI, Brightcove server-side ad insertion (incl. PAL), FreeWheel, and Pulse.
 - **DRM & offline** — [`DRM/`](DRM/) · [`Offline/`](Offline/): Widevine Modular playback and offline (downloaded) playback.
@@ -53,6 +53,7 @@ Every capability ships a Java and a Kotlin sample.
 | Bumper | [`Player/BumperSampleApp-java`](Player/BumperSampleApp-java/) · [`Player/BumperSampleApp-kotlin`](Player/BumperSampleApp-kotlin/) |
 | TextureView | [`Player/TextureViewSampleApp-java`](Player/TextureViewSampleApp-java/) · [`Player/TextureViewSampleApp-kotlin`](Player/TextureViewSampleApp-kotlin/) |
 | AppCompat entry points | [`Player/AppCompatSampleApp-java`](Player/AppCompatSampleApp-java/) · [`Player/AppCompatSampleApp-kotlin`](Player/AppCompatSampleApp-kotlin/) |
+| Vertical video | [`Player/VerticalVideoSampleApp-java`](Player/VerticalVideoSampleApp-java/) · [`Player/VerticalVideoSampleApp-kotlin`](Player/VerticalVideoSampleApp-kotlin/) |
 
 ## Building
 
