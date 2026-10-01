@@ -43,7 +43,7 @@ Every capability ships a Java and a Kotlin sample.
 | Custom controls | [`PlayerUI/`](PlayerUI/) — 4 samples |
 | IMA ads | [`IMA/`](IMA/) — 4 samples |
 | DAI | [`DAI/BasicDAISampleApp-java`](DAI/BasicDAISampleApp-java/) · [`DAI/BasicDAISampleApp-kotlin`](DAI/BasicDAISampleApp-kotlin/) |
-| SSAI | [`SSAI/`](SSAI/) — 2 samples |
+| SSAI | [`SSAI/`](SSAI/) — 3 samples |
 | FreeWheel | [`FreeWheel/`](FreeWheel/) — 2 samples |
 | Pulse | [`Pulse/PulseSampleApp-java`](Pulse/PulseSampleApp-java/) · [`Pulse/PulseSampleApp-kotlin`](Pulse/PulseSampleApp-kotlin/) |
 | DRM (Widevine) | [`DRM/WidevineModularSampleApp-java`](DRM/WidevineModularSampleApp-java/) · [`DRM/WidevineModularSampleApp-kotlin`](DRM/WidevineModularSampleApp-kotlin/) |
