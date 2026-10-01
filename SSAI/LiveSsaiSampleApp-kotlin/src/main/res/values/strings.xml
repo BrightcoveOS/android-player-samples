@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">LiveSsaiSampleApp</string>
+
+    <!-- Replace these values with a NextGen Live 2.0 stream that has SSAI enabled -->
+    <string name="sdk_demo_account">YOUR_ACCOUNT_ID</string>
+    <string name="sdk_demo_policy">YOUR_POLICY_KEY</string>
+    <string name="sdk_demo_video_id">YOUR_LIVE_VIDEO_ID</string>
+    <string name="sdk_demo_ad_config_id">YOUR_AD_CONFIG_ID</string>
+    <string name="sdk_demo_live_playback_token">YOUR_LIVE_PLAYBACK_TOKEN</string>
+</resources>
