@@ -264,6 +264,7 @@ class VerticalVideoAdapter : ListAdapter<Video, VerticalVideoAdapter.PageHolder>
         fun deactivate() {
             videoView.pause()
             videoView.clear()
+            videoView.playback?.destroyPlayer()
             unregisterPlaybackListeners()
             queued = false
             cancelPosterAnimation()

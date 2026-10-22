@@ -312,6 +312,7 @@ public class VerticalVideoAdapter extends ListAdapter<Video, VerticalVideoAdapte
         void deactivate() {
             videoView.pause();
             videoView.clear();
+            videoView.getPlayback().destroyPlayer();
             unregisterPlaybackListeners();
             queued = false;
             cancelPosterAnimation();
