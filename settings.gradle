@@ -24,6 +24,8 @@ include ':Player:TextureViewSampleApp-java'
 include ':Player:TextureViewSampleApp-kotlin'
 include ':Player:BumperSampleApp-java'
 include ':Player:BumperSampleApp-kotlin'
+include ':Player:VerticalVideoSampleApp-java'
+include ':Player:VerticalVideoSampleApp-kotlin'
 
 // PlayerUI — Brightcove player controls customization
 include ':PlayerUI:CustomizedControlsSampleApp-java'

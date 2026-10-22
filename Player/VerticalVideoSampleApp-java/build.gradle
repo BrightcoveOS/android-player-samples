@@ -1,0 +1,16 @@
+android {
+    namespace 'com.brightcove.player.samples.verticalvideo.java'
+
+    defaultConfig {
+        applicationId "com.brightcove.player.samples.verticalvideo.java"
+    }
+}
+
+dependencies {
+    implementation "androidx.appcompat:appcompat:${ANDROIDX_APPCOMPAT}"
+    implementation "androidx.viewpager2:viewpager2:1.1.0"
+    implementation "androidx.recyclerview:recyclerview:${ANDROIDX_RECYCLER_VIEW}"
+    implementation "com.google.android.material:material:${ANDROID_MATERIAL}"
+    implementation "io.coil-kt.coil3:coil:${COIL_VERSION}"
+    implementation "io.coil-kt.coil3:coil-network-okhttp:${COIL_VERSION}"
+}

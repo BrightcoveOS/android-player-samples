@@ -27,3 +27,4 @@ Most samples play from the shared Brightcove demo account (`5420904993001`); the
 | `TextureViewSampleApp` | [Java](TextureViewSampleApp-java/) · [Kotlin](TextureViewSampleApp-kotlin/) | Rendering into a `TextureView` instead of the default `SurfaceView`. Android-specific. |
 | `AppCompatSampleApp` | [Java](AppCompatSampleApp-java/) · [Kotlin](AppCompatSampleApp-kotlin/) | The AppCompat plugin, shown through both an Activity and a Fragment entry point. Android-specific. |
 | `BumperSampleApp` | [Java](BumperSampleApp-java/) · [Kotlin](BumperSampleApp-kotlin/) | Playing a bumper video ahead of the main content. Android-specific. |
+| `VerticalVideoSampleApp` | [Java](VerticalVideoSampleApp-java/) · [Kotlin](VerticalVideoSampleApp-kotlin/) | Full-bleed vertical (TikTok-style) paging feed with one player per page; aspect-fill, autoplay of the focused page only. |

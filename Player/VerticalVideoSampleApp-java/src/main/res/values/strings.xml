@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Vertical Video Sample App</string>
+
+    <!-- Shared Brightcove demo account for the vertical-video playlist. This is the same
+         account, playlist, and policy key used by the iOS VerticalPlayer sample. -->
+    <string name="sdk_demo_account">5434391461001</string>
+
+    <!-- A sample Brightcove Edge Policy Key -->
+    <string name="sdk_demo_policy">BCpkADawqM0T8lW3nMChuAbrcunBBHmh4YkNl5e6ZrKQwPiK_Y83RAOF4DP5tyBF_ONBVgrEjqW6fbV0nKRuHvjRU3E8jdT9WMTOXfJODoPML6NUDCYTwTHxtNlr5YdyGYaCPLhMUZ3Xu61L</string>
+
+    <!-- Playlist of vertical (9:16) videos, "Vertical Player Videos". -->
+    <string name="sdk_demo_playlist_id">1791438459701684628</string>
+
+    <string name="video_play">Play</string>
+</resources>
