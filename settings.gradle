@@ -54,6 +54,7 @@ include ':SSAI:BasicSsaiSampleApp-java'
 include ':SSAI:BasicSsaiSampleApp-kotlin'
 include ':SSAI:BasicSsaiPALSampleApp-java'
 include ':SSAI:BasicSsaiPALSampleApp-kotlin'
+include ':SSAI:LiveSsaiSampleApp-kotlin'
 
 // DRM — Widevine Modular
 include ':DRM:WidevineModularSampleApp-java'

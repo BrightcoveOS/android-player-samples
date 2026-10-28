@@ -19,3 +19,4 @@ The samples play from the shared Brightcove demo account (`5420904993001`) with 
 |---|---|---|
 | `BasicSsaiSampleApp` | [Java](BasicSsaiSampleApp-java/) · [Kotlin](BasicSsaiSampleApp-kotlin/) | Brightcove server-side ad insertion. |
 | `BasicSsaiPALSampleApp` | [Java](BasicSsaiPALSampleApp-java/) · [Kotlin](BasicSsaiPALSampleApp-kotlin/) | SSAI with the Google PAL nonce for ad tracking. |
+| `LiveSsaiSampleApp` | [Kotlin](LiveSsaiSampleApp-kotlin/) | SSAI on a NextGen Live 2.0 stream. Needs your own stream values. |
